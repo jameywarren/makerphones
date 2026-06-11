@@ -1,0 +1,22 @@
+---
+/**
+ * Diagram-system figure frame: bordered card + mono caption with a
+ * bold figure label. Slot in a diagram component or image.
+ *
+ * Usage: <Figure label="Fig. 2.7" caption="Cross-section of a typical driver."><DriverDiagram /></Figure>
+ */
+interface Props {
+  label?: string;
+  caption?: string;
+}
+const { label, caption } = Astro.props;
+---
+
+<figure class="mp-figure not-content">
+  <slot />
+  {caption && (
+    <figcaption class="mp-figcaption">
+      {label && <b>{label}</b>}{label && ' — '}{caption}
+    </figcaption>
+  )}
+</figure>

@@ -1,0 +1,21 @@
+---
+/**
+ * Spec / parameter block — monospace key-value grid for driver specs
+ * and measured parameters. For MDX pages; plain-Markdown chapters get
+ * the same look on code fences via theme.css.
+ *
+ * Usage: <SpecBlock title="Driver — as listed" rows={[['Nominal impedance', '32 Ω ± 15%'], ...]} />
+ */
+interface Props {
+  title?: string;
+  rows: [string, string][];
+}
+const { title, rows } = Astro.props;
+---
+
+<div class="mp-spec not-content">
+  {title && <span class="mp-spec-title">{title}</span>}
+  {rows.map(([k, v]) => (
+    <span class="mp-spec-row"><span>{k}</span><span>{v}</span></span>
+  ))}
+</div>

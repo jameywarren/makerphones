@@ -1,24 +1,60 @@
 ---
 /**
- * Starlight PageTitle override: default title, then the chapter
- * metadata row when the page's frontmatter carries chapter fields.
+ * v2 chapter header: breadcrumb (nav chrome — decimal numbers allowed)
+ * + clean H1 + excerpt lede + metadata row (difficulty dots, read
+ * time, prerequisites). Non-chapter pages get the plain title.
  */
-import Default from '@astrojs/starlight/components/PageTitle.astro';
-import ChapterMeta from './ChapterMeta.astro';
+import { getManual } from '../data/manual';
+import Level from './Level.astro';
 
-const { entry } = Astro.locals.starlightRoute;
-const { difficulty, read_time, prerequisites, related } = entry.data as {
-  difficulty?: 'Beginner' | 'Intermediate' | 'Advanced';
+const { entry, id } = Astro.locals.starlightRoute;
+const handle = id.startsWith('learn/') ? id.slice(6) : null;
+const { byHandle } = await getManual();
+const chapter = handle ? byHandle.get(handle) : undefined;
+
+const data = entry.data as typeof entry.data & {
+  excerpt?: string;
   read_time?: number;
+  difficulty?: string;
   prerequisites?: string[];
-  related?: string[];
 };
+
+const prereqLinks = (chapter?.prerequisites ?? [])
+  .map((h) => byHandle.get(h))
+  .filter((c) => c?.written);
 ---
 
-<Default><slot /></Default>
-<ChapterMeta
-  difficulty={difficulty}
-  readTime={read_time}
-  prerequisites={prerequisites}
-  related={related}
-/>
+{
+  chapter ? (
+    <div class="not-content">
+      <nav class="mp-crumb" aria-label="Breadcrumb">
+        <a href="/contents/">The Manual</a>
+        <span class="sep" aria-hidden="true">/</span>
+        <a href={`/contents/#part-${chapter.partNum}`}>
+          Part {String(chapter.partNum).padStart(2, '0')} — {chapter.partTitle}
+        </a>
+        <span class="sep" aria-hidden="true">/</span>
+        <span class="here">{`${chapter.num} ${chapter.title}`}</span>
+      </nav>
+      <h1 id="_top" data-page-title>{data.title}</h1>
+      {data.excerpt && <p class="mp-lede">{data.excerpt}</p>}
+      <div class="mp-chapter-meta">
+        <Level level={data.difficulty} />
+        {data.read_time && <span class="mp-meta">{data.read_time} min read</span>}
+        {prereqLinks.length > 0 && (
+          <span class="mp-meta">
+            Read first:{' '}
+            {prereqLinks.map((c, i) => (
+              <>
+                {i > 0 && ', '}
+                <a href={`/learn/${c!.handle}/`}>{c!.title}</a>
+              </>
+            ))}
+          </span>
+        )}
+      </div>
+    </div>
+  ) : (
+    <h1 id="_top" data-page-title>{data.title}</h1>
+  )
+}

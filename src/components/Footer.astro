@@ -1,0 +1,58 @@
+---
+/**
+ * Chapter footer: related chapters (decimal nav numbers) + prev/next
+ * cards, ordered by the manual outline across written chapters only —
+ * never a link to an unwritten page. Non-chapter pages get nothing.
+ */
+import { getManual } from '../data/manual';
+
+const { id } = Astro.locals.starlightRoute;
+const handle = id.startsWith('learn/') ? id.slice(6) : null;
+const { parts, byHandle } = await getManual();
+const chapter = handle ? byHandle.get(handle) : undefined;
+
+const writtenOrder = parts.flatMap((p) => p.chapters).filter((c) => c.written);
+const idx = chapter ? writtenOrder.findIndex((c) => c.handle === chapter.handle) : -1;
+const prev = idx > 0 ? writtenOrder[idx - 1] : undefined;
+const next = idx >= 0 && idx < writtenOrder.length - 1 ? writtenOrder[idx + 1] : undefined;
+
+const related = (chapter?.related ?? [])
+  .map((h) => byHandle.get(h))
+  .filter((c) => c?.written && c.handle !== chapter?.handle);
+---
+
+{
+  chapter && (
+    <div class="mp-foot not-content">
+      {related.length > 0 && (
+        <>
+          <span class="mp-eyebrow">Related chapters</span>
+          <ul class="mp-related">
+            {related.map((c) => (
+              <li>
+                <span class="mp-meta">{c!.num}</span>
+                <a href={`/learn/${c!.handle}/`}>{c!.title}</a>
+              </li>
+            ))}
+          </ul>
+        </>
+      )}
+      <nav class="mp-pn" aria-label="Previous and next chapters">
+        {prev ? (
+          <a class="mp-pn-card" href={`/learn/${prev.handle}/`} rel="prev">
+            <span class="mp-pn-label">← Previous</span>
+            <span class="mp-pn-title">{prev.title}</span>
+          </a>
+        ) : (
+          <span />
+        )}
+        {next && (
+          <a class="mp-pn-card is-next" href={`/learn/${next.handle}/`} rel="next">
+            <span class="mp-pn-label">Next →</span>
+            <span class="mp-pn-title">{next.title}</span>
+          </a>
+        )}
+      </nav>
+    </div>
+  )
+}

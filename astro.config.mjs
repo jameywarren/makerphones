@@ -52,14 +52,23 @@ export default defineConfig({
       description:
         'An open reference for designing and building your own headphones — real engineering, explained plainly.',
       sidebar,
-      customCss: ['./src/styles/theme.css'],
+      customCss: [
+        // self-hosted variable fonts (bundled, no external requests)
+        '@fontsource-variable/schibsted-grotesk',
+        '@fontsource-variable/source-serif-4',
+        '@fontsource-variable/jetbrains-mono',
+        './src/styles/theme.css',
+      ],
       pagination: true,
       lastUpdated: false,
       social: [],
       components: {
-        // Renders the chapter metadata row (difficulty, read time,
-        // prerequisites, related) beneath the title, fed by frontmatter.
+        // Claude Design v2 overrides — see src/components/.
+        SiteTitle: './src/components/SiteTitle.astro',
+        Sidebar: './src/components/Sidebar.astro',
         PageTitle: './src/components/PageTitle.astro',
+        Footer: './src/components/Footer.astro',
+        Header: './src/components/Header.astro',
       },
     }),
   ],

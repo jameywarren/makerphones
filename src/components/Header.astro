@@ -1,0 +1,33 @@
+---
+/**
+ * Default Starlight header + a reading-progress bar on chapter pages.
+ */
+import Default from '@astrojs/starlight/components/Header.astro';
+
+const { id } = Astro.locals.starlightRoute;
+const isChapter = id.startsWith('learn/') && id !== 'learn';
+---
+
+<Default><slot /></Default>
+{
+  isChapter && (
+    <div class="mp-progress" aria-hidden="true">
+      <span class="mp-progress-fill" id="mp-progress-fill" />
+    </div>
+  )
+}
+
+<script>
+  const fill = document.getElementById('mp-progress-fill');
+  if (fill) {
+    const update = () => {
+      const doc = document.documentElement;
+      const max = doc.scrollHeight - doc.clientHeight;
+      const pct = max > 0 ? (doc.scrollTop / max) * 100 : 0;
+      fill.style.width = pct.toFixed(1) + '%';
+    };
+    addEventListener('scroll', update, { passive: true });
+    addEventListener('resize', update, { passive: true });
+    update();
+  }
+</script>

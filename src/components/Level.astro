@@ -1,0 +1,14 @@
+---
+/** Difficulty dots — orange, confident. ●●○ Intermediate */
+import { LEVEL_RANK } from '../data/manual';
+
+interface Props {
+  level?: string;
+  dim?: boolean;
+}
+const { level, dim = false } = Astro.props;
+const rank = level ? (LEVEL_RANK[level] ?? 0) : 0;
+const dots = rank ? '●'.repeat(rank) + '○'.repeat(3 - rank) : '';
+---
+
+{level && <span class:list={['mp-level', { 'is-dim': dim }]}><b>{dots}</b> {level}</span>}

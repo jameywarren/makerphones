@@ -1,0 +1,71 @@
+---
+/**
+ * Frequency-response curve on a measurement grid. Charcoal dashed
+ * target, orange measured trace — diagram-system style.
+ *
+ * The curve paths are ILLUSTRATIVE vector art from the design handoff,
+ * not real measurement data — caption accordingly wherever it's used
+ * (see "Real assets needed" in CONTENT-TODO.md).
+ */
+interface Props {
+  measuredLabel?: string;
+  targetLabel?: string;
+  showTarget?: boolean;
+}
+const { measuredLabel = 'measured', targetLabel = 'target', showTarget = true } = Astro.props;
+---
+
+<svg
+  viewBox="0 0 560 230"
+  class="mp-frcurve"
+  role="img"
+  aria-label={`Frequency response chart: ${measuredLabel}${showTarget ? ` vs ${targetLabel}` : ''}`}
+>
+  {[40, 130, 220, 310, 400, 490].map((x) => (
+    <line x1={x} y1="16" x2={x} y2="186" stroke="var(--mp-line)" stroke-width="1"></line>
+  ))}
+  {[16, 50, 84, 118, 152, 186].map((y) => (
+    <line x1="40" y1={y} x2="520" y2={y} stroke="var(--mp-line)" stroke-width="1"></line>
+  ))}
+  <text x="36" y="206" class="mp-diagram-label">20</text>
+  <text x="122" y="206" class="mp-diagram-label">100</text>
+  <text x="212" y="206" class="mp-diagram-label">500</text>
+  <text x="304" y="206" class="mp-diagram-label">2k</text>
+  <text x="392" y="206" class="mp-diagram-label">8k</text>
+  <text x="482" y="206" class="mp-diagram-label">20k</text>
+  <text x="8" y="54" class="mp-diagram-label">+10</text>
+  <text x="16" y="122" class="mp-diagram-label">0</text>
+  <text x="8" y="190" class="mp-diagram-label">-10</text>
+  {showTarget && (
+    <path
+      d="M 40 96 C 110 96 150 112 210 118 C 280 124 320 118 370 110 C 420 104 460 116 520 134"
+      fill="none"
+      stroke="var(--mp-charcoal)"
+      stroke-width="1.5"
+      stroke-dasharray="5 5"
+      opacity="0.65"
+    ></path>
+  )}
+  <path
+    d="M 40 86 C 90 86 120 108 180 120 C 240 132 290 126 330 104 C 358 90 380 92 404 112 C 430 134 460 124 490 148 L 520 158"
+    fill="none"
+    stroke="var(--mp-accent)"
+    stroke-width="2.2"
+  ></path>
+  <line x1="404" y1="30" x2="428" y2="30" stroke="var(--mp-accent)" stroke-width="2.2"></line>
+  <text x="434" y="33" class="mp-diagram-label">{measuredLabel}</text>
+  {showTarget && (
+    <>
+      <line x1="404" y1="46" x2="428" y2="46" stroke="var(--mp-charcoal)" stroke-width="1.5" stroke-dasharray="5 5" opacity="0.65"></line>
+      <text x="434" y="49" class="mp-diagram-label">{targetLabel}</text>
+    </>
+  )}
+</svg>
+
+<style>
+  .mp-frcurve {
+    max-width: 100%;
+    height: auto;
+    display: block;
+  }
+</style>

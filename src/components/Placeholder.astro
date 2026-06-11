@@ -1,0 +1,23 @@
+---
+/**
+ * Styled image placeholder — used until real assets land
+ * (see "Real assets needed" in CONTENT-TODO.md). Never a broken image.
+ */
+interface Props {
+  label?: string;
+  height?: number;
+  width?: string;
+  radius?: string;
+  class?: string;
+}
+const { label = '', height = 240, width, radius, class: className } = Astro.props;
+---
+
+<div
+  class:list={['mp-ph', className]}
+  style={`height:${height}px;${width ? `width:${width};` : ''}${radius ? `border-radius:${radius};` : ''}`}
+  role="img"
+  aria-label={label || 'placeholder image'}
+>
+  {label && <span class="mp-ph-label">{label}</span>}
+</div>

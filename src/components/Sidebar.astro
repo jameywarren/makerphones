@@ -1,0 +1,51 @@
+---
+/**
+ * Accordion sidebar — the six parts with decimal nav numbers.
+ * Built from the manual outline (src/data/manual.ts), not the
+ * Starlight sidebar config: upcoming chapters render dimmed and
+ * unlinked, which config-driven sidebars can't express.
+ *
+ * Decimal numbers here are nav chrome — allowed by the numbering rule.
+ */
+import { getManual } from '../data/manual';
+
+const { parts } = await getManual();
+const currentId = Astro.locals.starlightRoute.id; // e.g. "learn/damping-materials"
+const currentHandle = currentId.startsWith('learn/') ? currentId.slice(6) : null;
+const currentPart =
+  parts.find((p) => p.chapters.some((c) => c.handle === currentHandle))?.num ?? 1;
+---
+
+<div class="mp-sb">
+  <a class="mp-sb-contents-link" href="/contents/">Contents — all 30 chapters</a>
+  {
+    parts.map((part) => (
+      <details open={part.num === currentPart}>
+        <summary>
+          <span class="mp-partnum" style="width: 22px;">{String(part.num).padStart(2, '0')}</span>
+          <span style="flex: 1;">{part.title}</span>
+          <span class="mp-sb-caret" aria-hidden="true">▸</span>
+        </summary>
+        <div class="mp-sb-chapters">
+          {part.chapters.map((c) =>
+            c.written ? (
+              <a
+                class="mp-sb-chapter"
+                href={`/learn/${c.handle}/`}
+                aria-current={c.handle === currentHandle ? 'page' : undefined}
+              >
+                <span class="mp-sb-num">{c.num}</span>
+                <span>{c.title}</span>
+              </a>
+            ) : (
+              <span class="mp-sb-chapter is-upcoming">
+                <span class="mp-sb-num">{c.num}</span>
+                <span>{c.title}</span>
+              </span>
+            )
+          )}
+        </div>
+      </details>
+    ))
+  }
+</div>
