@@ -61,6 +61,13 @@ or hold until the target exists.
 - [ ] Length vs. style guide (1,200–1,800 words):
       `headphone-form-factors` is ~760 words;
       `design-methodology` is ~1,920. Flag for editorial, not urgent.
+- [ ] `cables-connectors-hardware` — the What's Next prose says "You've
+      now completed Part 2: Components & Materials" and "Next up is
+      **Part 3: Design & Build Process**". The build's quality gate only
+      covers titles/headings (per spec), but visible part numbers in body
+      copy violate the spirit of the internal-only rule — rewrite to
+      natural language ("the components and materials chapters") in the
+      editorial pass.
 
 ## Process
 

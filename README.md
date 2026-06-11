@@ -22,8 +22,10 @@ canonical author bio, and voice rules — it is authoritative.
 | `src/styles/theme.css` | Brand tokens (`--mp-*`) — restyle by swapping tokens |
 | `scripts/check-no-chapter-numbers.mjs` | Quality gate: no visible "Chapter N" / "Part N" |
 | `scripts/to-shopify/` | Shopify export bridge (stub — finished at store-launch) |
-| `CONTENT-TODO.md` | Known stale facts for a later editorial pass |
-| `project/` | Planning docs (ported from `_source/` once present) |
+| `scripts/migrate-chapters.mjs` | One-time HTML→Markdown chapter migration (kept for provenance) |
+| `CONTENT-TODO.md` | Known stale facts + migration anomalies for a later editorial pass |
+| `project/` | Planning docs, ported from `_source/` and pruned to resource mode |
+| `_source/` | Raw migration inputs (originals, untouched) |
 
 ## Commands
 
@@ -48,16 +50,12 @@ Deploys on push to `main` via `.github/workflows/deploy.yml`
   → What's Next.
 - Slugs are frozen — `_source/Website_URL_slug_Reference` verbatim.
 
-## Pending: content migration
+## Status
 
-The 13 written chapters, the slug reference, and the planning docs migrate
-from `_source/` (not yet in the repo). When they land:
+**13 of 30 chapters live** under `/learn/` — Parts 1–2 complete (Ch 1–12)
+plus Design Methodology (Ch 13). Handles are frozen per the Content &
+Style Guide appendix (`_source/MakerPhones-Content-Style-Guide.md`).
 
-1. Convert each chapter to `src/content/docs/learn/<handle>.md` per the
-   schema in `src/content.config.ts`.
-2. Add the chapter slugs to the sidebar groups in `astro.config.mjs`
-   (Part 1: ch 1–6 → Fundamentals; Part 2: ch 7–12 → Components & Materials;
-   Part 3: ch 13 → Design & Build).
-3. Port planning docs into `project/`, pruned to resource mode
-   (90-day launch calendar → `project/archive/`; status → 13/30; bio →
-   Compass-canonical everywhere).
+To add a chapter: write `src/content/docs/learn/<handle>.md` with the
+frontmatter schema from `src/content.config.ts`, then add
+`'learn/<handle>'` to its part's sidebar group in `astro.config.mjs`.
