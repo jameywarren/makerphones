@@ -1,0 +1,34 @@
+---
+/** Homepage hero — warm blueprint wash, exploded-diagram focal point. */
+import ExplodedHeadphone from '../diagrams/ExplodedHeadphone.astro';
+---
+
+<div class="mp-full mp-blueprint mp-hero">
+  <div class="mp-section mp-hero-grid">
+    <div>
+      <span class="mp-eyebrow">An open reference manual for headphone makers</span>
+      <h1 class="mp-hero-title" id="_top">Build Your Own Sound.</h1>
+      <p class="mp-hero-lede">
+        An open reference manual on how headphones actually work — and how to design, build, and
+        tune your own. Written for makers, from first build up.
+      </p>
+      <div class="mp-hero-actions">
+        <a class="mp-btn" href="/learn/how-headphones-create-sound/">Start with the fundamentals&nbsp;&nbsp;→</a>
+        <a class="mp-textlink" href="/contents/">Browse the contents</a>
+      </div>
+    </div>
+    <ExplodedHeadphone />
+  </div>
+</div>
+
+<style>
+  .mp-hero {
+    border-bottom: 1px solid var(--mp-line);
+  }
+  .mp-hero-actions {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    flex-wrap: wrap;
+  }
+</style>

@@ -1,19 +1,18 @@
 ---
 title: MakerPhones
-description: An open reference for designing and building your own headphones — real engineering, explained plainly.
+description: An open reference manual on how headphones actually work — and how to design, build, and tune your own. Written for makers, from first build up.
 template: splash
-hero:
-  title: Build Your Own Sound
-  tagline: A working reference for designing and building your own headphones — real engineering, explained plainly enough to follow on your first build.
-  actions:
-    - text: Start with the manual
-      link: /learn/
-      icon: right-arrow
-      variant: primary
+tableOfContents: false
 ---
 
-{/*
-  Placeholder hero — a bespoke visual design is being explored separately.
-  Keep this page minimal and restyleable: hero only, no feature grids,
-  no marketing sections. Theme tokens live in src/styles/theme.css.
-*/}
+import HomeHero from '../../components/home/HomeHero.astro';
+import CredStrip from '../../components/home/CredStrip.astro';
+import PartsGrid from '../../components/home/PartsGrid.astro';
+import CosmicBand from '../../components/home/CosmicBand.astro';
+
+<div class="mp-home not-content">
+  <HomeHero />
+  <CredStrip />
+  <PartsGrid />
+  <CosmicBand />
+</div>

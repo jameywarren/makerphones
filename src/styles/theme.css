@@ -799,8 +799,34 @@ button[data-open-modal] {
 }
 
 /* ---- homepage / splash sections (full-bleed inside Starlight's content column) ---- */
-.mp-splash {
-  margin: 0 !important;
+.mp-full {
+  margin-inline: calc(50% - 50vw);
+}
+.mp-home,
+.mp-contents-page {
+  margin-top: -1.5rem;
+}
+body {
+  overflow-x: clip;
+}
+.mp-hero-actions {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+.mp-contents-hero {
+  border-bottom: 1px solid var(--mp-line);
+  padding: 4rem clamp(1.25rem, 4vw, 4rem) 2.25rem;
+  display: grid;
+  gap: 1rem;
+  justify-items: start;
+}
+.mp-contents-hero .mp-hero-title {
+  margin: 0;
+}
+.mp-contents-hero .mp-hero-lede {
+  margin: 0 0 0.5rem;
 }
 .mp-section {
   padding: 4rem clamp(1.25rem, 4vw, 4rem);

@@ -22,10 +22,13 @@ const data = entry.data as typeof entry.data & {
 const prereqLinks = (chapter?.prerequisites ?? [])
   .map((h) => byHandle.get(h))
   .filter((c) => c?.written);
+
+// Splash pages (home, contents) compose their own headers.
+const isSplash = (entry.data as { template?: string }).template === 'splash';
 ---
 
 {
-  chapter ? (
+  isSplash ? null : chapter ? (
     <div class="not-content">
       <nav class="mp-crumb" aria-label="Breadcrumb">
         <a href="/contents/">The Manual</a>

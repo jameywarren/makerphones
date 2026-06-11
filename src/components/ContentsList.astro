@@ -1,0 +1,71 @@
+---
+/**
+ * Contents page body — the real 30-chapter outline. Six parts,
+ * decimal nav numbers, difficulty + read time from frontmatter for
+ * the 13 written chapters; the rest render as upcoming (dimmed,
+ * unlinked — no difficulty/read time invented for unwritten work).
+ */
+import { getManual } from '../data/manual';
+import Level from './Level.astro';
+
+const { parts } = await getManual();
+---
+
+<div class="mp-contents">
+  {
+    parts.map((p) => (
+      <section class="mp-contents-part" id={`part-${p.num}`}>
+        <header class="mp-contents-head">
+          <span class="mp-partnum">PART {String(p.num).padStart(2, '0')}</span>
+          <h2>{p.title}</h2>
+          <p>{p.desc}</p>
+          <span class="mp-meta">{p.chapters.length} chapters · {p.level}</span>
+        </header>
+        <div class="mp-contents-rows">
+          {p.chapters.map((c, ci) =>
+            c.written ? (
+              <a class="mp-chapter-row" href={`/learn/${c.handle}/`}>
+                <span class="mp-partnum">{c.num}</span>
+                <span class="mp-row-main">
+                  <span class="mp-row-title">{c.title}</span>
+                  {p.num === 1 && ci === 0 && <span class="mp-start-tag">Start here</span>}
+                </span>
+                <span class="mp-row-level"><Level level={c.difficulty} /></span>
+                <span class="mp-meta mp-row-mins">{c.readTime} min</span>
+              </a>
+            ) : (
+              <div class="mp-chapter-row is-upcoming">
+                <span class="mp-meta" style="opacity: 0.7;">{c.num}</span>
+                <span class="mp-row-main">
+                  <span class="mp-row-title">{c.title}</span>
+                </span>
+                <span class="mp-row-level" />
+                <span class="mp-row-mins"><span class="mp-soon">upcoming</span></span>
+              </div>
+            )
+          )}
+        </div>
+      </section>
+    ))
+  }
+</div>
+
+<style>
+  .mp-contents {
+    display: grid;
+    gap: 3.5rem;
+    padding: 3.5rem 0 1rem;
+  }
+  .mp-contents-rows {
+    border-top: 1px solid var(--mp-line);
+  }
+  .mp-row-main {
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+  .mp-contents-part {
+    scroll-margin-top: calc(var(--sl-nav-height, 4rem) + 1rem);
+  }
+</style>

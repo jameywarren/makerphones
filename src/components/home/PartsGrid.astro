@@ -1,0 +1,65 @@
+---
+/** The six-part grid, fed by the manual outline + live chapter data. */
+import { getManual, WRITTEN_COUNT, TOTAL_COUNT } from '../../data/manual';
+
+const { parts } = await getManual();
+
+function partMeta(p: (typeof parts)[number]): string {
+  const pub = p.chapters.filter((c) => c.written).length;
+  const n = p.chapters.length;
+  if (pub === 0) return `${n} chapters · ${p.level} · planned`;
+  if (pub < n) return `${n} chapters · ${p.level} · ${pub} of ${n} published`;
+  return `${n} chapters · ${p.level}`;
+}
+---
+
+<div class="mp-full mp-section mp-parts-section">
+  <div class="mp-ruler" style="margin-bottom: 2.5rem;"></div>
+  <div class="mp-parts-headrow">
+    <h2>The manual, in six parts</h2>
+    <span class="mp-meta">{TOTAL_COUNT} chapters · {WRITTEN_COUNT} published · free to read</span>
+  </div>
+  <p class="mp-parts-intro">
+    Read it front-to-back like a book, or jump straight to the problem sitting on your bench. Each
+    part builds on the one before it.
+  </p>
+  <div class="mp-parts-grid">
+    {
+      parts.map((p, i) => (
+        <a class:list={['mp-part-card', { 'is-first': i === 0 }]} href={`/contents/#part-${p.num}`}>
+          <span class="mp-partnum">PART {String(p.num).padStart(2, '0')}</span>
+          <span class="mp-part-title">{p.title}</span>
+          <span class="mp-part-desc">{p.desc}</span>
+          <span class="mp-meta" style="margin-top: 6px;">{partMeta(p)}{i === 0 ? ' · start here →' : ''}</span>
+        </a>
+      ))
+    }
+  </div>
+</div>
+
+<style>
+  .mp-parts-headrow {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 1rem;
+    flex-wrap: wrap;
+    margin-bottom: 10px;
+  }
+  .mp-parts-headrow h2 {
+    font-family: var(--mp-sans);
+    font-weight: 700;
+    font-size: 1.875rem;
+    letter-spacing: -0.01em;
+    color: var(--mp-charcoal);
+    margin: 0;
+  }
+  .mp-parts-intro {
+    font-family: var(--mp-body);
+    font-size: 1rem;
+    line-height: 1.6;
+    color: var(--mp-meta);
+    max-width: 60ch;
+    margin: 0 0 2rem;
+  }
+</style>
