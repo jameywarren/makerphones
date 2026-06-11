@@ -33,6 +33,16 @@
   --mp-radius: 6px;
   --mp-radius-lg: 8px;
 
+  /* Accessible link/CTA color on light surfaces: #ea580c is only
+   * 3.6:1 on white — reading-surface links and button fills use the
+   * darker orange (5.2:1); #ea580c stays for chrome accents (part
+   * numbers, dots, diagram marks, active states). */
+  --mp-link: var(--mp-accent-hover);
+  --mp-link-hover: var(--mp-accent-active);
+  --mp-btn-bg: var(--mp-accent-hover);
+  --mp-btn-bg-hover: var(--mp-accent-active);
+  --mp-btn-text: #fff;
+
   /* Starlight font hooks */
   --sl-font: var(--mp-body);
   --sl-font-mono: var(--mp-mono);
@@ -52,6 +62,13 @@
   --mp-line: #374151;
   --mp-meta: #9ca3af;
   --mp-shadow-warm: none;
+
+  /* dark surfaces: light orange is high-contrast (7.8:1 on #111827) */
+  --mp-link: var(--mp-accent);
+  --mp-link-hover: var(--mp-accent-hover);
+  --mp-btn-bg: var(--mp-accent);
+  --mp-btn-bg-hover: var(--mp-accent-hover);
+  --mp-btn-text: #111827;
 }
 
 /* ---- Starlight theme mapping ---------------------------------------- */
@@ -75,7 +92,7 @@
   --sl-color-hairline-light: var(--mp-line);
   --sl-color-hairline-shade: var(--mp-line);
   --sl-color-text: var(--mp-ink);
-  --sl-color-text-accent: var(--mp-accent);
+  --sl-color-text-accent: var(--mp-link);
 }
 
 :root[data-theme='dark'] {
@@ -98,7 +115,7 @@
   --sl-color-hairline-light: var(--mp-line);
   --sl-color-hairline-shade: var(--mp-line);
   --sl-color-text: var(--mp-ink);
-  --sl-color-text-accent: var(--mp-accent);
+  --sl-color-text-accent: var(--mp-link);
 }
 
 /* ---- recurring motifs ------------------------------------------------ */
@@ -195,12 +212,12 @@
   text-align: center;
   letter-spacing: 0.005em;
   text-decoration: none;
-  background: var(--mp-accent);
-  color: #fff;
+  background: var(--mp-btn-bg);
+  color: var(--mp-btn-text);
 }
 .mp-btn:hover {
-  background: var(--mp-accent-hover);
-  color: #fff;
+  background: var(--mp-btn-bg-hover);
+  color: var(--mp-btn-text);
 }
 .mp-btn:active {
   background: var(--mp-accent-active);
@@ -212,14 +229,14 @@
 .mp-textlink {
   font-family: var(--mp-sans);
   font-size: 0.9375rem;
-  color: var(--mp-accent);
+  color: var(--mp-link);
   font-weight: 500;
   text-decoration: underline;
   text-decoration-thickness: 1px;
   text-underline-offset: 3px;
 }
 .mp-textlink:hover {
-  color: var(--mp-accent-hover);
+  color: var(--mp-link-hover);
   text-decoration-thickness: 2px;
 }
 
@@ -308,14 +325,14 @@ header.header {
   margin-top: 2.25rem;
 }
 .sl-markdown-content a:not(:where(.not-content *)) {
-  color: var(--mp-accent);
+  color: var(--mp-link);
   font-weight: 500;
   text-decoration: underline;
   text-decoration-thickness: 1px;
   text-underline-offset: 3px;
 }
 .sl-markdown-content a:hover:not(:where(.not-content *)) {
-  color: var(--mp-accent-hover);
+  color: var(--mp-link-hover);
   text-decoration-thickness: 2px;
 }
 .sl-markdown-content strong {
@@ -705,14 +722,14 @@ starlight-toc a[aria-current='true']:hover {
   margin-top: 1.25rem;
 }
 .mp-chapter-meta a {
-  color: var(--mp-accent);
+  color: var(--mp-link);
   font-weight: 400;
   text-decoration: underline;
   text-decoration-thickness: 1px;
   text-underline-offset: 3px;
 }
 .mp-chapter-meta a:hover {
-  color: var(--mp-accent-hover);
+  color: var(--mp-link-hover);
 }
 
 /* ---- related + prev/next cards --------------------------------------------------------- */
@@ -736,14 +753,14 @@ starlight-toc a[aria-current='true']:hover {
 .mp-related a {
   font-family: var(--mp-sans);
   font-size: 0.9rem;
-  color: var(--mp-accent);
+  color: var(--mp-link);
   font-weight: 500;
   text-decoration: underline;
   text-decoration-thickness: 1px;
   text-underline-offset: 3px;
 }
 .mp-related a:hover {
-  color: var(--mp-accent-hover);
+  color: var(--mp-link-hover);
 }
 .mp-pn {
   display: grid;
