@@ -1,6 +1,6 @@
-# CONTENT-TODO — known stale facts
+# CONTENT-TODO — known stale facts & pending assets
 
-**Version 1.1 · June 11, 2026**
+**Version 1.2 · June 11, 2026**
 
 Facts known to be stale in the written chapters. Migration is faithful —
 these are **not** fixed during migration; they're fixed in a deliberate
@@ -29,6 +29,10 @@ framing in body copy (migrated faithfully):
 - [ ] `how-headphones-create-sound` — "After 30 years working with
       headphones — from manufacturing at Grace Design to running
       HeadRoom" (opening) and "I've built headphones for 30 years."
+      **Note:** this chapter's `excerpt` also says "After 30 years in
+      professional audio…" and the v2 design renders excerpts as the
+      visible chapter lede — fixing the excerpt is now reader-facing,
+      not just metadata.
 - [ ] `driver-selection-guide` — "30 years" mention.
 - [ ] `design-methodology` — "30 years" mention.
 
@@ -68,6 +72,21 @@ or hold until the target exists.
       copy violate the spirit of the internal-only rule — rewrite to
       natural language ("the components and materials chapters") in the
       editorial pass.
+
+## Real assets needed (v2 design placeholders)
+
+The v2 design ships with styled placeholders — swap in real assets:
+
+- [ ] **Bench portrait** of Jamey — homepage credibility strip
+      (`src/components/home/CredStrip.astro`).
+- [ ] **Workshop photo** — About page (`src/content/docs/about.md`).
+- [ ] **The Cosmic's real measurement plot** — the homepage Cosmic band
+      (`src/components/home/CosmicBand.astro`) uses an illustrative FR
+      curve, captioned as such. Replace with the actual measured-vs-
+      target plot (per the Compass: never present invented data as
+      measurement).
+- The hero exploded-headphone diagram, FR-grid, and driver cutaway are
+  real vector art from the design handoff — no replacement needed.
 
 ## Process
 

@@ -1,17 +1,35 @@
 #!/usr/bin/env node
 /**
- * Quality gate: no rendered page title or heading may contain
- * "Chapter N" or "Part N". Part/chapter labels are internal-only
- * (frontmatter), never visible copy.
+ * Quality gate — numbering rule (v2, post-design-integration):
  *
- * Scans dist/ HTML: <title> tags and <h1>–<h6> contents.
- * Run after `npm run build`. Exits 1 on any violation.
+ *   - Chapter H1s and page <title>s stay clean: no "Chapter N" / "Part N".
+ *   - Body prose and content headings: no "Chapter N" / "Part N" or
+ *     part-references (cross-references are natural language).
+ *   - NAV CHROME IS EXEMPT: sidebar, contents page, breadcrumb,
+ *     prev/next, on-page TOC may show decimal numbers (1.1–6.4) and
+ *     part labels. Chrome lives outside .sl-markdown-content (or in
+ *     .mp-foot after it), so the scan covers the markdown body only.
+ *
+ * Known issues already tracked in CONTENT-TODO.md are allowlisted and
+ * reported as warnings — the gate fails only on NEW violations.
+ *
+ * Run after `npm run build`. Exits 1 on any non-allowlisted violation.
  */
 import { readdir, readFile } from 'node:fs/promises';
-import { join } from 'node:path';
+import { join, relative } from 'node:path';
 
 const DIST = new URL('../dist', import.meta.url).pathname;
 const PATTERN = /\b(Chapter|Part)\s+\d+\b/i;
+
+/** Landing/nav pages — entirely navigation chrome, not manual content. */
+const SKIP = new Set(['index.html', 'contents/index.html', '404.html']);
+
+/** Known violations tracked in CONTENT-TODO.md — warn, don't fail. */
+const ALLOWLIST = new Set([
+  // "You've now completed Part 2..." in the What's Next prose; queued
+  // for the editorial pass (see CONTENT-TODO.md).
+  'learn/cables-connectors-hardware/index.html',
+]);
 
 async function htmlFiles(dir) {
   const out = [];
@@ -23,33 +41,61 @@ async function htmlFiles(dir) {
   return out;
 }
 
-const violations = [];
+const text = (html) =>
+  html.replace(/<script[\s\S]*?<\/script>/gi, ' ').replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim();
+
+const failures = [];
+const warnings = [];
+
 let files;
 try {
   files = await htmlFiles(DIST);
 } catch {
-  console.error(`No dist/ directory found at ${DIST} — run \`npm run build\` first.`);
+  console.error(`No dist/ at ${DIST} — run \`npm run build\` first.`);
   process.exit(1);
 }
 
+let checked = 0;
 for (const file of files) {
+  const rel = relative(DIST, file);
+  if (SKIP.has(rel)) continue;
+  checked++;
   const html = await readFile(file, 'utf8');
-  const checks = [
+  const sink = ALLOWLIST.has(rel) ? warnings : failures;
+
+  // 1. <title> and every <h1> must be clean — always a hard failure.
+  for (const m of [
     ...html.matchAll(/<title[^>]*>([\s\S]*?)<\/title>/gi),
-    ...html.matchAll(/<h[1-6][^>]*>([\s\S]*?)<\/h[1-6]>/gi),
-  ];
-  for (const match of checks) {
-    const text = match[1].replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim();
-    if (PATTERN.test(text)) {
-      violations.push({ file: file.replace(DIST + '/', ''), text });
-    }
+    ...html.matchAll(/<h1[^>]*>([\s\S]*?)<\/h1>/gi),
+  ]) {
+    const t = text(m[1]);
+    if (PATTERN.test(t)) failures.push(`${rel} [title/h1]: "${t}"`);
   }
+
+  // 2. Markdown body (content headings + prose). Chrome before
+  //    .sl-markdown-content and the .mp-foot block after it are exempt.
+  const start = html.indexOf('sl-markdown-content');
+  if (start === -1) continue;
+  let body = html.slice(start);
+  const footAt = body.indexOf('class="mp-foot');
+  if (footAt !== -1) body = body.slice(0, footAt);
+  const endMain = body.indexOf('</main>');
+  if (endMain !== -1) body = body.slice(0, endMain);
+
+  const bodyText = text(body);
+  const hit = bodyText.match(new RegExp(`.{0,60}${PATTERN.source}.{0,60}`, 'i'));
+  if (hit) sink.push(`${rel} [body]: "…${hit[0].trim()}…"`);
 }
 
-if (violations.length > 0) {
-  console.error('Quality gate FAILED — visible chapter/part numbers found:\n');
-  for (const v of violations) console.error(`  ${v.file}: "${v.text}"`);
+for (const w of warnings)
+  console.warn(`WARN (allowlisted, tracked in CONTENT-TODO.md): ${w}`);
+
+if (failures.length > 0) {
+  console.error('\nQuality gate FAILED — visible chapter/part numbers outside nav chrome:\n');
+  for (const f of failures) console.error(`  ${f}`);
   process.exit(1);
 }
 
-console.log(`Quality gate passed — ${files.length} pages checked, no visible chapter/part numbers.`);
+console.log(
+  `Quality gate passed — ${checked} pages checked (titles/H1s + body prose; nav chrome exempt), ${warnings.length} allowlisted warning(s).`
+);

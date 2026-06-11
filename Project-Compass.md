@@ -1,6 +1,6 @@
 # MakerPhones — Project Compass
 
-**Version 1.0 · June 11, 2026**
+**Version 1.1 · June 11, 2026** *(1.1: numbering rule updated for the v2 design — decimal numbers allowed in nav chrome)*
 
 *The single source of positioning, voice, and author bio for chat sessions. The repo is the source of truth for everything else (content, site, detailed docs). Keep only this + the voice/content rules + the slug reference in project knowledge; everything else lives in git.*
 
@@ -29,8 +29,8 @@ Clear, approachable, credible — readable by a first-time builder, grounded in 
 
 ## Content rules that don't change
 
-- Part/Chapter labels are **internal only** — never shown in visible titles or headings.
-- Cross-references use **natural language**, never "Chapter 7."
+- Chapter titles (H1) stay **clean — no numbers**. Decimal numbers (1.1–6.4, Part.WithinPartIndex) appear in **nav chrome only**: sidebar, contents, breadcrumb, prev/next, on-page TOC. No numbers or part-references in body prose. (The frontmatter `chapter` field is the internal global 1–30 index — never displayed.)
+- Cross-references use **natural language**, never "Chapter 7" or "see 2.3."
 - Target **~1,200–1,800 words** per chapter.
 - Structure: why it matters → concept → technical detail → practical application → **Common Mistakes** → **What's Next**.
 - Footer: difficulty, prerequisites, related links.

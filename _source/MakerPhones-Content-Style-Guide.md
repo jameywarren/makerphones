@@ -1,6 +1,6 @@
 # MakerPhones — Content & Style Guide
 
-**Version 1.0 · June 11, 2026**
+**Version 1.1 · June 11, 2026** *(1.1: numbering rule updated for the v2 design — decimal numbers allowed in nav chrome)*
 
 *The working "how to write a chapter" guide. Positioning, the canonical author bio, and the voice north star live in **Project-Compass.md** — read that first; this expands the mechanics. Full historical/planning docs live in the repo, which is the source of truth.*
 
@@ -54,8 +54,8 @@ Occasional mild profanity ("damn," "hell") is fine and authentic; keep it worksh
 
 ## The non-negotiables
 
-- **No visible "Chapter N" or "Part N"** anywhere a reader sees — titles, headings, nav, or links. Part/chapter labels are internal only (frontmatter, filenames).
-- **Cross-references in natural language** — "see the driver selection guide," never "see Chapter 7."
+- **Chapter titles (H1) stay clean — no numbers.** Decimal numbers (1.1–6.4, Part.WithinPartIndex, derived from sidebar order) are allowed in **nav chrome only**: sidebar, contents page, breadcrumb, prev/next, on-page TOC. **No numbers or part-references in headings or body prose.** The frontmatter `chapter` field is the internal global 1–30 index — never displayed; nav shows the part-relative decimal.
+- **Cross-references in natural language** — "see the driver selection guide," never "see Chapter 7" or "see 2.3."
 - **Accuracy over plausibility** — never invent drivers, parts, suppliers, prices, or specs. When unsure, check or say so. A sourcing-and-build resource lives or dies on this.
 - **Use the bio sparingly** — the canonical framing (Compass) when credentials genuinely add weight, not in every chapter.
 
