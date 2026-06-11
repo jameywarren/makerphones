@@ -1,0 +1,63 @@
+---
+/**
+ * Chapter metadata row — difficulty, read time, prerequisites, related.
+ *
+ * Fed entirely by frontmatter (difficulty, read_time, prerequisites,
+ * related). Rendered automatically beneath the page title via the
+ * PageTitle override, so chapter Markdown stays pure and portable.
+ * Prerequisite/related handles resolve to chapter titles at build time;
+ * link text is always the chapter title, never "Chapter N".
+ */
+import { getCollection } from 'astro:content';
+
+interface Props {
+  difficulty?: 'Beginner' | 'Intermediate' | 'Advanced';
+  readTime?: number;
+  prerequisites?: string[];
+  related?: string[];
+}
+
+const { difficulty, readTime, prerequisites = [], related = [] } = Astro.props;
+
+const docs = await getCollection('docs');
+const titleFor = (handle: string): string =>
+  docs.find((d) => d.id === `learn/${handle}`)?.data.title ?? handle;
+
+const hasContent =
+  difficulty || readTime || prerequisites.length > 0 || related.length > 0;
+---
+
+{
+  hasContent && (
+    <div class="mp-chapter-meta not-content">
+      {difficulty && (
+        <span class="mp-difficulty" data-level={difficulty}>
+          {difficulty}
+        </span>
+      )}
+      {readTime && <span>{readTime} min read</span>}
+      {prerequisites.length > 0 && (
+        <span>
+          <span class="mp-meta-label">Read first: </span>
+          {prerequisites.map((handle, i) => (
+            <>
+              {i > 0 && ', '}
+              <a href={`/learn/${handle}/`}>{titleFor(handle)}</a>
+            </>
+          ))}
+        </span>
+      )}
+      {related.length > 0 && (
+        <span>
+          <span class="mp-meta-label">Related: </span>
+          {related.map((handle, i) => (
+            <>
+              {i > 0 && ', '}
+              <a href={`/learn/${handle}/`}>{titleFor(handle)}</a>
+            </>
+          ))}
+        </span>
+      )}
+    </div>
+  )
+}

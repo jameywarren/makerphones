@@ -1,0 +1,162 @@
+/**
+ * MakerPhones brand tokens — clean token layer over Starlight.
+ *
+ * A bespoke design is coming from Claude Design: keep everything routed
+ * through the --mp-* custom properties below so a restyle is a token swap,
+ * not a rewrite. Don't add component-specific overrides here unless they
+ * read from these tokens.
+ */
+
+:root {
+  /* ---- Brand palette ---------------------------------------------- */
+  --mp-charcoal: #2d3748; /* structure, headings */
+  --mp-orange: #ea580c; /* accent ONLY — links, key CTAs, active states */
+  --mp-bg: #f9fafb; /* off-white background */
+  --mp-border: #e5e7eb; /* light gray borders */
+  --mp-text: #111827; /* near-black body */
+  --mp-meta: #6b7280; /* medium gray metadata */
+
+  /* ---- Reading typography ------------------------------------------ */
+  --mp-measure: 70ch; /* ~65–75 char measure for long-form */
+  --mp-line-height: 1.6;
+}
+
+/* ---- Starlight theme mapping (light) ------------------------------- */
+:root[data-theme='light'] {
+  --sl-color-accent-low: #ffedd5;
+  --sl-color-accent: var(--mp-orange);
+  --sl-color-accent-high: #9a3412;
+  --sl-color-white: var(--mp-text);
+  --sl-color-gray-1: var(--mp-charcoal);
+  --sl-color-gray-2: #4a5568;
+  --sl-color-gray-3: var(--mp-meta);
+  --sl-color-gray-4: #9ca3af;
+  --sl-color-gray-5: var(--mp-border);
+  --sl-color-gray-6: #f3f4f6;
+  --sl-color-gray-7: var(--mp-bg);
+  --sl-color-black: #ffffff;
+  --sl-color-bg: var(--mp-bg);
+  --sl-color-text: var(--mp-text);
+  --sl-color-text-accent: var(--mp-orange);
+}
+
+/* Dark mode: keep Starlight defaults but carry the accent through. */
+:root[data-theme='dark'] {
+  --sl-color-accent-low: #431407;
+  --sl-color-accent: var(--mp-orange);
+  --sl-color-accent-high: #fdba74;
+  --sl-color-text-accent: #fb923c;
+}
+
+/* ---- Long-form reading --------------------------------------------- */
+.sl-markdown-content {
+  line-height: var(--mp-line-height);
+  max-width: var(--mp-measure);
+}
+
+.sl-markdown-content h1,
+.sl-markdown-content h2,
+.sl-markdown-content h3,
+.sl-markdown-content h4 {
+  color: var(--sl-color-white);
+}
+
+:root[data-theme='light'] .sl-markdown-content h1,
+:root[data-theme='light'] .sl-markdown-content h2,
+:root[data-theme='light'] .sl-markdown-content h3,
+:root[data-theme='light'] .sl-markdown-content h4 {
+  color: var(--mp-charcoal);
+}
+
+/* ---- Spec / parameter blocks ---------------------------------------
+ * Use a fenced code block with no language, or <div class="mp-spec">,
+ * for driver specs and measured parameters. Monospace, quiet border.
+ */
+.mp-spec,
+.sl-markdown-content .mp-spec {
+  font-family: var(--__sl-font-mono, ui-monospace, 'SF Mono', Menlo, monospace);
+  font-size: var(--sl-text-sm);
+  line-height: 1.5;
+  background: var(--sl-color-gray-6);
+  border: 1px solid var(--sl-color-gray-5);
+  border-radius: 0.5rem;
+  padding: 0.75rem 1rem;
+}
+
+/* ---- Comparison tables ---------------------------------------------- */
+.sl-markdown-content table {
+  font-size: var(--sl-text-sm);
+}
+
+.sl-markdown-content table th {
+  background: var(--sl-color-gray-6);
+  color: var(--sl-color-gray-1);
+  border-bottom: 2px solid var(--sl-color-gray-5);
+  text-align: left;
+}
+
+.sl-markdown-content table td {
+  border-bottom: 1px solid var(--sl-color-gray-5);
+  vertical-align: top;
+}
+
+/* ---- Chapter metadata row (ChapterMeta.astro) ------------------------ */
+.mp-chapter-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 1.5rem;
+  align-items: baseline;
+  font-size: var(--sl-text-sm);
+  color: var(--sl-color-gray-3);
+  border-bottom: 1px solid var(--sl-color-gray-5);
+  padding-bottom: 0.75rem;
+  margin-bottom: 1rem;
+}
+
+.mp-chapter-meta .mp-meta-label {
+  font-weight: 600;
+  color: var(--sl-color-gray-2);
+}
+
+.mp-chapter-meta a {
+  color: var(--sl-color-text-accent);
+  text-decoration: none;
+}
+
+.mp-chapter-meta a:hover {
+  text-decoration: underline;
+}
+
+.mp-difficulty {
+  display: inline-block;
+  border: 1px solid var(--sl-color-gray-5);
+  border-radius: 999px;
+  padding: 0.05rem 0.6rem;
+  font-weight: 600;
+}
+
+.mp-difficulty[data-level='Beginner'] {
+  color: #166534;
+  border-color: #bbf7d0;
+  background: #f0fdf4;
+}
+
+.mp-difficulty[data-level='Intermediate'] {
+  color: #9a3412;
+  border-color: #fed7aa;
+  background: #fff7ed;
+}
+
+.mp-difficulty[data-level='Advanced'] {
+  color: var(--mp-charcoal);
+  border-color: var(--mp-border);
+  background: var(--sl-color-gray-6);
+}
+
+:root[data-theme='dark'] .mp-difficulty[data-level='Beginner'],
+:root[data-theme='dark'] .mp-difficulty[data-level='Intermediate'],
+:root[data-theme='dark'] .mp-difficulty[data-level='Advanced'] {
+  color: var(--sl-color-gray-2);
+  border-color: var(--sl-color-gray-5);
+  background: transparent;
+}

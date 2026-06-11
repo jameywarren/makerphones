@@ -1,0 +1,24 @@
+---
+/**
+ * Starlight PageTitle override: default title, then the chapter
+ * metadata row when the page's frontmatter carries chapter fields.
+ */
+import Default from '@astrojs/starlight/components/PageTitle.astro';
+import ChapterMeta from './ChapterMeta.astro';
+
+const { entry } = Astro.locals.starlightRoute;
+const { difficulty, read_time, prerequisites, related } = entry.data as {
+  difficulty?: 'Beginner' | 'Intermediate' | 'Advanced';
+  read_time?: number;
+  prerequisites?: string[];
+  related?: string[];
+};
+---
+
+<Default><slot /></Default>
+<ChapterMeta
+  difficulty={difficulty}
+  readTime={read_time}
+  prerequisites={prerequisites}
+  related={related}
+/>
