@@ -11,19 +11,32 @@ const sidebar = [
   {
     label: 'Fundamentals',
     items: [
-      // Part 1 — chapters 1–6 (add 'learn/<handle>' entries from the slug reference)
+      // Part 1 — chapters 1–6
+      'learn/how-headphones-create-sound',
+      'learn/understanding-frequency-response',
+      'learn/impedance-and-sensitivity',
+      'learn/open-vs-closed-back-design',
+      'learn/headphone-form-factors',
+      'learn/driver-technologies',
     ],
   },
   {
     label: 'Components & Materials',
     items: [
       // Part 2 — chapters 7–12
+      'learn/driver-selection-guide',
+      'learn/sourcing-components',
+      'learn/acoustic-chambers-and-enclosures',
+      'learn/ear-pads-and-comfort',
+      'learn/damping-materials',
+      'learn/cables-connectors-hardware',
     ],
   },
   {
     label: 'Design & Build',
     items: [
-      // Part 3 — chapter 13 (Design Methodology) written; 14–17 pending
+      // Part 3 — chapter 13 written; 14–17 pending
+      'learn/design-methodology',
     ],
   },
   { label: 'Measurement & Tuning', items: [] }, // Part 4 — not yet written

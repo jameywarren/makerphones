@@ -1,0 +1,126 @@
+---
+title: "Driver Technologies"
+handle: driver-technologies
+part: 1
+chapter: 6
+difficulty: Beginner
+prerequisites: [how-headphones-create-sound]
+related: [driver-selection-guide, impedance-and-sensitivity, sourcing-components]
+read_time: 7
+tags: [fundamentals, beginner, theory, drivers, technology]
+description: "Learn about dynamic, planar magnetic, balanced armature, and electrostatic drivers — and why dynamic drivers are the right choice for DIY builders."
+excerpt: "There are four main driver technologies in headphones, but only one makes sense for DIY builders. Here's why dynamic drivers should be your starting point."
+---
+
+If you've been following along from the beginning, you already know the basics of how dynamic drivers work. But there are actually several different driver technologies used in headphones, each with its own physics, sound characteristics, and practical considerations for builders. Let me walk you through what's out there, how they compare, and most importantly — which ones make sense for DIY projects.
+
+## Dynamic Drivers: The DIY Standard
+
+We covered the basics in [How Headphones Create Sound](/learn/how-headphones-create-sound/), but let's go deeper into why dynamic drivers dominate both commercial headphones and DIY builds.
+
+A dynamic driver uses a voice coil suspended in a magnetic gap, attached to a diaphragm. Current through the coil creates a magnetic field that interacts with the permanent magnet, moving the diaphragm and creating sound.
+
+**Key components in detail:**
+
+**The magnet structure:** Usually neodymium (for strength and low weight) or ferrite (cheaper, heavier). Modern designs use carefully shaped pole pieces to concentrate the magnetic field precisely where needed.
+
+**The voice coil:** Wound from copper or aluminum wire. Copper sounds slightly warmer, aluminum is lighter (better high-frequency response). The coil diameter, length, and wire gauge all affect performance.
+
+**The diaphragm:** Common materials include paper/cellulose (warm, natural damping), Mylar/PET film (clear, neutral, very common), and various composites. Each has tradeoffs between rigidity, weight, and internal damping.
+
+**The suspension:** The surround (outer edge) and spider (inner suspension) keep the voice coil centered while allowing movement. Compliance — how easily the driver moves — affects bass extension and sensitivity.
+
+**Why dynamic drivers win for DIY:**
+
+- Available in huge variety from many suppliers
+- Affordable — good drivers from $5 to $50
+- Self-contained — no external electronics needed
+- Well-understood behavior
+- Works with any standard amplifier
+- Replaceable if damaged
+
+## Planar Magnetic Drivers: Interesting But Challenging
+
+Planar magnetic drivers work on a completely different principle. Instead of a voice coil attached to a diaphragm, a planar driver has a thin membrane with conductor traces (like circuit board traces) running across it. This membrane sits between two sets of magnets.
+
+When current flows through the conductor traces, the entire membrane moves as a unit — not just the center like a dynamic driver. This means the entire diaphragm surface is driven simultaneously, which proponents argue reduces distortion and improves transient response.
+
+**The appeal:** Planar magnetic headphones (Audeze, HiFiMAN, Meze) are known for their low distortion, good transient response, and "effortless" sound character. Some of the world's most respected headphones are planar magnetic.
+
+**The DIY challenge:**
+
+- Extremely difficult to source as raw drivers
+- Require powerful amplification (low sensitivity, complex impedance)
+- Large and heavy
+- Very expensive when available
+- Not practical for first builds
+
+DIY planar builds exist, but they're advanced projects requiring significant resources and expertise. Don't start here.
+
+## Balanced Armature Drivers: IEM Territory
+
+Balanced armature (BA) drivers are the technology that makes modern multi-driver IEMs possible. They're tiny — sometimes just a few millimeters — and incredibly efficient. Almost all hearing aids use balanced armature technology.
+
+A BA driver uses a small armature (a metal bar) balanced between two magnets. When current flows through a coil around the armature, it tilts toward one magnet or the other, driving a small diaphragm through a mechanical linkage.
+
+**BA advantages:**
+
+- Extremely compact
+- Very efficient (high sensitivity)
+- Multiple drivers can be combined for full-range coverage
+
+**BA limitations for DIY:**
+
+- Extremely small, requiring precision work
+- Limited bass extension (most need dynamic drivers for bass)
+- Require crossovers for multi-driver systems
+- Sourcing is difficult and expensive
+
+For IEM building, BA drivers are essential knowledge. For over-ear headphones, they're irrelevant.
+
+## Electrostatic Drivers: Audiophile Stratosphere
+
+Electrostatic headphones operate on completely different physics. An extremely thin membrane (just microns thick) is suspended between two perforated metal plates called stators. The membrane is given a static electrical charge (hence the name).
+
+When audio signal is applied to the stators, it creates an alternating electrical field. The charged membrane is attracted to one stator and repelled by the other, moving back and forth to create sound.
+
+**Why electrostats are special:** The membrane is so light (often just a few micrograms) that it can respond to extremely fast transients. Many audiophiles consider top electrostatic headphones (Stax SR-009, HiFiMAN Shangri-La) to be the absolute pinnacle of headphone performance.
+
+**Why they're not DIY-accessible:**
+
+- Require dedicated high-voltage amplifiers ("energizers") — not compatible with standard amps
+- Membrane fabrication is extremely specialized
+- High voltages involved are potentially dangerous
+- No practical component sourcing for DIY builds
+- Extremely expensive even for commercial products
+
+Electrostatics are fascinating technology worth understanding, but building one yourself is a serious engineering project, not a beginner or even intermediate DIY endeavor.
+
+## The Bottom Line for DIY Builders
+
+For your first build — and likely your first several builds — the decision is simple: use dynamic drivers. Here's why:
+
+- Vast selection at multiple price points
+- Well-understood behavior and design patterns
+- Works with any amplifier
+- Affordable enough to experiment and iterate
+- Can produce excellent results in competent designs
+- Active DIY community with shared knowledge
+
+The other technologies are interesting and worth learning about, but they're not practical starting points. Master dynamic drivers first. The principles you learn — acoustic design, damping, tuning — transfer to other technologies if you eventually explore them.
+
+## Common Misconceptions
+
+:::caution
+
+**"Bigger drivers sound better."** Not necessarily. Larger drivers can move more air (good for bass) but can have breakup modes (bad for highs). It's about implementation.
+
+**"Expensive drivers guarantee good sound."** Nope. System integration matters more than driver cost. I've heard $200 drivers sound terrible in poor enclosures and $15 drivers sound great in well-designed ones.
+
+**"Measurements tell you everything."** They tell you a lot, but not everything. Transient response, distortion characteristics, and how the sound interacts with your specific ear anatomy all matter.
+
+:::
+
+## What's Next
+
+Now that you understand the driver technologies available, it's time to get practical. In [Driver Selection Guide](/learn/driver-selection-guide/), we'll walk through how to actually choose a dynamic driver for your specific project — size, impedance, material, supplier, and budget all considered.

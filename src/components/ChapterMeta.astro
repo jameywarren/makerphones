@@ -20,11 +20,22 @@ interface Props {
 const { difficulty, readTime, prerequisites = [], related = [] } = Astro.props;
 
 const docs = await getCollection('docs');
-const titleFor = (handle: string): string =>
-  docs.find((d) => d.id === `learn/${handle}`)?.data.title ?? handle;
+const titleFor = (handle: string): string | undefined =>
+  docs.find((d) => d.id === `learn/${handle}`)?.data.title;
+
+// Frontmatter keeps every handle for portability, but only render links
+// for chapters that exist — no 404 links to unwritten chapters.
+const resolve = (handles: string[]) =>
+  handles.flatMap((handle) => {
+    const title = titleFor(handle);
+    return title ? [{ handle, title }] : [];
+  });
+
+const prereqLinks = resolve(prerequisites);
+const relatedLinks = resolve(related);
 
 const hasContent =
-  difficulty || readTime || prerequisites.length > 0 || related.length > 0;
+  difficulty || readTime || prereqLinks.length > 0 || relatedLinks.length > 0;
 ---
 
 {
@@ -36,24 +47,24 @@ const hasContent =
         </span>
       )}
       {readTime && <span>{readTime} min read</span>}
-      {prerequisites.length > 0 && (
+      {prereqLinks.length > 0 && (
         <span>
           <span class="mp-meta-label">Read first: </span>
-          {prerequisites.map((handle, i) => (
+          {prereqLinks.map(({ handle, title }, i) => (
             <>
               {i > 0 && ', '}
-              <a href={`/learn/${handle}/`}>{titleFor(handle)}</a>
+              <a href={`/learn/${handle}/`}>{title}</a>
             </>
           ))}
         </span>
       )}
-      {related.length > 0 && (
+      {relatedLinks.length > 0 && (
         <span>
           <span class="mp-meta-label">Related: </span>
-          {related.map((handle, i) => (
+          {relatedLinks.map(({ handle, title }, i) => (
             <>
               {i > 0 && ', '}
-              <a href={`/learn/${handle}/`}>{titleFor(handle)}</a>
+              <a href={`/learn/${handle}/`}>{title}</a>
             </>
           ))}
         </span>
