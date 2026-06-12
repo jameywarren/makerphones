@@ -1,0 +1,104 @@
+---
+/**
+ * FIG 10 — Impedance & sensitivity, amp matching. Impedance-vs-
+ * frequency curve (resonance peak at f₀, inductive rise up top, the
+ * 32 Ω nominal line) plus the sensitivity / low-Z / high-Z matching
+ * panel. Curve is illustrative, not measured data.
+ */
+import FrFrame from './FrFrame.astro';
+import { lgx } from './geometry';
+
+const x0 = 84,
+  W = 430,
+  y0 = 372,
+  H = 240;
+const pxOhm = 2.0;
+
+// resonance peak near 89 Hz over a 32 Ω floor, inductive rise past ~1.3 kHz
+function Z(f: number): number {
+  const lg = Math.log10(f);
+  return 32 + 58 * Math.exp(-Math.pow(lg - 1.95, 2) / (2 * 0.13 * 0.13)) + (lg > 3.1 ? (lg - 3.1) * 26 : 0);
+}
+const pts: string[] = [];
+for (let lg = Math.log10(20); lg <= Math.log10(20000) + 1e-9; lg += 0.01) {
+  const f = Math.pow(10, lg);
+  pts.push(`${lgx(f, x0, W).toFixed(1)} ${(y0 - Z(f) * pxOhm).toFixed(1)}`);
+}
+const xPeak = lgx(89, x0, W);
+
+const accent = 'var(--mp-accent)';
+const dark = 'var(--mp-ink)';
+const label = 'var(--mp-meta)';
+const faint = 'var(--mp-faint)';
+const hair = 'var(--mp-hair)';
+---
+
+<svg
+  viewBox="0 76 760 384"
+  class="mp-dgm"
+  role="img"
+  aria-label="An impedance-versus-frequency curve showing the resonance peak at f-zero, the 32-ohm nominal line, and the inductive rise at high frequencies, beside a panel linking sensitivity in dB per milliwatt to low- and high-impedance amp matching"
+>
+  <line x1={x0} y1={y0 - 32 * pxOhm} x2={x0 + W} y2={y0 - 32 * pxOhm} stroke={faint} stroke-width="1.2" stroke-dasharray="5 4"></line>
+  <path d={'M ' + pts.join(' L ')} fill="none" stroke={accent} stroke-width="2.5"></path>
+  <FrFrame x0={x0} y0={y0} W={W} H={H} dbTicks={null} />
+  {
+    [0, 40, 80, 120].map((z) => (
+      <g>
+        <line x1={x0 - 5} y1={y0 - z * pxOhm} x2={x0} y2={y0 - z * pxOhm} stroke={faint} stroke-width="1" />
+        <text x={x0 - 10} y={y0 - z * pxOhm + 3.5} font-size="8.5" font-weight="500" fill={label} text-anchor="end">
+          {z}
+        </text>
+      </g>
+    ))
+  }
+  <text
+    x={x0 - 48}
+    y={y0 - H + 4}
+    font-size="9"
+    font-weight="500"
+    fill={label}
+    text-anchor="end"
+    transform={`rotate(-90 ${x0 - 48} ${y0 - H + 4})`}>IMPEDANCE (Ω)</text
+  >
+
+  <text x={xPeak + 16} y={y0 - 90 * pxOhm - 14} font-size="9.5" font-weight="500" fill={label}>f₀ — RESONANCE PEAK</text>
+  <line x1={xPeak + 22} y1={y0 - 90 * pxOhm - 8} x2={xPeak + 2} y2={y0 - Z(89) * pxOhm - 4} stroke={faint} stroke-width="1"></line>
+  <circle cx={xPeak + 2} cy={y0 - Z(89) * pxOhm - 4} r="2.2" fill={faint}></circle>
+  <text x="330" y="328" font-size="9.5" font-weight="500" fill={label}>NOMINAL — 32 Ω (QUOTED AT 1 kHz)</text>
+  <line x1="338" y1="322" x2="310" y2={y0 - 32 * pxOhm - 2} stroke={faint} stroke-width="1"></line>
+  <circle cx="310" cy={y0 - 32 * pxOhm - 2} r="2.2" fill={faint}></circle>
+  <text x="448" y="188" font-size="9.5" font-weight="500" fill={label} text-anchor="end">COIL INDUCTANCE — Z RISES</text>
+  <line x1="452" y1="192" x2="500" y2={y0 - Z(14000) * pxOhm + 4} stroke={faint} stroke-width="1"></line>
+  <circle cx="500" cy={y0 - Z(14000) * pxOhm + 4} r="2.2" fill={faint}></circle>
+
+  <g>
+    <rect x="556" y="92" width="180" height="280" fill="none" stroke={hair} stroke-width="1"></rect>
+    <text x="570" y="118" font-size="9.5" font-weight="600" fill={dark}>SENSITIVITY</text>
+    <text x="570" y="140" font-size="13" font-weight="700" fill={accent}>98 dB / mW</text>
+    <text x="570" y="156" font-size="8.5" font-weight="500" fill={label}>AT 1 kHz — LOUDNESS PER mW</text>
+    <line x1="570" y1="176" x2="722" y2="176" stroke={hair} stroke-width="1"></line>
+    <text x="570" y="200" font-size="9.5" font-weight="600" fill={dark}>{'LOW Z (< 50 Ω)'}</text>
+    <text x="570" y="216" font-size="8.5" font-weight="500" fill={label}>WANTS CURRENT —</text>
+    <text x="570" y="229" font-size="8.5" font-weight="500" fill={label}>PHONES &amp; DONGLES OK</text>
+    <line x1="570" y1="249" x2="722" y2="249" stroke={hair} stroke-width="1"></line>
+    <text x="570" y="273" font-size="9.5" font-weight="600" fill={dark}>{'HIGH Z (> 250 Ω)'}</text>
+    <text x="570" y="289" font-size="8.5" font-weight="500" fill={label}>WANTS VOLTAGE —</text>
+    <text x="570" y="302" font-size="8.5" font-weight="500" fill={label}>NEEDS A REAL AMP</text>
+    <line x1="570" y1="322" x2="722" y2="322" stroke={hair} stroke-width="1"></line>
+    <text x="570" y="346" font-size="8.5" font-weight="500" fill={label}>Z SWINGS WITH f — A HIGH-Z</text>
+    <text x="570" y="359" font-size="8.5" font-weight="500" fill={label}>SOURCE RESHAPES THE RESPONSE</text>
+  </g>
+
+  <text x="24" y="446" font-size="10" font-weight="500" fill={label} opacity="0.9"
+    >IMPEDANCE IS A CURVE, NOT A NUMBER — THE PEAK AND THE HF RISE ARE WHY SOURCES CHANGE THE SOUND.</text
+  >
+</svg>
+
+<style>
+  svg {
+    max-width: 100%;
+    height: auto;
+    display: block;
+  }
+</style>

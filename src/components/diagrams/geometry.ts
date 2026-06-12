@@ -55,6 +55,25 @@ export function angleDeg(x1: number, y1: number, x2: number, y2: number): number
   return (Math.atan2(y2 - y1, x2 - x1) * 180) / Math.PI;
 }
 
+/** Log-frequency x position: 20 Hz → 20 kHz over W px (3 decades). */
+export function lgx(f: number, x0: number, W: number): number {
+  return x0 + (Math.log10(f / 20) / 3) * W;
+}
+
+/** Shared tick set for the log-frequency axes (FIG 09 / 10). */
+export const FR_TICKS: [number, string][] = [
+  [20, '20'],
+  [50, '50'],
+  [100, '100'],
+  [200, '200'],
+  [500, '500'],
+  [1000, '1k'],
+  [2000, '2k'],
+  [5000, '5k'],
+  [10000, '10k'],
+  [20000, '20k'],
+];
+
 /** Vertical-wall hatching line coordinates. */
 export function hatchV(x: number, y0: number, y1: number, side = 1, n = 7, len = 10) {
   const lines: { x1: number; y1: number; x2: number; y2: number }[] = [];

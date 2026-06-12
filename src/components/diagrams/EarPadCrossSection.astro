@@ -1,0 +1,104 @@
+---
+/**
+ * FIG 11 — Ear pad cross-section & front cavity. Pad seated on the
+ * baffle around the ear: inner/outer diameter and depth dimensions,
+ * the front-cavity volume highlighted, and a shallower-pad ghost
+ * line showing how depth reshapes the cavity.
+ */
+import Pinna from './Pinna.astro';
+import { hatchV, arrowHead, angleDeg } from './geometry';
+
+const bx = 196,
+  cy = 252; // baffle right face x, centerline y
+const depth = 122,
+  face = bx + 18 + depth; // pad front face (head side)
+
+const ink = 'var(--mp-charcoal)';
+const accent = 'var(--mp-accent)';
+const label = 'var(--mp-meta)';
+const faint = 'var(--mp-faint)';
+const hair = 'var(--mp-hair)';
+const washInk = 'color-mix(in srgb, var(--mp-charcoal) 8%, transparent)';
+const washInkSoft = 'color-mix(in srgb, var(--mp-charcoal) 5%, transparent)';
+const washAccent = 'color-mix(in srgb, var(--mp-accent) 7%, transparent)';
+
+const skinHatch = hatchV(face, 116, 392, 1, 9, 8);
+// dimension arrows: [x1, y1, x2, y2]
+const dims: [number, number, number, number][] = [
+  [bx + 60, cy - 24, bx + 60, cy - 68],
+  [bx + 60, cy + 24, bx + 60, cy + 68],
+  [bx - 22, cy - 50, bx - 22, 104],
+  [bx - 22, cy + 50, bx - 22, 400],
+  [(bx + 18 + face) / 2 - 16, 90, bx + 24, 90],
+  [(bx + 18 + face) / 2 + 16, 90, face - 6, 90],
+];
+const dimHeads = dims.map(([x1, y1, x2, y2]) => arrowHead(x2, y2, angleDeg(x1, y1, x2, y2), 5));
+---
+
+<svg
+  viewBox="0 70 760 390"
+  class="mp-dgm"
+  role="img"
+  aria-label="Cross-section of an ear pad seated on the baffle around the ear, with inner diameter, outer diameter, and depth dimensioned, the front-cavity air volume highlighted, and a dashed ghost line showing a shallower pad making the cavity smaller"
+>
+  <rect x={bx} y="104" width="18" height="296" fill={washInk} stroke={ink} stroke-width="1.5"></rect>
+  <rect x={bx + 18} y={cy - 36} width="12" height="72" fill="none" stroke={ink} stroke-width="1.5"></rect>
+  <path d={`M ${bx + 30} ${cy - 30} A 34 34 0 0 1 ${bx + 30} ${cy + 30}`} fill={washAccent} stroke={accent} stroke-width="2"></path>
+
+  {
+    [-1, 1].map((sg) => {
+      const yc = cy + sg * 110;
+      return (
+        <g>
+          <rect x={bx + 18} y={yc - 38} width={depth} height="76" rx="30" fill={washInkSoft} stroke={ink} stroke-width="1.5" />
+          <path d={`M ${bx + 40} ${yc - 18} q 14 14 0 28 M ${bx + 72} ${yc - 18} q 14 14 0 28`} fill="none" stroke={hair} stroke-width="1" />
+        </g>
+      );
+    })
+  }
+
+  <line x1={face} y1="104" x2={face} y2="400" stroke={hair} stroke-width="1.2"></line>
+  {skinHatch.map((l) => <line x1={l.x1} y1={l.y1} x2={l.x2} y2={l.y2} stroke={faint} stroke-width="1" />)}
+  <Pinna cx={face - 34} cy={cy} s={1.15} />
+
+  <rect x={bx + 30} y={cy - 72} width={face - bx - 30} height="144" fill={washAccent} opacity="0.7"></rect>
+  <text x={face + 26} y={cy + 62} font-size="9.5" font-weight="600" fill={accent}>FRONT CAVITY</text>
+  <line x1={face + 32} y1={cy + 54} x2={face - 38} y2={cy + 44} stroke={faint} stroke-width="1"></line>
+  <circle cx={face - 38} cy={cy + 44} r="2.2" fill={faint}></circle>
+
+  <line x1={face - 40} y1="104" x2={face - 40} y2="400" stroke={accent} stroke-width="1" stroke-dasharray="3 5" opacity="0.7"></line>
+  <text x={face + 26} y="132" font-size="9.5" font-weight="500" fill={label}>SHALLOWER PAD — SMALLER CAVITY,</text>
+  <text x={face + 26} y="146" font-size="9.5" font-weight="500" fill={label}>MORE BASS, CLOSER IMAGE</text>
+  <line x1={face + 32} y1="152" x2={face - 38} y2="170" stroke={faint} stroke-width="1"></line>
+  <circle cx={face - 38} cy="170" r="2.2" fill={faint}></circle>
+
+  {dims.map(([x1, y1, x2, y2]) => <line x1={x1} y1={y1} x2={x2} y2={y2} stroke={faint} stroke-width="1" />)}
+  {dimHeads.map((h) => <polygon points={h.points} transform={h.transform} fill={faint} />)}
+  <text x={bx + 74} y={cy + 24} font-size="8.5" font-weight="500" fill={label} transform={`rotate(-90 ${bx + 74} ${cy + 24})`}>INNER Ø</text>
+  <text x={bx - 28} y={cy + 4} font-size="8.5" font-weight="500" fill={label} text-anchor="end" transform={`rotate(-90 ${bx - 28} ${cy + 4})`}>OUTER Ø</text>
+  <line x1={bx + 18} y1="84" x2={bx + 18} y2="96" stroke={faint} stroke-width="1"></line>
+  <line x1={face} y1="84" x2={face} y2="96" stroke={faint} stroke-width="1"></line>
+  <text x={(bx + 18 + face) / 2} y="93" font-size="8.5" font-weight="500" fill={label} text-anchor="middle">DEPTH</text>
+
+  <text x="56" y="170" font-size="9.5" font-weight="500" fill={label}>BAFFLE</text>
+  <line x1="86" y1="176" x2={bx + 8} y2="196" stroke={faint} stroke-width="1"></line>
+  <circle cx={bx + 8} cy="196" r="2.2" fill={faint}></circle>
+  <text x="56" y={cy + 130} font-size="9.5" font-weight="500" fill={label}>DRIVER</text>
+  <line x1="86" y1={cy + 124} x2={bx + 34} y2={cy + 24} stroke={faint} stroke-width="1"></line>
+  <circle cx={bx + 34} cy={cy + 24} r="2.2" fill={faint}></circle>
+  <text x={face + 26} y={cy - 8} font-size="9.5" font-weight="500" fill={label}>EAR</text>
+  <line x1={face + 32} y1={cy - 14} x2={face - 16} y2={cy - 24} stroke={faint} stroke-width="1"></line>
+  <circle cx={face - 16} cy={cy - 24} r="2.2" fill={faint}></circle>
+
+  <text x="24" y="446" font-size="10" font-weight="500" fill={label} opacity="0.9"
+    >PADS ARE A TUNING PARAMETER — DEPTH SETS FRONT-CAVITY VOLUME; VOLUME SETS THE RESPONSE.</text
+  >
+</svg>
+
+<style>
+  svg {
+    max-width: 100%;
+    height: auto;
+    display: block;
+  }
+</style>

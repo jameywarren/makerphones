@@ -1,0 +1,98 @@
+---
+/**
+ * FIG 09 — Reading a frequency-response curve. Log-frequency axis
+ * with the three regions shaded, a flat reference line, and an
+ * at-ear target (bass shelf + presence lift) overlaid: flat ≠
+ * neutral. Target curve is illustrative, not measured data.
+ */
+import FrFrame from './FrFrame.astro';
+import { lgx } from './geometry';
+
+const x0 = 90,
+  W = 620,
+  y0 = 396,
+  yZero = 268,
+  px = 7.5,
+  H = 290;
+const xB = lgx(300, x0, W),
+  xM = lgx(4000, x0, W);
+
+// at-ear target: bass shelf below ~110 Hz, ~3 kHz presence lift, gentle HF roll
+function target(f: number): number {
+  const lg = Math.log10(f);
+  const shelf = 6 / (1 + Math.exp((lg - 2.05) * 7));
+  const presence = 7.5 * Math.exp(-Math.pow(lg - 3.48, 2) / (2 * 0.16 * 0.16));
+  const tilt = lg > 3.85 ? -(lg - 3.85) * 9 : 0;
+  return shelf + presence + tilt;
+}
+const pts: string[] = [];
+for (let lg = Math.log10(20); lg <= Math.log10(20000) + 1e-9; lg += 0.01) {
+  const f = Math.pow(10, lg);
+  pts.push(`${lgx(f, x0, W).toFixed(1)} ${(yZero - target(f) * px).toFixed(1)}`);
+}
+
+const ink = 'var(--mp-charcoal)';
+const accent = 'var(--mp-accent)';
+const dark = 'var(--mp-ink)';
+const label = 'var(--mp-meta)';
+const faint = 'var(--mp-faint)';
+const hair = 'var(--mp-hair)';
+const washInkSoft = 'color-mix(in srgb, var(--mp-charcoal) 5%, transparent)';
+---
+
+<svg
+  viewBox="0 88 760 400"
+  class="mp-dgm"
+  role="img"
+  aria-label="A frequency-response chart from 20 hertz to 20 kilohertz with the bass, midrange, and treble regions shaded, a flat reference line, and an at-ear target curve with a bass shelf and presence lift overlaid"
+>
+  <rect x={x0} y={y0 - H} width={xB - x0} height={H} fill={washInkSoft}></rect>
+  <rect x={xM} y={y0 - H} width={x0 + W - xM} height={H} fill={washInkSoft}></rect>
+  <line x1={xB} y1={y0} x2={xB} y2={y0 - H} stroke={hair} stroke-width="1" stroke-dasharray="2 4"></line>
+  <line x1={xM} y1={y0} x2={xM} y2={y0 - H} stroke={hair} stroke-width="1" stroke-dasharray="2 4"></line>
+  <text x={(x0 + xB) / 2} y={y0 - H + 18} font-size="9" font-weight="600" fill={dark} text-anchor="middle">BASS</text>
+  <text x={(x0 + xB) / 2} y={y0 - H + 32} font-size="8" font-weight="500" fill={label} text-anchor="middle">20 – 300 Hz</text>
+  <text x={(xB + xM) / 2} y={y0 - H + 18} font-size="9" font-weight="600" fill={dark} text-anchor="middle">MIDRANGE</text>
+  <text x={(xB + xM) / 2} y={y0 - H + 32} font-size="8" font-weight="500" fill={label} text-anchor="middle">300 Hz – 4 kHz</text>
+  <text x={(xM + x0 + W) / 2} y={y0 - H + 18} font-size="9" font-weight="600" fill={dark} text-anchor="middle">TREBLE</text>
+  <text x={(xM + x0 + W) / 2} y={y0 - H + 32} font-size="8" font-weight="500" fill={label} text-anchor="middle">4 – 20 kHz</text>
+
+  <line x1={x0} y1={yZero} x2={x0 + W} y2={yZero} stroke={faint} stroke-width="1.2" stroke-dasharray="5 4"></line>
+  <path d={'M ' + pts.join(' L ')} fill="none" stroke={accent} stroke-width="2.5"></path>
+
+  <FrFrame x0={x0} y0={y0} W={W} H={H} dbTicks={[-10, 0, 10]} pxPerDb={px} yZero={yZero} />
+  <text
+    x={x0 - 52}
+    y={y0 - H + 8}
+    font-size="9"
+    font-weight="500"
+    fill={label}
+    text-anchor="end"
+    transform={`rotate(-90 ${x0 - 52} ${y0 - H + 8})`}>LEVEL (dB)</text
+  >
+
+  <text x="148" y="188" font-size="9.5" font-weight="500" fill={label}>BASS SHELF — FELT, NOT HEARD</text>
+  <line x1="156" y1="194" x2="146" y2={yZero - target(60) * px - 6} stroke={faint} stroke-width="1"></line>
+  <circle cx="146" cy={yZero - target(60) * px - 6} r="2.2" fill={faint}></circle>
+  <text x="478" y="150" font-size="9.5" font-weight="500" fill={label}>PRESENCE LIFT ≈ 3 kHz</text>
+  <line x1="486" y1="156" x2={lgx(3000, x0, W)} y2={yZero - target(3000) * px - 6} stroke={faint} stroke-width="1"></line>
+  <circle cx={lgx(3000, x0, W)} cy={yZero - target(3000) * px - 6} r="2.2" fill={faint}></circle>
+  <text x="398" y="300" font-size="9.5" font-weight="500" fill={label}>FLAT (0 dB) — REFERENCE</text>
+  <line x1="406" y1="294" x2="430" y2={yZero + 2} stroke={faint} stroke-width="1"></line>
+  <circle cx="430" cy={yZero + 2} r="2.2" fill={faint}></circle>
+  <text x="622" y="236" font-size="9.5" font-weight="500" fill={label} text-anchor="end">TARGET — AT-EAR</text>
+  <line x1="626" y1="240" x2={lgx(9000, x0, W)} y2={yZero - target(9000) * px - 4} stroke={faint} stroke-width="1"></line>
+  <circle cx={lgx(9000, x0, W)} cy={yZero - target(9000) * px - 4} r="2.2" fill={faint}></circle>
+
+  <text x="24" y="476" font-size="10" font-weight="500" fill={label} opacity="0.9"
+    >FLAT ≠ NEUTRAL — AT THE EARDRUM, NEUTRAL TAKES A BASS SHELF AND A PRESENCE LIFT. THE TARGET IS THE GOAL.</text
+  >
+</svg>
+
+<style>
+  svg {
+    max-width: 100%;
+    height: auto;
+    display: block;
+  }
+</style>

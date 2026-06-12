@@ -1,0 +1,21 @@
+---
+/**
+ * Shared ear glyph (profile, facing left) for the fit/coupling
+ * figures (FIG 11 / 12 / 14). Renders a bare SVG group — use inside
+ * an <svg class="mp-dgm">.
+ */
+interface Props {
+  cx: number;
+  cy: number;
+  s?: number;
+}
+const { cx, cy, s = 1 } = Astro.props;
+
+const ink = 'var(--mp-charcoal)';
+---
+
+<g transform={`translate(${cx} ${cy}) scale(${s})`}>
+  <path d="M 2 -30 C 24 -32 30 -12 26 4 C 23 18 14 28 0 32" fill="none" stroke={ink} stroke-width="1.5" stroke-linecap="round"></path>
+  <path d="M 4 -16 C 16 -16 18 -4 14 6" fill="none" stroke={ink} stroke-width="1.2" stroke-linecap="round"></path>
+  <line x1="2" y1="-2" x2="-14" y2="-2" stroke={ink} stroke-width="1.2" stroke-dasharray="3 3"></line>
+</g>

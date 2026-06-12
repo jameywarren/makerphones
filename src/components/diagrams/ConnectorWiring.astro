@@ -1,0 +1,147 @@
+---
+/**
+ * FIG 13 — Connectors: TRS / TRRS wiring map. Both plugs sectioned
+ * contact by contact with the L / R / ground (and CTIA mic) map,
+ * plus the always-true rules panel. FIG 22 (mic wiring, CTIA vs
+ * OMTP) reuses this plug language.
+ */
+interface Seg {
+  w: number;
+  kind: 'tip' | 'ins' | 'contact' | 'body';
+}
+const TRS_SEGS: Seg[] = [
+  { w: 46, kind: 'tip' },
+  { w: 7, kind: 'ins' },
+  { w: 36, kind: 'contact' },
+  { w: 7, kind: 'ins' },
+  { w: 116, kind: 'contact' },
+  { w: 54, kind: 'body' },
+];
+const TRRS_SEGS: Seg[] = [
+  { w: 46, kind: 'tip' },
+  { w: 7, kind: 'ins' },
+  { w: 32, kind: 'contact' },
+  { w: 7, kind: 'ins' },
+  { w: 32, kind: 'contact' },
+  { w: 7, kind: 'ins' },
+  { w: 84, kind: 'contact' },
+  { w: 54, kind: 'body' },
+];
+
+const x = 120,
+  h = 40;
+function layout(segs: Seg[]) {
+  let cx = x;
+  return segs.map((s) => {
+    const o = { ...s, x: cx, cx: cx + s.w / 2 };
+    cx += s.w;
+    return o;
+  });
+}
+const trs = layout(TRS_SEGS);
+const trrs = layout(TRRS_SEGS);
+
+interface Pin {
+  cx: number;
+  lab: string;
+  sub: string;
+  below?: boolean;
+}
+const trsPins: Pin[] = [
+  { cx: trs[0].cx, lab: 'TIP', sub: 'LEFT' },
+  { cx: trs[2].cx, lab: 'RING', sub: 'RIGHT' },
+  { cx: trs[4].cx, lab: 'SLEEVE', sub: 'GROUND' },
+];
+const trrsPins: Pin[] = [
+  { cx: trrs[0].cx, lab: 'TIP', sub: 'LEFT' },
+  { cx: trrs[2].cx, lab: 'RING 1', sub: 'RIGHT', below: true },
+  { cx: trrs[4].cx, lab: 'RING 2', sub: 'GROUND' },
+  { cx: trrs[6].cx, lab: 'SLEEVE', sub: 'MIC (CTIA)', below: true },
+];
+
+const ink = 'var(--mp-charcoal)';
+const accent = 'var(--mp-accent)';
+const dark = 'var(--mp-ink)';
+const label = 'var(--mp-meta)';
+const faint = 'var(--mp-faint)';
+const hair = 'var(--mp-hair)';
+const washInk = 'color-mix(in srgb, var(--mp-charcoal) 8%, transparent)';
+---
+
+<svg
+  viewBox="0 84 760 376"
+  class="mp-dgm"
+  role="img"
+  aria-label="Sectioned TRS and TRRS plugs with each contact mapped: tip is left, ring is right, sleeve is ground — and on TRRS, ring two is ground with the sleeve carrying the CTIA microphone"
+>
+  {
+    [
+      { name: 'TRS', sub: '3 CONTACTS', cy: 172, segs: trs, pins: trsPins, ly: 150 },
+      { name: 'TRRS', sub: '4 CONTACTS', cy: 352, segs: trrs, pins: trrsPins, ly: 330 },
+    ].map((p) => (
+      <g>
+        <text x="42" y={p.ly} font-size="10" font-weight="700" fill={accent}>
+          {p.name}
+        </text>
+        <text x="42" y={p.ly + 15} font-size="8.5" font-weight="500" fill={label}>
+          {p.sub}
+        </text>
+        {p.segs.map((s) =>
+          s.kind === 'tip' ? (
+            <path
+              d={`M ${s.x + s.w} ${p.cy - h / 2} L ${s.x + 12} ${p.cy - h / 2} Q ${s.x - 2} ${p.cy} ${s.x + 12} ${p.cy + h / 2} L ${s.x + s.w} ${p.cy + h / 2} Z`}
+              fill={washInk}
+              stroke={ink}
+              stroke-width="1.5"
+            />
+          ) : s.kind === 'ins' ? (
+            <rect x={s.x} y={p.cy - h / 2} width={s.w} height={h} fill={dark} />
+          ) : s.kind === 'body' ? (
+            <rect x={s.x} y={p.cy - h / 2 - 8} width={s.w} height={h + 16} rx="4" fill="none" stroke={ink} stroke-width="1.5" />
+          ) : (
+            <rect x={s.x} y={p.cy - h / 2} width={s.w} height={h} fill={washInk} stroke={ink} stroke-width="1.5" />
+          )
+        )}
+        {p.pins.map((pin) => (
+          <g>
+            <line
+              x1={pin.cx}
+              y1={pin.below ? p.cy + 46 : p.cy - 54}
+              x2={pin.cx}
+              y2={pin.below ? p.cy + 24 : p.cy - 24}
+              stroke={faint}
+              stroke-width="1"
+            />
+            <circle cx={pin.cx} cy={pin.below ? p.cy + 24 : p.cy - 24} r="2.2" fill={faint} />
+            <text x={pin.cx} y={pin.below ? p.cy + 68 : p.cy - 72} font-size="9.5" font-weight="600" fill={dark} text-anchor="middle">
+              {pin.lab}
+            </text>
+            <text x={pin.cx} y={pin.below ? p.cy + 81 : p.cy - 59} font-size="8.5" font-weight="500" fill={label} text-anchor="middle">
+              {pin.sub}
+            </text>
+          </g>
+        ))}
+      </g>
+    ))
+  }
+
+  <text x="560" y="150" font-size="9.5" font-weight="600" fill={dark}>ALWAYS TRUE</text>
+  <text x="560" y="168" font-size="8.5" font-weight="500" fill={label}>TIP = LEFT · METER IT</text>
+  <text x="560" y="181" font-size="8.5" font-weight="500" fill={label}>BEFORE YOU CLOSE THE CUP</text>
+  <line x1="560" y1="200" x2="722" y2="200" stroke={hair} stroke-width="1"></line>
+  <text x="560" y="222" font-size="9.5" font-weight="600" fill={dark}>WATCH FOR</text>
+  <text x="560" y="240" font-size="8.5" font-weight="500" fill={label}>OMTP (LEGACY) SWAPS</text>
+  <text x="560" y="253" font-size="8.5" font-weight="500" fill={label}>GROUND ↔ MIC — METER, DON'T ASSUME</text>
+
+  <text x="24" y="446" font-size="10" font-weight="500" fill={label} opacity="0.9"
+    >TIP IS ALWAYS LEFT — TIN, SOLDER, METER, THEN STRAIN-RELIEVE. A SWAPPED RING REVERSES THE IMAGE.</text
+  >
+</svg>
+
+<style>
+  svg {
+    max-width: 100%;
+    height: auto;
+    display: block;
+  }
+</style>
