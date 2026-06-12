@@ -15,6 +15,8 @@ import { docsSchema } from '@astrojs/starlight/schema';
 const chapterFields = z.object({
   /** Frozen URL slug/handle — identical to the filename and the future Shopify page handle. */
   handle: z.string().optional(),
+  /** Page kind: manual chapter (default), reference appendix, or build guide. */
+  type: z.enum(['chapter', 'appendix', 'build-guide']).default('chapter'),
   /** Part number 1–6. Internal ordering only; never displayed. */
   part: z.number().int().min(1).max(6).optional(),
   /** Chapter number within the manual. Internal ordering only; never displayed. */

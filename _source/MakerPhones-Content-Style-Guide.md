@@ -148,4 +148,9 @@ Frozen handles — use these verbatim for filenames and cross-links. Live source
 - ✓ microphone-integration
 - ✓ custom-iem-design
 
-*Five appendices planned (glossary, supplier directory, design resources, troubleshooting, community builds) — handles TBD when written.*
+**Appendices** (no nav numbering; outside the chapter chain)
+- ✓ glossary
+- ✓ supplier-directory
+- ✓ design-resources
+- ✓ troubleshooting-guide
+- ✓ community-builds

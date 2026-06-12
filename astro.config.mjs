@@ -74,6 +74,17 @@ const sidebar = [
       'learn/custom-iem-design',
     ],
   },
+  {
+    label: 'Appendices',
+    items: [
+      // Reference appendices — no nav numbering, outside the chapter chain
+      'learn/glossary',
+      'learn/supplier-directory',
+      'learn/design-resources',
+      'learn/troubleshooting-guide',
+      'learn/community-builds',
+    ],
+  },
 ];
 
 export default defineConfig({

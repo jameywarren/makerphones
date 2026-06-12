@@ -34,7 +34,7 @@
 - **/learn/<handle>** — the Reference Manual, one route per chapter, six sidebar groups in manual order. Difficulty, read time, prerequisites, and related links surface from frontmatter on every chapter.
 - Search (Pagefind), on-page TOC, and prev/next navigation are on throughout.
 
-The manual's structure is fixed: **Fundamentals → Components & Materials → Design & Build → Measurement & Tuning → Advanced → Special Topics**, plus five appendices (glossary, supplier directory, design resources, troubleshooting, community builds). Status: **30/30 written — complete. Five appendices remain planned.**
+The manual's structure is fixed: **Fundamentals → Components & Materials → Design & Build → Measurement & Tuning → Advanced → Special Topics**, plus five appendices (glossary, supplier directory, design resources, troubleshooting, community builds). Status: **complete — 30/30 chapters and all five appendices live.**
 
 ## Long-range content map
 

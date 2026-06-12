@@ -52,9 +52,9 @@ Deploys on push to `main` via `.github/workflows/deploy.yml`
 
 ## Status
 
-**All 30 chapters live** under `/learn/` — the manual is complete.
-Five appendices (glossary, supplier directory, design resources,
-troubleshooting, community builds) remain planned. Handles are frozen per the Content &
+**All 30 chapters and all five appendices live** under `/learn/` —
+the manual is complete: glossary, supplier directory, design
+resources, troubleshooting guide, and community builds. Handles are frozen per the Content &
 Style Guide appendix (`_source/MakerPhones-Content-Style-Guide.md`).
 
 To add a chapter: write `src/content/docs/learn/<handle>.md` with the

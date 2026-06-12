@@ -9,11 +9,13 @@
  */
 import { getManual } from '../data/manual';
 
-const { parts } = await getManual();
+const { parts, appendices } = await getManual();
 const currentId = Astro.locals.starlightRoute.id; // e.g. "learn/damping-materials"
 const currentHandle = currentId.startsWith('learn/') ? currentId.slice(6) : null;
-const currentPart =
-  parts.find((p) => p.chapters.some((c) => c.handle === currentHandle))?.num ?? 1;
+const inAppendices = appendices.some((a) => a.handle === currentHandle);
+const currentPart = inAppendices
+  ? 0
+  : (parts.find((p) => p.chapters.some((c) => c.handle === currentHandle))?.num ?? 1);
 ---
 
 <div class="mp-sb">
@@ -48,4 +50,26 @@ const currentPart =
       </details>
     ))
   }
+  <details open={inAppendices}>
+    <summary>
+      <span class="mp-partnum" style="width: 22px;">A</span>
+      <span style="flex: 1;">Appendices</span>
+      <span class="mp-sb-caret" aria-hidden="true">▸</span>
+    </summary>
+    <div class="mp-sb-chapters">
+      {
+        appendices
+          .filter((a) => a.written)
+          .map((a) => (
+            <a
+              class="mp-sb-chapter"
+              href={`/learn/${a.handle}/`}
+              aria-current={a.handle === currentHandle ? 'page' : undefined}
+            >
+              <span>{a.title}</span>
+            </a>
+          ))
+      }
+    </div>
+  </details>
 </div>

@@ -33,11 +33,15 @@ const isSplash = (entry.data as { template?: string }).template === 'splash';
       <nav class="mp-crumb" aria-label="Breadcrumb">
         <a href="/contents/">The Manual</a>
         <span class="sep" aria-hidden="true">/</span>
-        <a href={`/contents/#part-${chapter.partNum}`}>
-          Part {String(chapter.partNum).padStart(2, '0')} — {chapter.partTitle}
-        </a>
+        {chapter.partNum === 0 ? (
+          <a href="/contents/#appendices">Appendices</a>
+        ) : (
+          <a href={`/contents/#part-${chapter.partNum}`}>
+            Part {String(chapter.partNum).padStart(2, '0')} — {chapter.partTitle}
+          </a>
+        )}
         <span class="sep" aria-hidden="true">/</span>
-        <span class="here">{`${chapter.num} ${chapter.title}`}</span>
+        <span class="here">{`${chapter.num} ${chapter.title}`.trim()}</span>
       </nav>
       <h1 id="_top" data-page-title>{data.title}</h1>
       {data.excerpt && <p class="mp-lede">{data.excerpt}</p>}

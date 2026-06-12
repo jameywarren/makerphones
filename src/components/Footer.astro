@@ -37,22 +37,26 @@ const related = (chapter?.related ?? [])
           </ul>
         </>
       )}
-      <nav class="mp-pn" aria-label="Previous and next chapters">
-        {prev ? (
-          <a class="mp-pn-card" href={`/learn/${prev.handle}/`} rel="prev">
-            <span class="mp-pn-label">← Previous</span>
-            <span class="mp-pn-title">{prev.title}</span>
-          </a>
-        ) : (
-          <span />
-        )}
-        {next && (
-          <a class="mp-pn-card is-next" href={`/learn/${next.handle}/`} rel="next">
-            <span class="mp-pn-label">Next →</span>
-            <span class="mp-pn-title">{next.title}</span>
-          </a>
-        )}
-      </nav>
+      {
+        (prev || next) && (
+          <nav class="mp-pn" aria-label="Previous and next chapters">
+            {prev ? (
+              <a class="mp-pn-card" href={`/learn/${prev.handle}/`} rel="prev">
+                <span class="mp-pn-label">← Previous</span>
+                <span class="mp-pn-title">{prev.title}</span>
+              </a>
+            ) : (
+              <span />
+            )}
+            {next && (
+              <a class="mp-pn-card is-next" href={`/learn/${next.handle}/`} rel="next">
+                <span class="mp-pn-label">Next →</span>
+                <span class="mp-pn-title">{next.title}</span>
+              </a>
+            )}
+          </nav>
+        )
+      }
     </div>
   )
 }

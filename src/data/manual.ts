@@ -123,6 +123,20 @@ export const MANUAL_PARTS: ManualPart[] = [
   },
 ];
 
+/**
+ * The five reference appendices, in the Compass's planned order.
+ * Appendices carry no nav numbering and sit outside the 1–30
+ * prev/next chain; they resolve in byHandle so related-field
+ * cross-references link correctly in both directions.
+ */
+export const APPENDIX_HANDLES = [
+  'glossary',
+  'supplier-directory',
+  'design-resources',
+  'troubleshooting-guide',
+  'community-builds',
+] as const;
+
 export const LEVEL_RANK: Record<string, number> = {
   Beginner: 1,
   Intermediate: 2,
@@ -150,6 +164,7 @@ export interface ChapterInfo {
  */
 export async function getManual(): Promise<{
   parts: (ManualPart & { chapters: ChapterInfo[] })[];
+  appendices: ChapterInfo[];
   byHandle: Map<string, ChapterInfo>;
   writtenCount: number;
   totalCount: number;
@@ -179,10 +194,30 @@ export async function getManual(): Promise<{
     return { ...part, chapters };
   });
 
+  const appendices = APPENDIX_HANDLES.map((handle): ChapterInfo => {
+    const entry = byId.get(`learn/${handle}`);
+    const info: ChapterInfo = {
+      handle,
+      num: '', // appendices carry no nav numbering
+      partNum: 0,
+      partTitle: 'Appendices',
+      title: entry?.data.title ?? handle,
+      written: Boolean(entry),
+      difficulty: entry?.data.difficulty,
+      readTime: entry?.data.read_time,
+      prerequisites: entry?.data.prerequisites ?? [],
+      related: entry?.data.related ?? [],
+    };
+    byHandle.set(handle, info);
+    return info;
+  });
+
   const all = parts.flatMap((p) => p.chapters);
   return {
     parts,
+    appendices,
     byHandle,
+    // counts cover the 30 manual chapters only; appendices are extra
     writtenCount: all.filter((c) => c.written).length,
     totalCount: all.length,
   };
