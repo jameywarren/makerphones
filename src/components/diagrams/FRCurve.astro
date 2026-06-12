@@ -12,12 +12,12 @@ interface Props {
   targetLabel?: string;
   showTarget?: boolean;
 }
-const { measuredLabel = 'measured', targetLabel = 'target', showTarget = true } = Astro.props;
+const { measuredLabel = 'MEASURED', targetLabel = 'TARGET', showTarget = true } = Astro.props;
 ---
 
 <svg
   viewBox="0 0 560 230"
-  class="mp-frcurve"
+  class="mp-dgm mp-frcurve"
   role="img"
   aria-label={`Frequency response chart: ${measuredLabel}${showTarget ? ` vs ${targetLabel}` : ''}`}
 >

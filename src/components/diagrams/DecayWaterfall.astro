@@ -6,18 +6,25 @@
  */
 import { arrowHead } from './geometry';
 
+interface Props {
+  dense?: boolean;
+}
+const { dense = false } = Astro.props;
+
 const x0 = 110,
   W = 520,
   y0 = 395,
-  H = 125,
-  dx = 13,
-  dy = 24,
-  N = 9;
+  H = 125;
+const N = dense ? 14 : 9,
+  dx = dense ? 9 : 13,
+  dy = dense ? 16.5 : 24;
+const decayK = dense ? 0.38 : 0.55,
+  ringK = dense ? 0.07 : 0.1;
 
 const base = (f: number) => 0.42 + 0.16 * Math.cos(3.2 * f + 0.6) + 0.1 * Math.cos(8.5 * f + 1.8);
 const gauss = (f: number) => Math.exp(-Math.pow(f - 0.62, 2) / (2 * 0.035 * 0.035));
 const lvl = (f: number, i: number) =>
-  base(f) * Math.exp(-i * 0.55) + 0.9 * gauss(f) * 0.95 * Math.exp(-i * 0.1);
+  base(f) * Math.exp(-i * decayK) + 0.9 * gauss(f) * 0.95 * Math.exp(-i * ringK);
 
 const slices: { d: string; front: boolean; delay: string }[] = [];
 for (let i = N - 1; i >= 0; i--) {
@@ -30,7 +37,7 @@ for (let i = N - 1; i >= 0; i--) {
   slices.push({
     d: `M ${bx} ${by} L ` + pts.join(' L ') + ` L ${bx + W} ${by} Z`,
     front: i === 0,
-    delay: `${(i * 0.32 - 4.2).toFixed(2)}s`,
+    delay: `${(i * (4.2 / N) - 4.2).toFixed(2)}s`,
   });
 }
 
@@ -60,15 +67,15 @@ const timeArr = arrowHead(x0 + W + 14 + (N - 1) * dx, y0 - 6 - (N - 1) * dy, -61
         d={s.d}
         fill={ground}
         stroke={ink}
-        stroke-width={s.front ? 2 : 1.1}
+        stroke-width={s.front ? 2 : dense ? 1 : 1.1}
         class={s.front ? undefined : 'csd-slice'}
         style={s.front ? undefined : `animation-delay: ${s.delay};`}
-        opacity={s.front ? 1 : 0.9}
+        opacity={s.front ? 1 : dense ? 0.92 : 0.9}
       />
     ))
   }
   <polyline points={ridgePts.map((p) => p.join(',')).join(' ')} fill="none" stroke={accent} stroke-width="2"></polyline>
-  {ridgePts.map((p) => <circle cx={p[0]} cy={p[1]} r="2.2" fill={accent} />)}
+  {ridgePts.map((p) => <circle cx={p[0]} cy={p[1]} r={dense ? 1.7 : 2.2} fill={accent} />)}
 
   <line x1={x0} y1={y0} x2={x0 + W} y2={y0} stroke={ink} stroke-width="1.5"></line>
   <text x={x0} y={y0 + 24} font-size="9" font-weight="500" fill={label}>20 Hz</text>
@@ -85,7 +92,7 @@ const timeArr = arrowHead(x0 + W + 14 + (N - 1) * dx, y0 - 6 - (N - 1) * dy, -61
   <line x1="210" y1="158" x2="290" y2="194" stroke={faint} stroke-width="1"></line>
   <circle cx="290" cy="194" r="2.2" fill={faint}></circle>
 
-  <text x="24" y="452" font-size="10" font-weight="500" fill={label} opacity="0.9">EACH SLICE IS THE RESPONSE A FEW MS AFTER THE SIGNAL STOPS — GOOD DAMPING DROPS FAST AT EVERY FREQUENCY</text>
+  <text x="24" y="452" font-size="10" font-weight="500" fill={label} opacity="0.9">{dense ? 'FINER TIME SLICES — THE RESONANT RIDGE READS AS A CONTINUOUS WALL OF STORED ENERGY' : 'EACH SLICE IS THE RESPONSE A FEW MS AFTER THE SIGNAL STOPS — GOOD DAMPING DROPS FAST AT EVERY FREQUENCY'}</text>
 </svg>
 
 <style>
