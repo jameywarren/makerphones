@@ -9,13 +9,15 @@
  */
 import { getManual } from '../data/manual';
 
-const { parts, appendices } = await getManual();
+const { parts, appendices, buildGuides } = await getManual();
 const currentId = Astro.locals.starlightRoute.id; // e.g. "learn/damping-materials"
 const currentHandle = currentId.startsWith('learn/') ? currentId.slice(6) : null;
 const inAppendices = appendices.some((a) => a.handle === currentHandle);
-const currentPart = inAppendices
-  ? 0
-  : (parts.find((p) => p.chapters.some((c) => c.handle === currentHandle))?.num ?? 1);
+const inBuildGuides = buildGuides.some((b) => b.handle === currentHandle);
+const currentPart =
+  inAppendices || inBuildGuides
+    ? 0
+    : (parts.find((p) => p.chapters.some((c) => c.handle === currentHandle))?.num ?? 1);
 ---
 
 <div class="mp-sb">
@@ -50,6 +52,28 @@ const currentPart = inAppendices
       </details>
     ))
   }
+  <details open={inBuildGuides}>
+    <summary>
+      <span class="mp-partnum" style="width: 22px;">B</span>
+      <span style="flex: 1;">Build Guides</span>
+      <span class="mp-sb-caret" aria-hidden="true">▸</span>
+    </summary>
+    <div class="mp-sb-chapters">
+      {
+        buildGuides
+          .filter((b) => b.written)
+          .map((b) => (
+            <a
+              class="mp-sb-chapter"
+              href={`/learn/${b.handle}/`}
+              aria-current={b.handle === currentHandle ? 'page' : undefined}
+            >
+              <span>{b.title}</span>
+            </a>
+          ))
+      }
+    </div>
+  </details>
   <details open={inAppendices}>
     <summary>
       <span class="mp-partnum" style="width: 22px;">A</span>

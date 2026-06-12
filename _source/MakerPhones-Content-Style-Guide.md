@@ -148,6 +148,11 @@ Frozen handles — use these verbatim for filenames and cross-links. Live source
 - ✓ microphone-integration
 - ✓ custom-iem-design
 
+**Build guides** (type: build-guide; no nav numbering; outside the chapter chain)
+- ✓ your-first-build
+- ✓ simple-open-back-build
+- ✓ closed-back-studio-build
+
 **Appendices** (no nav numbering; outside the chapter chain)
 - ✓ glossary
 - ✓ supplier-directory

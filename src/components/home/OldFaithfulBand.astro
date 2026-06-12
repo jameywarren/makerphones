@@ -1,0 +1,37 @@
+---
+/**
+ * The one dark moment on the homepage — the Old Faithful feature band.
+ * Links to the About page; Old Faithful is NOT a chapter.
+ *
+ * The FR curve is illustrative vector art until Old Faithful's real
+ * measurement plot lands (tracked in CONTENT-TODO.md) — the caption
+ * says so honestly.
+ */
+import FRCurve from '../diagrams/FRCurve.astro';
+---
+
+<div class="mp-full mp-band">
+  <div>
+    <span class="mp-eyebrow" style="display: block; color: var(--mp-accent);">From the bench</span>
+    <h2>Old Faithful — the process, in the open.</h2>
+    <p>
+      Driver selection, chamber design, damping, measurement, voicing — Old Faithful is a
+      closed-back studio headphone being designed in the open, with the same methods these
+      chapters teach. Not a thought experiment: a real build you can watch take shape.
+    </p>
+    <a class="mp-textlink" href="/about/">The full story&nbsp;→</a>
+  </div>
+  <div class="mp-band-figure">
+    <FRCurve measuredLabel="measured" targetLabel="design target" />
+    <span class="mp-meta">
+      Measured response vs. design target — illustrative curve; Old Faithful's real plot replaces it.
+    </span>
+  </div>
+</div>
+
+<style>
+  .mp-band-figure {
+    display: grid;
+    gap: 14px;
+  }
+</style>

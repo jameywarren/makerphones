@@ -137,6 +137,17 @@ export const APPENDIX_HANDLES = [
   'community-builds',
 ] as const;
 
+/**
+ * Build guides — hands-on companion builds (type: build-guide).
+ * Like appendices: no nav numbering, outside the 1–30 chain,
+ * resolved in byHandle so cross-references link correctly.
+ */
+export const BUILD_GUIDE_HANDLES = [
+  'your-first-build',
+  'simple-open-back-build',
+  'closed-back-studio-build',
+] as const;
+
 export const LEVEL_RANK: Record<string, number> = {
   Beginner: 1,
   Intermediate: 2,
@@ -153,6 +164,8 @@ export interface ChapterInfo {
   written: boolean;
   difficulty?: 'Beginner' | 'Intermediate' | 'Advanced';
   readTime?: number;
+  /** Build guides: rough hands-on time, free text. */
+  timeEstimate?: string;
   prerequisites: string[];
   related: string[];
 }
@@ -165,6 +178,7 @@ export interface ChapterInfo {
 export async function getManual(): Promise<{
   parts: (ManualPart & { chapters: ChapterInfo[] })[];
   appendices: ChapterInfo[];
+  buildGuides: ChapterInfo[];
   byHandle: Map<string, ChapterInfo>;
   writtenCount: number;
   totalCount: number;
@@ -212,12 +226,32 @@ export async function getManual(): Promise<{
     return info;
   });
 
+  const buildGuides = BUILD_GUIDE_HANDLES.map((handle): ChapterInfo => {
+    const entry = byId.get(`learn/${handle}`);
+    const info: ChapterInfo = {
+      handle,
+      num: '', // build guides carry no nav numbering
+      partNum: -1,
+      partTitle: 'Build Guides',
+      title: entry?.data.title ?? handle,
+      written: Boolean(entry),
+      difficulty: entry?.data.difficulty,
+      readTime: entry?.data.read_time,
+      timeEstimate: (entry?.data as { time_estimate?: string } | undefined)?.time_estimate,
+      prerequisites: entry?.data.prerequisites ?? [],
+      related: entry?.data.related ?? [],
+    };
+    byHandle.set(handle, info);
+    return info;
+  });
+
   const all = parts.flatMap((p) => p.chapters);
   return {
     parts,
     appendices,
+    buildGuides,
     byHandle,
-    // counts cover the 30 manual chapters only; appendices are extra
+    // counts cover the 30 manual chapters only; appendices/guides are extra
     writtenCount: all.filter((c) => c.written).length,
     totalCount: all.length,
   };

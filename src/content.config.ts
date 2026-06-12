@@ -28,6 +28,8 @@ const chapterFields = z.object({
   related: z.array(z.string()).default([]),
   /** Estimated reading time in minutes. */
   read_time: z.number().int().positive().optional(),
+  /** Build guides: rough hands-on time, free text ("A weekend"). */
+  time_estimate: z.string().optional(),
   tags: z.array(z.string()).default([]),
   /** The chapter's Shopify excerpt. */
   excerpt: z.string().optional(),

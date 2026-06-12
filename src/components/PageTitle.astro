@@ -33,7 +33,9 @@ const isSplash = (entry.data as { template?: string }).template === 'splash';
       <nav class="mp-crumb" aria-label="Breadcrumb">
         <a href="/contents/">The Manual</a>
         <span class="sep" aria-hidden="true">/</span>
-        {chapter.partNum === 0 ? (
+        {chapter.partNum === -1 ? (
+          <a href="/contents/#build-guides">Build Guides</a>
+        ) : chapter.partNum === 0 ? (
           <a href="/contents/#appendices">Appendices</a>
         ) : (
           <a href={`/contents/#part-${chapter.partNum}`}>
@@ -48,6 +50,7 @@ const isSplash = (entry.data as { template?: string }).template === 'splash';
       <div class="mp-chapter-meta">
         <Level level={data.difficulty} />
         {data.read_time && <span class="mp-meta">{data.read_time} min read</span>}
+        {chapter.timeEstimate && <span class="mp-meta">Build time: {chapter.timeEstimate}</span>}
         {prereqLinks.length > 0 && (
           <span class="mp-meta">
             Read first:{' '}
