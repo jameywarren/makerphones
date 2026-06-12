@@ -312,8 +312,36 @@
 }
 
 /* bench band */
+/* section ornament — hairlines meeting the driver mark at center;
+ * rings go faint via currentColor, the dome dot stays --mp-accent */
+.mp-ornament {
+  display: flex;
+  align-items: center;
+  gap: 22px;
+  padding: 10px clamp(1rem, 4vw, 4rem); /* match page gutter */
+  color: var(--mp-faint, #9ca3af);
+}
+.mp-ornament::before,
+.mp-ornament::after {
+  content: '';
+  flex: 1;
+  border-top: 1px solid var(--mp-hair, #d1d5db);
+}
+
 .mp-bench {
   background: var(--mp-ink);
+  position: relative; /* positioning context for the corner seal */
+}
+
+/* bench-band seal — mono ghost of the mark, like a deboss in a cup
+ * shell; strictly mono at this size, never orange on the dark band */
+.mp-bench-seal {
+  position: absolute;
+  right: 60px;
+  bottom: 46px;
+  opacity: 0.38;
+  color: #cbd5e1;
+  pointer-events: none;
 }
 .mp-bench-in {
   display: grid;
