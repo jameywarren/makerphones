@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "@astrojs/rss": "^4.0.18",
     "@astrojs/starlight": "^0.40.0",
     "@fontsource-variable/jetbrains-mono": "^5.2.8",
     "@fontsource-variable/schibsted-grotesk": "^5.2.8",

@@ -31,3 +31,10 @@ If you're not sure your build is "good enough" to share, it is. A first build, h
 ## The point of all this
 
 A resource like this grows from its builders. Every documented build makes the next one easier, every shared failure saves someone else the same evening of frustration, and every honest write-up makes the whole thing a little more real. The manual is the map; the builds are the territory. Add yours to it.
+
+## Submit your build
+
+Built something from the manual? Send it in: **email a few photos, your parts list, and what
+you'd do differently to [PLACEHOLDER_EMAIL](mailto:PLACEHOLDER_EMAIL)** and it'll be considered
+for this page. (A proper submission form and community space are planned — until then, email
+is the queue.)

@@ -392,3 +392,44 @@
     display: none;
   }
 }
+
+/* ── dark-mode separation for always-dark surfaces ───────────────────
+ * In dark mode the bench band's #111827 matches the page surface and
+ * loses its "one dark moment" identity — give it a deeper ground and
+ * hairline rules so it stays distinct and intentional. */
+:root[data-theme='dark'] .mp-bench {
+  background: #0b101b;
+  border-top: 1px solid var(--mp-line);
+  border-bottom: 1px solid var(--mp-line);
+}
+:root[data-theme='dark'] .mp-darkscope {
+  --mp-ground: #0b101b;
+  --mp-hair: #2b3648;
+}
+/* cover plate + plates sit on --mp-ground; in dark mode lift them off
+ * the page surface with a visible hairline instead of the white halo */
+:root[data-theme='dark'] .mp-coverplate {
+  box-shadow: 0 0 0 1px var(--mp-surface), 0 0 0 2px var(--mp-line);
+}
+:root[data-theme='dark'] .mp-plate-empty {
+  background: repeating-linear-gradient(
+    45deg,
+    transparent 0 10px,
+    color-mix(in srgb, var(--mp-charcoal) 10%, transparent) 10px 20px
+  );
+}
+
+/* ── focus visibility (keyboard operability) ───────────────────────── */
+.mp-home a:focus-visible,
+.mp-bench a:focus-visible,
+.mp-hnav a:focus-visible,
+.mp-fbtn:focus-visible {
+  outline: 2px solid var(--mp-accent);
+  outline-offset: 3px;
+}
+
+/* meta text on the grid wash: the wash lowers effective contrast —
+ * darken label text inside washed sections in light mode */
+:root[data-theme='light'] .mp-grid-bg .mono {
+  color: #5b6371;
+}

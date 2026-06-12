@@ -104,6 +104,34 @@ export default defineConfig({
       description:
         'An open reference for designing and building your own headphones — real engineering, explained plainly.',
       sidebar,
+      favicon: '/favicon.svg',
+      head: [
+        // default branded OG image (per-page overrides optional later)
+        { tag: 'meta', attrs: { property: 'og:image', content: 'https://makerphones.com/og-default.png' } },
+        { tag: 'meta', attrs: { property: 'og:image:width', content: '1200' } },
+        { tag: 'meta', attrs: { property: 'og:image:height', content: '630' } },
+        { tag: 'meta', attrs: { name: 'twitter:card', content: 'summary_large_image' } },
+        { tag: 'meta', attrs: { name: 'twitter:image', content: 'https://makerphones.com/og-default.png' } },
+        // icons + manifest
+        { tag: 'link', attrs: { rel: 'icon', type: 'image/png', sizes: '32x32', href: '/favicon-32.png' } },
+        { tag: 'link', attrs: { rel: 'icon', type: 'image/png', sizes: '16x16', href: '/favicon-16.png' } },
+        { tag: 'link', attrs: { rel: 'apple-touch-icon', sizes: '180x180', href: '/apple-touch-icon.png' } },
+        { tag: 'link', attrs: { rel: 'manifest', href: '/site.webmanifest' } },
+        { tag: 'meta', attrs: { name: 'theme-color', content: '#ea580c' } },
+        // bench-notes feed
+        { tag: 'link', attrs: { rel: 'alternate', type: 'application/rss+xml', title: 'MakerPhones — Bench Notes', href: '/rss.xml' } },
+        // Privacy-friendly analytics (GoatCounter: no cookies, no consent
+        // banner needed). PLACEHOLDER: Jamey creates the account at
+        // goatcounter.com and replaces GOATCOUNTER_CODE with the site code.
+        {
+          tag: 'script',
+          attrs: {
+            'data-goatcounter': 'https://GOATCOUNTER_CODE.goatcounter.com/count',
+            async: true,
+            src: '//gc.zgo.at/count.js',
+          },
+        },
+      ],
       customCss: [
         // self-hosted variable fonts (bundled, no external requests)
         '@fontsource-variable/schibsted-grotesk',
