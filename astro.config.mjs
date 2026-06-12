@@ -61,7 +61,15 @@ const sidebar = [
       'learn/professional-design-insights',
     ],
   },
-  { label: 'Special Topics', items: [] }, // Part 6 — not yet written
+  {
+    label: 'Special Topics',
+    items: [
+      // Part 6 — 6.1 (bluetooth-integration) pending
+      'learn/active-noise-cancelling',
+      'learn/microphone-integration',
+      'learn/custom-iem-design',
+    ],
+  },
 ];
 
 export default defineConfig({
