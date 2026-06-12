@@ -26,9 +26,8 @@ const SKIP = new Set(['index.html', 'contents/index.html', '404.html']);
 
 /** Known violations tracked in CONTENT-TODO.md — warn, don't fail. */
 const ALLOWLIST = new Set([
-  // "You've now completed Part 2..." in the What's Next prose; queued
-  // for the editorial pass (see CONTENT-TODO.md).
-  'learn/cables-connectors-hardware/index.html',
+  // (empty — the cables-connectors-hardware part-reference prose was
+  // fixed in the June 2026 editorial pass)
 ]);
 
 async function htmlFiles(dir) {

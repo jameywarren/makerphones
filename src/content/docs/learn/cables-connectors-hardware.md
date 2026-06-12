@@ -151,8 +151,8 @@ Cable failures almost always happen at the entry point to the ear cup. Strain re
 
 ## What's Next
 
-You've now completed Part 2: Components & Materials. You understand [drivers](/learn/driver-selection-guide/), [chambers](/learn/acoustic-chambers-and-enclosures/), [pads](/learn/ear-pads-and-comfort/), [damping](/learn/damping-materials/), and now cables and hardware.
+That's the full tour of components and materials: you understand [drivers](/learn/driver-selection-guide/), [chambers](/learn/acoustic-chambers-and-enclosures/), [pads](/learn/ear-pads-and-comfort/), [damping](/learn/damping-materials/), and now cables and hardware.
 
-Next up is **Part 3: Design & Build Process** where we put all this knowledge into practice. Start with [Design Methodology](/learn/design-methodology/) — the complete workflow from concept to finished headphones — then continue through 3D design, chamber design, assembly, and damping strategy.
+Next, we put all this knowledge into practice. Start with [Design Methodology](/learn/design-methodology/) — the complete workflow from concept to finished headphones — then continue through 3D design, chamber design, assembly, and damping strategy.
 
 Or if you want to jump straight into building, check out [Your First Build](/learn/your-first-build/) where we walk through a simple, achievable first project.

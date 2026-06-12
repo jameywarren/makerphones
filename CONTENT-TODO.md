@@ -8,16 +8,18 @@ editorial pass, one commit per correction, so the change history is clean.
 
 ## Sourcing chapter
 
-- [ ] **Zalytron** is listed as a "Canadian supplier." It was actually in
-      Mineola, NY, and is long defunct. Remove it from the supplier list.
-- [ ] **miniDSP EARS** is listed at ~$300. It launched at $199, is now out
-      of stock at major retailers, and has been superseded by the EARS Pro.
-      This recommendation needs a rework, not just a price fix.
-- [ ] **miniDSP UMIK-1** at ~$120 is roughly right, but the mic is currently
-      supply-constrained. Add a backup measurement-mic recommendation.
+- [x] **Zalytron** removed from the supplier list *(fixed June 11, 2026)*.
+- [x] **miniDSP EARS** — sourcing-components no longer carries its own
+      measurement-gear recommendations; it points to Budget Measurement
+      Setup (4.2), the single source of truth for measurement gear
+      *(fixed June 11, 2026)*.
+- [x] **miniDSP UMIK-1** — supply-constraint note + keep-an-alternative
+      advice added to sourcing-components, folded into the pointer to
+      4.2; the price now lives only in 4.2 *(fixed June 11, 2026)*.
 - [ ] **Dayton driver model numbers and prices** — verify every Dayton
       reference against the current Parts Express catalog before the
-      editorial pass closes.
+      editorial pass closes. (Deliberately NOT touched in the June 11
+      pass — needs catalog verification first, not guesswork.)
 
 ## Outdated author bio in chapter bodies
 
@@ -63,13 +65,10 @@ or hold until the target exists.
 - [ ] Length vs. style guide (1,200–1,800 words):
       `headphone-form-factors` is ~760 words;
       `design-methodology` is ~1,920. Flag for editorial, not urgent.
-- [ ] `cables-connectors-hardware` — the What's Next prose says "You've
-      now completed Part 2: Components & Materials" and "Next up is
-      **Part 3: Design & Build Process**". The build's quality gate only
-      covers titles/headings (per spec), but visible part numbers in body
-      copy violate the spirit of the internal-only rule — rewrite to
-      natural language ("the components and materials chapters") in the
-      editorial pass.
+- [x] `cables-connectors-hardware` — What's Next prose reworded to
+      natural language (no part references); the gate's allowlist entry
+      for this page is removed, so it's enforced strictly again
+      *(fixed June 11, 2026)*.
 
 ## Real assets needed (v2 design placeholders)
 

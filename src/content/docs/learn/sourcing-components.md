@@ -30,8 +30,6 @@ Before we dive into suppliers, let's break down everything you actually need for
 
 **Madisound (madisound.com):** Another excellent US supplier. More focused on high-end components, sometimes carries drivers you won't find elsewhere. Good customer service and technical knowledge.
 
-**Zalytron (zalytron.com):** Canadian supplier with good selection. If you're in Canada, worth checking before paying US shipping.
-
 **AliExpress:** As we discussed in [Driver Selection Guide](/learn/driver-selection-guide/), proceed with caution. Use only for experimental builds with verified driver models.
 
 ## Ear Pads
@@ -86,11 +84,9 @@ Covered thoroughly in [Damping Materials](/learn/damping-materials/), but the qu
 
 ## Measurement Equipment
 
-Not strictly a component, but you'll want this for tuning. Full coverage in [Budget Measurement Setup](/learn/budget-measurement-setup/), but the short version:
+Not strictly a component, but you'll want it for tuning. The full breakdown — what to buy at each budget tier, and what each rig can and can't tell you — lives in [Budget Measurement Setup](/learn/budget-measurement-setup/). The gear recommendations stay current there rather than here.
 
-**MiniDSP UMIK-1 (~$120):** Calibrated USB measurement microphone. The entry-level standard for DIY audio measurement. Comes with calibration file. Works with free Room EQ Wizard (REW) software.
-
-**MiniDSP EARS (~$300):** Budget headphone measurement rig with ear canal simulation. Not as accurate as professional gear, but useful for relative comparisons and tuning.
+One sourcing note worth making in this chapter: the usual entry-level calibrated USB mic, the MiniDSP UMIK-1, is frequently supply-constrained. Don't plan around a single source — any calibrated measurement microphone with a downloadable calibration file does the same job in REW, so keep an alternative in mind for when the UMIK-1 is out of stock.
 
 You don't need measurement equipment for your first build — listening is sufficient. But once you're serious about tuning, measurement tools become invaluable.
 
@@ -106,7 +102,7 @@ For a realistic first build budget:
 - 3D printing filament: $5–10 (if printing your own parts)
 - **Total: $65–120**
 
-Budget separately for measurement equipment if you want it ($120–300 depending on what you get).
+Budget separately for measurement equipment if you want it — [Budget Measurement Setup](/learn/budget-measurement-setup/) breaks down what each tier costs.
 
 ## What's Next
 
