@@ -57,7 +57,8 @@ const sidebar = [
   {
     label: 'Advanced',
     items: [
-      // Part 5 — 5.1 (acoustic-modeling) pending
+      // Part 5 — complete
+      'learn/acoustic-modeling',
       'learn/resonance-control',
       'learn/manufacturing-for-consistency',
       'learn/professional-design-insights',
@@ -66,7 +67,8 @@ const sidebar = [
   {
     label: 'Special Topics',
     items: [
-      // Part 6 — 6.1 (bluetooth-integration) pending
+      // Part 6 — complete
+      'learn/bluetooth-integration',
       'learn/active-noise-cancelling',
       'learn/microphone-integration',
       'learn/custom-iem-design',

@@ -38,7 +38,7 @@ Clear, approachable, credible — readable by a first-time builder, grounded in 
 
 ## The manual
 
-30 chapters in six parts — Fundamentals → Components & Materials → Design & Build → Measurement & Tuning → Advanced → Special Topics — plus five appendices. **State: 28 of 30 written** — Parts 1–4 complete (Ch 1–22); remaining gaps: Acoustic Modeling and Bluetooth Integration (Ch 23, 27), plus appendices.
+30 chapters in six parts — Fundamentals → Components & Materials → Design & Build → Measurement & Tuning → Advanced → Special Topics — plus five appendices. **State: 30 of 30 written — the manual is complete.** Remaining: the five appendices.
 
 ## Relationship to Warren Labs
 

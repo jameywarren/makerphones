@@ -52,8 +52,9 @@ Deploys on push to `main` via `.github/workflows/deploy.yml`
 
 ## Status
 
-**28 of 30 chapters live** under `/learn/` — Parts 1–4 complete; the
-only gaps are Acoustic Modeling (5.1) and Bluetooth Integration (6.1). Handles are frozen per the Content &
+**All 30 chapters live** under `/learn/` — the manual is complete.
+Five appendices (glossary, supplier directory, design resources,
+troubleshooting, community builds) remain planned. Handles are frozen per the Content &
 Style Guide appendix (`_source/MakerPhones-Content-Style-Guide.md`).
 
 To add a chapter: write `src/content/docs/learn/<handle>.md` with the
