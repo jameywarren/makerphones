@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>MakerPhones — Illustration System & Figure Extensions</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Schibsted+Grotesk:wght@500;600;700;800&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,500;0,8..60,600;1,8..60,400&display=swap" rel="stylesheet">
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="lib/mp-site.css">
+</head>
+<body data-anim="on">
+<div id="root"></div>
+<script type="text/babel" src="design-canvas.jsx"></script>
+<script type="text/babel" src="tweaks-panel.jsx"></script>
+<script type="text/babel" src="lib/mp-theme.jsx"></script>
+<script type="text/babel" src="lib/mp-listeners.jsx"></script>
+<script type="text/babel" src="lib/mp-hero.jsx"></script>
+<script type="text/babel" src="lib/mp-motifs.jsx"></script>
+<script type="text/babel" src="lib/mp-fig-revisions.jsx"></script>
+<script type="text/babel" src="lib/mp-figs-t1.jsx"></script>
+<script type="text/babel" src="lib/mp-figs-t2.jsx"></script>
+<script type="text/babel" src="lib/mp-figs-t3.jsx"></script>
+<script type="text/babel">
+const {
+  DesignCanvas, DCSection, DCArtboard,
+  useTweaks, TweaksPanel, TweakSection, TweakRadio, TweakToggle, TweakSlider,
+  MP, MotifWave, MotifRuler, MotifFR, MotifArcs, MpIcon, MpDifficulty,
+  HeroExploded, PoseListening, PoseBuilding, PoseReading, PoseInspecting,
+  ListenerHead, FigPhones, FigStandingV2, FigCSDv2,
+  FigFR, FigImpedance, FigPad, FigDamping, FigConnector, FigFormFactor,
+  FigProcess, FigWireless, FigANC, FigIEM,
+  FigLumped, FigMatching, FigDiagnosis, FigMicWiring,
+} = window;
+
+const TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{
+  "heroWeight": "mass",
+  "heroMotion": "settle",
+  "face": "none",
+  "animations": true
+}/*EDITMODE-END*/;
+
+function MarginaliaStrip() {
+  const poses = [
+    [PoseListening, 150], [PoseBuilding, 205], [PoseReading, 165], [PoseInspecting, 150],
+  ];
+  return (
+    <div className="sheet" data-screen-label="Marginalia scale" style={{ width: '100%' }}>
+      <h2><span className="fig">RULING</span>FIGURES — MARGINALIA SCALE ONLY · FACELESS · GESTURAL</h2>
+      <div style={{ display: 'flex', gap: 28, alignItems: 'flex-end', marginTop: 10 }}>
+        {poses.map(([P, w], i) => (
+          <div key={i} style={{ width: w }}><P anatomy="contour" face="none" annotated={false} /></div>
+        ))}
+        <p className="serif" style={{ maxWidth: '30ch', paddingBottom: 18, color: 'var(--mp-meta)' }}>
+          At this scale the pose carries it — section breaks, build-guide margins, 404s. Never the hero.
+        </p>
+      </div>
+    </div>
+  );
+}
+
+function IconCell({ name, label, sub, isNew, diff }) {
+  const cell = { display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 9, padding: '16px 6px 13px', border: '1px solid var(--mp-hair)', position: 'relative' };
+  return (
+    <div style={cell}>
+      {isNew && <span className="mono orange" style={{ position: 'absolute', top: 5, right: 7, fontSize: 8 }}>NEW</span>}
+      {diff ? <MpDifficulty level={diff} size={28} /> : <MpIcon name={name} size={28} />}
+      <span className="mono dark" style={{ fontSize: 9.5 }}>{label}</span>
+      <span className="mono" style={{ fontSize: 8, marginTop: -6 }}>{sub}</span>
+    </div>
+  );
+}
+
+function TaxonomySheet() {
+  const grp = { margin: '16px 0 8px' };
+  const grid = (n) => ({ display: 'grid', gridTemplateColumns: `repeat(${n}, 1fr)`, gap: 8 });
+  return (
+    <div className="sheet" data-screen-label="Icon taxonomy" style={{ width: '100%' }}>
+      <h2><span className="fig">FIG. I</span>WAYFINDING TAXONOMY — ONE FAMILY, EVERY DESTINATION MARKED</h2>
+      <p className="mono" style={grp}>THE SIX PARTS — CHAPTER MARKS</p>
+      <div style={grid(6)}>
+        <IconCell name="fundamentals" label="PART 01" sub="FUNDAMENTALS" />
+        <IconCell name="drivers" label="PART 02" sub="DRIVERS" />
+        <IconCell name="enclosures" label="PART 03" sub="CUPS & CAVITIES" />
+        <IconCell name="materials" label="PART 04" sub="TOOLS & MATERIALS" />
+        <IconCell name="build" label="PART 05" sub="THE BUILD" />
+        <IconCell name="measure" label="PART 06" sub="MEASURE & TUNE" />
+      </div>
+      <p className="mono" style={grp}>CONTENT KINDS — WHAT AM I READING?</p>
+      <div style={grid(6)}>
+        <IconCell name="read" label="CHAPTER" sub="THE MANUAL" />
+        <IconCell name="guide" label="BUILD GUIDE" sub="STEP-BY-STEP" isNew />
+        <IconCell name="builds" label="COMMUNITY BUILD" sub="FINISHED PAIRS" isNew />
+        <IconCell name="contents" label="REFERENCE" sub="APPENDICES" />
+      </div>
+      <p className="mono" style={grp}>REFERENCE PAGES — THE APPENDICES, EACH WITH ITS OWN MARK</p>
+      <div style={grid(6)}>
+        <IconCell name="glossary" label="GLOSSARY" sub="APPENDIX A" isNew />
+        <IconCell name="troubleshoot" label="TROUBLESHOOTING" sub="APPENDIX B" isNew />
+        <IconCell name="resources" label="DESIGN RESOURCES" sub="APPENDIX C" isNew />
+        <IconCell name="suppliers" label="SUPPLIERS" sub="APPENDIX D" isNew />
+      </div>
+      <p className="mono" style={grp}>WAYFINDING & DIFFICULTY — CHROME ONLY</p>
+      <div style={grid(6)}>
+        <IconCell name="arrow" label="GO / CONTINUE" sub="LINKS, CARD FEET" />
+        <IconCell diff={1} label="BEGINNER" sub="DIFFICULTY" />
+        <IconCell diff={2} label="INTERMEDIATE" sub="DIFFICULTY" />
+        <IconCell diff={3} label="ADVANCED" sub="DIFFICULTY" />
+      </div>
+    </div>
+  );
+}
+
+function ChromeRow({ children, note }) {
+  return (
+    <div style={{ display: 'grid', gridTemplateColumns: '1fr 230px', gap: 24, alignItems: 'center', borderBottom: '1px solid var(--mp-hair)', padding: '14px 0' }}>
+      <div>{children}</div>
+      <p className="mono" style={{ fontSize: 8.5, margin: 0 }}>{note}</p>
+    </div>
+  );
+}
+
+function PlacementSheet() {
+  const chrome = { display: 'flex', alignItems: 'center', gap: 12 };
+  return (
+    <div className="sheet" data-screen-label="Icon placement" style={{ width: '100%' }}>
+      <h2><span className="fig">SPEC</span>WHERE EACH MARK LIVES — CHROME ONLY, NEVER BODY PROSE</h2>
+
+      <ChromeRow note="HOMEPAGE PART CARDS — EXISTING. ICON + PART No. + DIFFICULTY.">
+        <div style={chrome}>
+          <MpIcon name="enclosures" size={24} />
+          <span className="mono orange">Part 03</span>
+          <span className="h-display" style={{ fontSize: 18 }}>Cups & Cavities</span>
+          <span style={{ marginLeft: 'auto' }}><MpDifficulty level={2} size={18} /></span>
+        </div>
+      </ChromeRow>
+
+      <ChromeRow note="CONTENTS PAGE — EVERY ROW GETS ITS PART OR KIND MARK AT 20 PX.">
+        <div style={{ ...chrome, gap: 16 }}>
+          <span className="mono orange" style={{ width: 64 }}>Part 06</span>
+          <MpIcon name="measure" size={20} />
+          <span className="h-display" style={{ fontSize: 17 }}>Measure & Tune</span>
+          <span style={{ flex: 1, borderBottom: '1.5px dotted var(--mp-faint)', transform: 'translateY(-4px)' }}></span>
+          <MpDifficulty level={3} size={16} />
+        </div>
+      </ChromeRow>
+
+      <ChromeRow note="CHAPTER HEADER — ONE SMALL MARK IN THE META ROW ABOVE THE TITLE.">
+        <div>
+          <div style={{ ...chrome, gap: 10, marginBottom: 6 }}>
+            <MpIcon name="drivers" size={18} />
+            <span className="mono orange">Part 02 · Chapter 2.3</span>
+          </div>
+          <span className="h-display" style={{ fontSize: 22 }}>Planar-Magnetic Drivers</span>
+        </div>
+      </ChromeRow>
+
+      <ChromeRow note="BUILD-GUIDE HEADER — KIND MARK + DIFFICULTY. THE GUIDE ICON IS THE BUILDER'S DRIVER-AND-TIP.">
+        <div>
+          <div style={{ ...chrome, gap: 10, marginBottom: 6 }}>
+            <MpIcon name="guide" size={18} />
+            <span className="mono orange">Build guide</span>
+            <MpDifficulty level={2} size={16} />
+            <span className="mono">12 HRS · HAND TOOLS</span>
+          </div>
+          <span className="h-display" style={{ fontSize: 22 }}>Open-Back Cups from Walnut</span>
+        </div>
+      </ChromeRow>
+
+      <ChromeRow note="APPENDIX HEADER — EACH REFERENCE PAGE WEARS ITS OWN MARK.">
+        <div style={{ ...chrome, gap: 10 }}>
+          <MpIcon name="troubleshoot" size={18} />
+          <span className="mono orange">Appendix B</span>
+          <span className="h-display" style={{ fontSize: 20 }}>Troubleshooting</span>
+        </div>
+      </ChromeRow>
+
+      <ChromeRow note="RULING: NAV STAYS TEXT-ONLY — FOUR LABELS DON'T NEED PICTURES. SAME FOR BODY PROSE: NEVER.">
+        <div style={{ ...chrome, gap: 26 }}>
+          {['The Manual', 'Bench Notes', 'Builds', 'About'].map((l, i) => (
+            <span key={l} className={'mono' + (i === 0 ? ' dark' : '')}>{l}</span>
+          ))}
+          <span className="mono" style={{ marginLeft: 'auto', textDecoration: 'line-through', opacity: 0.55 }}>+ ICONS</span>
+        </div>
+      </ChromeRow>
+    </div>
+  );
+}
+
+function board(id, label, w, h, node, pad = 0) {
+  return (
+    <DCArtboard id={id} label={label} width={w} height={h}>
+      <div data-screen-label={label} style={{ width: '100%', height: '100%', background: 'var(--mp-ground, #f9fafb)', padding: pad, boxSizing: 'border-box', overflow: 'hidden' }}>
+        {node}
+      </div>
+    </DCArtboard>
+  );
+}
+
+function App() {
+  const [t, setTweak] = useTweaks(TWEAK_DEFAULTS);
+  React.useEffect(() => {
+    document.body.dataset.anim = t.animations ? 'on' : 'off';
+  }, [t.animations]);
+
+  return (
+    <div>
+      <DesignCanvas>
+        <DCSection id="hero" title="Hero exploded headphone" subtitle="Two weight dialects — motion mode via Tweaks (hover the figure in 'hover' mode)">
+          {board('hero-mass', 'Mass-fill dialect (homepage hero)', 1000, 760,
+            <div style={{ padding: 24 }}><HeroExploded weight="mass" motion={t.heroMotion} annotated={true} header="OLD FAITHFUL — EXPLODED" caption="MASS DIALECT — FILLED MAGNETS, WEIGHTED SHELLS" /></div>)}
+          {board('hero-line', 'Pure line dialect (cover + article use)', 1000, 760,
+            <div style={{ padding: 24 }}><HeroExploded weight="line" motion={t.heroMotion} annotated={true} header="OLD FAITHFUL — EXPLODED" caption="LINE DIALECT — AIRY, FOR COVER + ARTICLE USE" /></div>)}
+        </DCSection>
+
+        <DCSection id="listeners" title="The listeners — marginalia only" subtitle="Ruling: faceless, gestural, small — never hero mascots. Face variant via Tweaks.">
+          {board('marginalia', 'Marginalia scale — the approved usage', 1060, 330, <MarginaliaStrip />)}
+          {board('pose-1', 'I · The Listener — annotated', 440, 500,
+            <div style={{ width: 380, padding: '24px 30px 0' }}><PoseListening anatomy="contour" face={t.face} annotated={true} /></div>)}
+          {board('pose-2', 'II · The Builder — annotated', 600, 500,
+            <div style={{ width: 545, padding: '24px 28px 0' }}><PoseBuilding anatomy="contour" face={t.face} annotated={true} /></div>)}
+          {board('pose-3', 'III · The Reader — annotated', 500, 500,
+            <div style={{ width: 440, padding: '24px 30px 0' }}><PoseReading anatomy="contour" face={t.face} annotated={true} /></div>)}
+          {board('pose-4', 'IV · The Inspector — annotated', 440, 500,
+            <div style={{ width: 380, padding: '24px 30px 0' }}><PoseInspecting anatomy="contour" face={t.face} annotated={true} /></div>)}
+        </DCSection>
+
+        <DCSection id="figs-t1" title="Figure extensions — Tier 1 · FIG 09–14" subtitle="Foundational, heavily referenced · line dialect, FIG 00 conventions">
+          {board('fig09', '09 · Frequency response', 808, 548, <div style={{ padding: 24 }}><FigFR /></div>)}
+          {board('fig10', '10 · Impedance & sensitivity', 808, 518, <div style={{ padding: 24 }}><FigImpedance /></div>)}
+          {board('fig11', '11 · Ear-pad cross-section', 808, 518, <div style={{ padding: 24 }}><FigPad /></div>)}
+          {board('fig12', '12 · Damping placement map', 808, 518, <div style={{ padding: 24 }}><FigDamping /></div>)}
+          {board('fig13', '13 · Connector & wiring', 808, 518, <div style={{ padding: 24 }}><FigConnector /></div>)}
+          {board('fig14', '14 · Form factors', 808, 518, <div style={{ padding: 24 }}><FigFormFactor /></div>)}
+        </DCSection>
+
+        <DCSection id="figs-t2" title="Figure extensions — Tier 2 · FIG 15–18" subtitle="Process & special topics">
+          {board('fig15', '15 · Design process', 808, 468, <div style={{ padding: 24 }}><FigProcess /></div>)}
+          {board('fig16', '16 · Wireless signal chain', 808, 518, <div style={{ padding: 24 }}><FigWireless /></div>)}
+          {board('fig17', '17 · ANC mic topology', 808, 528, <div style={{ padding: 24 }}><FigANC /></div>)}
+          {board('fig18', '18 · IEM cross-section', 808, 518, <div style={{ padding: 24 }}><FigIEM /></div>)}
+        </DCSection>
+
+        <DCSection id="figs-t3" title="Figure extensions — Tier 3 · FIG 19–22" subtitle="Stretch · modeling, tolerance, diagnosis, mic wiring">
+          {board('fig19', '19 · Lumped-element model', 808, 548, <div style={{ padding: 24 }}><FigLumped /></div>)}
+          {board('fig20', '20 · Channel matching', 808, 518, <div style={{ padding: 24 }}><FigMatching /></div>)}
+          {board('fig21', '21 · Reading a measurement', 808, 528, <div style={{ padding: 24 }}><FigDiagnosis /></div>)}
+          {board('fig22', '22 · Mic wiring & placement', 808, 528, <div style={{ padding: 24 }}><FigMicWiring /></div>)}
+        </DCSection>
+
+        <DCSection id="figrev" title="Figure revisions" subtitle="FIG 05 second harmonic · FIG 06 denser ridge">
+          {board('fig05b', '05b · Second harmonic', 768, 478, <div style={{ padding: 24 }}><FigStandingV2 harmonic={2} /></div>)}
+          {board('fig06b', '06b · Dense waterfall', 808, 518, <div style={{ padding: 24 }}><FigCSDv2 dense={true} /></div>)}
+        </DCSection>
+
+        <DCSection id="motifs" title="Motifs & texture" subtitle="Quiet — for dividers and faint backgrounds">
+          {board('m-wave', 'Waveform divider', 1240, 130, <div style={{ padding: '28px 20px' }}><MotifWave w={1200} h={72} /></div>)}
+          {board('m-ruler', 'Ruler strip', 1240, 76, <div style={{ padding: '28px 20px 0' }}><MotifRuler w={1200} /></div>)}
+          {board('m-fr', 'FR backdrop (light + dark scope)', 960, 420,
+            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', height: '100%' }}>
+              <div style={{ padding: 24 }}><MotifFR w={420} h={330} /></div>
+              <div className="mp-darkscope" style={{ padding: 24, background: '#111827' }}><MotifFR w={420} h={330} /></div>
+            </div>)}
+          {board('m-arcs', 'Pressure arcs — corner', 300, 300, <div style={{ padding: 20 }}><MotifArcs size={250} corner="tl" animated={true} /></div>)}
+          {board('m-grid', 'Blueprint grid', 360, 300, <div className="mp-grid-bg" style={{ width: '100%', height: '100%' }}></div>)}
+        </DCSection>
+
+        <DCSection id="icons" title="Icon set — wayfinding taxonomy" subtitle="One family: parts · content kinds · reference pages · difficulty. Chrome only — if a spot doesn't tell you where you are, no icon goes there.">
+          {board('icon-taxonomy', 'The complete family', 880, 660, <TaxonomySheet />)}
+          {board('icon-placement', 'Where each mark lives', 880, 560, <PlacementSheet />)}
+        </DCSection>
+      </DesignCanvas>
+
+      <TweaksPanel>
+        <TweakSection label="Hero figure" />
+        <TweakRadio label="Motion" value={t.heroMotion} options={['settle', 'breathe', 'hover']}
+          onChange={(v) => setTweak('heroMotion', v)} />
+        <TweakSection label="Figures" />
+        <TweakRadio label="Faces" value={t.face} options={['none', 'line', 'soft']}
+          onChange={(v) => setTweak('face', v)} />
+        <TweakSection label="Motion" />
+        <TweakToggle label="Animations" value={t.animations}
+          onChange={(v) => setTweak('animations', v)} />
+      </TweaksPanel>
+    </div>
+  );
+}
+
+ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+</script>
+</body>
+</html>

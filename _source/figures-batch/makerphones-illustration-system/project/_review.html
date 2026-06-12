@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>review</title>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Schibsted+Grotesk:wght@500;600;700;800&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,500;0,8..60,600&display=swap" rel="stylesheet">
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+<script src="image-slot.js"></script>
+<link rel="stylesheet" href="lib/mp-site.css">
+<style>
+  body { margin: 0; background: #eee; font-family: monospace; }
+  .row { display: flex; gap: 16px; padding: 16px; flex-wrap: wrap; align-items: flex-start; }
+  .cell { background: #f9fafb; outline: 1px solid #ccc; }
+  .cap { font-size: 11px; padding: 4px 8px; color: #666; }
+  .pagewrap { transform: scale(0.62); transform-origin: top left; }
+  .pagebox { overflow: hidden; outline: 1px solid #ccc; }
+  body[data-anim="off"] * { animation: none !important; transition: none !important; }
+</style>
+</head>
+<body data-anim="off">
+<div id="root"></div>
+<script type="text/babel" src="lib/mp-theme.jsx"></script>
+<script type="text/babel" src="lib/mp-listeners.jsx"></script>
+<script type="text/babel" src="lib/mp-hero.jsx"></script>
+<script type="text/babel" src="lib/mp-motifs.jsx"></script>
+<script type="text/babel" src="lib/mp-fig-revisions.jsx"></script>
+<script type="text/babel" src="lib/mp-figs-t1.jsx"></script>
+<script type="text/babel" src="lib/mp-figs-t2.jsx"></script>
+<script type="text/babel" src="lib/mp-figs-t3.jsx"></script>
+<script type="text/babel" src="lib/mp-home.jsx"></script>
+<script type="text/babel" src="lib/mp-pages.jsx"></script>
+<script type="text/babel">
+const { PoseListening, PoseBuilding, PoseReading, PoseInspecting, HeroExploded, HomeA, HomeB, HomeC, HomeD,
+        FigStandingV2, FigCSDv2, MotifWave, MotifRuler, MotifFR, MotifArcs, MpIcon, MpDifficulty, ListenerHead, FigPhones, MP,
+        FigFR, FigImpedance, FigPad, FigDamping, FigConnector, FigFormFactor,
+        FigProcess, FigWireless, FigANC, FigIEM,
+        FigLumped, FigMatching, FigDiagnosis, FigMicWiring } = window;
+const T = { heroWeight: 'mass', heroMotion: 'hover', face: 'line' };
+function App() {
+  return (
+    <div>
+      <div className="row" id="r-poses">
+        <div className="cell" style={{ width: 380 }}><div className="cap">pose-1 listening</div><PoseListening anatomy="contour" face="line" annotated={true} /></div>
+        <div className="cell" style={{ width: 540 }}><div className="cap">pose-2 building</div><PoseBuilding anatomy="contour" face="line" annotated={true} /></div>
+        <div className="cell" style={{ width: 430 }}><div className="cap">pose-3 reading</div><PoseReading anatomy="contour" face="line" annotated={true} /></div>
+        <div className="cell" style={{ width: 380 }}><div className="cap">pose-4 inspecting</div><PoseInspecting anatomy="contour" face="line" annotated={true} /></div>
+      </div>
+      <div className="row" id="r-hero">
+        <div className="cell" style={{ width: 860, padding: 12 }}><div className="cap">hero mass</div><HeroExploded weight="mass" motion="none" annotated={true} /></div>
+        <div className="cell" style={{ width: 860, padding: 12 }}><div className="cap">hero line</div><HeroExploded weight="line" motion="none" annotated={true} /></div>
+      </div>
+      <div className="row" id="r-extra">
+        <div className="cell" style={{ width: 360 }}><div className="cap">anatomy fill</div><PoseListening anatomy="fill" face="line" /></div>
+        <div className="cell" style={{ width: 360 }}><div className="cap">anatomy drafted</div><PoseListening anatomy="drafted" face="line" /></div>
+        <div className="cell" style={{ width: 260 }}><div className="cap">faces</div>
+          {['none', 'line', 'soft'].map((f) => (
+            <svg key={f} viewBox="0 0 120 110" style={{ display: 'block', width: 170 }}>
+              <g transform="translate(60 62) scale(2.4) translate(-60 -62)">
+                <ListenerHead cx={60} cy={62} dir={-1} tilt={6} face={f} eye="closed" tone={MP.ground} />
+                <FigPhones cx={60} cy={62} dir={-1} tilt={6} />
+              </g>
+            </svg>
+          ))}
+        </div>
+      </div>
+      <div className="row" id="r-figs">
+        <div className="cell"><div className="cap">fig 05b</div><FigStandingV2 harmonic={2} /></div>
+        <div className="cell"><div className="cap">fig 06b</div><FigCSDv2 dense={true} /></div>
+      </div>
+      <div className="row" id="r-motifs">
+        <div className="cell" style={{ width: 880, padding: 10 }}><div className="cap">wave + ruler</div><MotifWave w={860} h={64} /><div style={{ height: 12 }}></div><MotifRuler w={860} /></div>
+        <div className="cell" style={{ width: 420, padding: 10 }}><div className="cap">FR motif</div><MotifFR w={400} h={200} /></div>
+        <div className="cell" style={{ padding: 10 }}><div className="cap">arcs</div><MotifArcs size={200} corner="tl" /></div>
+        <div className="cell" style={{ padding: 14, display: 'flex', gap: 14 }}>
+          {['fundamentals', 'drivers', 'enclosures', 'materials', 'build', 'measure', 'read', 'contents', 'arrow'].map((n) => <MpIcon key={n} name={n} size={30} />)}
+          {[1, 2, 3].map((d) => <MpDifficulty key={d} level={d} size={30} />)}
+        </div>
+      </div>
+      <div className="row" id="r-t1">
+        {[FigFR, FigImpedance, FigPad, FigDamping, FigConnector, FigFormFactor].map((F, i) => (
+          <div key={i} className="cell"><F /></div>
+        ))}
+      </div>
+      <div className="row" id="r-t2">
+        {[FigProcess, FigWireless, FigANC, FigIEM].map((F, i) => (
+          <div key={i} className="cell"><F /></div>
+        ))}
+      </div>
+      <div className="row" id="r-t3">
+        {[FigLumped, FigMatching, FigDiagnosis, FigMicWiring].map((F, i) => (
+          <div key={i} className="cell"><F /></div>
+        ))}
+      </div>
+      <div className="row" id="r-pages">
+        {[['D', HomeD, 3470], ['A', HomeA, 3267], ['B', HomeB, 2736], ['C', HomeC, 3498]].map(([k, P, h]) => (
+          <div key={k} className="pagebox" id={'page-' + k} style={{ width: 1440 * 0.62, height: h * 0.62 }}>
+            <div className="pagewrap"><P t={T} /></div>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+</script>
+</body>
+</html>

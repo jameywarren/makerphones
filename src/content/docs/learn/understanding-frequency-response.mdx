@@ -1,0 +1,124 @@
+---
+title: "Understanding Frequency Response"
+handle: understanding-frequency-response
+part: 1
+chapter: 2
+difficulty: Beginner
+prerequisites: [how-headphones-create-sound]
+related: [impedance-and-sensitivity, budget-measurement-setup, taking-and-interpreting-measurements, tuning-with-damping]
+read_time: 9
+tags: [fundamentals, beginner, theory, measurement, frequency-response]
+description: "Learn how to read frequency response graphs, why \"flat\" isn't good for headphones, and what the Harman target curve means for DIY builders."
+excerpt: "Frequency response graphs look intimidating, but they're one of the most practical tools for headphone builders. Here's how to read them and what they actually tell you."
+---
+
+import Figure from '../../../components/Figure.astro';
+import FRReading from '../../../components/diagrams/FRReading.astro';
+
+If you've spent any time looking at headphones online, you've probably seen frequency response graphs. They look intimidating — these squiggly lines with numbers and colors — but here's the thing: understanding frequency response is one of the most practical skills you can develop as a headphone builder. Let me show you how to read these graphs and, more importantly, what they actually tell you about sound.
+
+## What Is Frequency Response?
+
+Frequency response is simply a measurement of how loud a headphone plays different frequencies. That's it. It's not magic, it's not subjective — it's just "how much sound pressure does this headphone produce at each frequency?"
+
+When you look at a frequency response graph, the horizontal axis shows frequency (from deep bass around 20Hz up to the highest treble at 20kHz). The vertical axis shows the sound pressure level in decibels (dB). Higher on the graph means louder at that frequency.
+
+So when the line goes up, that means more of that frequency. When it dips down, there's less of that frequency. The shape of this line tells you a lot about how a headphone will sound.
+
+## The Three Main Regions
+
+Let's break the frequency spectrum into three main areas.
+
+<Figure label="Fig. 1" caption="Reading a frequency-response curve — the three regions, a flat reference line, and an at-ear target (illustrative) showing why flat isn't neutral.">
+  <FRReading />
+</Figure>
+
+### Bass (20Hz – 300Hz)
+
+This is where you feel the thump, the rumble, the low end. The very deepest bass (20–60Hz) is sub-bass — you feel this more than hear it in speakers, but with headphones it's purely audible. Mid-bass (60–250Hz) is where kick drums, bass guitars, and the body of most bass instruments live.
+
+Here's something critical: with headphones, you generally want the bass elevated compared to the midrange. If a headphone measures "flat" in the bass, it's going to sound thin and anemic. Remember from [How Headphones Create Sound](/learn/how-headphones-create-sound/) — we don't have room gain or physical impact with headphones, so we need to compensate.
+
+Most good headphones have a gentle bass shelf — meaning the entire bass region is lifted by a few dB compared to the mids. This sounds natural to our ears, even though it's technically not "flat."
+
+### Midrange (300Hz – 4kHz)
+
+This is where most of the music lives. Vocals, guitars, pianos, most instruments — they all have their fundamental frequencies in the midrange. This is the most critical region to get right because our ears are incredibly sensitive to midrange problems.
+
+Within the midrange, there are some sensitive spots:
+
+**Lower mids (300Hz – 1kHz):** Warmth and body. Too much here and things sound muddy or boomy. Too little and music sounds thin.
+
+**Upper mids (1kHz – 4kHz):** Presence and clarity. This region is critical for speech intelligibility and the "forward" or "in your face" character of headphones. A peak around 3kHz sounds harsh and fatiguing. A dip sounds recessed or laid-back.
+
+### Treble (4kHz – 20kHz)
+
+This is where things get complicated. The treble region determines how "airy," "detailed," or "sparkly" headphones sound — but it's also where things go wrong most often.
+
+The treble interacts heavily with your ear anatomy. Specifically, the shape of your outer ear (the pinna) creates peaks and dips in the treble as you move your head. This is actually important for how we localize sound in the real world, but it makes headphone measurement tricky.
+
+Generally, you want the treble to follow a gradual downward slope above 10kHz. Sharp peaks anywhere in the treble sound harsh and fatiguing. A big dip around 4–8kHz sounds dark and muffled.
+
+## Why "Flat" Isn't Good for Headphones
+
+This is probably the most important concept in headphone acoustics. A "flat" frequency response — where all frequencies are reproduced at exactly the same level — sounds wrong on headphones.
+
+Why? Because that's not how we hear in the real world.
+
+When we listen to music through speakers in a room, several things happen that headphones don't replicate:
+
+- Bass frequencies are reinforced by room resonances (adds 3–6dB of bass in most rooms)
+- High frequencies above 10kHz roll off naturally with distance
+- The sound interacts with our outer ears, adding pinna-related coloration
+- We perceive sound from outside our head, not inside it
+
+Headphones that measure flat sound bass-light, midrange-heavy, and overly bright. To sound "neutral" — meaning similar to good speakers in a good room — headphones need a specific non-flat response.
+
+## The Harman Target Curve
+
+In the early 2010s, audio researchers at Harman International (JBL, AKG, etc.) did something invaluable: they ran extensive studies to find out what frequency response people actually prefer in headphones. Thousands of listeners, hundreds of headphones, statistically rigorous methodology.
+
+The result is the Harman target curve — a specific frequency response shape that most people prefer when they don't know what they're listening to. It's not what everyone prefers (bass heads want more bass, some people prefer brighter signatures), but it's a well-validated starting point.
+
+Key characteristics of the Harman target:
+
+- Bass elevated by about 5–6dB below 200Hz
+- Gradually rising response through the mids
+- Peak around 3–4kHz (presence region)
+- Gradual roll-off above 10kHz
+
+For DIY builders, this is incredibly useful. Instead of guessing what "sounds right," you have a target to aim for. When you're tuning your [damping materials](/learn/damping-materials/), you can measure your headphones and compare to the Harman target to guide your decisions.
+
+## How to Read FR Graphs
+
+Now that you understand what you're looking at, here's a practical guide to interpreting graphs.
+
+**Look at the overall shape first, not individual details.** Is the bass elevated? Does it roll off gradually going toward the mids? Is there a presence peak? Does the treble slope downward? These big-picture characteristics matter more than small wiggles.
+
+**Peaks are problem areas.** Any sharp spike in the frequency response — especially narrow spikes that go up 5dB or more above the trend — will be audible. Peaks in the 2–8kHz range are especially noticeable. In DIY headphones, peaks often indicate resonances in the acoustic chamber or the driver itself.
+
+**Dips are less audible than peaks.** Our ears are less sensitive to missing frequencies than to excess frequencies. A 6dB dip is less objectionable than a 6dB peak, all else equal. That said, big dips in the mids (the "hollow" sound) are very noticeable.
+
+**Channel matching matters.** When you see two lines (one for each ear), they should be very close together — ideally within 2–3dB across most of the frequency range. Large differences between channels mess with imaging and stereo perception.
+
+**Smoothing hides details.** Frequency response graphs are often smoothed to make them easier to read. More smoothing makes things look cleaner but hides narrow resonances. When you're tuning your own builds, look at both smoothed and unsmoothed views.
+
+## Practical Application for Builders
+
+Here's how this knowledge applies when you're actually building:
+
+**1. Don't panic about small deviations.** Getting within 5–6dB of your target curve over most of the frequency range is a win. Chasing perfect measurement is an endless road.
+
+**2. Fix the big problems first.** If you have a 15dB peak at 8kHz, that's the problem to solve. Don't worry about the gentle bass rolloff until the obvious problems are fixed.
+
+**3. Measurements guide listening, not replace it.** After any damping change, measure AND listen. Sometimes a measurement improvement doesn't sound better subjectively. Trust your ears too.
+
+**4. Focus on problem areas first.** Don't try to match a target curve exactly from the start. Fix the glaring problems — harsh peaks, boomy bass, recessed mids — then fine-tune.
+
+**5. Listen more than you measure.** Seriously. I've spent days chasing measurements only to realize I preferred an earlier version that measured "worse." Trust your ears.
+
+## What's Next
+
+Now that you understand frequency response, you're ready to dive deeper into the specifications that actually matter when choosing components. In [Impedance and Sensitivity](/learn/impedance-and-sensitivity/), we'll demystify these specs and show you why they matter more than most people think.
+
+Or, if you want to get hands-on with measurement right away, jump to [Budget Measurement Setup](/learn/budget-measurement-setup/) to learn about affordable tools that will let you see what your headphones are actually doing.

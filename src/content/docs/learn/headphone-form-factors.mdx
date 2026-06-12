@@ -1,0 +1,96 @@
+---
+title: "Headphone Form Factors"
+handle: headphone-form-factors
+part: 1
+chapter: 5
+difficulty: Beginner
+prerequisites: [open-vs-closed-back-design]
+related: [driver-technologies, driver-selection-guide, your-first-build]
+read_time: 5
+tags: [fundamentals, beginner, theory, form-factor, design]
+description: "Over-ear, on-ear, or IEM — not all headphone form factors are equally suited for DIY building. Here's what you need to know before starting your first project."
+excerpt: "The form factor you choose affects your acoustic design, driver selection, and build complexity. Here's why over-ear is almost always the right choice for DIY builders."
+---
+
+import Figure from '../../../components/Figure.astro';
+import FormFactors from '../../../components/diagrams/FormFactors.astro';
+
+Walk into any audio store and you'll see headphones in all shapes and sizes — massive over-ears, compact on-ears, tiny earbuds. For most people, this is just a comfort or portability choice. But as a builder, the form factor you choose affects everything: acoustic design, driver selection, comfort engineering, and build complexity. Let me walk you through the main categories and what each means for DIY projects.
+
+## The Three Main Categories
+
+Headphones fall into three broad form factors:
+
+**Over-ear (circumaural):** The ear cups completely surround your ears, resting on your head around the ear rather than on the ear itself.
+
+**On-ear (supra-aural):** The ear cups rest directly on your ears, pressing against them rather than surrounding them.
+
+**In-ear (IEMs — In-Ear Monitors):** Sit inside your ear canal, creating a seal with tips or custom molds.
+
+<Figure label="Fig. 1" caption="Over-ear, on-ear, and in-ear against the same ear — what changes is the coupling volume, the air the driver actually sees, and how it seals.">
+  <FormFactors />
+</Figure>
+
+For DIY building, they're not equally accessible.
+
+## Over-Ear: The DIY Sweet Spot
+
+This is where most DIY headphone building happens, and for good reason.
+
+**Generous size:** You have physical space to work with. Mounting a 40–50mm driver is straightforward. You can fit damping materials, experiment with chamber volumes, and make adjustments without working at microscopic scale.
+
+**Forgiving fit:** Because the cups surround the ear rather than pressing on it, small variations in shape or size are more tolerable. Your design doesn't need to be as precisely fitted to each individual person.
+
+**Design flexibility:** You can go open or closed, try different pad materials, experiment with damping — all the main tuning tools are available to you.
+
+**Standard components:** 40mm and 50mm drivers have a huge selection. Pads are standardized enough that you have many options. Headband designs are well-documented.
+
+Most of the content on this site focuses on over-ear designs. If this is your first build, over-ear is the right choice.
+
+## On-Ear: More Challenging
+
+On-ear headphones look similar to over-ear from a distance, but the acoustics are quite different.
+
+**The seal problem:** Because the pad rests on the ear rather than around it, getting a consistent seal is much harder. The bass response depends heavily on how well and consistently the pad seals against each user's ear. This varies significantly person to person.
+
+**Comfort engineering is critical:** On-ear headphones press directly on your ear. Getting the clamp force and pad pressure right matters enormously. Too much pressure is painful for long sessions. Too little and the seal (and bass) suffers.
+
+**Smaller drivers:** On-ear cups are smaller, which means smaller drivers — typically 30–40mm. Less driver area generally means less bass capability.
+
+On-ear is workable for DIY, but it adds complexity without a clear performance advantage. I'd suggest building an over-ear first and exploring on-ear later.
+
+## In-Ear Monitors: A Completely Different World
+
+IEMs are phenomenal audio devices, but they're a completely different design challenge from headphones. Building your own IEMs is an advanced project with a very different skill set.
+
+**Tiny drivers:** IEM drivers are typically 6–10mm dynamic drivers, or balanced armature drivers that are even smaller. Sourcing, handling, and mounting these requires precision that's significantly more demanding.
+
+**Shell design:** The IEM body needs to fit precisely in or around your ear canal. Custom IEMs require ear impressions and careful fitting. Universal IEMs need to work for a wide range of ear canal sizes.
+
+**Crossovers:** Multi-driver IEMs (which is where the really interesting designs live) require acoustic crossovers to divide frequencies between drivers. This is its own area of expertise.
+
+I love IEMs and I plan to cover them in future content. But they're not a starting point. Master over-ear first, then consider IEMs as a separate advanced project.
+
+## Driver Size within Over-Ear
+
+Within over-ear headphones, there's another size decision: 40mm vs. 50mm drivers.
+
+**40mm drivers:**
+
+- Most common, largest selection of options
+- Lighter, smaller cups possible
+- Slightly less bass extension potential (smaller diaphragm area)
+- Easier to source at reasonable prices
+
+**50mm drivers:**
+
+- Larger diaphragm = more bass potential
+- Requires larger cups (heavier)
+- Fewer options at budget price points
+- Preferred by some premium manufacturers for bass impact
+
+For a first build: 40mm. The selection is better, the cups can be lighter, and the bass difference is smaller than marketing would suggest.
+
+## What's Next
+
+Now that you understand form factors, we can get into the heart of how headphones actually produce sound — the different driver technologies available. In [Driver Technologies](/learn/driver-technologies/), we'll cover dynamic, planar magnetic, and other driver types, and explain why dynamic drivers are the right choice for most DIY builders.
