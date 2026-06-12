@@ -46,8 +46,10 @@ const sidebar = [
   {
     label: 'Measurement & Tuning',
     items: [
-      // Part 4 — 4.2 and 4.3 pending
+      // Part 4 — complete
       'learn/why-measure-headphones',
+      'learn/budget-measurement-setup',
+      'learn/taking-and-interpreting-measurements',
       'learn/tuning-with-damping',
       'learn/advanced-measurement-topics',
     ],

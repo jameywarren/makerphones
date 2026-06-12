@@ -1,0 +1,67 @@
+---
+title: Budget Measurement Setup
+handle: budget-measurement-setup
+part: 4
+chapter: 19
+difficulty: Intermediate
+prerequisites: [why-measure-headphones, impedance-and-sensitivity]
+related: [why-measure-headphones, taking-and-interpreting-measurements, tuning-with-damping, understanding-frequency-response]
+read_time: 11
+tags: [measurement, coupler, microphone, rew, budget]
+description: "Building a headphone measurement rig on a maker's budget — couplers, mics, software, and the parts you can 3D-print yourself — without the five-figure industry gear."
+excerpt: "The good news about measuring headphones: a usable rig costs a few hundred dollars or less, and as a maker you can print half of it yourself. Here's what to buy and what to build."
+---
+
+The previous chapter made the case for measuring. This one is about what you actually put on the bench to do it — on a DIY budget, without the rigs the industry uses, which run from roughly ten thousand dollars into the tens of thousands. The good news is that a genuinely useful headphone measurement setup costs a few hundred dollars or much less, and because you're a maker, you can 3D-print a real part of it yourself.
+
+## What a setup is made of
+
+Every measurement rig, cheap or expensive, is the same chain. Something drives the headphone, the headphone plays into an artificial ear, a microphone in that artificial ear captures the sound, and a computer running measurement software turns it into a graph.
+
+On the playback side you need a way to drive the headphone — any decent small DAC or headphone amp. One modern note worth absorbing: use an amp with very low output impedance. The old advice to measure through a 120-ohm output is obsolete; today you want the lowest output impedance you can get, so the amp isn't coloring the result.
+
+On the capture side you need a coupler — an artificial ear canal with a microphone — and, for over-ear headphones, a silicone pinna (an artificial outer ear) for the headphone to seal against, plus a stand to hold everything in alignment.
+
+The software is the easy part: Room EQ Wizard, universally called REW, is free and the de facto standard. Everything below works with it.
+
+## The pieces
+
+**The coupler and mic.** This is the heart of the rig. The affordable-but-serious choice now is an IEC 711 clone coupler — an unofficial coupler built to the IEC 60318-4 standard, widely available online for around a hundred dollars, that either includes a microphone or pairs with one. This is what most of the hobby measures with today, and it's the path to data you can actually trust within its limits.
+
+**The pinna, for over-ears.** A silicone artificial ear that the earpad seals against, sitting in front of the coupler. IEMs don't need it — they couple directly — but over-ear headphones do, because the pinna and the seal are part of what you're measuring.
+
+**The stand.** Something to hold the coupler, pinna, and headphone in consistent alignment. Here's the maker's advantage: you can print this. The community has shared fully 3D-printable measurement stands designed around the common clone couplers and pinnae, so the fixture that would otherwise be an awkward purchase becomes an afternoon on your own printer — and one you can tweak to fit your exact coupler.
+
+**Getting the signal into the computer.** The coupler's microphone reaches your computer one of two ways: through a USB measurement microphone that's class-compliant and simply shows up as an input, or through a separate USB sound card if what you have is a bare electret capsule. Bare electrets need plug-in power — a small bias voltage — which a sound card's microphone input or a little audio interface supplies. Either way, the goal is a clean, calibrated input that REW can see, with the recording level set so a measurement sweep sits comfortably above the noise floor and well below clipping. Get this right once and it stays right.
+
+## Three budget tiers
+
+**Shoestring, to learn the ropes (a few dollars to a few tens).** A small calibrated electret measurement microphone plus a coupler you build yourself from vinyl and latex tubing. You tune the tube length so the canal resonance lands somewhere around 8 kHz, apply the mic's calibration, and you're measuring. The limits are real — the cheap mic rolls off in the deep bass, and it conforms to no standard — but it is genuinely good enough to see your own before-and-after changes and to match channels, which is most of what tuning needs early on. As a way to learn the workflow before spending, it's hard to beat.
+
+**The sweet spot (a few hundred dollars).** An IEC 711 clone coupler, a silicone pinna for over-ears, a 3D-printed stand, REW, and a low-impedance amp to drive the headphone. This is what serious DIY builders use, and it's the target to aim for once you know you'll keep at it.
+
+**The turnkey option (around $180 when in stock).** The miniDSP EARS is a plug-and-play USB headphone and IEM jig that needs no assembly. Be clear-eyed about it, though: it predates the clone-coupler era, it isn't built to any international standard, and it's frequently out of stock. It's fine for fun and for relative work, but for anything you want to trust deeply or share, the clone-coupler path is where the hobby has moved.
+
+## Calibrate, and stay humble about it
+
+Clone couplers and budget mics vary from unit to unit in manufacturing, so you apply the supplied calibration file and treat your rig as *your* reference, not a universal one. This connects directly to the honesty from the last chapter, now made concrete: even a good clone rig is reliable only up to roughly 10 kHz, and the extremes — the top treble especially, and to a degree the deep bass — should be read with caution, because peaks and dips up there can land at the wrong frequency or the wrong height.
+
+The practical consequence: rig-to-rig differences mean you can't directly compare your graphs against a reviewer's or another builder's. Your measurements are for tracking *your* changes and matching *your* channels — not for chasing someone else's curve on your own equipment.
+
+:::tip
+Start at the shoestring tier — an electret mic and a tubing coupler — before you spend on a clone coupler. It's enough to see your before-and-after changes and match channels, which is the large majority of what tuning actually needs, and it teaches you the whole workflow cheaply before you put money into the better rig. You'll buy the clone coupler with much clearer eyes for having done it.
+:::
+
+## Common Mistakes
+
+:::caution
+- **Treating hobby-rig numbers as industry-standard.** They're useful and relative, not absolute. Read changes and shapes, not exact values.
+- **Comparing your graphs to reviewers'.** Different rigs aren't comparable. Use your measurements to track your own builds.
+- **Skipping the calibration file.** The clone coupler and mic need their correction applied, or the result is wrong from the start.
+- **Trusting data above ~10 kHz.** That's past where these rigs are reliable. Be skeptical of fine detail and exact peak positions at the extremes.
+- **Measuring through a high-impedance amp.** The old 120-ohm advice is outdated. Use the lowest output impedance you can.
+:::
+
+## What's Next
+
+A rig is only as good as your technique with it. The same headphone measures differently depending on how you seat it, and a graph you can't read is just a wiggly line — so the next chapter is about taking clean, repeatable measurements and actually interpreting them: [taking and interpreting measurements](/learn/taking-and-interpreting-measurements).

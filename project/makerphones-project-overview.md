@@ -16,7 +16,7 @@
 
 The parts/kit store, pricing, and all commerce are **parked** — deferred until wholesale suppliers exist. The manual's content stays portable (Markdown + frontmatter with frozen handles) so a Shopify cutover is a deterministic conversion plus a redirect map when that day comes. Nothing on the site should build toward, hint at, or depend on commerce until it's reactivated.
 
-**Status: 26 of 30 chapters written** — Parts 1–3 complete (Ch 1–17); remaining: Ch 19–20, Ch 23, Ch 27, and five appendices.
+**Status: 28 of 30 chapters written** — Parts 1–4 complete (Ch 1–22); remaining: Ch 23, Ch 27, and five appendices.
 
 ## The core problem
 
@@ -122,4 +122,4 @@ MakerPhones is the resource I wish existed when I started. It's sharing the know
 **Project start:** January 2026
 **Project lead:** Jamey Warren
 **Legal entity:** Free River Studios LLC
-**Status:** Resource mode — manual in progress, 26/30 chapters live
+**Status:** Resource mode — manual in progress, 28/30 chapters live
