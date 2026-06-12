@@ -46,12 +46,21 @@ const sidebar = [
   {
     label: 'Measurement & Tuning',
     items: [
-      // Part 4 — 4.1 and 4.4 written; 4.2, 4.3, 4.5 pending
+      // Part 4 — 4.2 and 4.3 pending
       'learn/why-measure-headphones',
       'learn/tuning-with-damping',
+      'learn/advanced-measurement-topics',
     ],
   },
-  { label: 'Advanced', items: [] }, // Part 5 — not yet written
+  {
+    label: 'Advanced',
+    items: [
+      // Part 5 — 5.1 (acoustic-modeling) pending
+      'learn/resonance-control',
+      'learn/manufacturing-for-consistency',
+      'learn/professional-design-insights',
+    ],
+  },
   { label: 'Special Topics', items: [] }, // Part 6 — not yet written
 ];
 

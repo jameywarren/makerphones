@@ -1,0 +1,73 @@
+---
+title: Resonance Control
+handle: resonance-control
+part: 5
+chapter: 24
+difficulty: Advanced
+prerequisites: [damping-strategy-and-application, acoustic-chamber-design]
+related: [damping-strategy-and-application, acoustic-chamber-design, driver-technologies, advanced-measurement-topics, manufacturing-for-consistency]
+read_time: 11
+tags: [resonance, acoustics, structure, damping, tuning]
+description: Where resonances come from in a headphone — driver, cavities, and structure — and the four levers you have to control them. The deeper skill underneath tuning.
+excerpt: "Every chapter so far has circled the same enemy. This one names it directly: resonance, where it comes from, and how to control it at the source rather than chasing it on a curve."
+---
+
+Every chapter so far has circled the same enemy. The peak you damped, the boxiness you chased, the ring you saw on a decay plot, the one-note bass — those are all resonance, showing up in different places under different names. This chapter names it directly, because once you understand resonance as a single phenomenon with a handful of sources and a handful of cures, a lot of headphone behavior that seemed mysterious turns into something you can reason about.
+
+## What a resonance is
+
+Any structure, and any volume of air, has natural frequencies where it wants to vibrate or oscillate. Feed energy in at one of those frequencies and it piles up rather than passing through, and it keeps going after the signal stops — that's the ringing tail you saw on a decay plot. A resonance is just that: a frequency where energy accumulates and rings instead of being delivered cleanly and then stopping.
+
+In a headphone you don't have one resonance, you have several, stacked on top of each other from different sources. Untangling which is which is most of the work.
+
+## Where they come from
+
+**The driver itself.** Every driver has a fundamental resonance down low — its natural "want to move" frequency — and, higher up, breakup modes, where the diaphragm stops moving as a single piston and different parts of it flap out of step with each other. You're not going to redesign the driver, but how well-behaved these are is part of why one driver sounds cleaner than another, and it's a reason to choose carefully — see [driver technologies](/learn/driver-technologies). You design around the driver's resonances; you don't erase them.
+
+**The air cavities.** The front and rear chambers have their own resonances and standing waves, set by their size and shape. These are the ones [acoustic chamber design](/learn/acoustic-chamber-design) and damping address most directly — the boom, the boxiness, the cupped coloration.
+
+**The structure.** The cup walls, the baffle, the headband. This is the source DIY builders most often overlook, because it isn't part of the "acoustics" mental model — but a thin printed cup wall rings like a drum head, a flimsy baffle flexes and adds its own voice, and a resonant headband transmits buzz straight into the cup. A surprising amount of "this build sounds hard and cheap" is actually the plastic shell ringing along with the music.
+
+## Why it matters
+
+Each resonance shows up as a peak and a ringing tail. That means coloration — a honk, a one-note region, a hard upper midrange — plus smeared detail and listening fatigue. Flattening the frequency response alone can't fully fix this, because a resonance is a time problem as much as a level problem. Controlling resonances is what gives you the clean, effortless sound that a merely flat headphone can still lack.
+
+## The four levers
+
+**Absorb it (damping).** Convert the resonant energy to heat with felt, foam, or fill. This is your main tool for cavity resonances and reflections, and it's covered in depth in [damping strategy and application](/learn/damping-strategy-and-application). Absorption is the right answer when the resonance lives in the air.
+
+**Stiffen it or add mass.** This is the right answer when the resonance lives in the structure. Making a panel stiffer raises its resonant frequency — often pushing it up out of the range where it matters — and reduces how much it rings. Adding mass lowers the frequency and deadens it. For a printed cup, the most direct fixes are increasing wall thickness, adding internal ribs, or bumping up the infill, all of which turn a thin ringing shell into a dead one.
+
+**Break up the geometry.** Parallel walls and simple box shapes encourage standing waves, because the sound bounces back and forth between two flat surfaces and reinforces itself at specific frequencies. Non-parallel surfaces, chamfers, and irregular internal shapes spread that energy out instead of letting it build at one frequency. You can design a resonance down before you ever damp it.
+
+**Decouple it.** Stop vibration from traveling between parts. Isolating the cup from the gimbal and headband keeps structural buzz from reaching the cup; soft-mounting the driver keeps its frame from driving the shell. Sometimes the cure isn't killing a resonance but breaking the path it travels.
+
+There's a fifth, worth a mention: constrained-layer damping, where a stiff layer and a soft lossy layer are bonded to a panel so that any flexing shears the lossy layer and burns off the energy. It's an efficient way to kill panel ringing in a stubbornly resonant cup wall.
+
+## Putting it together for a printed headphone
+
+The three sources map cleanly onto three responsibilities. The chamber design sets your cavity resonances, so design them well. Damping controls the cavities and reflections, so apply it deliberately. And the structure controls the shell, so manage it with wall thickness, ribbing, material choice, and decoupling.
+
+The classic DIY failure is to attack a structural resonance with absorption — to keep adding felt to a cup that's actually ringing in its walls. No amount of felt fixes a structural resonance, because the energy is in the plastic, not the air. When damping isn't working, ask whether you're damping the wrong kind of resonance, and reach for stiffness or decoupling instead.
+
+## Finding them
+
+A decay plot, from [advanced measurement topics](/learn/advanced-measurement-topics), is your map: it shows which frequencies ring and for how long, which tells you what to control and whether your fix actually shortened the tail. Resonance control without a way to see decay is possible, but it's a lot of guessing.
+
+:::tip
+Tap the empty cup gently and listen. A sharp, ringing "ting" means a resonant shell you'll hear coloring the music; a dull, dead "tock" means a well-behaved structure. It's the crudest possible resonance diagnostic and it costs nothing — and it instantly tells you whether your next move should be more damping or a stiffer wall.
+:::
+
+## Common Mistakes
+
+:::caution
+- **Damping a structural resonance.** If the cup walls are ringing, felt won't fix it. Stiffen, mass-load, or decouple instead.
+- **Leaving thin printed walls to ring.** A thin shell is a drum. Add thickness or ribs if it sounds hard and the tap test rings.
+- **Ignoring driver breakup when choosing a driver.** How clean a driver stays at the top is part of what you're buying. Choose with it in mind.
+- **Parallel-walled box cavities.** Flat parallel surfaces build standing waves. Break up the geometry where you can.
+- **Over-stiffening everything.** Mass and ribs add weight and don't help if the real problem was a cavity. Match the lever to the source.
+:::
+
+## What's Next
+
+Controlling resonance reliably in one build is a skill; controlling it the same way across many builds is a process. [Manufacturing for consistency](/learn/manufacturing-for-consistency) is about making your results repeatable — matched, reproducible, and shareable — rather than lucky.
