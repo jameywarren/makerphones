@@ -16,10 +16,17 @@ editorial pass, one commit per correction, so the change history is clean.
 - [x] **miniDSP UMIK-1** — supply-constraint note + keep-an-alternative
       advice added to sourcing-components, folded into the pointer to
       4.2; the price now lives only in 4.2 *(fixed June 11, 2026)*.
-- [ ] **Dayton driver model numbers and prices** — verify every Dayton
-      reference against the current Parts Express catalog before the
-      editorial pass closes. (Deliberately NOT touched in the June 11
-      pass — needs catalog verification first, not guesswork.)
+- [x] **Dayton in sourcing-components** — verified against the Parts
+      Express catalog: the generic "excellent selection of Dayton
+      drivers" framing replaced with the one genuinely
+      headphone-applicable part, the CE38MB-32 (# 285-131, 38 mm/32 Ω,
+      ~$3.49, bass-heavy closed-back caveat) *(fixed June 11, 2026)*.
+- [ ] **Dayton in driver-selection-guide** — still pending verification:
+      it lists the CE38MB-32 (fine) but also CE50MB-32 and "PS95-8 and
+      similar" as headphone drivers; the PS95-8 is a 3" full-range
+      loudspeaker driver. Verify each model and price against the
+      current catalog before editing — out of scope of the June 11
+      sourcing-components fix.
 
 ## Outdated author bio in chapter bodies
 
@@ -47,8 +54,9 @@ or hold until the target exists.
       `open-vs-closed-back-design`, `cables-connectors-hardware`,
       `design-methodology`; in `related` frontmatter of those plus
       `headphone-form-factors` and `driver-selection-guide`.
-- [ ] `troubleshooting-guide` — in `related` frontmatter of
-      `cables-connectors-hardware` and `design-methodology`.
+- [x] `troubleshooting-guide` — now exists as an appendix; the
+      `related` references in `cables-connectors-hardware` and
+      `design-methodology` resolve automatically *(June 11, 2026)*.
 - Links to frozen-but-unwritten chapters (e.g. `budget-measurement-setup`,
   `3d-design-for-headphones`, `tuning-with-damping`) 404 until those
   chapters ship — expected; no action needed.
