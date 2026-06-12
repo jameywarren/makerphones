@@ -2,7 +2,7 @@
  * The manual's structure — six parts, 30 chapters, frozen handles.
  *
  * Handle order matches the Content & Style Guide appendix
- * (_source/MakerPhones-Content-Style-Guide.md) verbatim. Nav-chrome
+ * (_source/Makerphones-Content-Style-Guide.md) verbatim. Nav-chrome
  * decimal numbers (1.1–6.4) derive from position here — they are
  * NEVER stored in content. Titles for written chapters come from
  * frontmatter at build time (see chapterInfo); titles listed here are
@@ -138,7 +138,8 @@ export const APPENDIX_HANDLES = [
 ] as const;
 
 /**
- * Build guides — hands-on companion builds (type: build-guide).
+ * Build guides — hands-on companion builds (type: build-guide),
+ * plus the design specs behind them (same type, no time_estimate).
  * Like appendices: no nav numbering, outside the 1–30 chain,
  * resolved in byHandle so cross-references link correctly.
  */
@@ -146,6 +147,7 @@ export const BUILD_GUIDE_HANDLES = [
   'your-first-build',
   'simple-open-back-build',
   'closed-back-studio-build',
+  'daily-driver-design-spec',
 ] as const;
 
 export const LEVEL_RANK: Record<string, number> = {

@@ -1,0 +1,170 @@
+---
+/**
+ * "Suggest an edit" feedback form — rendered at the foot of every
+ * chapter, appendix, build guide, and spec page. Posts to Web3Forms
+ * (no backend, no cookies); the page URL rides along so the email
+ * says which page it's about. Inline thank-you via fetch; plain
+ * POST fallback without JS.
+ *
+ * WEB3FORMS_ACCESS_KEY is a placeholder — replace with the real key
+ * from web3forms.com (created with jamey@jameywarren.com).
+ */
+interface Props {
+  url: string;
+  title: string;
+}
+const { url, title } = Astro.props;
+---
+
+<aside class="mp-feedback not-content">
+  <span class="mp-fb-eyebrow">Suggest an edit or ask about this page</span>
+  <p class="mp-fb-hint">Spotted an error, something unclear, or a question the page doesn't answer? It goes straight to the bench.</p>
+  <form class="mp-fb-form" action="https://api.web3forms.com/submit" method="POST">
+    <input type="hidden" name="access_key" value="WEB3FORMS_ACCESS_KEY" />
+    <input type="hidden" name="subject" value={`makerphones feedback: ${title}`} />
+    <input type="hidden" name="page" value={url} />
+    <input type="checkbox" name="botcheck" class="mp-fb-hp" tabindex="-1" autocomplete="off" aria-hidden="true" />
+    <label class="mp-fb-label">
+      <span>Your note</span>
+      <textarea name="message" rows="4" required placeholder="What should change, or what's unclear?"></textarea>
+    </label>
+    <div class="mp-fb-row">
+      <label class="mp-fb-label mp-fb-email">
+        <span>Email — optional, if you'd like a reply</span>
+        <input type="email" name="email" autocomplete="email" placeholder="you@example.com" />
+      </label>
+      <button type="submit" class="mp-fb-send">Send</button>
+    </div>
+  </form>
+  <p class="mp-fb-done" hidden>Thanks — your note is on its way to the bench.</p>
+  <p class="mp-fb-error" hidden>That didn't send — please try again, or email <a href="mailto:jamey@jameywarren.com">jamey@jameywarren.com</a>.</p>
+</aside>
+
+<script>
+  for (const box of document.querySelectorAll('.mp-feedback')) {
+    const form = box.querySelector('form');
+    if (!(form instanceof HTMLFormElement)) continue;
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const done = box.querySelector('.mp-fb-done');
+      const err = box.querySelector('.mp-fb-error');
+      const btn = form.querySelector('button[type="submit"]');
+      if (err) err.hidden = true;
+      if (btn instanceof HTMLButtonElement) {
+        btn.disabled = true;
+        btn.textContent = 'Sending…';
+      }
+      try {
+        const res = await fetch(form.action, {
+          method: 'POST',
+          headers: { Accept: 'application/json' },
+          body: new FormData(form),
+        });
+        if (!res.ok) throw new Error(String(res.status));
+        form.hidden = true;
+        if (done) done.hidden = false;
+      } catch {
+        if (err) err.hidden = false;
+        if (btn instanceof HTMLButtonElement) {
+          btn.disabled = false;
+          btn.textContent = 'Send';
+        }
+      }
+    });
+  }
+</script>
+
+<style>
+  .mp-feedback {
+    margin-top: 3rem;
+    padding: 1.25rem 1.25rem 1.4rem;
+    border: 1px solid var(--mp-line);
+    background: color-mix(in srgb, var(--mp-charcoal) 3%, transparent);
+  }
+  .mp-fb-eyebrow {
+    display: block;
+    font-family: var(--mp-mono);
+    font-size: 0.6875rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--mp-accent);
+  }
+  .mp-fb-hint {
+    font-family: var(--mp-body);
+    font-size: 0.875rem;
+    line-height: 1.55;
+    color: var(--mp-meta);
+    margin: 0.5rem 0 0.9rem;
+  }
+  .mp-fb-hp {
+    display: none;
+  }
+  .mp-fb-form {
+    display: grid;
+    gap: 0.8rem;
+  }
+  .mp-fb-label {
+    display: grid;
+    gap: 5px;
+  }
+  .mp-fb-label > span {
+    font-family: var(--mp-mono);
+    font-size: 0.625rem;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--mp-meta);
+  }
+  .mp-fb-label textarea,
+  .mp-fb-label input[type='email'] {
+    font-family: var(--mp-body);
+    font-size: 0.9rem;
+    color: var(--mp-ink);
+    background: var(--mp-bg);
+    border: 1px solid var(--mp-hair);
+    border-radius: 0;
+    padding: 8px 10px;
+  }
+  .mp-fb-label textarea:focus-visible,
+  .mp-fb-label input:focus-visible {
+    outline: 2px solid var(--mp-accent);
+    outline-offset: 1px;
+  }
+  .mp-fb-row {
+    display: flex;
+    gap: 0.8rem;
+    align-items: end;
+    flex-wrap: wrap;
+  }
+  .mp-fb-email {
+    flex: 1;
+    min-width: 220px;
+  }
+  .mp-fb-send {
+    font-family: var(--mp-mono);
+    font-size: 0.6875rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--mp-bg);
+    background: var(--mp-btn-bg, var(--mp-accent));
+    border: none;
+    padding: 10px 22px;
+    cursor: pointer;
+  }
+  .mp-fb-send:hover {
+    background: var(--mp-btn-bg-hover, var(--mp-accent-hover));
+  }
+  .mp-fb-send:disabled {
+    opacity: 0.6;
+    cursor: default;
+  }
+  .mp-fb-done,
+  .mp-fb-error {
+    font-family: var(--mp-body);
+    font-size: 0.9rem;
+    margin: 0.4rem 0 0;
+    color: var(--mp-ink);
+  }
+</style>

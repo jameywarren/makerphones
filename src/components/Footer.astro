@@ -2,9 +2,12 @@
 /**
  * Chapter footer: related chapters (decimal nav numbers) + prev/next
  * cards, ordered by the manual outline across written chapters only —
- * never a link to an unwritten page. Non-chapter pages get nothing.
+ * never a link to an unwritten page — plus the page feedback form on
+ * every manual page (chapter, appendix, build guide, spec).
+ * Non-manual pages get nothing.
  */
 import { getManual } from '../data/manual';
+import PageFeedback from './PageFeedback.astro';
 
 const { id } = Astro.locals.starlightRoute;
 const handle = id.startsWith('learn/') ? id.slice(6) : null;
@@ -57,6 +60,7 @@ const related = (chapter?.related ?? [])
           </nav>
         )
       }
+      <PageFeedback url={`https://makerphones.com${Astro.url.pathname}`} title={chapter.title} />
     </div>
   )
 }

@@ -66,9 +66,9 @@ const liveGuides = buildGuides.filter((b) => b.written);
           <h2>Build something</h2>
           <p>
             Complete, hands-on builds that put the chapters into practice — parts lists, steps,
-            and what to expect when it doesn't go to plan.
+            and what to expect when it doesn't go to plan — plus the design specs behind them.
           </p>
-          <span class="mp-meta">{liveGuides.length} guides</span>
+          <span class="mp-meta">{liveGuides.length} guides &amp; specs</span>
         </header>
         <div class="mp-contents-rows">
           {liveGuides.map((b) => (
@@ -78,7 +78,7 @@ const liveGuides = buildGuides.filter((b) => b.written);
                 <span class="mp-row-title">{b.title}</span>
               </span>
               <span class="mp-row-level">{b.difficulty && <Level level={b.difficulty} />}</span>
-              <span class="mp-meta mp-row-mins">{b.timeEstimate ?? 'guide'}</span>
+              <span class="mp-meta mp-row-mins">{b.timeEstimate ?? (b.readTime ? `${b.readTime} min` : 'guide')}</span>
             </a>
           ))}
         </div>

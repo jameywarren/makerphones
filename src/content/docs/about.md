@@ -1,10 +1,10 @@
 ---
 title: About
-description: Who writes the MakerPhones Reference Manual, and the studio headphone being built in the open — Old Faithful.
+description: Who writes the Makerphones Reference Manual, and the studio headphone being built in the open — Old Faithful.
 tableOfContents: false
 ---
 
-MakerPhones is an open reference for designing and building your own headphones — real
+Makerphones is an open reference for designing and building your own headphones — real
 engineering, explained plainly enough that a first-time builder can follow it and trust it. It's
 written and maintained by one person, and it's free to read.
 

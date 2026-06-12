@@ -13,7 +13,7 @@ export async function GET(context) {
     (d) => d.id.startsWith('bench-notes/') && d.id !== 'bench-notes'
   );
   return rss({
-    title: 'MakerPhones — Bench Notes',
+    title: 'Makerphones — Bench Notes',
     description:
       'The Old Faithful build log — prototypes, measurements, and decisions, published as they happen.',
     site: context.site,
