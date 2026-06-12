@@ -90,6 +90,7 @@ const sidebar = [
       'learn/glossary',
       'learn/supplier-directory',
       'learn/design-resources',
+      'learn/sources-and-further-reading',
       'learn/troubleshooting-guide',
       'learn/community-builds',
     ],

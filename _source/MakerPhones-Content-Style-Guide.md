@@ -157,5 +157,6 @@ Frozen handles — use these verbatim for filenames and cross-links. Live source
 - ✓ glossary
 - ✓ supplier-directory
 - ✓ design-resources
+- ✓ sources-and-further-reading
 - ✓ troubleshooting-guide
 - ✓ community-builds

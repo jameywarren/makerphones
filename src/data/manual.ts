@@ -124,7 +124,7 @@ export const MANUAL_PARTS: ManualPart[] = [
 ];
 
 /**
- * The five reference appendices, in the Compass's planned order.
+ * The six reference appendices, in the Compass's planned order.
  * Appendices carry no nav numbering and sit outside the 1–30
  * prev/next chain; they resolve in byHandle so related-field
  * cross-references link correctly in both directions.
@@ -133,6 +133,7 @@ export const APPENDIX_HANDLES = [
   'glossary',
   'supplier-directory',
   'design-resources',
+  'sources-and-further-reading',
   'troubleshooting-guide',
   'community-builds',
 ] as const;

@@ -4,7 +4,7 @@ handle: design-resources
 type: appendix
 description: "The tools and communities worth knowing — CAD and slicing, measurement and modeling software, model repositories, and where the DIY headphone community gathers."
 excerpt: "A curated starting set of the software, model libraries, and communities that make DIY headphone building easier. Tools, not parts — sourcing has its own directory."
-related: [3d-design-for-headphones, budget-measurement-setup, acoustic-modeling, taking-and-interpreting-measurements]
+related: [3d-design-for-headphones, budget-measurement-setup, acoustic-modeling, taking-and-interpreting-measurements, sources-and-further-reading]
 tags: [resources, tools, software, community, appendix]
 ---
 
@@ -32,7 +32,7 @@ Public 3D-model repositories are full of headphone cups, measurement stands, and
 
 ## Measurement databases
 
-Community measurement databases let you browse and compare frequency-response graphs for a huge range of headphones and IEMs. They're a useful reference for what target you might aim at and how commercial designs measure — but remember that different contributors use different rigs, so the graphs aren't strictly comparable to each other or to your own. Read them for shape and intent, not absolute truth.
+Community measurement databases let you browse and compare frequency-response graphs for a huge range of headphones and IEMs. They're a useful reference for what target you might aim at and how commercial designs measure — but remember that different contributors use different rigs, so the graphs aren't strictly comparable to each other or to your own. Read them for shape and intent, not absolute truth. The major databases — and the preference research and standards behind them — are mapped in [Sources & Further Reading](/learn/sources-and-further-reading).
 
 ## Communities
 

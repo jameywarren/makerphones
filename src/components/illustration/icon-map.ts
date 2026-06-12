@@ -28,6 +28,7 @@ export const APPENDIX_ICONS: Record<string, MpIconName> = {
   glossary: 'glossary',
   'supplier-directory': 'suppliers',
   'design-resources': 'resources',
+  'sources-and-further-reading': 'read',
   'troubleshooting-guide': 'troubleshoot',
   'community-builds': 'builds',
 };

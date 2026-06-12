@@ -5,7 +5,7 @@ part: 4
 chapter: 18
 difficulty: Intermediate
 prerequisites: [understanding-frequency-response, impedance-and-sensitivity]
-related: [understanding-frequency-response, tuning-with-damping, damping-strategy-and-application, open-vs-closed-back-design]
+related: [understanding-frequency-response, tuning-with-damping, damping-strategy-and-application, open-vs-closed-back-design, sources-and-further-reading]
 read_time: 10
 tags: [measurement, tuning, frequency-response, target-curve]
 description: What measurement gives you that listening can't — and what it can't give you — plus why even a rough rig beats guessing once you're tuning a build.
@@ -38,7 +38,7 @@ And your rig is not an industry-standard measurement head. A hobby setup gives y
 
 ## You're not chasing flat
 
-It's worth saying plainly, because the graph constantly tempts you toward it: the goal is not a flat line. We don't hear flat as neutral. The ear canal and the shape of the outer ear impose their own large response — a broad boost in the presence region and a roll-off pattern up top — which is exactly why measured target curves are tilted and bumped the way they are rather than ruler-straight. You're aiming at a target that accounts for how human hearing works, not at a horizon line. Tuning a headphone until its raw curve looks flat is a reliable way to make it sound thin and harsh.
+It's worth saying plainly, because the graph constantly tempts you toward it: the goal is not a flat line. We don't hear flat as neutral. The ear canal and the shape of the outer ear impose their own large response — a broad boost in the presence region and a roll-off pattern up top — which is exactly why measured target curves are tilted and bumped the way they are rather than ruler-straight. You're aiming at a target that accounts for how human hearing works, not at a horizon line. Tuning a headphone until its raw curve looks flat is a reliable way to make it sound thin and harsh. The listening research that produced those targets is mapped in [Sources & Further Reading](/learn/sources-and-further-reading/).
 
 ## Calibrate your expectations
 
