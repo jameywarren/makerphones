@@ -1,8 +1,8 @@
 ---
 /** The six-part grid, fed by the manual outline + live chapter data. */
-import { getManual, WRITTEN_COUNT, TOTAL_COUNT } from '../../data/manual';
+import { getManual } from '../../data/manual';
 
-const { parts } = await getManual();
+const { parts, writtenCount, totalCount } = await getManual();
 
 function partMeta(p: (typeof parts)[number]): string {
   const pub = p.chapters.filter((c) => c.written).length;
@@ -17,7 +17,7 @@ function partMeta(p: (typeof parts)[number]): string {
   <div class="mp-ruler" style="margin-bottom: 2.5rem;"></div>
   <div class="mp-parts-headrow">
     <h2>The manual, in six parts</h2>
-    <span class="mp-meta">{TOTAL_COUNT} chapters · {WRITTEN_COUNT} published · free to read</span>
+    <span class="mp-meta">{totalCount} chapters · {writtenCount} published · free to read</span>
   </div>
   <p class="mp-parts-intro">
     Read it front-to-back like a book, or jump straight to the problem sitting on your bench. Each

@@ -1,0 +1,8 @@
+---
+/** Live published-count line — never hardcode the chapter count. */
+import { getManual } from '../data/manual';
+
+const { writtenCount, totalCount } = await getManual();
+---
+
+<span class="mp-meta">{writtenCount} of {totalCount} chapters published — the rest land as they're finished</span>

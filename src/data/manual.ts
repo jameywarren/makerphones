@@ -151,6 +151,8 @@ export interface ChapterInfo {
 export async function getManual(): Promise<{
   parts: (ManualPart & { chapters: ChapterInfo[] })[];
   byHandle: Map<string, ChapterInfo>;
+  writtenCount: number;
+  totalCount: number;
 }> {
   const docs = await getCollection('docs');
   const byId = new Map(docs.map((d) => [d.id, d]));
@@ -177,8 +179,11 @@ export async function getManual(): Promise<{
     return { ...part, chapters };
   });
 
-  return { parts, byHandle };
+  const all = parts.flatMap((p) => p.chapters);
+  return {
+    parts,
+    byHandle,
+    writtenCount: all.filter((c) => c.written).length,
+    totalCount: all.length,
+  };
 }
-
-export const WRITTEN_COUNT = 13;
-export const TOTAL_COUNT = 30;

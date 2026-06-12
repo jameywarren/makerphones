@@ -52,8 +52,9 @@ Deploys on push to `main` via `.github/workflows/deploy.yml`
 
 ## Status
 
-**13 of 30 chapters live** under `/learn/` — Parts 1–2 complete (Ch 1–12)
-plus Design Methodology (Ch 13). Handles are frozen per the Content &
+**18 of 30 chapters live** under `/learn/` — Parts 1–2 complete, Part 3
+complete except 3D Design for Headphones, and Part 4 started (Why
+Measure Headphones, Tuning with Damping). Handles are frozen per the Content &
 Style Guide appendix (`_source/MakerPhones-Content-Style-Guide.md`).
 
 To add a chapter: write `src/content/docs/learn/<handle>.md` with the

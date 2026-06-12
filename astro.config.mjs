@@ -35,11 +35,21 @@ const sidebar = [
   {
     label: 'Design & Build',
     items: [
-      // Part 3 — chapter 13 written; 14–17 pending
+      // Part 3 — 3d-design-for-headphones (3.2) still pending
       'learn/design-methodology',
+      'learn/acoustic-chamber-design',
+      'learn/driver-mounting-and-assembly',
+      'learn/damping-strategy-and-application',
     ],
   },
-  { label: 'Measurement & Tuning', items: [] }, // Part 4 — not yet written
+  {
+    label: 'Measurement & Tuning',
+    items: [
+      // Part 4 — 4.1 and 4.4 written; 4.2, 4.3, 4.5 pending
+      'learn/why-measure-headphones',
+      'learn/tuning-with-damping',
+    ],
+  },
   { label: 'Advanced', items: [] }, // Part 5 — not yet written
   { label: 'Special Topics', items: [] }, // Part 6 — not yet written
 ];

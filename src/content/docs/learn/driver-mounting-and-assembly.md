@@ -1,0 +1,71 @@
+---
+title: Driver Mounting and Assembly
+handle: driver-mounting-and-assembly
+part: 3
+chapter: 16
+difficulty: Intermediate
+prerequisites: [3d-design-for-headphones, driver-selection-guide]
+related: [3d-design-for-headphones, acoustic-chamber-design, cables-connectors-hardware, ear-pads-and-comfort, damping-strategy-and-application]
+read_time: 10
+tags: [assembly, build, driver, mounting, wiring]
+description: Mounting the driver, sealing the chambers, and putting the cup together — the hands-on steps where a good design becomes a working headphone.
+excerpt: This is the hands-on part — seating the driver, getting the seals right, and assembling the cup so it sounds the way the design intended.
+---
+
+You've designed the cup and printed it. Now you put it together — and assembly is where seals are won or lost. The seal is most of the sound, so this stage matters more than its short word count suggests. Rush it and a well-designed headphone comes out thin and lifeless. Take your time and it sounds like what you drew. The difference between those two outcomes is usually a few minutes of care at a few specific joints.
+
+## Cleaning up the print first
+
+Before anything mounts, dry-fit it. A printed driver bore almost never comes off the bed at its exact modeled size — layer lines, elephant's foot at the base, and slight over-extrusion all eat into tolerances. Test that the driver actually seats the way the model intended, and clean up the bore with a hobby knife or light sanding until it does. A driver that's forced into a too-tight bore can sit cocked or stressed; one that rattles in a too-loose bore won't seal. You want it to drop in snugly and sit flat.
+
+## Seating the driver
+
+The driver sits in the baffle, and the joint between the driver and the baffle is a seal you cannot afford to leak. Air escaping around the rim of the driver changes the front cavity and bleeds away low end, and because the leak is invisible it's a maddening fault to chase after the fact.
+
+You've got three reasonable ways to mount it. A soft gasket — a ring of foam, rubber, or even a punched craft-foam washer — that the driver presses against as it's held down. An adhesive bead around the rim. Or a mechanical retaining ring or clamp that holds it against a gasket. Lean toward a gasket plus a clamp or screws over gluing, because a glued-in driver is a driver you can't get back out, and you will want to get it back out — to retune, to swap, or to fix a channel you wired backwards.
+
+If your driver has an orientation — some do, with a marked terminal or an asymmetric frame — note it and keep both channels oriented the same way. Consistency between left and right starts here.
+
+## Two seals, both critical
+
+Your build has a front seal — driver to baffle — and the cup-to-pad seal against your head, covered in [ear pads and comfort](/learn/ear-pads-and-comfort). Both matter, and a tiny leak in either one collapses the low end. When a finished build sounds bass-shy for no obvious reason, a broken seal is the first suspect, every time.
+
+There's a quick field test for it: play steady bass and press the cups gently harder against your head, or against a flat surface. If the bass swells noticeably as you press, you have a leak somewhere in the seal path. Chase it down before you blame the chamber or the driver.
+
+## Wiring and polarity
+
+Solder your leads to the driver terminals, and get the polarity right. Tin the leads and the terminals first, keep the iron on the terminal only as long as it takes — driver terminals sit close to delicate parts, and lingering heat is a risk. Mark positive, and keep both channels in phase with each other.
+
+Two channels wired out of phase cancel in the bass and smear the stereo image. The build goes thin and vague, the center of the image dissolves, and it is a genuinely maddening problem to diagnose if you don't already suspect it — everything measures and looks fine, it just sounds wrong. Checking it takes seconds and saves an evening. Connector and cable choices live in [cables, connectors, and hardware](/learn/cables-connectors-hardware).
+
+Add strain relief where the wire meets the driver and where the cable enters the cup — a dab of hot glue, a knot, a heat-shrink anchor. The solder joint at the driver is the weakest mechanical point in the whole headphone, and unrelieved cable flex will eventually crack it.
+
+## Build the pair identically
+
+Left and right need to match — same mounting, same gasket, same seal, same wiring, same damping. Channel matching is as much mechanical as electrical, and your ears will catch an imbalance you didn't think mattered. The reliable way to get a matched pair is to build both cups the same way, in the same session, with the same materials and the same hands. Don't build one tonight and the other next week from memory.
+
+## Order of operations
+
+Damp and wire the driver before you close the cup, and test before final assembly. Wire it up, play both channels with the cup still open, and confirm three things: both sides make sound, polarity is correct (a mono track should image dead center), and there are no rattles or buzzes from a loose part or a diaphragm fouling on something. Only then commit to sealing or gluing anything shut.
+
+:::tip
+Before you glue or close anything, wire it up and play both channels with a mono track. It should image as a single point right between your ears. If it sounds wide, hollow, or sucked-out, one channel is out of phase — fix it now, while the cup is still open, not after you've glued it shut.
+:::
+
+## Closing up
+
+If your cup is a two-part print, the seam between the halves is another seal, and so is the joint where the baffle meets the cup body and where the cable enters. Whether you're gluing, screwing, or press-fitting, make those joints airtight on a closed design — a bead of glue, a gasket, or a wrap of tape on the cable pass-through. On an open design you have more latitude back there, since the rear is meant to breathe, but the front seal and channel matching still have to be right.
+
+## Common Mistakes
+
+:::caution
+- **Reversed polarity on one channel.** Phase cancellation — thin sound, gutted bass, vague imaging. Confirm both channels are in phase with a mono track before closing up.
+- **Gluing the driver in permanently.** You'll want to retune or swap it. Use a gasket and clamp so the build stays serviceable.
+- **Ignoring the front seal.** A leak between driver and baffle changes the sound as much as a bad chamber does. Seal it and test for leaks.
+- **Mismatched cups.** Different gaskets, damping, or seal between left and right gives you a channel imbalance you'll hear but struggle to place. Build them as a matched pair, together.
+- **No strain relief.** Cable flex cracks the solder joint at the driver — the most common long-term failure. Anchor the wire at both ends.
+:::
+
+## What's Next
+
+With the driver mounted, sealed, and tested, the chamber and damping decide the final voice. [Damping strategy and application](/learn/damping-strategy-and-application) is where you take a sealed, working build and dial in how it actually sounds.
