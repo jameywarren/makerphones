@@ -54,7 +54,10 @@ const { parts } = await getManual();
   .mp-contents {
     display: grid;
     gap: 3.5rem;
-    padding: 3.5rem 0 1rem;
+    /* the column is full-width on this route; keep the list at a reading measure */
+    padding: 3.5rem clamp(1.25rem, 4vw, 4rem) 1rem;
+    max-width: 64rem;
+    margin-inline: auto;
   }
   .mp-contents-rows {
     border-top: 1px solid var(--mp-line);
