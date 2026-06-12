@@ -126,12 +126,14 @@ export const MANUAL_PARTS: ManualPart[] = [
 ];
 
 /**
- * The six reference appendices, in the Compass's planned order.
- * Appendices carry no nav numbering and sit outside the 1–30
+ * The reference pages — a standing front-matter note (listening-safely)
+ * followed by the six appendices, in the Compass's planned order.
+ * These carry no nav numbering and sit outside the chapter
  * prev/next chain; they resolve in byHandle so related-field
  * cross-references link correctly in both directions.
  */
 export const APPENDIX_HANDLES = [
+  'listening-safely',
   'glossary',
   'supplier-directory',
   'design-resources',

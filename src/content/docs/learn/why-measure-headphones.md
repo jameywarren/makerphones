@@ -12,6 +12,8 @@ description: What measurement gives you that listening can't — and what it can
 excerpt: Your ears are the final judge, but they're a moving target. Here's what measurement adds — catching what you can't hear, and turning "sounds off" into "here's the problem."
 ---
 
+*Measurement means running test tones close to your ears — keep [Listening Safely](/learn/listening-safely/) in mind before your first sweep.*
+
 You can build and tune a good headphone entirely by ear, and plenty of great builds happen exactly that way. But there's a point in every build where measurement stops being optional and starts saving you hours — the point where you need to know *what's* happening, not just whether you like it. Measurement turns a vague feeling into a visible fact, and that's the whole reason to pick up a microphone.
 
 This chapter is about why measuring is worth the trouble, what it can and can't tell you, and how to hold your own measurements at the right level of trust — because a rig you misread is worse than no rig at all.

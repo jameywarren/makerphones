@@ -88,7 +88,8 @@ const sidebar = [
   {
     label: 'Appendices',
     items: [
-      // Reference appendices — no nav numbering, outside the chapter chain
+      // Reference pages — no nav numbering, outside the chapter chain
+      'learn/listening-safely',
       'learn/glossary',
       'learn/supplier-directory',
       'learn/design-resources',
