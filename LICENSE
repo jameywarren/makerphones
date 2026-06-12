@@ -13,6 +13,3 @@ Full license text: https://creativecommons.org/licenses/by-nc/4.0/
 
 The site's source code (the Astro/Starlight implementation in this
 repository, excluding the written content) may be reused freely.
-
-NOTE: license choice is pending final confirmation — if it changes,
-update this file, src/content/docs/license.md, and the footer link.

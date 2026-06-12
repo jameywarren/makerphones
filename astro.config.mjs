@@ -121,12 +121,11 @@ export default defineConfig({
         // bench-notes feed
         { tag: 'link', attrs: { rel: 'alternate', type: 'application/rss+xml', title: 'MakerPhones — Bench Notes', href: '/rss.xml' } },
         // Privacy-friendly analytics (GoatCounter: no cookies, no consent
-        // banner needed). PLACEHOLDER: Jamey creates the account at
-        // goatcounter.com and replaces GOATCOUNTER_CODE with the site code.
+        // banner needed).
         {
           tag: 'script',
           attrs: {
-            'data-goatcounter': 'https://GOATCOUNTER_CODE.goatcounter.com/count',
+            'data-goatcounter': 'https://makerphones.goatcounter.com/count',
             async: true,
             src: '//gc.zgo.at/count.js',
           },

@@ -35,6 +35,6 @@ A resource like this grows from its builders. Every documented build makes the n
 ## Submit your build
 
 Built something from the manual? Send it in: **email a few photos, your parts list, and what
-you'd do differently to [PLACEHOLDER_EMAIL](mailto:PLACEHOLDER_EMAIL)** and it'll be considered
+you'd do differently to [jamey@jameywarren.com](mailto:jamey@jameywarren.com)** and it'll be considered
 for this page. (A proper submission form and community space are planned — until then, email
 is the queue.)
