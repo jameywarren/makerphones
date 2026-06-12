@@ -12,6 +12,7 @@ import PhotoPlate from '../illustration/PhotoPlate.astro';
 import Motifs from '../illustration/Motifs.astro';
 import MpIcon from '../illustration/MpIcon.astro';
 import DifficultyArcs from '../illustration/DifficultyArcs.astro';
+import DriverMark from '../illustration/DriverMark.astro';
 
 const { parts, writtenCount, totalCount } = await getManual();
 
@@ -180,10 +181,15 @@ const BENCH = {
     </div>
   </section>
 
-  <!-- footer -->
+  <!-- footer: tagline lockup per the logo handoff (covers, footer) -->
   <footer class="mp-full mp-homefoot">
-    <span class="mono dark">Makerphones</span>
-    <span class="mono">Build your own sound.</span>
+    <div class="mp-foot-lockup">
+      <div class="mp-foot-lockup-row">
+        <DriverMark size={31} />
+        <span class="mp-foot-wordmark">makerphones<span class="mp-foot-dot" aria-hidden="true"></span></span>
+      </div>
+      <span class="mp-foot-tagline">Build your own sound</span>
+    </div>
     <nav style="display: flex; gap: 28px; flex-wrap: wrap;">
       <a class="mono" href="/contents/">Manual</a>
       <a class="mono" href="/bench-notes/">Bench notes</a>

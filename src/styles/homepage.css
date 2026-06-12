@@ -357,6 +357,45 @@
   flex-wrap: wrap;
 }
 
+/* tagline lockup (logo handoff) — ratios for wordmark size S = 26px:
+ * mark 1.18×S, row gap 0.42×S, column gap 0.34×S, tagline 0.26×S
+ * (floored at 8px for legibility), tagline indent 1.6×S. */
+.mp-foot-lockup {
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+  color: var(--mp-charcoal);
+}
+.mp-foot-lockup-row {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+}
+.mp-foot-wordmark {
+  font-family: var(--mp-sans);
+  font-weight: 700;
+  font-size: 26px;
+  letter-spacing: -0.03em;
+  line-height: 1;
+  white-space: nowrap;
+}
+.mp-foot-dot {
+  width: 0.115em;
+  height: 0.115em;
+  border-radius: 50%;
+  background: var(--mp-accent);
+  display: inline-block;
+  margin-left: 0.09em;
+}
+.mp-foot-tagline {
+  font-family: var(--mp-mono);
+  font-size: 8px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--mp-meta);
+  margin-left: 42px;
+}
+
 /* header nav links (global Starlight header extension) */
 .mp-hnav {
   display: flex;

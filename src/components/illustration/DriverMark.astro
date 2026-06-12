@@ -1,0 +1,29 @@
+---
+/**
+ * The makerphones mark — the driver section on a 64-grid (surround,
+ * voice-coil ring, orange dome dot). From the logo handoff
+ * (_source/logo-final): rings inherit currentColor; the dot reads
+ * --mp-accent (dark mode re-scopes it), or currentColor in mono for
+ * emboss/single-color use. The dot is the only accent — never fill
+ * the rings. Minimum size 16px.
+ */
+interface Props {
+  size?: number;
+  mono?: boolean;
+}
+const { size = 64, mono = false } = Astro.props;
+const dot = mono ? 'currentColor' : 'var(--mp-accent, #ea580c)';
+---
+
+<svg viewBox="0 0 64 64" width={size} height={size} class="mp-drivermark" aria-hidden="true">
+  <circle cx="32" cy="32" r="24" fill="none" stroke="currentColor" stroke-width="5"></circle>
+  <circle cx="32" cy="32" r="13.5" fill="none" stroke="currentColor" stroke-width="2.5"></circle>
+  <circle cx="32" cy="32" r="4.2" fill={dot}></circle>
+</svg>
+
+<style>
+  .mp-drivermark {
+    display: block;
+    flex: none;
+  }
+</style>

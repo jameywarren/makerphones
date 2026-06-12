@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>MakerPhones — Logo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Schibsted+Grotesk:wght@500;600;700;800&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,500;0,8..60,600&display=swap" rel="stylesheet">
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="lib/mp-site.css">
+<style>
+  .logo-ground { --mp-ground: #faf8f5; background: var(--mp-ground); color: var(--mp-charcoal, #2d3748); }
+  .logo-dark { background: #111827; color: #f9fafb; --mp-accent: #fb923c; --mp-meta: #9ca3af; --mp-hair: #374151; }
+  .lab { font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.08em;
+         text-transform: uppercase; color: var(--mp-meta, #6b7280); font-weight: 500; }
+  .lab.dk { color: var(--mp-ink, #111827); font-weight: 600; }
+  .lab.or { color: var(--mp-accent, #ea580c); font-weight: 600; }
+  .deboss-dark { color: #1d2128; filter: drop-shadow(0 1px 0 rgba(255,255,255,0.07)) drop-shadow(0 -1px 1px rgba(0,0,0,0.55)); }
+  .emboss-cream { color: #eee9e2; filter: drop-shadow(0 -1px 0 rgba(255,255,255,0.9)) drop-shadow(0 1.5px 1.5px rgba(45,55,72,0.28)); }
+</style>
+</head>
+<body data-anim="on">
+<div id="root"></div>
+<script type="text/babel" src="design-canvas.jsx"></script>
+<script type="text/babel" src="tweaks-panel.jsx"></script>
+<script type="text/babel" src="lib/mp-theme.jsx"></script>
+<script type="text/babel" src="lib/mp-motifs.jsx"></script>
+<script type="text/babel" src="lib/mp-logo.jsx"></script>
+<script type="text/babel">
+const { DesignCanvas, DCSection, DCArtboard, useTweaks, TweaksPanel, TweakSection, TweakRadio, TweakToggle,
+        MarkDriver, MarkMonogram, MarkCup, MP_MARKS, Wordmark, Lockup, MpIcon, MpDifficulty } = window;
+
+const TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{
+  "symbol": "driver",
+  "detail": "dot",
+  "monoPreview": false
+}/*EDITMODE-END*/;
+
+function board(id, label, w, h, node, dark) {
+  return (
+    <DCArtboard id={id} label={label} width={w} height={h}>
+      <div data-screen-label={label} className={dark ? 'logo-dark' : 'logo-ground'}
+        style={{ width: '100%', height: '100%', boxSizing: 'border-box', overflow: 'hidden' }}>
+        {node}
+      </div>
+    </DCArtboard>
+  );
+}
+
+function NotesSheet() {
+  return (
+    <div className="sheet logo-ground" data-screen-label="Logo notes" style={{ width: '100%', height: '100%', background: 'transparent' }}>
+      <h2><span className="fig">NOTES</span>LOGO — REASONING & RECOMMENDATION</h2>
+      <p style={{ marginTop: 12 }}><strong>Three directions, all inside the dialect.</strong> S1 borrows the manual's first figure (driver section). S2 makes the lowercase <strong>m</strong> itself the headphone — outer stems land in cups, and the middle stem ends in the system's 2px leader dot. S3 is the cup-and-pressure-arc, closest kin to the wayfinding icons.</p>
+      <ul>
+        <li><strong>Recommendation: S2 monogram + 'dot' wordmark.</strong> It's the most ownable (S1 reads as "audio brand" generically; S3 sits very close to the icon set), it's literally built from the system's annotation language, and it survives 16px and deboss best — solid cups carry it.</li>
+        <li><strong>Wordmark</strong> is Schibsted Grotesk 700, lowercase, −3% tracking. The terminal leader dot is the one permitted accent; the driver-o variant is shown but flirts with cute.</li>
+        <li><strong>Orange discipline:</strong> one dot, never a fill. Mono variant drops it entirely — that's the embossing version.</li>
+        <li><strong>Tweaks</strong> (toolbar): swap symbol × wordmark detail across every lockup sheet; mono preview toggle.</li>
+        <li><strong>For Claude Code:</strong> marks are stroke-built on a 64-grid, colors are <code>currentColor</code> + <code>var(--mp-accent)</code> — favicon/dark/mono are scoping, not new files.</li>
+      </ul>
+    </div>
+  );
+}
+
+function SymbolSheet() {
+  const cells = [
+    [MarkDriver, 'S1 — THE DRIVER', 'THE MANUAL\u2019S FIRST FIGURE, REDUCED', 'SURROUND · COIL · DOME'],
+    [MarkMonogram, 'S2 — THE MONOGRAM', 'm AS HEADBAND + CUPS', 'MIDDLE STEM ENDS IN A LEADER DOT'],
+    [MarkCup, 'S3 — THE CUP', 'SOUND LEAVING A CUP', 'KIN TO THE WAYFINDING ICONS'],
+  ];
+  return (
+    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 0, height: '100%' }}>
+      {cells.map(([M, name, sub, note], i) => (
+        <div key={name} style={{ borderRight: i < 2 ? '1px solid var(--mp-hair, #d1d5db)' : 'none',
+          display: 'flex', flexDirection: 'column', alignItems: 'center', padding: '34px 20px 22px', gap: 8 }}>
+          <M size={120} />
+          <span className="lab dk" style={{ marginTop: 18 }}>{name}</span>
+          <span className="lab">{sub}</span>
+          <span className="lab or" style={{ marginTop: 'auto' }}>{note}</span>
+        </div>
+      ))}
+    </div>
+  );
+}
+
+function WordmarkSheet() {
+  const rows = [
+    ['plain', 'PLAIN — NO ACCENT'],
+    ['dot', 'TERMINAL LEADER DOT — RECOMMENDED'],
+    ['driver-o', 'DRIVER-O — SHOWN, NOT RECOMMENDED'],
+  ];
+  return (
+    <div style={{ padding: '30px 40px', display: 'flex', flexDirection: 'column', gap: 6 }}>
+      {rows.map(([d, lab]) => (
+        <div key={d} style={{ display: 'flex', alignItems: 'baseline', gap: 28, borderBottom: '1px solid var(--mp-hair, #d1d5db)', padding: '18px 0' }}>
+          <Wordmark size={52} detail={d} />
+          <span className="lab" style={{ marginLeft: 'auto' }}>{lab}</span>
+        </div>
+      ))}
+    </div>
+  );
+}
+
+function LockupSheet({ t }) {
+  return (
+    <div style={{ padding: '34px 44px', display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '40px 48px', alignItems: 'center' }}>
+      <div>
+        <Lockup symbol={t.symbol} detail={t.detail} layout="horizontal" size={40} mono={t.monoPreview} />
+        <p className="lab" style={{ marginTop: 16 }}>HORIZONTAL — HEADER, DEFAULT</p>
+      </div>
+      <div>
+        <Lockup symbol={t.symbol} detail={t.detail} layout="tagline" size={38} mono={t.monoPreview} />
+        <p className="lab" style={{ marginTop: 16 }}>TAGLINE LOCKUP — COVERS, FOOTER</p>
+      </div>
+      <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+        <Lockup symbol={t.symbol} detail={t.detail} layout="stacked" size={36} mono={t.monoPreview} />
+        <p className="lab" style={{ marginTop: 16 }}>STACKED — SQUARE CONTEXTS</p>
+      </div>
+      <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+        <Lockup symbol={t.symbol} layout="symbol" size={48} mono={t.monoPreview} />
+        <p className="lab" style={{ marginTop: 16 }}>SYMBOL ONLY — AVATAR, FAVICON</p>
+      </div>
+    </div>
+  );
+}
+
+function VariantsSheet({ t }) {
+  const Mark = MP_MARKS[t.symbol];
+  return (
+    <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', height: '100%' }}>
+      <div className="logo-ground" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: 22 }}>
+        <Lockup symbol={t.symbol} detail={t.detail} layout="horizontal" size={30} />
+        <span className="lab">LIGHT — CHARCOAL ON CREAM</span>
+      </div>
+      <div className="logo-dark" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: 22 }}>
+        <Lockup symbol={t.symbol} detail={t.detail} layout="horizontal" size={30} />
+        <span className="lab" style={{ color: '#9ca3af' }}>DARK — ORANGE SHIFTS TO #FB923C</span>
+      </div>
+      <div className="logo-ground" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: 22, borderLeft: '1px solid var(--mp-hair, #d1d5db)' }}>
+        <Lockup symbol={t.symbol} detail={t.detail} layout="horizontal" size={30} mono={true} />
+        <span className="lab">MONO — ONE COLOR, NO ACCENT</span>
+      </div>
+    </div>
+  );
+}
+
+function SmallsSheet({ t }) {
+  const Mark = MP_MARKS[t.symbol];
+  return (
+    <div style={{ padding: '28px 36px', display: 'flex', flexDirection: 'column', gap: 26 }}>
+      <div>
+        <p className="lab dk" style={{ marginBottom: 14 }}>FAVICON LADDER — 48 / 32 / 24 / 16</p>
+        <div style={{ display: 'flex', alignItems: 'flex-end', gap: 26 }}>
+          {[48, 32, 24, 16].map((s) => (
+            <div key={s} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 8 }}>
+              <Mark size={s} mono={t.monoPreview} />
+              <span className="lab">{s}</span>
+            </div>
+          ))}
+          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 8, marginLeft: 18 }}>
+            <div className="logo-dark" style={{ width: 44, height: 44, borderRadius: 9, display: 'grid', placeItems: 'center' }}>
+              <Mark size={28} />
+            </div>
+            <span className="lab">AVATAR</span>
+          </div>
+        </div>
+      </div>
+      <div>
+        <p className="lab dk" style={{ marginBottom: 14 }}>BESIDE THE ICON FAMILY — SAME WEIGHT ROOM, MORE MASS</p>
+        <div style={{ display: 'flex', alignItems: 'center', gap: 20 }}>
+          <Mark size={22} mono={t.monoPreview} />
+          <span style={{ width: 1, height: 26, background: 'var(--mp-hair, #d1d5db)' }}></span>
+          {['fundamentals', 'drivers', 'enclosures', 'build', 'measure', 'guide', 'troubleshoot'].map((n) => <MpIcon key={n} name={n} size={22} />)}
+          <MpDifficulty level={2} size={22} />
+        </div>
+      </div>
+      <div>
+        <p className="lab dk" style={{ marginBottom: 14 }}>PRESSED INTO A CUP — MONO SURVIVES MOLDING</p>
+        <div style={{ display: 'flex', gap: 30, alignItems: 'center' }}>
+          <div style={{ width: 130, height: 130, borderRadius: '50%', background: '#23272e',
+            boxShadow: 'inset 0 2px 6px rgba(255,255,255,0.05), inset 0 -3px 8px rgba(0,0,0,0.5), 0 2px 6px rgba(0,0,0,0.18)',
+            display: 'grid', placeItems: 'center' }}>
+            <div className="deboss-dark"><Mark size={62} mono={true} /></div>
+          </div>
+          <div style={{ width: 130, height: 130, borderRadius: '50%', background: '#faf8f5',
+            boxShadow: 'inset 0 1px 3px rgba(255,255,255,0.9), inset 0 -2px 6px rgba(45,55,72,0.15), 0 2px 6px rgba(45,55,72,0.12)',
+            display: 'grid', placeItems: 'center' }}>
+            <div className="emboss-cream"><Mark size={62} mono={true} /></div>
+          </div>
+          <span className="lab" style={{ maxWidth: 200 }}>DEBOSSED — DARK SHELL · EMBOSSED — CREAM SHELL. ONE COLOR, NO DOT.</span>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function HeaderContext({ t }) {
+  return (
+    <div>
+      <header style={{ display: 'flex', alignItems: 'center', gap: 48, padding: '0 48px', height: 64,
+        borderBottom: '1px solid var(--mp-hair, #d1d5db)' }}>
+        <Lockup symbol={t.symbol} detail={t.detail} layout="horizontal" size={19} mono={t.monoPreview} />
+        <nav style={{ display: 'flex', gap: 28, marginLeft: 'auto' }}>
+          {['The Manual', 'Bench Notes', 'Builds', 'About'].map((l, i) => (
+            <span key={l} className="lab" style={i === 0 ? { color: 'var(--mp-ink, #111827)', fontWeight: 600 } : null}>{l}</span>
+          ))}
+        </nav>
+        <span className="lab">v2 · Open manual</span>
+      </header>
+      <div className="logo-dark" style={{ display: 'flex', alignItems: 'center', gap: 48, padding: '0 48px', height: 64 }}>
+        <Lockup symbol={t.symbol} detail={t.detail} layout="horizontal" size={19} />
+        <span className="lab" style={{ marginLeft: 'auto', color: '#9ca3af' }}>DARK HEADER — SAME MARKUP, RE-SCOPED TOKENS</span>
+      </div>
+    </div>
+  );
+}
+
+function App() {
+  const [t, setTweak] = useTweaks(TWEAK_DEFAULTS);
+  return (
+    <div>
+      <DesignCanvas>
+        <DCSection id="notes" title="Read me" subtitle="Reasoning + recommendation">
+          {board('notes', 'Notes', 720, 480, <NotesSheet />)}
+        </DCSection>
+        <DCSection id="symbols" title="Symbol — three directions" subtitle="All stroke-built on a 64-grid · currentColor + one accent token">
+          {board('symbols', 'S1 · S2 · S3', 980, 360, <SymbolSheet />)}
+        </DCSection>
+        <DCSection id="wordmark" title="Wordmark" subtitle="Schibsted Grotesk 700 lowercase, −3% tracking · one accent detail max">
+          {board('wordmark', 'Detail studies', 880, 360, <WordmarkSheet />)}
+        </DCSection>
+        <DCSection id="lockups" title="Lockups" subtitle="Swap symbol × detail via Tweaks — every sheet updates">
+          {board('lockups', 'The four lockups', 980, 440, <LockupSheet t={t} />)}
+          {board('variants', 'Light · dark · mono', 980, 300, <VariantsSheet t={t} />)}
+        </DCSection>
+        <DCSection id="smalls" title="Small sizes & physical" subtitle="Favicon ladder · beside the icons · deboss/emboss test">
+          {board('smalls', 'The hard tests', 920, 470, <SmallsSheet t={t} />)}
+          {board('header', 'In the header — light + dark', 1240, 130, <HeaderContext t={t} />)}
+        </DCSection>
+      </DesignCanvas>
+
+      <TweaksPanel>
+        <TweakSection label="Logo" />
+        <TweakRadio label="Symbol" value={t.symbol} options={['monogram', 'driver', 'cup']}
+          onChange={(v) => setTweak('symbol', v)} />
+        <TweakRadio label="Wordmark" value={t.detail} options={['dot', 'plain', 'driver-o']}
+          onChange={(v) => setTweak('detail', v)} />
+        <TweakToggle label="Mono preview" value={t.monoPreview}
+          onChange={(v) => setTweak('monoPreview', v)} />
+      </TweaksPanel>
+    </div>
+  );
+}
+
+ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+</script>
+</body>
+</html>

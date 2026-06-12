@@ -274,16 +274,19 @@ header.header {
   border-bottom: 1px solid var(--mp-line);
   background-color: var(--mp-surface);
 }
+/* Brand lockup (logo handoff): mark 1.18×S, gap 0.42×S for wordmark size S. */
 .site-title {
-  gap: 10px;
+  gap: 8px;
+  color: var(--mp-charcoal);
 }
 .site-title span.mp-wordmark {
   font-family: var(--mp-sans);
   font-weight: 700;
-  font-size: 0.875rem;
-  letter-spacing: 0.08em;
+  font-size: 1.1875rem;
+  letter-spacing: -0.03em;
   color: var(--mp-charcoal);
   white-space: nowrap;
+  line-height: 1;
 }
 
 /* reading progress */

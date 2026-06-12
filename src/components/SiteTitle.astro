@@ -1,38 +1,47 @@
 ---
 /**
- * Brand: orange square mark + wordmark (homepage handoff). The
- * rendered wordmark is lowercase "makerphones" by convention — the
- * only place the name isn't written "Makerphones".
+ * Brand: horizontal lockup from the logo handoff (_source/logo-final)
+ * — driver mark + lowercase wordmark with the terminal leader dot.
+ * Spec ratios for wordmark size S: mark 1.18×S, gap 0.42×S; wordmark
+ * Schibsted Grotesk 700, -0.03em tracking; dot 0.115em in
+ * --mp-accent, 0.09em gap, on the baseline. The rendered wordmark is
+ * lowercase "makerphones" by convention — the only place the name
+ * isn't written "Makerphones".
  */
+import DriverMark from './illustration/DriverMark.astro';
+
 const href = '/';
 ---
 
 <a {href} class="site-title sl-flex">
-  <span class="mp-mark" aria-hidden="true"></span>
-  <span class="mp-wordmark">makerphones</span>
+  <DriverMark size={22} />
+  <span class="mp-wordmark">makerphones<span class="mp-wordmark-dot" aria-hidden="true"></span></span>
 </a>
 
 <style>
   .site-title {
     align-items: center;
-    gap: 11px;
+    gap: 8px; /* 0.42 × wordmark size (19px) per the lockup spec */
     text-decoration: none;
     min-width: 0;
     flex: none;
-  }
-  .mp-mark {
-    width: 10px;
-    height: 10px;
-    background: var(--mp-accent, #ea580c);
-    display: block;
-    flex: none;
+    color: var(--mp-charcoal);
   }
   .mp-wordmark {
     font-family: var(--mp-sans);
     font-weight: 700;
-    font-size: 17.5px;
-    color: var(--mp-ink);
-    letter-spacing: -0.01em;
+    font-size: 1.1875rem;
+    color: var(--mp-charcoal);
+    letter-spacing: -0.03em;
     white-space: nowrap;
+    line-height: 1;
+  }
+  .mp-wordmark-dot {
+    width: 0.115em;
+    height: 0.115em;
+    border-radius: 50%;
+    background: var(--mp-accent);
+    display: inline-block;
+    margin-left: 0.09em;
   }
 </style>
