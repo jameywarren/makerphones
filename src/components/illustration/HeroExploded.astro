@@ -1,0 +1,202 @@
+---
+/**
+ * Hero exploded headphone — the showpiece figure from the homepage
+ * handoff. Right cup assembled + playing; left cup exploded along a
+ * dash-dot axis. weight='mass' (filled magnets/walls, heavy shells —
+ * the homepage dialect) or 'line' (airy line-work for cover/article
+ * use). Motion via data-motion: 'settle' | 'breathe' | 'hover'
+ * (hover-to-assemble) — all gated behind prefers-reduced-motion in
+ * diagrams.css; the exploded layout is the static still.
+ */
+import { arcPath } from '../diagrams/geometry';
+
+interface Props {
+  weight?: 'mass' | 'line';
+  motion?: 'settle' | 'breathe' | 'hover' | 'none';
+  annotated?: boolean;
+}
+const { weight = 'mass', motion = 'settle', annotated = true } = Astro.props;
+const mass = weight === 'mass';
+
+const ink = 'var(--mp-charcoal)';
+const accent = 'var(--mp-accent)';
+const dark = 'var(--mp-ink)';
+const label = 'var(--mp-meta)';
+const faint = 'var(--mp-faint)';
+const hair = 'var(--mp-hair)';
+const ground = 'var(--mp-ground)';
+const washInk = 'color-mix(in srgb, var(--mp-charcoal) 8%, transparent)';
+const washInkSoft = 'color-mix(in srgb, var(--mp-charcoal) 5%, transparent)';
+const washAccent = 'color-mix(in srgb, var(--mp-accent) 7%, transparent)';
+const tintMix = 'color-mix(in srgb, var(--mp-charcoal) 9%, var(--mp-ground))';
+
+const HX_A = { x: 412, y: 216 };
+const HX_B = { x: 60, y: 548 };
+const HX_TARGET = { x: 420, y: 252 };
+const hxPos = (u: number) => ({
+  x: HX_A.x + u * (HX_B.x - HX_A.x),
+  y: HX_A.y + u * (HX_B.y - HX_A.y),
+});
+
+const PARTS = [
+  { id: 'yoke', u: 0.08, label: 'YOKE' },
+  { id: 'shell', u: 0.26, label: 'CUP SHELL' },
+  { id: 'damping', u: 0.44, label: 'DAMPING' },
+  { id: 'driver', u: 0.62, label: 'DRIVER' },
+  { id: 'baffle', u: 0.81, label: 'BAFFLE' },
+  { id: 'pad', u: 1.0, label: 'EAR PAD' },
+] as const;
+
+const parts = PARTS.map((p, i) => {
+  const c = hxPos(p.u);
+  return {
+    ...p,
+    ...c,
+    style: `--tx: ${(HX_TARGET.x - c.x).toFixed(1)}px; --ty: ${(HX_TARGET.y - c.y).toFixed(1)}px; --i: ${PARTS.length - i};`,
+  };
+});
+
+const cup = { x: 688, y: 252 };
+const CALLOUTS: Record<string, { lx: number; ly: number; anchor: string; tx: number; ty: number }> = {
+  yoke: { lx: 452, ly: 240, anchor: 'start', tx: 430, ty: 247 },
+  shell: { lx: 208, ly: 288, anchor: 'end', tx: 268, ty: 300 },
+  damping: { lx: 304, ly: 388, anchor: 'start', tx: 284, ty: 372 },
+  driver: { lx: 86, ly: 412, anchor: 'end', tx: 150, ty: 420 },
+  baffle: { lx: 190, ly: 498, anchor: 'start', tx: 173, ty: 488 },
+  pad: { lx: 126, ly: 560, anchor: 'start', tx: 109, ty: 552 },
+};
+const rad = (a: number) => (a * Math.PI) / 180;
+const ring = (cx: number, cy: number, rO: number, rI: number) =>
+  `M ${cx} ${cy - rO} A ${rO} ${rO} 0 1 0 ${cx + 0.01} ${cy - rO} Z M ${cx} ${cy - rI} A ${rI} ${rI} 0 1 1 ${cx - 0.01} ${cy - rI} Z`;
+---
+
+<div class="hero-x" data-motion={motion}>
+  <svg viewBox="0 0 900 640" class="mp-dgm hx-svg" role="img" aria-label="Old Faithful exploded: yoke, cup shell, damping, driver, baffle, and ear pad along an assembly axis; the assembled right cup playing">
+    <line x1={HX_A.x + 14} y1={HX_A.y - 12} x2={HX_B.x - 18} y2={HX_B.y + 28} stroke={faint} stroke-width="1" stroke-dasharray="2 6" class="hx-axis"></line>
+
+    <path d="M 420 210 C 426 104 478 78 554 78 C 630 78 682 104 688 204" fill="none" stroke={ink} stroke-width={mass ? 7 : 2.5} stroke-linecap="round"></path>
+    <path d="M 488 92 C 510 84 598 84 620 92" fill="none" stroke={hair} stroke-width="1"></path>
+    {[[414, 181, 430, 179], [415.5, 166, 431.5, 164], [417, 151, 433, 149]].map((t) => (
+      <line x1={t[0]} y1={t[1]} x2={t[2]} y2={t[3]} stroke={mass ? ground : ink} stroke-width="1.5" opacity={mass ? 1 : 0.45} />
+    ))}
+
+    <!-- assembled right cup, playing -->
+    <path d={arcPath(cup.x, cup.y, 58, -165, -15)} fill="none" stroke={ink} stroke-width={mass ? 4 : 2.2} stroke-linecap="round"></path>
+    <circle cx={cup.x - 56} cy={cup.y - 15} r={mass ? 3.2 : 2.4} fill={mass ? dark : 'none'} stroke={ink} stroke-width="1.5"></circle>
+    <circle cx={cup.x + 56} cy={cup.y - 15} r={mass ? 3.2 : 2.4} fill={mass ? dark : 'none'} stroke={ink} stroke-width="1.5"></circle>
+    <circle cx={cup.x} cy={cup.y} r="48" fill={mass ? washInk : 'none'} stroke={ink} stroke-width={mass ? 4 : 2.2}></circle>
+    <circle cx={cup.x} cy={cup.y} r="38" fill="none" stroke={hair} stroke-width="1"></circle>
+    <circle cx={cup.x} cy={cup.y} r="3" fill={accent} class="hx-dome" style="transform-origin: center; transform-box: fill-box;"></circle>
+    {[64, 88, 112].map((r, i) => (
+      <path class="mp-wave-out" style={i ? `animation-delay: ${-0.8 * i}s;` : undefined} d={arcPath(cup.x, cup.y, r, -42, 42)} fill="none" stroke={accent} stroke-width="1.8" opacity={0.8 - i * 0.25} />
+    ))}
+    <path class="hx-cable" d={`M ${cup.x} ${cup.y + 48} C ${cup.x + 4} 380 ${cup.x - 46} 430 ${cup.x - 40} 500 C ${cup.x - 36} 560 ${cup.x + 14} 580 ${cup.x + 18} 640`} fill="none" stroke={accent} stroke-width="1.5" opacity="0.85"></path>
+
+    <!-- exploded parts -->
+    {parts.map((p) => (
+      <g class="hx-part" style={p.style}>
+        {p.id === 'yoke' && (
+          <g>
+            <line x1={p.x} y1={p.y - 32} x2={p.x} y2={p.y - 8} stroke={ink} stroke-width={mass ? 4 : 2.2} stroke-linecap="round" />
+            <circle cx={p.x} cy={p.y - 4} r="4" fill="none" stroke={ink} stroke-width="1.5" />
+            <path d={arcPath(p.x, p.y + 20, 42, -160, -20)} fill="none" stroke={ink} stroke-width={mass ? 4 : 2.2} stroke-linecap="round" />
+            <circle cx={p.x - 39.5} cy={p.y + 5.6} r={mass ? 3.4 : 2.6} fill={mass ? dark : 'none'} stroke={ink} stroke-width="1.5" />
+            <circle cx={p.x + 39.5} cy={p.y + 5.6} r={mass ? 3.4 : 2.6} fill={mass ? dark : 'none'} stroke={ink} stroke-width="1.5" />
+          </g>
+        )}
+        {p.id === 'shell' && (
+          <g>
+            <circle cx={p.x} cy={p.y} r="46" fill={mass ? washInk : 'none'} stroke={ink} stroke-width={mass ? 4 : 2.2} />
+            <circle cx={p.x} cy={p.y} r="37" fill="none" stroke={hair} stroke-width="1" />
+            <path d={arcPath(p.x, p.y, 28, -140, -40)} fill="none" stroke={hair} stroke-width="1" />
+            <path d={arcPath(p.x, p.y, 20, 30, 130)} fill="none" stroke={hair} stroke-width="1" />
+            <circle cx={p.x} cy={p.y} r="2.5" fill={ink} />
+          </g>
+        )}
+        {p.id === 'damping' && (
+          <g>
+            <circle cx={p.x} cy={p.y} r="33" fill={mass ? washInkSoft : 'none'} stroke={label} stroke-width="1.5" />
+            {[-12, 0, 12].map((dy) => (
+              <path d={`M ${p.x - 24} ${p.y + dy} q 6 -5 12 0 t 12 0 t 12 0`} fill="none" stroke={faint} stroke-width="1.2" />
+            ))}
+          </g>
+        )}
+        {p.id === 'driver' && (
+          <g>
+            <circle cx={p.x} cy={p.y} r="40" fill={mass ? ground : 'none'} stroke={ink} stroke-width="2" />
+            {mass ? (
+              <path d={ring(p.x, p.y, 32, 24)} fill={dark} fill-rule="evenodd" />
+            ) : (
+              <g>
+                <circle cx={p.x} cy={p.y} r="32" fill="none" stroke={ink} stroke-width="1.5" />
+                <circle cx={p.x} cy={p.y} r="24" fill="none" stroke={ink} stroke-width="1.5" />
+                {[0, 45, 90, 135, 180, 225, 270, 315].map((a) => (
+                  <line x1={p.x + 24 * Math.cos(rad(a))} y1={p.y + 24 * Math.sin(rad(a))} x2={p.x + 32 * Math.cos(rad(a))} y2={p.y + 32 * Math.sin(rad(a))} stroke={hair} stroke-width="1" />
+                ))}
+              </g>
+            )}
+            <circle cx={p.x} cy={p.y} r="17.5" fill="none" stroke={hair} stroke-width="1" />
+            <circle class="hx-dome" cx={p.x} cy={p.y} r="13" fill={washAccent} stroke={accent} stroke-width="2.5" style="transform-origin: center; transform-box: fill-box;" />
+            <circle cx={p.x - 6} cy={p.y + 37} r="1.6" fill={dark} />
+            <circle cx={p.x + 6} cy={p.y + 37} r="1.6" fill={dark} />
+          </g>
+        )}
+        {p.id === 'baffle' && (
+          <g>
+            <circle cx={p.x} cy={p.y} r="42" fill={mass ? tintMix : 'none'} stroke={ink} stroke-width="2" />
+            <circle cx={p.x} cy={p.y} r="14" fill={mass ? ground : 'none'} stroke={ink} stroke-width="1.5" />
+            {[45, 135, 225, 315].map((a) => (
+              <circle cx={p.x + 33 * Math.cos(rad(a))} cy={p.y + 33 * Math.sin(rad(a))} r="2" fill={dark} />
+            ))}
+            {[78, 90, 102].map((a) => (
+              <line x1={p.x + 20 * Math.cos(rad(a))} y1={p.y + 20 * Math.sin(rad(a))} x2={p.x + 27 * Math.cos(rad(a))} y2={p.y + 27 * Math.sin(rad(a))} stroke={ink} stroke-width="1.5" stroke-linecap="round" />
+            ))}
+          </g>
+        )}
+        {p.id === 'pad' && (
+          <g>
+            {mass && <path d={ring(p.x, p.y, 45, 24)} fill={washInk} fill-rule="evenodd" />}
+            <circle cx={p.x} cy={p.y} r="45" fill="none" stroke={ink} stroke-width="2.2" />
+            <circle cx={p.x} cy={p.y} r="24" fill="none" stroke={ink} stroke-width="1.5" />
+            {Array.from({ length: 12 }).map((_, k) => (
+              <line x1={p.x + 39 * Math.cos(rad(k * 30))} y1={p.y + 39 * Math.sin(rad(k * 30))} x2={p.x + 45 * Math.cos(rad(k * 30))} y2={p.y + 45 * Math.sin(rad(k * 30))} stroke={hair} stroke-width="1" />
+            ))}
+          </g>
+        )}
+      </g>
+    ))}
+
+    {annotated && (
+      <g class="hx-callouts">
+        <text x="554" y="44" font-size="9.5" font-weight="500" fill={label} text-anchor="middle">HEADBAND</text>
+        <line x1="554" y1="50" x2="554" y2="74" stroke={faint} stroke-width="1"></line>
+        <circle cx="554" cy="74" r="2.2" fill={faint}></circle>
+        <text x="812" y="170" font-size="9.5" font-weight="500" fill={label}>ASSEMBLED — R</text>
+        <line x1="818" y1="176" x2="730" y2="216" stroke={faint} stroke-width="1"></line>
+        <circle cx="730" cy="216" r="2.2" fill={faint}></circle>
+        {parts.map((p, i) => {
+          const c = CALLOUTS[p.id];
+          return (
+            <g>
+              <text x={c.lx} y={c.ly} font-size="9.5" font-weight="500" fill={label} text-anchor={c.anchor === 'end' ? 'end' : 'start'}>{`0${i + 1} — ${p.label}`}</text>
+              <line x1={c.anchor === 'end' ? c.lx + 6 : c.lx - 6} y1={c.ly - 4} x2={c.tx} y2={c.ty} stroke={faint} stroke-width="1" />
+              <circle cx={c.tx} cy={c.ty} r="2.2" fill={faint} />
+            </g>
+          );
+        })}
+      </g>
+    )}
+  </svg>
+</div>
+
+<style>
+  .hero-x {
+    width: 100%;
+  }
+  .hx-svg {
+    display: block;
+    overflow: visible;
+    max-width: 100%;
+    height: auto;
+  }
+</style>

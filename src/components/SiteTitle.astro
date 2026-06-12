@@ -1,35 +1,34 @@
 ---
-/** Wordmark: charcoal mark with orange dot + MAKER PHONES. */
+/** Brand: orange square mark + MakerPhones wordmark (homepage handoff). */
 const href = '/';
 ---
 
 <a {href} class="site-title sl-flex">
-  <span class="mp-mark" aria-hidden="true"><span class="mp-mark-dot"></span></span>
-  <span class="mp-wordmark">MAKER&nbsp;PHONES</span>
+  <span class="mp-mark" aria-hidden="true"></span>
+  <span class="mp-wordmark">MakerPhones</span>
 </a>
 
 <style>
   .site-title {
     align-items: center;
-    gap: 10px;
+    gap: 11px;
     text-decoration: none;
     min-width: 0;
-  }
-  .mp-mark {
-    width: 20px;
-    height: 20px;
-    border-radius: 4.4px;
-    background: #2d3748;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
     flex: none;
   }
-  .mp-mark-dot {
-    width: 8.4px;
-    height: 8.4px;
-    border-radius: 50%;
-    background: #ea580c;
+  .mp-mark {
+    width: 10px;
+    height: 10px;
+    background: var(--mp-accent, #ea580c);
     display: block;
+    flex: none;
+  }
+  .mp-wordmark {
+    font-family: var(--mp-sans);
+    font-weight: 700;
+    font-size: 17.5px;
+    color: var(--mp-ink);
+    letter-spacing: -0.01em;
+    white-space: nowrap;
   }
 </style>

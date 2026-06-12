@@ -1,14 +1,37 @@
 ---
 /**
- * Default Starlight header + a reading-progress bar on chapter pages.
+ * Site header — Starlight chrome (brand, search, theme toggle) plus
+ * the field-manual nav: The Manual / Bench Notes / Builds / About /
+ * V2 · Open Manual. Reading-progress bar on chapter pages.
  */
-import Default from '@astrojs/starlight/components/Header.astro';
+import SiteTitle from './SiteTitle.astro';
+import Search from '@astrojs/starlight/components/Search.astro';
+import ThemeSelect from '@astrojs/starlight/components/ThemeSelect.astro';
 
 const { id } = Astro.locals.starlightRoute;
 const isChapter = id.startsWith('learn/') && id !== 'learn';
+const path = Astro.url.pathname;
+
+const NAV = [
+  { label: 'The Manual', href: '/contents/' },
+  { label: 'Bench Notes', href: '/bench-notes/' },
+  { label: 'Builds', href: '/contents/#build-guides' },
+  { label: 'About', href: '/about/' },
+];
+const current = (href: string) => path === href ? 'page' : undefined;
 ---
 
-<Default><slot /></Default>
+<div class="mp-header sl-flex">
+  <SiteTitle />
+  <nav class="mp-hnav" aria-label="Main">
+    {NAV.map((n) => <a href={n.href} aria-current={current(n.href)}>{n.label}</a>)}
+  </nav>
+  <div class="mp-header-tools sl-flex">
+    <Search />
+    <span class="mp-hver">V2 · Open Manual</span>
+    <ThemeSelect />
+  </div>
+</div>
 {
   isChapter && (
     <div class="mp-progress" aria-hidden="true">
@@ -31,3 +54,16 @@ const isChapter = id.startsWith('learn/') && id !== 'learn';
     update();
   }
 </script>
+
+<style>
+  .mp-header {
+    gap: var(--sl-nav-gap, 1rem);
+    justify-content: space-between;
+    align-items: center;
+    height: 100%;
+  }
+  .mp-header-tools {
+    gap: 0.75rem;
+    align-items: center;
+  }
+</style>

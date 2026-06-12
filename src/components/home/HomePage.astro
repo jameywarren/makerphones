@@ -1,0 +1,193 @@
+---
+/**
+ * Homepage — Field Manual (the B+C merged direction from the
+ * homepage handoff). Layout/copy per the design; the six-part
+ * contents are LIVE DATA from src/data/manual.ts (titles, chapter
+ * counts, difficulty) — never literals. Photo plates render as
+ * intentional empty frames until real shots land (pass src= here).
+ */
+import { getManual } from '../../data/manual';
+import HeroExploded from '../illustration/HeroExploded.astro';
+import PhotoPlate from '../illustration/PhotoPlate.astro';
+import Motifs from '../illustration/Motifs.astro';
+import MpIcon from '../illustration/MpIcon.astro';
+import DifficultyArcs from '../illustration/DifficultyArcs.astro';
+
+const { parts, writtenCount, totalCount } = await getManual();
+
+/** Design icon → real part mapping (judgment; reported). */
+const PART_ICONS = ['fundamentals', 'drivers', 'build', 'measure', 'enclosures', 'materials'] as const;
+const LEVEL_NUM: Record<string, number> = {
+  Beginner: 1,
+  'Beginner → Intermediate': 2,
+  Intermediate: 2,
+  Advanced: 3,
+};
+const LEVEL_WORD: Record<number, string> = { 1: 'BASICS', 2: 'INTERM.', 3: 'ADV.' };
+
+const toc = parts.map((p, i) => ({
+  num: String(p.num).padStart(2, '0'),
+  title: p.title,
+  icon: PART_ICONS[i],
+  lvl: LEVEL_NUM[p.level] ?? 2,
+  count: p.chapters.length,
+  href: `/contents/#part-${p.num}`,
+}));
+
+const MARGINALIA: [string, string][] = [
+  ['01', 'A complete manual — driver physics to finished pair'],
+  ['02', 'Measured, not vibes: every claim has a curve'],
+  ['03', 'Old Faithful built in the open, below'],
+];
+const BIO = {
+  text: 'Twenty-five years designing pro audio — Grace Design, HeadRoom — now building Old Faithful, a closed-back studio headphone, in the open. Every chapter in this manual comes off that bench.',
+  meta: ['25+ YRS PRO AUDIO', 'GRACE DESIGN · HEADROOM', 'NOW — OLD FAITHFUL'],
+};
+const BENCH = {
+  text: 'A closed-back studio headphone, designed and measured in public. Follow the prototypes, the dead ends, and the curves as they happen.',
+  meta: [
+    ['STATUS', 'PROTOTYPE 04'],
+    ['TARGET', 'CLOSED-BACK STUDIO REFERENCE'],
+    ['LAST PASS', 'BAFFLE REV — REMEASURE'],
+  ],
+};
+---
+
+<div class="mp-home not-content">
+  <!-- cover hero -->
+  <section class="mp-full mp-heroC mp-grid-bg">
+    <div class="mp-coverplate">
+      <span class="pt pt-tl"></span><span class="pt pt-tr"></span>
+      <span class="pt pt-bl"></span><span class="pt pt-br"></span>
+      <div class="mp-cover-toprow">
+        <span class="mono">MP-2 · Field manual</span>
+        <span class="mono orange">An open reference manual for headphone builders</span>
+        <span class="mono">2026 · Open edition</span>
+      </div>
+      <div class="mp-heroD-grid">
+        <div>
+          <h1 class="h-display mp-heroD-title" id="_top">
+            Build Your<br />Own Sound<span style="color: var(--mp-accent);">.</span>
+          </h1>
+          <p class="serif-lg" style="max-width: 42ch; margin-bottom: 32px;">
+            A field guide to building headphones you can trust your ears to — how drivers make
+            sound, why enclosures behave the way they do, and how to measure, tune, and prove the
+            result.
+          </p>
+          <div class="mp-cta-row">
+            <a class="mp-fbtn primary" href="/learn/how-headphones-create-sound/">Start the manual <MpIcon name="arrow" size={14} color="currentColor" /></a>
+            <a class="mp-fbtn" href="/bench-notes/">Follow the build</a>
+          </div>
+          <div class="mp-heroD-marg">
+            {MARGINALIA.map(([n, txt]) => (
+              <p class="mp-marginalia">
+                <span class="mono orange">{n}</span>
+                <span class="mono note">{txt}</span>
+              </p>
+            ))}
+          </div>
+        </div>
+        <div>
+          <HeroExploded weight="mass" motion="settle" annotated={true} />
+        </div>
+      </div>
+      <div class="mp-cover-botrow">
+        <span class="mono">J. Warren</span>
+        <span class="mono">Six parts · {writtenCount} of {totalCount} chapters · Free · Written from the bench</span>
+        <span class="mono">FIG. H — OLD FAITHFUL, EXPLODED</span>
+      </div>
+    </div>
+  </section>
+
+  <div class="mp-full"><Motifs kind="ruler" w={1440} /></div>
+
+  <!-- contents -->
+  <section class="mp-full mp-sec">
+    <div class="mp-secB-grid">
+      <div>
+        <p class="mono orange">Contents</p>
+        <h2 class="h-display" style="font-size: clamp(1.6rem, 3vw, 2.375rem); margin: 12px 0 30px;">The manual in six parts</h2>
+        <div class="mp-toc">
+          {toc.map((r) => (
+            <a class="mp-toc-row" href={r.href}>
+              <span class="mono orange" style="width: 76px;">Part {r.num}</span>
+              <MpIcon name={r.icon} size={20} />
+              <span class="h-display mp-toc-title">{r.title}</span>
+              <span class="mp-toc-dots"></span>
+              <span class="mono mp-toc-count">{r.count} CH</span>
+              <span class="mp-toc-lvl"><DifficultyArcs level={r.lvl} size={18} /></span>
+              <span class="mono mp-toc-count" style="width: 52px; text-align: right;">{LEVEL_WORD[r.lvl]}</span>
+            </a>
+          ))}
+        </div>
+      </div>
+      <div style="padding-top: 86px;">
+        <PhotoPlate label="PLATE I — THE BENCH, TODAY" height={330} placeholder="WORKSHOP PHOTO" />
+      </div>
+    </div>
+  </section>
+
+  <!-- author -->
+  <section class="mp-full mp-bio-margin">
+    <div>
+      <PhotoPlate label="PLATE II — THE AUTHOR, AT THE BENCH" height={170} placeholder="BENCH PORTRAIT" />
+    </div>
+    <div>
+      <p class="mono orange" style="margin-bottom: 14px;">Who is writing this</p>
+      <p class="serif-lg" style="max-width: 46ch;">{BIO.text}</p>
+      <div class="mp-meta-row">
+        {BIO.meta.map((m) => <span class="mono">{m}</span>)}
+      </div>
+    </div>
+  </section>
+
+  <!-- the record -->
+  <section class="mp-full mp-sec" style="padding-top: 56px;">
+    <p class="mono orange" style="margin-bottom: 18px;">The record — prototypes & builds</p>
+    <div class="mp-platerow">
+      <PhotoPlate label="PLATE III — PROTOTYPE 04" height={230} placeholder="PROTOTYPE PHOTO" />
+      <PhotoPlate label="PLATE IV — BUILD 022, COMMUNITY" height={230} placeholder="FINISHED BUILD PHOTO" />
+      <PhotoPlate label="PLATE V — FINISHED PAIR" height={230} placeholder="FINISHED PAIR PHOTO" />
+    </div>
+  </section>
+
+  <!-- bench band -->
+  <section class="mp-full mp-bench">
+    <div class="mp-darkscope mp-bench-in">
+      <div>
+        <p class="mono orange">From the bench</p>
+        <h2 class="h-display" style="font-size: clamp(2rem, 3.4vw, 2.875rem); margin: 14px 0 18px;">Old Faithful</h2>
+        <p class="serif-lg" style="max-width: 44ch;">{BENCH.text}</p>
+        <dl class="mp-bench-meta">
+          {BENCH.meta.map(([k, v]) => (
+            <div><dt class="mono">{k}</dt><dd class="mono dark">{v}</dd></div>
+          ))}
+        </dl>
+        <a class="mp-fbtn" href="/bench-notes/">Read the bench notes <MpIcon name="arrow" size={14} color="currentColor" /></a>
+      </div>
+      <div>
+        <div class="mp-plate" style="padding: 20px 16px 8px;">
+          <span class="pt pt-tl"></span><span class="pt pt-tr"></span>
+          <span class="pt pt-bl"></span><span class="pt pt-br"></span>
+          <div style="display: flex; justify-content: space-between; padding: 0 8px 6px;">
+            <span class="mono orange">MEASURED — P04</span>
+            <span class="mono">TARGET · DASHED</span>
+          </div>
+          <Motifs kind="fr" w={620} h={250} />
+          <p class="mono" style="padding: 8px 8px 6px; opacity: 0.75;">FR — ILLUSTRATIVE, NOT A PUBLISHED CURVE</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- footer -->
+  <footer class="mp-full mp-homefoot">
+    <span class="mono dark">MakerPhones</span>
+    <span class="mono">Build your own sound.</span>
+    <nav style="display: flex; gap: 28px;">
+      <a class="mono" href="/contents/">Manual</a>
+      <a class="mono" href="/bench-notes/">Bench notes</a>
+      <a class="mono" href="/about/">About</a>
+    </nav>
+  </footer>
+</div>

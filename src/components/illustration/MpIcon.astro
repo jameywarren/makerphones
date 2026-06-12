@@ -1,0 +1,97 @@
+---
+/**
+ * Icon set — 24×24, stroke 1.6, round caps. Six part icons plus
+ * wayfinding (read, contents, arrow). From the illustration system.
+ */
+interface Props {
+  name:
+    | 'fundamentals'
+    | 'drivers'
+    | 'enclosures'
+    | 'materials'
+    | 'build'
+    | 'measure'
+    | 'read'
+    | 'contents'
+    | 'arrow';
+  size?: number;
+  color?: string;
+}
+const { name, size = 24, color } = Astro.props;
+const s = color ?? 'var(--mp-charcoal)';
+const a = 'var(--mp-accent)';
+---
+
+<svg viewBox="0 0 24 24" width={size} height={size} stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" class="mp-icon" aria-hidden="true">
+  {name === 'fundamentals' && (
+    <g>
+      <path d="M 2.5 12 C 5.5 4.5 8.5 4.5 11.5 12 C 14.5 19.5 17.5 19.5 20.5 12" fill="none" stroke={s}></path>
+      <circle cx="2.5" cy="12" r="1.4" fill={a} stroke="none"></circle>
+    </g>
+  )}
+  {name === 'drivers' && (
+    <g>
+      <rect x="3" y="8" width="6.5" height="8" fill="none" stroke={s}></rect>
+      <line x1="9.5" y1="10" x2="13" y2="10" stroke={s}></line>
+      <line x1="9.5" y1="14" x2="13" y2="14" stroke={s}></line>
+      <path d="M 14.5 5.5 A 8.5 8.5 0 0 1 14.5 18.5" fill="none" stroke={a} stroke-width="2"></path>
+    </g>
+  )}
+  {name === 'enclosures' && (
+    <g>
+      <path d="M 9.5 3.5 A 8.6 8.6 0 0 1 9.5 20.5" fill="none" stroke={s} stroke-width="2"></path>
+      <line x1="9.5" y1="4.5" x2="9.5" y2="19.5" stroke={s}></line>
+      <circle cx="12.5" cy="12" r="1.6" fill={a} stroke="none"></circle>
+    </g>
+  )}
+  {name === 'materials' && (
+    <g>
+      <line x1="4.5" y1="4.5" x2="10" y2="10" stroke={s} stroke-width="3.4"></line>
+      <line x1="10" y1="10" x2="18.5" y2="18.5" stroke={s}></line>
+      <circle cx="19.5" cy="19.5" r="1.5" fill={a} stroke="none"></circle>
+    </g>
+  )}
+  {name === 'build' && (
+    <g>
+      <line x1="12" y1="2.5" x2="12" y2="21.5" stroke={s} stroke-dasharray="1.5 3" stroke-width="1.1"></line>
+      <line x1="6" y1="6.5" x2="18" y2="6.5" stroke={s}></line>
+      <line x1="7.5" y1="12" x2="16.5" y2="12" stroke={a} stroke-width="2"></line>
+      <line x1="6.5" y1="17.5" x2="17.5" y2="17.5" stroke={s}></line>
+    </g>
+  )}
+  {name === 'measure' && (
+    <g>
+      <path d="M 4 4 L 4 20 L 21 20" fill="none" stroke={s}></path>
+      <path d="M 6.5 15.5 C 9.5 13 11 16.5 13.5 14 C 15.5 12 17.5 10.5 20 11.5" fill="none" stroke={a} stroke-width="2"></path>
+    </g>
+  )}
+  {name === 'read' && (
+    <g>
+      <path d="M 12 5.5 C 9.5 3.5 5.5 3.5 3.5 5 L 3.5 19.5 C 5.5 18 9.5 18 12 20 C 14.5 18 18.5 18 20.5 19.5 L 20.5 5 C 18.5 3.5 14.5 3.5 12 5.5 Z" fill="none" stroke={s}></path>
+      <line x1="12" y1="5.5" x2="12" y2="20" stroke={s}></line>
+    </g>
+  )}
+  {name === 'contents' && (
+    <g>
+      {[6, 12, 18].map((y, i) => (
+        <g>
+          <circle cx="4.5" cy={y} r="1.2" fill={i === 0 ? a : s} stroke="none" />
+          <line x1="9" y1={y} x2="20.5" y2={y} stroke={s} />
+        </g>
+      ))}
+    </g>
+  )}
+  {name === 'arrow' && (
+    <g>
+      <line x1="3.5" y1="12" x2="19.5" y2="12" stroke={s}></line>
+      <path d="M 14 6.5 L 19.8 12 L 14 17.5" fill="none" stroke={s}></path>
+    </g>
+  )}
+</svg>
+
+<style>
+  .mp-icon {
+    display: block;
+    flex: none;
+  }
+</style>

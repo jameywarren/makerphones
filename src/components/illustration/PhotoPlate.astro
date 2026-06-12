@@ -1,0 +1,34 @@
+---
+/**
+ * Framed photo plate — the home for real photography. With `src`,
+ * the photo crops to the frame; without, an intentional empty
+ * technical frame (corner ticks + plate label) that reads as
+ * deliberate until the real shot drops in. Populate by passing
+ * image paths where the plates are used (see index.mdx).
+ */
+interface Props {
+  label: string;
+  src?: string;
+  alt?: string;
+  height?: number;
+  placeholder?: string;
+}
+const { label, src, alt = '', height = 240, placeholder = 'PHOTO TO COME' } = Astro.props;
+---
+
+<figure class="mp-plate-fig">
+  <div class="mp-plate">
+    <span class="pt pt-tl"></span><span class="pt pt-tr"></span>
+    <span class="pt pt-bl"></span><span class="pt pt-br"></span>
+    {
+      src ? (
+        <img class="mp-plate-img" {src} {alt} style={`height: ${height}px;`} loading="lazy" />
+      ) : (
+        <div class="mp-plate-empty" style={`height: ${height}px;`} role="img" aria-label={`${label} — photo to come`}>
+          <span class="mono">{placeholder}</span>
+        </div>
+      )
+    }
+  </div>
+  <figcaption class="mono mp-plate-cap">{label}</figcaption>
+</figure>

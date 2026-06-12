@@ -1,0 +1,130 @@
+---
+/**
+ * Background motifs from the illustration system — quiet texture in
+ * the diagram vocabulary. kind: 'ruler' | 'wave' | 'fr' | 'arcs'.
+ */
+import { arcPath } from '../diagrams/geometry';
+
+interface Props {
+  kind: 'ruler' | 'wave' | 'fr' | 'arcs';
+  w?: number;
+  h?: number;
+  corner?: 'tl' | 'tr' | 'bl' | 'br';
+  accent?: boolean;
+}
+const { kind, w = 1200, h: hProp, corner = 'tl', accent = true } = Astro.props;
+
+const ink = 'var(--mp-charcoal)';
+const acc = 'var(--mp-accent)';
+const label = 'var(--mp-meta)';
+const faint = 'var(--mp-faint)';
+const hair = 'var(--mp-hair)';
+
+/* ruler */
+const rh = hProp ?? 28;
+const ticks: { x: number; len: number; major: boolean }[] = [];
+if (kind === 'ruler') {
+  for (let x = 0, k = 0; x <= w; x += 10, k++) {
+    const major = k % 10 === 0;
+    ticks.push({ x, len: major ? 16 : k % 5 === 0 ? 10 : 5, major });
+  }
+}
+
+/* wave */
+const wh = hProp ?? 72;
+const mid = wh / 2;
+let wavePath = '';
+if (kind === 'wave') {
+  const pts: string[] = [];
+  for (let x = 0; x <= w; x += 3) {
+    const y = mid - 10 * Math.sin((2 * Math.PI * x) / 160) - 5 * Math.sin((2 * Math.PI * x) / 47 + 1.2);
+    pts.push(`${x.toFixed(1)} ${y.toFixed(1)}`);
+  }
+  wavePath = 'M ' + pts.join(' L ');
+}
+const ax = w * 0.42;
+const aw = w * 0.16;
+
+/* fr */
+const fh = hProp ?? 360;
+const fy0 = fh - 24;
+const frCurve = (wob: number, off: number) => {
+  const pts: string[] = [];
+  for (let f = 0; f <= 1.0001; f += 0.02) {
+    const y =
+      fy0 -
+      (fh - 60) *
+        (0.52 + 0.1 * Math.cos(3.0 * f * Math.PI + 0.4) * wob + 0.06 * Math.cos(7.5 * f * Math.PI + 1.1) * wob - 0.22 * Math.pow(f, 3)) +
+      off;
+    pts.push(`${(f * w).toFixed(1)} ${y.toFixed(1)}`);
+  }
+  return 'M ' + pts.join(' L ');
+};
+
+/* arcs */
+const size = hProp ?? 220;
+const flip = { tl: '', tr: `scale(-1,1) translate(${-size},0)`, bl: `scale(1,-1) translate(0,${-size})`, br: `scale(-1,-1) translate(${-size},${-size})` }[corner];
+---
+
+{
+  kind === 'ruler' && (
+    <svg viewBox={`0 0 ${w} ${rh}`} class="mp-motif" preserveAspectRatio="none" aria-hidden="true">
+      <line x1="0" y1={rh - 0.5} x2={w} y2={rh - 0.5} stroke={label} stroke-width="1" />
+      {ticks.map((t) => (
+        <line x1={t.x} y1={rh} x2={t.x} y2={rh - t.len} stroke={t.major ? label : hair} stroke-width="1" />
+      ))}
+    </svg>
+  )
+}
+{
+  kind === 'wave' && (
+    <svg viewBox={`0 0 ${w} ${wh}`} class="mp-motif" preserveAspectRatio="none" aria-hidden="true">
+      <defs>
+        <clipPath id="mwClipA"><rect x={ax} y="0" width={aw} height={wh} /></clipPath>
+      </defs>
+      <line x1="0" y1={mid} x2={w} y2={mid} stroke={hair} stroke-width="1" stroke-dasharray="2 4" />
+      <path d={wavePath} fill="none" stroke={faint} stroke-width="1.2" />
+      <g clip-path="url(#mwClipA)">
+        <path d={wavePath} fill="none" stroke={acc} stroke-width="2.2" />
+      </g>
+      <line x1={ax} y1={wh * 0.18} x2={ax} y2={wh * 0.82} stroke={hair} stroke-width="1" />
+      <line x1={ax + aw} y1={wh * 0.18} x2={ax + aw} y2={wh * 0.82} stroke={hair} stroke-width="1" />
+    </svg>
+  )
+}
+{
+  kind === 'fr' && (
+    <svg viewBox={`0 0 ${w} ${fh}`} class="mp-motif" preserveAspectRatio="none" aria-hidden="true">
+      {[0.25, 0.5, 0.75].map((t) => (
+        <line x1="0" y1={24 + (fy0 - 24) * t} x2={w} y2={24 + (fy0 - 24) * t} stroke={hair} stroke-width="1" opacity="0.6" />
+      ))}
+      <line x1="0" y1={fy0} x2={w} y2={fy0} stroke={hair} stroke-width="1" />
+      <path d={frCurve(0.55, 0)} fill="none" stroke={faint} stroke-width="1.2" stroke-dasharray="5 4" />
+      <path d={frCurve(1, 6)} fill="none" stroke={accent ? acc : label} stroke-width="2" />
+    </svg>
+  )
+}
+{
+  kind === 'arcs' && (
+    <svg viewBox={`0 0 ${size} ${size}`} width={size} height={size} class="mp-motif-fixed" aria-hidden="true">
+      <g transform={flip}>
+        <circle cx="0" cy="0" r="3" fill={acc} />
+        {Array.from({ length: 5 }).map((_, k) => {
+          const r = 34 + k * ((size - 50) / 5);
+          const orange = k === 1;
+          return <path d={arcPath(0, 0, r, 4, 86)} fill="none" stroke={orange ? acc : hair} stroke-width={orange ? 1.8 : 1} opacity={1 - k * 0.13} />;
+        })}
+      </g>
+    </svg>
+  )
+}
+
+<style>
+  .mp-motif {
+    display: block;
+    width: 100%;
+  }
+  .mp-motif-fixed {
+    display: block;
+  }
+</style>

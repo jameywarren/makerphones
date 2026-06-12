@@ -1,0 +1,394 @@
+/**
+ * MakerPhones homepage — Field Manual (B+C merge) from the Claude
+ * Design homepage handoff (_source/homepage/). All color through
+ * --mp-* tokens; dark mode via the token flips in theme.css.
+ */
+
+.mp-home {
+  background: var(--mp-ground);
+  color: var(--mp-charcoal);
+  font-family: var(--mp-body);
+}
+.mp-home a {
+  text-decoration: none;
+  color: inherit;
+}
+
+/* shared type primitives */
+.mp-home .mono,
+.mp-bench .mono {
+  font-family: var(--mp-mono);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-weight: 500;
+  color: var(--mp-meta);
+}
+.mp-home .mono.dark,
+.mp-bench .mono.dark {
+  color: var(--mp-ink);
+  font-weight: 600;
+}
+.mp-home .mono.orange,
+.mp-bench .mono.orange {
+  color: var(--mp-accent);
+  font-weight: 600;
+}
+.mp-home .h-display,
+.mp-bench .h-display {
+  font-family: var(--mp-sans);
+  color: var(--mp-ink);
+  font-weight: 700;
+  letter-spacing: -0.025em;
+  line-height: 1.04;
+  margin: 0;
+}
+.mp-home .serif,
+.mp-bench .serif {
+  font-size: 15.5px;
+  line-height: 1.65;
+  color: var(--mp-charcoal);
+  margin: 0;
+  text-wrap: pretty;
+}
+.mp-home .serif-lg,
+.mp-bench .serif-lg {
+  font-size: 19px;
+  line-height: 1.6;
+  color: var(--mp-charcoal);
+  margin: 0;
+  text-wrap: pretty;
+}
+
+/* buttons — field-manual chrome (distinct from .mp-btn chapter CTA) */
+.mp-fbtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 13px 22px;
+  border: 1.5px solid var(--mp-ink);
+  color: var(--mp-ink);
+  font-family: var(--mp-mono);
+  font-size: 11.5px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-weight: 600;
+  white-space: nowrap;
+}
+.mp-fbtn.primary {
+  background: var(--mp-ink);
+  color: var(--mp-ground);
+}
+.mp-fbtn:hover {
+  border-color: var(--mp-accent);
+  color: var(--mp-accent);
+}
+.mp-fbtn.primary:hover {
+  background: var(--mp-accent-hover);
+  border-color: var(--mp-accent-hover);
+  color: #fff;
+}
+
+.mp-grid-bg {
+  background-image: linear-gradient(
+      color-mix(in srgb, var(--mp-charcoal) 8%, transparent) 1px,
+      transparent 1px
+    ),
+    linear-gradient(
+      90deg,
+      color-mix(in srgb, var(--mp-charcoal) 8%, transparent) 1px,
+      transparent 1px
+    );
+  background-size: 28px 28px;
+}
+
+/* plate frame + corner ticks */
+.mp-plate-fig {
+  margin: 0;
+}
+.mp-plate {
+  position: relative;
+  border: 1px solid var(--mp-hair);
+  background: var(--mp-ground);
+}
+.pt {
+  position: absolute;
+  width: 9px;
+  height: 9px;
+}
+.pt-tl { top: -1px; left: -1px; border-top: 1.5px solid var(--mp-charcoal); border-left: 1.5px solid var(--mp-charcoal); }
+.pt-tr { top: -1px; right: -1px; border-top: 1.5px solid var(--mp-charcoal); border-right: 1.5px solid var(--mp-charcoal); }
+.pt-bl { bottom: -1px; left: -1px; border-bottom: 1.5px solid var(--mp-charcoal); border-left: 1.5px solid var(--mp-charcoal); }
+.pt-br { bottom: -1px; right: -1px; border-bottom: 1.5px solid var(--mp-charcoal); border-right: 1.5px solid var(--mp-charcoal); }
+.mp-plate-cap {
+  margin-top: 10px;
+}
+.mp-plate-empty {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  background: repeating-linear-gradient(
+    45deg,
+    transparent 0 10px,
+    color-mix(in srgb, var(--mp-charcoal) 4%, transparent) 10px 20px
+  );
+}
+.mp-plate-img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* dark band token re-scope */
+.mp-darkscope {
+  --mp-ground: #111827;
+  --mp-charcoal: #cbd5e1;
+  --mp-ink: #f9fafb;
+  --mp-meta: #9ca3af;
+  --mp-faint: #6b7280;
+  --mp-hair: #374151;
+  --mp-accent: #fb923c;
+  --mp-accent-hover: #fdba74;
+  color: var(--mp-charcoal);
+}
+
+/* cover hero */
+.mp-heroC {
+  padding: clamp(1.25rem, 4vw, 3.5rem) clamp(1rem, 4vw, 4rem);
+}
+.mp-coverplate {
+  position: relative;
+  border: 1.5px solid var(--mp-charcoal);
+  padding: clamp(1.25rem, 3vw, 2.75rem) clamp(1.25rem, 3.5vw, 3.5rem);
+  background: var(--mp-ground);
+  box-shadow:
+    0 0 0 1px var(--mp-ground),
+    0 0 0 2px var(--mp-hair);
+}
+.mp-cover-toprow,
+.mp-cover-botrow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 32px;
+  flex-wrap: wrap;
+}
+.mp-cover-toprow {
+  border-bottom: 1px solid var(--mp-hair);
+  padding-bottom: 22px;
+}
+.mp-cover-botrow {
+  border-top: 1px solid var(--mp-hair);
+  padding-top: 26px;
+}
+.mp-heroD-grid {
+  display: grid;
+  grid-template-columns: 1fr minmax(0, 640px);
+  gap: 48px;
+  align-items: center;
+  padding: 44px 8px 20px;
+}
+@media (max-width: 64rem) {
+  .mp-heroD-grid {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+}
+.mp-heroD-title {
+  font-size: clamp(2.75rem, 1.4rem + 4.6vw, 4.625rem);
+  margin: 0 0 24px;
+}
+.mp-heroD-marg {
+  margin-top: 32px;
+  border-top: 1px solid var(--mp-hair);
+  padding-top: 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.mp-marginalia {
+  display: flex;
+  gap: 12px;
+  align-items: baseline;
+  margin: 0;
+  max-width: 380px;
+}
+.mp-marginalia .note {
+  text-transform: none;
+  letter-spacing: 0.04em;
+}
+.mp-cta-row {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+/* sections */
+.mp-sec {
+  padding: clamp(2.5rem, 5vw, 4.5rem) clamp(1rem, 4vw, 4rem);
+}
+.mp-secB-grid {
+  display: grid;
+  grid-template-columns: 1fr minmax(260px, 360px);
+  gap: clamp(2rem, 5vw, 4.5rem);
+  align-items: start;
+}
+@media (max-width: 64rem) {
+  .mp-secB-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* contents list */
+.mp-toc {
+  border-top: 1.5px solid var(--mp-charcoal);
+}
+.mp-toc-row {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  padding: 19px 4px;
+  border-bottom: 1px solid var(--mp-hair);
+}
+.mp-toc-row:hover .mp-toc-title {
+  color: var(--mp-accent);
+}
+.mp-toc-title {
+  font-size: clamp(1.05rem, 1.6vw, 1.375rem);
+  font-weight: 600;
+}
+.mp-toc-dots {
+  flex: 1;
+  border-bottom: 1.5px dotted var(--mp-faint);
+  transform: translateY(-5px);
+  min-width: 40px;
+}
+.mp-toc-count {
+  white-space: nowrap;
+}
+@media (max-width: 40rem) {
+  .mp-toc-dots,
+  .mp-toc-count,
+  .mp-toc-lvl {
+    display: none;
+  }
+}
+
+/* bio margin */
+.mp-bio-margin {
+  display: grid;
+  grid-template-columns: minmax(220px, 280px) 1fr;
+  gap: clamp(2rem, 5vw, 4rem);
+  padding: clamp(2.5rem, 5vw, 4.5rem) clamp(1rem, 4vw, 4rem);
+  align-items: start;
+  border-top: 1px solid var(--mp-hair);
+}
+@media (max-width: 48rem) {
+  .mp-bio-margin {
+    grid-template-columns: 1fr;
+  }
+}
+.mp-meta-row {
+  display: flex;
+  gap: 28px;
+  margin-top: 22px;
+  flex-wrap: wrap;
+}
+
+/* plate rows */
+.mp-platerow {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 28px;
+  align-items: start;
+}
+@media (max-width: 48rem) {
+  .mp-platerow {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* bench band */
+.mp-bench {
+  background: var(--mp-ink);
+}
+.mp-bench-in {
+  display: grid;
+  grid-template-columns: 1fr minmax(0, 680px);
+  gap: clamp(2rem, 5vw, 4rem);
+  padding: clamp(3rem, 6vw, 5rem) clamp(1rem, 4vw, 4rem);
+  align-items: start;
+}
+@media (max-width: 64rem) {
+  .mp-bench-in {
+    grid-template-columns: 1fr;
+  }
+}
+.mp-bench-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin: 30px 0 34px;
+  padding: 0;
+}
+.mp-bench-meta div {
+  display: flex;
+  gap: 18px;
+}
+.mp-bench-meta dt {
+  width: 110px;
+  flex-shrink: 0;
+}
+.mp-bench-meta dd {
+  margin: 0;
+}
+
+/* footer */
+.mp-homefoot {
+  display: flex;
+  align-items: center;
+  gap: 40px;
+  justify-content: space-between;
+  padding: 36px clamp(1rem, 4vw, 4rem) 44px;
+  border-top: 1px solid var(--mp-hair);
+  flex-wrap: wrap;
+}
+
+/* header nav links (global Starlight header extension) */
+.mp-hnav {
+  display: flex;
+  gap: clamp(0.9rem, 2vw, 2rem);
+  align-items: center;
+  margin-inline: auto;
+}
+.mp-hnav a {
+  font-family: var(--mp-mono);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-weight: 500;
+  color: var(--mp-meta);
+  text-decoration: none;
+  white-space: nowrap;
+}
+.mp-hnav a:hover,
+.mp-hnav a[aria-current='page'] {
+  color: var(--mp-accent);
+}
+.mp-hver {
+  font-family: var(--mp-mono);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--mp-meta);
+  white-space: nowrap;
+}
+@media (max-width: 64rem) {
+  .mp-hnav,
+  .mp-hver {
+    display: none;
+  }
+}

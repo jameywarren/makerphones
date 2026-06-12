@@ -206,3 +206,78 @@
     opacity: 0.55;
   }
 }
+
+/* ── Hero exploded-headphone motion (homepage handoff) ──────────────
+ * Modes via data-motion on .hero-x: settle | breathe | hover.
+ * Gated like everything else; the exploded layout IS the static still. */
+@media (prefers-reduced-motion: no-preference) {
+  .mp-pulse-soft {
+    animation: mpPulseSoft 2.6s ease-in-out infinite;
+    transform-origin: center;
+    transform-box: fill-box;
+  }
+  .hx-dome {
+    animation: hxDome 1.6s ease-in-out infinite;
+  }
+  .hero-x[data-motion='settle'] .hx-part {
+    animation: hxSettle 1s cubic-bezier(0.2, 0.75, 0.2, 1) both;
+    animation-delay: calc(var(--i) * 90ms);
+  }
+  .hero-x[data-motion='breathe'] .hx-part {
+    animation: hxBreathe 4.6s ease-in-out infinite;
+    animation-delay: calc(var(--i) * -0.55s);
+  }
+  .hero-x[data-motion='hover'] .hx-part {
+    transition: transform 0.85s cubic-bezier(0.3, 0.7, 0.15, 1);
+    transition-delay: calc(var(--i) * 45ms);
+  }
+  .hero-x[data-motion='hover']:hover .hx-part {
+    transform: translate(var(--tx), var(--ty));
+  }
+  .hero-x[data-motion='hover'] .hx-callouts,
+  .hero-x[data-motion='hover'] .hx-axis {
+    transition: opacity 0.5s ease;
+  }
+  .hero-x[data-motion='hover']:hover .hx-callouts,
+  .hero-x[data-motion='hover']:hover .hx-axis {
+    opacity: 0.1;
+  }
+}
+
+@keyframes mpPulseSoft {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.035);
+  }
+}
+@keyframes hxDome {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.07);
+  }
+}
+@keyframes hxSettle {
+  from {
+    transform: translate(calc(var(--tx) * -0.22), calc(var(--ty) * -0.22));
+    opacity: 0;
+  }
+  to {
+    transform: none;
+    opacity: 1;
+  }
+}
+@keyframes hxBreathe {
+  0%,
+  100% {
+    transform: none;
+  }
+  50% {
+    transform: translate(calc(var(--tx) * -0.07), calc(var(--ty) * -0.07));
+  }
+}

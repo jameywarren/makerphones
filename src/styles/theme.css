@@ -28,6 +28,8 @@
   --mp-line: #e7e5e0; /* warm hairline */
   --mp-meta: #6b7280;
   --mp-faint: #9ca3af; /* diagram leader lines */
+  --mp-hair: #d1d5db; /* technical-chrome hairline (cooler than --mp-line) */
+  --mp-ground: var(--mp-bg); /* page/plate ground — aliases the warm bg */
 
   /* ---- effects ---- */
   --mp-shadow-warm: 0 1px 2px rgba(124, 45, 18, 0.04), 0 6px 20px rgba(124, 45, 18, 0.06);
@@ -63,6 +65,8 @@
   --mp-line: #374151;
   --mp-meta: #9ca3af;
   --mp-faint: #6b7280;
+  --mp-hair: #374151;
+  --mp-ground: var(--mp-bg);
   --mp-shadow-warm: none;
 
   /* dark surfaces: light orange is high-contrast (7.8:1 on #111827) */
