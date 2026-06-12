@@ -56,13 +56,11 @@ Lower is generally better, but for headphone drivers, distortion at normal liste
 
 ### Budget Tier ($10–20 per pair)
 
-**Dayton Audio CE38MB-32 (38mm, 32Ω):** Dayton's budget line is remarkably good for the price. The CE38MB is a solid first driver — decent frequency response, forgiving of enclosure variations, and cheap enough to buy extras for experimentation.
+**Dayton Audio CE38MB-32 (38mm, 32Ω):** The one part in Dayton's catalog actually marketed as a headphone replacement driver, and remarkably good for the price. A solid first driver — decent frequency response, forgiving of enclosure variations, and cheap enough to buy extras for experimentation. One build note: the Mylar diaphragm is fragile, and Dayton specifies installing it behind a grille — design your baffle accordingly.
 
-**Dayton Audio CE50MB-32 (50mm, 32Ω):** The larger sibling. More bass potential, requires bigger cups. Good choice if you specifically want that larger-driver feel.
+A word about the rest of Dayton's CE series, because the names look tempting: it's mostly small *loudspeaker* drivers — 4 and 8 ohm, paper or aluminum cones — that happen to be headphone-sized. The tell for headphone use is 32-ohm impedance with a Mylar diaphragm, the "MB-32" type like the CE38MB-32. Don't drop a 4 or 8 ohm cone driver into a headphone build and expect headphone behavior.
 
 ### Mid-Range Tier ($20–50 per pair)
-
-**Dayton Audio PS95-8 and similar:** Step up in quality from the CE series. Better materials, more refined response. Worth the extra cost for second and third builds.
 
 **Salvaged drivers from quality commercial headphones:** Surprisingly good option. A Sennheiser, Audio-Technica, or AKG headphone with broken headband/cable often has a perfectly good driver. Thrift stores and eBay are your friends. The downside: you don't get spec sheets.
 

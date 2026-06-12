@@ -21,12 +21,13 @@ editorial pass, one commit per correction, so the change history is clean.
       drivers" framing replaced with the one genuinely
       headphone-applicable part, the CE38MB-32 (# 285-131, 38 mm/32 Ω,
       ~$3.49, bass-heavy closed-back caveat) *(fixed June 11, 2026)*.
-- [ ] **Dayton in driver-selection-guide** — still pending verification:
-      it lists the CE38MB-32 (fine) but also CE50MB-32 and "PS95-8 and
-      similar" as headphone drivers; the PS95-8 is a 3" full-range
-      loudspeaker driver. Verify each model and price against the
-      current catalog before editing — out of scope of the June 11
-      sourcing-components fix.
+- [x] **Dayton in driver-selection-guide** — verified and fixed:
+      CE38MB-32 kept (with the Mylar-fragility/grille build note);
+      PS95-8 (a 3-1/2" loudspeaker driver) removed from the headphone
+      context; CE50MB-32 dropped — not found in Dayton's CE-series
+      catalog or a targeted Parts Express search; governing principle
+      added (headphone tell = 32 Ω + Mylar, the "MB-32" type)
+      *(fixed June 11, 2026)*.
 
 ## Outdated author bio in chapter bodies
 
