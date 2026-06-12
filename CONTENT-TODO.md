@@ -26,15 +26,13 @@ employee #1, 1997–2001; HeadRoom VP Ops → President & CEO, 2003–2017;
 designed the Cosmic**. These chapters still carry older "30 years"
 framing in body copy (migrated faithfully):
 
-- [ ] `how-headphones-create-sound` — "After 30 years working with
-      headphones — from manufacturing at Grace Design to running
-      HeadRoom" (opening) and "I've built headphones for 30 years."
-      **Note:** this chapter's `excerpt` also says "After 30 years in
-      professional audio…" and the v2 design renders excerpts as the
-      visible chapter lede — fixing the excerpt is now reader-facing,
-      not just metadata.
-- [ ] `driver-selection-guide` — "30 years" mention.
-- [ ] `design-methodology` — "30 years" mention.
+- [x] `how-headphones-create-sound` — opening, "I've built headphones
+      for 30 years," and the excerpt (the visible chapter lede) — all
+      reconciled to "25+ years" *(fixed June 11, 2026)*.
+- [x] `driver-selection-guide` — body + excerpt reconciled to
+      "25+ years" *(fixed June 11, 2026)*.
+- [x] `design-methodology` — reconciled to "25+ years"
+      *(fixed June 11, 2026)*.
 
 ## Cross-links to non-frozen handles (migration report)
 

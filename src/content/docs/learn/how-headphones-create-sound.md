@@ -9,10 +9,10 @@ related: [understanding-frequency-response, driver-technologies, open-vs-closed-
 read_time: 8
 tags: [fundamentals, beginner, theory, driver-technology]
 description: "Learn how headphones create sound — voice coil, magnet, and diaphragm working together. Essential knowledge for building your own."
-excerpt: "After 30 years in professional audio, here's the explanation of how headphones work that actually makes it click."
+excerpt: "After 25+ years in professional audio, here's the explanation of how headphones work that actually makes it click."
 ---
 
-You know how when you're learning something new, there's always that one person who can explain it in a way that just *clicks*? That's what I'm going for here. After 30 years working with headphones — from manufacturing at Grace Design to running HeadRoom — I've explained this stuff hundreds of times. Let's break it down together.
+You know how when you're learning something new, there's always that one person who can explain it in a way that just *clicks*? That's what I'm going for here. After 25+ years working with headphones — from manufacturing at Grace Design to running HeadRoom — I've explained this stuff hundreds of times. Let's break it down together.
 
 ## The Basic Magic Trick
 
@@ -82,7 +82,7 @@ This is actually good news for DIY builders. It means expensive components don't
 
 **Measurements and listening both matter.** Some people in the DIY community worship measurements. Others ignore them entirely and just listen. The reality is you need both. Measurements tell you what's happening objectively. Listening tells you whether it matters to your ears. Neither alone is complete.
 
-**Your first build won't be perfect — and that's fine.** I've built headphones for 30 years and I still have to iterate. Your first pair is a learning experience. Plan for it, embrace it, and don't beat yourself up when things don't sound exactly right on the first try. That's how this works.
+**Your first build won't be perfect — and that's fine.** I've built headphones for 25+ years and I still have to iterate. Your first pair is a learning experience. Plan for it, embrace it, and don't beat yourself up when things don't sound exactly right on the first try. That's how this works.
 
 The goal is to make something that sounds good to you. Measurements are tools to help you get there.
 

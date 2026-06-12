@@ -9,10 +9,10 @@ related: [sourcing-components, impedance-and-sensitivity, driver-technologies, y
 read_time: 7
 tags: [components, beginner, drivers, selection, practical]
 description: "Learn how to choose the right drivers for your DIY headphone build — size, impedance, materials, and specific recommendations for beginners."
-excerpt: "Hundreds of drivers are available, but which one is right for your build? Here's a practical guide to driver selection based on 30 years of experience."
+excerpt: "Hundreds of drivers are available, but which one is right for your build? Here's a practical guide to driver selection based on 25+ years of experience."
 ---
 
-You've learned the theory, you understand the different driver technologies, and you're ready to actually choose drivers for your build. But standing in front of Parts Express's website or scrolling through AliExpress listings, you realize there are hundreds of options. How do you choose? What actually matters? Let me walk you through the decision process I use when selecting drivers, based on 30 years of working with headphones.
+You've learned the theory, you understand the different driver technologies, and you're ready to actually choose drivers for your build. But standing in front of Parts Express's website or scrolling through AliExpress listings, you realize there are hundreds of options. How do you choose? What actually matters? Let me walk you through the decision process I use when selecting drivers, based on 25+ years of working with headphones.
 
 ## Start with Your Use Case
 

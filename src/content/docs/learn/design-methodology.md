@@ -12,7 +12,7 @@ description: "The complete workflow from concept to finished headphones — how 
 excerpt: "Most DIY builders jump straight to building without planning. Here's the professional design process that ensures your headphones actually work — and sound good."
 ---
 
-You now understand how headphones work, what components you need, and how they interact. But how do you actually go from "I want to build headphones" to holding a finished pair in your hands? That's what this chapter is about — the complete workflow from initial concept through testing and refinement. This is the design process I developed over 30 years in professional audio, adapted for DIY builders.
+You now understand how headphones work, what components you need, and how they interact. But how do you actually go from "I want to build headphones" to holding a finished pair in your hands? That's what this chapter is about — the complete workflow from initial concept through testing and refinement. This is the design process I developed over 25+ years in professional audio, adapted for DIY builders.
 
 ## The Five-Phase Design Process
 
