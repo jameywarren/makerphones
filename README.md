@@ -52,7 +52,7 @@ Deploys on push to `main` via `.github/workflows/deploy.yml`
 
 ## Status
 
-**All 30 chapters, five appendices, and three build guides live**
+**All 32 chapters, six appendices, and three build guides live**
 under `/learn/` — the manual is complete, with hands-on companion
 builds (Your First Build, Simple Open-Back, Closed-Back Studio). Handles are frozen per the Content &
 Style Guide appendix (`_source/MakerPhones-Content-Style-Guide.md`).

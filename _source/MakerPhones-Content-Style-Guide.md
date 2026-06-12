@@ -104,7 +104,7 @@ excerpt: "..."                        # Shopify excerpt
 
 ## Appendix: chapter handle reference
 
-Frozen handles — use these verbatim for filenames and cross-links. Live source of truth is the repo (`src/content/docs/learn/`). Routes are `/learn/<handle>`; at Shopify migration these become `/pages/<handle>` with identical handles. **✓ = written (30 of 30 — complete).**
+Frozen handles — use these verbatim for filenames and cross-links. Live source of truth is the repo (`src/content/docs/learn/`). Routes are `/learn/<handle>`; at Shopify migration these become `/pages/<handle>` with identical handles. **✓ = written (32 of 32 — complete).**
 
 **Part 1 — Fundamentals**
 - ✓ how-headphones-create-sound
@@ -134,6 +134,8 @@ Frozen handles — use these verbatim for filenames and cross-links. Live source
 - ✓ budget-measurement-setup
 - ✓ taking-and-interpreting-measurements
 - ✓ tuning-with-damping
+- ✓ tuning-with-eq
+- ✓ benchmarking-with-public-measurements
 - ✓ advanced-measurement-topics
 
 **Part 5 — Advanced Topics**

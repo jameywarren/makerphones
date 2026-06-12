@@ -1,5 +1,5 @@
 /**
- * The manual's structure — six parts, 30 chapters, frozen handles.
+ * The manual's structure — six parts, 32 chapters, frozen handles.
  *
  * Handle order matches the Content & Style Guide appendix
  * (_source/Makerphones-Content-Style-Guide.md) verbatim. Nav-chrome
@@ -94,6 +94,8 @@ export const MANUAL_PARTS: ManualPart[] = [
       'budget-measurement-setup',
       'taking-and-interpreting-measurements',
       'tuning-with-damping',
+      'tuning-with-eq',
+      'benchmarking-with-public-measurements',
       'advanced-measurement-topics',
     ],
   },

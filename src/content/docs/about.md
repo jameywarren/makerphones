@@ -32,5 +32,5 @@ progresses.
 
 ## The manual
 
-Six parts, 30 chapters, published openly as they're finished — [browse the contents](/contents/).
+Six parts, 32 chapters, published openly as they're finished — [browse the contents](/contents/).
 The manual is the product: there's nothing to buy here, and the chapters stay free to read.

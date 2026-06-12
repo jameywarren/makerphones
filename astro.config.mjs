@@ -51,6 +51,8 @@ const sidebar = [
       'learn/budget-measurement-setup',
       'learn/taking-and-interpreting-measurements',
       'learn/tuning-with-damping',
+      'learn/tuning-with-eq',
+      'learn/benchmarking-with-public-measurements',
       'learn/advanced-measurement-topics',
     ],
   },

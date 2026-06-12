@@ -2,7 +2,7 @@
 title: Professional Design Insights
 handle: professional-design-insights
 part: 5
-chapter: 26
+chapter: 28
 difficulty: Intermediate
 prerequisites: [design-methodology]
 related: [design-methodology, ear-pads-and-comfort, open-vs-closed-back-design, why-measure-headphones, manufacturing-for-consistency]

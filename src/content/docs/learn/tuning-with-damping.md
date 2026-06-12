@@ -70,4 +70,4 @@ Keep a log. Name each measurement file with what you changed — "rear-fill-2g,"
 
 ## What's Next
 
-Frequency response is the headline, but it isn't the whole picture. Decay plots, impulse response, and distortion measurements reveal problems that a frequency-response curve alone hides — the advanced measurement topics that round out this section and explain why two headphones with nearly identical curves can still sound clearly different from each other.
+Damping is the acoustic half of tuning; the electronic half — correcting the residual shape in the signal itself — is covered in [tuning with EQ](/learn/tuning-with-eq/). And frequency response is the headline, but it isn't the whole picture. Decay plots, impulse response, and distortion measurements reveal problems that a frequency-response curve alone hides — the advanced measurement topics that round out this section and explain why two headphones with nearly identical curves can still sound clearly different from each other.
