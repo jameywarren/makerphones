@@ -38,7 +38,7 @@ Clear, approachable, credible — readable by a first-time builder, grounded in 
 
 ## The manual
 
-30 chapters in six parts — Fundamentals → Components & Materials → Design & Build → Measurement & Tuning → Advanced → Special Topics — plus five appendices. **State: 18 of 30 written** — Parts 1–2 complete (Ch 1–12); Part 3 complete except 3D Design for Headphones (Ch 13, 15–17); Part 4 started (Why Measure Headphones, Tuning with Damping). Remaining: Ch 14, the rest of Part 4, Parts 5–6, appendices.
+30 chapters in six parts — Fundamentals → Components & Materials → Design & Build → Measurement & Tuning → Advanced → Special Topics — plus five appendices. **State: 19 of 30 written** — Parts 1–3 complete (Ch 1–17); Part 4 started (Why Measure Headphones, Tuning with Damping). Remaining: the rest of Part 4, Parts 5–6, appendices.
 
 ## Relationship to Warren Labs
 

@@ -35,8 +35,9 @@ const sidebar = [
   {
     label: 'Design & Build',
     items: [
-      // Part 3 — 3d-design-for-headphones (3.2) still pending
+      // Part 3 — complete
       'learn/design-methodology',
+      'learn/3d-design-for-headphones',
       'learn/acoustic-chamber-design',
       'learn/driver-mounting-and-assembly',
       'learn/damping-strategy-and-application',
