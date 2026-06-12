@@ -1,0 +1,117 @@
+---
+/**
+ * FIG 22 — Mic wiring: CTIA vs OMTP, boom vs inline. The same
+ * sectioned TRRS plug as the connector map, wired both ways — the
+ * two standards swap mic and ground — plus boom-vs-inline capsule
+ * placement.
+ */
+import PlugBody from './PlugBody.astro';
+import { TRRS_SEGS, plugLayout } from './geometry';
+
+const x = 96;
+const c = plugLayout(x, TRRS_SEGS).map((s) => s.cx);
+
+interface Pin {
+  cx: number;
+  lab: string;
+  hot?: boolean;
+}
+const rows: { cy: number; std: string; legacy?: boolean; pins: Pin[] }[] = [
+  {
+    cy: 120,
+    std: 'CTIA',
+    pins: [
+      { cx: c[0], lab: 'L' },
+      { cx: c[2], lab: 'R' },
+      { cx: c[4], lab: 'GND' },
+      { cx: c[6], lab: 'MIC', hot: true },
+    ],
+  },
+  {
+    cy: 258,
+    std: 'OMTP',
+    legacy: true,
+    pins: [
+      { cx: c[0], lab: 'L' },
+      { cx: c[2], lab: 'R' },
+      { cx: c[4], lab: 'MIC', hot: true },
+      { cx: c[6], lab: 'GND' },
+    ],
+  },
+];
+
+const ink = 'var(--mp-charcoal)';
+const accent = 'var(--mp-accent)';
+const dark = 'var(--mp-ink)';
+const label = 'var(--mp-meta)';
+const faint = 'var(--mp-faint)';
+const ground = 'var(--mp-ground)';
+---
+
+<svg
+  viewBox="0 74 760 406"
+  class="mp-dgm"
+  role="img"
+  aria-label="The same TRRS plug wired to the CTIA and OMTP standards, showing the swapped mic and ground contacts, above boom-versus-inline microphone placement: a boom arm holding the capsule at the mouth and an inline capsule on the cable"
+>
+  {
+    rows.map((r) => (
+      <g>
+        <text x="42" y={r.cy - 30} font-size="10" font-weight="700" fill={accent}>
+          {r.std}
+        </text>
+        {r.legacy && (
+          <text x="42" y={r.cy - 16} font-size="7.5" font-weight="500" fill={label}>
+            LEGACY
+          </text>
+        )}
+        <PlugBody x={x} cy={r.cy} segs={TRRS_SEGS} h={34} />
+        {r.pins.map((pin) => (
+          <g>
+            <line x1={pin.cx} y1={r.cy + 46} x2={pin.cx} y2={r.cy + 21} stroke={faint} stroke-width="1" />
+            <circle cx={pin.cx} cy={r.cy + 21} r="2.2" fill={faint} />
+            <text
+              x={pin.cx}
+              y={r.cy + 60}
+              font-size="8"
+              font-weight={pin.hot ? '700' : '500'}
+              fill={pin.hot ? accent : label}
+              text-anchor="middle"
+            >
+              {pin.lab}
+            </text>
+          </g>
+        ))}
+      </g>
+    ))
+  }
+  <path d={`M ${c[4]} 158 C ${c[4] + 30} 196 ${c[6] - 30} 196 ${c[6]} 232`} fill="none" stroke={accent} stroke-width="1.2" stroke-dasharray="3 3"></path>
+  <path d={`M ${c[6]} 158 C ${c[6] + 26} 200 ${c[4] - 26} 200 ${c[4]} 232`} fill="none" stroke={accent} stroke-width="1.2" stroke-dasharray="3 3"></path>
+  <text x={c[6] + 60} y="196" font-size="8.5" font-weight="600" fill={accent}>THE SWAP — MIC ↔ GND</text>
+  <text x={c[6] + 60} y="210" font-size="7.5" font-weight="500" fill={label}>WRONG STANDARD = DEAD MIC + FAINT AUDIO</text>
+
+  <text x="70" y="372" font-size="9.5" font-weight="600" fill={dark}>BOOM — AT THE MOUTH</text>
+  <text x="70" y="386" font-size="7.5" font-weight="500" fill={label}>CONSISTENT DISTANCE · BEST SNR</text>
+  <rect x="70" y="398" width="34" height="48" rx="12" fill="none" stroke={ink} stroke-width="1.5"></rect>
+  <path d="M 104 438 C 150 452 186 446 212 428" fill="none" stroke={ink} stroke-width="2"></path>
+  <circle cx="218" cy="425" r="7" fill={ground} stroke={accent} stroke-width="2"></circle>
+  <circle cx="218" cy="425" r="2" fill={accent}></circle>
+
+  <text x="430" y="372" font-size="9.5" font-weight="600" fill={dark}>INLINE — ON THE CABLE</text>
+  <text x="430" y="386" font-size="7.5" font-weight="500" fill={label}>CONVENIENT · RUBS, DROOPS, NOISIER</text>
+  <path d="M 430 408 C 470 420 500 444 560 448 C 610 452 650 440 690 444" fill="none" stroke={ink} stroke-width="1.5"></path>
+  <rect x="544" y="436" width="36" height="16" rx="5" fill={ground} stroke={accent} stroke-width="1.8"></rect>
+  <circle cx="562" cy="444" r="2" fill={accent}></circle>
+
+  <text x="24" y="470" font-size="10" font-weight="500" fill={label} opacity="0.9"
+    >SAME TRRS PLUG, ONE SWAPPED CONTACT — CHECK THE STANDARD BEFORE SOLDERING.</text
+  >
+</svg>
+
+<style>
+  svg {
+    max-width: 100%;
+    height: auto;
+    display: block;
+  }
+</style>

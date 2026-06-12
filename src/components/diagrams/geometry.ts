@@ -74,6 +74,42 @@ export const FR_TICKS: [number, string][] = [
   [20000, '20k'],
 ];
 
+/** Sectioned-plug segment data shared by the connector figures (FIG 13 / 22). */
+export interface PlugSeg {
+  w: number;
+  kind: 'tip' | 'ins' | 'contact' | 'body';
+}
+
+export const TRS_SEGS: PlugSeg[] = [
+  { w: 46, kind: 'tip' },
+  { w: 7, kind: 'ins' },
+  { w: 36, kind: 'contact' },
+  { w: 7, kind: 'ins' },
+  { w: 116, kind: 'contact' },
+  { w: 54, kind: 'body' },
+];
+
+export const TRRS_SEGS: PlugSeg[] = [
+  { w: 46, kind: 'tip' },
+  { w: 7, kind: 'ins' },
+  { w: 32, kind: 'contact' },
+  { w: 7, kind: 'ins' },
+  { w: 32, kind: 'contact' },
+  { w: 7, kind: 'ins' },
+  { w: 84, kind: 'contact' },
+  { w: 54, kind: 'body' },
+];
+
+/** Lay segments left→right from x, recording each one's left edge and center. */
+export function plugLayout(x: number, segs: PlugSeg[]) {
+  let cx = x;
+  return segs.map((s) => {
+    const o = { ...s, x: cx, cx: cx + s.w / 2 };
+    cx += s.w;
+    return o;
+  });
+}
+
 /** Vertical-wall hatching line coordinates. */
 export function hatchV(x: number, y0: number, y1: number, side = 1, n = 7, len = 10) {
   const lines: { x1: number; y1: number; x2: number; y2: number }[] = [];

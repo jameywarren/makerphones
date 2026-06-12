@@ -6,6 +6,8 @@
  */
 import { getManual } from '../data/manual';
 import Level from './Level.astro';
+import MpIcon from './illustration/MpIcon.astro';
+import { entryIcon } from './illustration/icon-map';
 
 const { entry, id } = Astro.locals.starlightRoute;
 const handle = id.startsWith('learn/') ? id.slice(6) : null;
@@ -31,6 +33,7 @@ const isSplash = (entry.data as { template?: string }).template === 'splash';
   isSplash ? null : chapter ? (
     <div class="not-content">
       <nav class="mp-crumb" aria-label="Breadcrumb">
+        <span class="mp-crumb-mark"><MpIcon name={entryIcon(chapter.partNum, chapter.handle)} size={18} /></span>
         <a href="/contents/">The Manual</a>
         <span class="sep" aria-hidden="true">/</span>
         {chapter.partNum === -1 ? (
@@ -68,3 +71,10 @@ const isSplash = (entry.data as { template?: string }).template === 'splash';
     <h1 id="_top" data-page-title>{data.title}</h1>
   )
 }
+
+<style>
+  .mp-crumb-mark {
+    display: inline-flex;
+    flex: none;
+  }
+</style>

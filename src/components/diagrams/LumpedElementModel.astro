@@ -1,0 +1,114 @@
+---
+/**
+ * FIG 19 — Acoustic model: the circuit analogy. Driver, chambers,
+ * and port drawn physically, mapped onto their electrical
+ * equivalents below — air mass ↔ inductor, compliance ↔ capacitor,
+ * loss ↔ resistor.
+ */
+import { arcPath, arrowHead, sinePath, zigzagPath } from './geometry';
+
+const cy = 152; // physical row centerline
+const wy = 354; // circuit wire baseline
+
+// inductor coil arc x-centers: 4 arcs, r 9, from left edge x
+const coil = (x: number) => [0, 1, 2, 3].map((k) => x + 9 + k * 18);
+const earArr = arrowHead(442, cy, 0, 5);
+
+const ink = 'var(--mp-charcoal)';
+const accent = 'var(--mp-accent)';
+const dark = 'var(--mp-ink)';
+const label = 'var(--mp-meta)';
+const faint = 'var(--mp-faint)';
+const hair = 'var(--mp-hair)';
+const washInkSoft = 'color-mix(in srgb, var(--mp-charcoal) 5%, transparent)';
+const washAccent = 'color-mix(in srgb, var(--mp-accent) 7%, transparent)';
+---
+
+<svg
+  viewBox="0 60 760 430"
+  class="mp-dgm"
+  role="img"
+  aria-label="A driver with rear cavity and port drawn physically, mapped onto its equivalent electrical circuit: the port's air mass as an inductor, the cavity's compliance as a capacitor to ground, the diaphragm's moving mass as a second inductor, and damping loss as a resistor"
+>
+  <rect x="150" y={cy - 60} width="110" height="120" fill={washInkSoft} stroke={ink} stroke-width="1.5"></rect>
+  <rect x="106" y={cy - 12} width="44" height="24" fill="none" stroke={ink} stroke-width="1.5"></rect>
+  <rect x="260" y={cy - 38} width="12" height="76" fill="none" stroke={ink} stroke-width="1.5"></rect>
+  <path d={`M 272 ${cy - 30} A 30 30 0 0 1 272 ${cy + 30}`} fill={washAccent} stroke={accent} stroke-width="2.5"></path>
+  <rect x="272" y={cy - 60} width="150" height="120" fill="none" stroke={hair} stroke-width="1.2" stroke-dasharray="4 3"></rect>
+  <text x="447" y={cy + 4} font-size="8.5" font-weight="500" fill={label}>TO EAR</text>
+  <line x1="426" y1={cy} x2="442" y2={cy} stroke={faint} stroke-width="1"></line>
+  <polygon points={earArr.points} transform={earArr.transform} fill={faint}></polygon>
+
+  <text x="92" y={cy - 76} font-size="8.5" font-weight="500" fill={label}>PORT — AIR MASS</text>
+  <line x1="116" y1={cy - 70} x2="126" y2={cy - 8} stroke={faint} stroke-width="1"></line>
+  <circle cx="126" cy={cy - 8} r="2.2" fill={faint}></circle>
+  <text x="170" y={cy + 88} font-size="8.5" font-weight="500" fill={label}>REAR CAVITY — AIR SPRING</text>
+  <line x1="206" y1={cy + 80} x2="206" y2={cy + 30} stroke={faint} stroke-width="1"></line>
+  <circle cx="206" cy={cy + 30} r="2.2" fill={faint}></circle>
+  <text x="300" y={cy - 76} font-size="8.5" font-weight="500" fill={label}>DIAPHRAGM — MOVING MASS + LOSS</text>
+  <line x1="308" y1={cy - 70} x2="290" y2={cy - 22} stroke={faint} stroke-width="1"></line>
+  <circle cx="290" cy={cy - 22} r="2.2" fill={faint}></circle>
+
+  {
+    [
+      [126, cy + 14, 196, wy - 26],
+      [206, cy + 42, 330, wy - 26],
+      [290, cy + 26, 436, wy - 26],
+    ].map(([x1, y1, x2, y2]) => <line x1={x1} y1={y1} x2={x2} y2={y2} stroke={faint} stroke-width="1" stroke-dasharray="2 5" />)
+  }
+
+  <circle cx="96" cy={wy} r="17" fill="none" stroke={ink} stroke-width="1.5"></circle>
+  <path d={sinePath(85, wy, 6, 11, 22)} fill="none" stroke={accent} stroke-width="1.8"></path>
+  <text x="96" y={wy + 42} font-size="8" font-weight="500" fill={label} text-anchor="middle">DRIVE P(t)</text>
+  <line x1="113" y1={wy} x2="160" y2={wy} stroke={ink} stroke-width="1.5"></line>
+  {coil(160).map((cx) => <path d={arcPath(cx, wy, 9, 180, 360)} fill="none" stroke={ink} stroke-width="1.5" />)}
+  <text x="196" y={wy - 24} font-size="8" font-weight="600" fill={dark} text-anchor="middle">L₁</text>
+  <line x1="232" y1={wy} x2="296" y2={wy} stroke={ink} stroke-width="1.5"></line>
+  <line x1="330" y1={wy} x2="330" y2={wy + 26} stroke={ink} stroke-width="1.5"></line>
+  <line x1="326" y1={wy + 22} x2="326" y2={wy + 46} stroke={ink} stroke-width="1.8"></line>
+  <line x1="334" y1={wy + 22} x2="334" y2={wy + 46} stroke={ink} stroke-width="1.8"></line>
+  <line x1="330" y1={wy + 42} x2="330" y2={wy + 58} stroke={ink} stroke-width="1.5"></line>
+  <line x1="318" y1={wy + 58} x2="342" y2={wy + 58} stroke={ink} stroke-width="1.5"></line>
+  <line x1="322" y1={wy + 63} x2="338" y2={wy + 63} stroke={ink} stroke-width="1.2"></line>
+  <line x1="326" y1={wy + 68} x2="334" y2={wy + 68} stroke={ink} stroke-width="1"></line>
+  <text x="352" y={wy + 40} font-size="8" font-weight="600" fill={dark}>C</text>
+  <line x1="296" y1={wy} x2="364" y2={wy} stroke={ink} stroke-width="1.5"></line>
+  {coil(400).map((cx) => <path d={arcPath(cx, wy, 9, 180, 360)} fill="none" stroke={ink} stroke-width="1.5" />)}
+  <text x="436" y={wy - 24} font-size="8" font-weight="600" fill={dark} text-anchor="middle">L₂</text>
+  <line x1="364" y1={wy} x2="400" y2={wy} stroke={ink} stroke-width="1.5"></line>
+  <line x1="472" y1={wy} x2="500" y2={wy} stroke={ink} stroke-width="1.5"></line>
+  <path d={zigzagPath(500, 554, wy, 6, 8)} fill="none" stroke={ink} stroke-width="1.5"></path>
+  <text x="527" y={wy - 24} font-size="8" font-weight="600" fill={dark} text-anchor="middle">R</text>
+  <line x1="554" y1={wy} x2="600" y2={wy} stroke={ink} stroke-width="1.5"></line>
+  <text x="614" y={wy + 4} font-size="8.5" font-weight="500" fill={label}>OUT — SPL</text>
+
+  <text x="560" y="120" font-size="9.5" font-weight="600" fill={dark}>THE DICTIONARY</text>
+  {
+    [
+      ['AIR MASS', '↔ L · INDUCTOR'],
+      ['COMPLIANCE', '↔ C · CAPACITOR'],
+      ['LOSS / DAMPING', '↔ R · RESISTOR'],
+    ].map(([a, b], i) => (
+      <g>
+        <text x="560" y={144 + i * 22} font-size="8.5" font-weight="500" fill={label}>
+          {a}
+        </text>
+        <text x="652" y={144 + i * 22} font-size="8.5" font-weight="600" fill={accent}>
+          {b}
+        </text>
+      </g>
+    ))
+  }
+
+  <text x="24" y="478" font-size="10" font-weight="500" fill={label} opacity="0.9"
+    >SAME MATH AS A CIRCUIT — SOLVE THE NETWORK AND THE RESONANCES FALL OUT BEFORE YOU CUT WOOD.</text
+  >
+</svg>
+
+<style>
+  svg {
+    max-width: 100%;
+    height: auto;
+    display: block;
+  }
+</style>

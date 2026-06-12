@@ -12,11 +12,18 @@ description: "Simulating how a driver and chamber will behave before you build �
 excerpt: "Modeling adds a step in front of building: predict how a driver and chamber will behave before you print, so you narrow the design space instead of printing ten cups to find out."
 ---
 
+import Figure from '../../../components/Figure.astro';
+import LumpedElementModel from '../../../components/diagrams/LumpedElementModel.astro';
+
 Every chapter so far has worked the same way: design by principle, then confirm by building and measuring. Acoustic modeling adds a step in front of all that. Instead of printing a cup to discover how it sounds, you simulate how a driver and chamber will behave first — narrowing the design space and, just as valuably, building your intuition for why a change does what it does. Modeling won't replace building and measuring, and a model you trust too much will lead you astray, but used well it can save you real iterations and deepen your understanding of everything in the earlier chapters.
 
 ## What acoustic modeling actually is
 
 The core idea is the equivalent circuit. A headphone's driver and the air around it form a single electro-mechanical-acoustical system, and that system can be modeled as an analogous electrical circuit. The driver's electrical, mechanical, and acoustic behavior becomes circuit elements, and so do the chambers: the springiness of trapped air becomes a compliance, the air in a vent or port behaves like a mass, and damping and leakage act as resistances. Solve the circuit, and you get a predicted frequency response. It is, quite literally, SPICE for acoustics.
+
+<Figure label="Fig. 1" caption="The lumped-element analogy — driver, chambers, and port drawn physically, then as the circuit they behave like: air mass as inductance, compliance as capacitance, loss as resistance.">
+  <LumpedElementModel />
+</Figure>
 
 This is the lumped-element method, and it's the tractable, fast approach that suits a headphone well, because the chambers are small relative to the wavelengths involved. It handles the things you care about — how the rear volume, a vent, and damping interact to shape the bass and the main resonance — without needing a supercomputer.
 

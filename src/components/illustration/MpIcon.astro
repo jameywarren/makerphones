@@ -1,19 +1,14 @@
 ---
 /**
- * Icon set — 24×24, stroke 1.6, round caps. Six part icons plus
- * wayfinding (read, contents, arrow). From the illustration system.
+ * Icon set — 24×24, stroke 1.6, round caps. Six part icons, content
+ * kinds (read, guide, builds, contents), the appendix marks
+ * (glossary, troubleshoot, resources, suppliers), and wayfinding
+ * (arrow). From the illustration system's wayfinding taxonomy.
  */
+import type { MpIconName } from './icon-map';
+
 interface Props {
-  name:
-    | 'fundamentals'
-    | 'drivers'
-    | 'enclosures'
-    | 'materials'
-    | 'build'
-    | 'measure'
-    | 'read'
-    | 'contents'
-    | 'arrow';
+  name: MpIconName;
   size?: number;
   color?: string;
 }
@@ -85,6 +80,48 @@ const a = 'var(--mp-accent)';
     <g>
       <line x1="3.5" y1="12" x2="19.5" y2="12" stroke={s}></line>
       <path d="M 14 6.5 L 19.8 12 L 14 17.5" fill="none" stroke={s}></path>
+    </g>
+  )}
+  {name === 'guide' && (
+    <g>
+      <line x1="4.5" y1="19.5" x2="9.5" y2="14.5" stroke={s} stroke-width="3.4"></line>
+      <line x1="9.5" y1="14.5" x2="17.5" y2="6.5" stroke={s}></line>
+      <circle cx="18.8" cy="5.2" r="1.5" fill={a} stroke="none"></circle>
+    </g>
+  )}
+  {name === 'builds' && (
+    <g>
+      <path d="M 5 13 A 7 7 0 0 1 19 13" fill="none" stroke={s} stroke-width="2"></path>
+      <rect x="3.5" y="12.5" width="4.5" height="7" rx="2" fill="none" stroke={s}></rect>
+      <rect x="16" y="12.5" width="4.5" height="7" rx="2" fill="none" stroke={s}></rect>
+      <circle cx="18.25" cy="16" r="1.2" fill={a} stroke="none"></circle>
+    </g>
+  )}
+  {name === 'glossary' && (
+    <g>
+      <path d="M 7 3.5 L 17 3.5 L 17 20.5 L 12 16 L 7 20.5 Z" fill="none" stroke={s} stroke-linejoin="round"></path>
+      <circle cx="12" cy="8.5" r="1.4" fill={a} stroke="none"></circle>
+    </g>
+  )}
+  {name === 'troubleshoot' && (
+    <g>
+      <path d="M 3 15 L 8 15 L 11 6.5 L 14 18.5 L 16.5 15 L 21 15" fill="none" stroke={s} stroke-linejoin="round"></path>
+      <circle cx="11" cy="6.5" r="2.4" fill="none" stroke={a} stroke-width="1.6"></circle>
+    </g>
+  )}
+  {name === 'resources' && (
+    <g>
+      <rect x="4" y="4" width="16" height="16" fill="none" stroke={s}></rect>
+      <circle cx="12" cy="12" r="4.2" fill="none" stroke={s}></circle>
+      <line x1="12" y1="4" x2="12" y2="7.8" stroke={s} stroke-width="1.1"></line>
+      <line x1="12" y1="16.2" x2="12" y2="20" stroke={s} stroke-width="1.1"></line>
+      <circle cx="12" cy="12" r="1.3" fill={a} stroke="none"></circle>
+    </g>
+  )}
+  {name === 'suppliers' && (
+    <g>
+      <path d="M 3.5 12.5 L 11.5 4.5 L 20.5 4.5 L 20.5 13.5 L 12.5 21.5 Z" fill="none" stroke={s} stroke-linejoin="round"></path>
+      <circle cx="16.5" cy="8.5" r="1.6" fill="none" stroke={a} stroke-width="1.6"></circle>
     </g>
   )}
 </svg>

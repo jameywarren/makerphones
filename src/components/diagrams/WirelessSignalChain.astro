@@ -1,0 +1,115 @@
+---
+/**
+ * FIG 16 — Signal chain: wired vs Bluetooth. The wired chain's one
+ * conversion out in the open, against the Bluetooth chain where the
+ * codec, receiver, DAC, and amp all move inside the cup — the codec
+ * sets the ceiling.
+ */
+import { arrowHead, zigzagPath } from './geometry';
+
+const yW = 120,
+  yB = 282;
+
+interface Box {
+  x: number;
+  y: number;
+  w: number;
+  lab: string;
+  sub?: string;
+  active?: boolean;
+}
+const boxes: Box[] = [
+  { x: 40, y: yW, w: 96, lab: 'SOURCE', sub: 'FILE / STREAM' },
+  { x: 172, y: yW, w: 96, lab: 'DAC', sub: 'D → A', active: true },
+  { x: 304, y: yW, w: 96, lab: 'AMP', sub: 'ANALOG GAIN' },
+  { x: 436, y: yW, w: 96, lab: 'DRIVER', sub: 'AIR' },
+  { x: 40, y: yB, w: 86, lab: 'SOURCE', sub: 'FILE / STREAM' },
+  { x: 156, y: yB, w: 96, lab: 'CODEC', sub: 'SBC · AAC · APTX · LDAC', active: true },
+  { x: 326, y: yB, w: 86, lab: 'RECEIVER', sub: 'IN THE CUP' },
+  { x: 442, y: yB, w: 76, lab: 'DAC', sub: 'D → A', active: true },
+  { x: 548, y: yB, w: 76, lab: 'AMP', sub: 'TINY, BATTERY' },
+  { x: 654, y: yB, w: 76, lab: 'DRIVER', sub: 'AIR' },
+];
+const arrows: [number, number, number][] = [
+  [140, 168, yW],
+  [272, 300, yW],
+  [404, 432, yW],
+  [130, 152, yB],
+  [416, 438, yB],
+  [522, 544, yB],
+  [628, 650, yB],
+];
+
+const ink = 'var(--mp-charcoal)';
+const accent = 'var(--mp-accent)';
+const dark = 'var(--mp-ink)';
+const label = 'var(--mp-meta)';
+const faint = 'var(--mp-faint)';
+const hair = 'var(--mp-hair)';
+const washAccent = 'color-mix(in srgb, var(--mp-accent) 7%, transparent)';
+---
+
+<svg
+  viewBox="0 90 760 370"
+  class="mp-dgm"
+  role="img"
+  aria-label="Two signal chains compared: wired runs source to DAC to amp to driver with one conversion in the open; Bluetooth runs source through a lossy codec over RF to a receiver, DAC, and amp inside the headphone cup"
+>
+  <text x="40" y={yW - 14} font-size="9.5" font-weight="600" fill={dark}>WIRED</text>
+  <text x="40" y={yB - 14} font-size="9.5" font-weight="600" fill={dark}>BLUETOOTH</text>
+  {
+    boxes.map((b) => (
+      <g>
+        <rect x={b.x} y={b.y} width={b.w} height="48" fill={b.active ? washAccent : 'none'} stroke={b.active ? accent : ink} stroke-width="1.5" />
+        <text x={b.x + b.w / 2} y={b.y + 22} font-size="8.4" font-weight="600" fill={dark} text-anchor="middle">
+          {b.lab}
+        </text>
+        {b.sub && (
+          <text x={b.x + b.w / 2} y={b.y + 37} font-size="7" font-weight="500" fill={label} text-anchor="middle">
+            {b.sub}
+          </text>
+        )}
+      </g>
+    ))
+  }
+  {
+    arrows.map(([x1, x2, y]) => {
+      const head = arrowHead(x2, y + 24, 0, 5);
+      return (
+        <g>
+          <line x1={x1} y1={y + 24} x2={x2} y2={y + 24} stroke={ink} stroke-width="1.2" />
+          <polygon points={head.points} transform={head.transform} fill={ink} />
+        </g>
+      );
+    })
+  }
+
+  <line x1="40" y1={yW + 64} x2="220" y2={yW + 64} stroke={faint} stroke-width="1.2" stroke-dasharray="3 4"></line>
+  <line x1="220" y1={yW + 64} x2="532" y2={yW + 64} stroke={faint} stroke-width="1.2"></line>
+  <text x="128" y={yW + 80} font-size="7.5" font-weight="500" fill={label} text-anchor="middle">DIGITAL</text>
+  <text x="376" y={yW + 80} font-size="7.5" font-weight="500" fill={label} text-anchor="middle">ANALOG</text>
+  <text x="566" y={yW + 28} font-size="8.5" font-weight="500" fill={label}>ONE CONVERSION,</text>
+  <text x="566" y={yW + 41} font-size="8.5" font-weight="500" fill={label}>OUT IN THE OPEN</text>
+
+  <path d={zigzagPath(258, 322, yB + 24, 5, 9)} fill="none" stroke={accent} stroke-width="1.8"></path>
+  <text x="290" y={yB - 8} font-size="7.5" font-weight="600" fill={accent} text-anchor="middle">RF — LOSSY</text>
+  <line x1="40" y1={yB + 64} x2="490" y2={yB + 64} stroke={faint} stroke-width="1.2" stroke-dasharray="3 4"></line>
+  <line x1="490" y1={yB + 64} x2="730" y2={yB + 64} stroke={faint} stroke-width="1.2"></line>
+  <text x="262" y={yB + 80} font-size="7.5" font-weight="500" fill={label} text-anchor="middle">DIGITAL — QUALITY SET BY THE CODEC</text>
+  <text x="610" y={yB + 80} font-size="7.5" font-weight="500" fill={label} text-anchor="middle">ANALOG</text>
+
+  <rect x="318" y={yB - 32} width="420" height="124" fill="none" stroke={hair} stroke-width="1" stroke-dasharray="5 4"></rect>
+  <text x="728" y={yB - 40} font-size="7.5" font-weight="500" fill={label} text-anchor="end">INSIDE THE HEADPHONE</text>
+
+  <text x="24" y="446" font-size="10" font-weight="500" fill={label} opacity="0.9"
+    >BLUETOOTH MOVES THE DAC AND AMP INTO THE CUP — THE CODEC SETS THE CEILING.</text
+  >
+</svg>
+
+<style>
+  svg {
+    max-width: 100%;
+    height: auto;
+    display: block;
+  }
+</style>

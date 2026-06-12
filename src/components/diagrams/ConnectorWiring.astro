@@ -5,41 +5,12 @@
  * plus the always-true rules panel. FIG 22 (mic wiring, CTIA vs
  * OMTP) reuses this plug language.
  */
-interface Seg {
-  w: number;
-  kind: 'tip' | 'ins' | 'contact' | 'body';
-}
-const TRS_SEGS: Seg[] = [
-  { w: 46, kind: 'tip' },
-  { w: 7, kind: 'ins' },
-  { w: 36, kind: 'contact' },
-  { w: 7, kind: 'ins' },
-  { w: 116, kind: 'contact' },
-  { w: 54, kind: 'body' },
-];
-const TRRS_SEGS: Seg[] = [
-  { w: 46, kind: 'tip' },
-  { w: 7, kind: 'ins' },
-  { w: 32, kind: 'contact' },
-  { w: 7, kind: 'ins' },
-  { w: 32, kind: 'contact' },
-  { w: 7, kind: 'ins' },
-  { w: 84, kind: 'contact' },
-  { w: 54, kind: 'body' },
-];
+import PlugBody from './PlugBody.astro';
+import { TRS_SEGS, TRRS_SEGS, plugLayout } from './geometry';
 
-const x = 120,
-  h = 40;
-function layout(segs: Seg[]) {
-  let cx = x;
-  return segs.map((s) => {
-    const o = { ...s, x: cx, cx: cx + s.w / 2 };
-    cx += s.w;
-    return o;
-  });
-}
-const trs = layout(TRS_SEGS);
-const trrs = layout(TRRS_SEGS);
+const x = 120;
+const trs = plugLayout(x, TRS_SEGS);
+const trrs = plugLayout(x, TRRS_SEGS);
 
 interface Pin {
   cx: number;
@@ -65,7 +36,6 @@ const dark = 'var(--mp-ink)';
 const label = 'var(--mp-meta)';
 const faint = 'var(--mp-faint)';
 const hair = 'var(--mp-hair)';
-const washInk = 'color-mix(in srgb, var(--mp-charcoal) 8%, transparent)';
 ---
 
 <svg
@@ -86,22 +56,7 @@ const washInk = 'color-mix(in srgb, var(--mp-charcoal) 8%, transparent)';
         <text x="42" y={p.ly + 15} font-size="8.5" font-weight="500" fill={label}>
           {p.sub}
         </text>
-        {p.segs.map((s) =>
-          s.kind === 'tip' ? (
-            <path
-              d={`M ${s.x + s.w} ${p.cy - h / 2} L ${s.x + 12} ${p.cy - h / 2} Q ${s.x - 2} ${p.cy} ${s.x + 12} ${p.cy + h / 2} L ${s.x + s.w} ${p.cy + h / 2} Z`}
-              fill={washInk}
-              stroke={ink}
-              stroke-width="1.5"
-            />
-          ) : s.kind === 'ins' ? (
-            <rect x={s.x} y={p.cy - h / 2} width={s.w} height={h} fill={dark} />
-          ) : s.kind === 'body' ? (
-            <rect x={s.x} y={p.cy - h / 2 - 8} width={s.w} height={h + 16} rx="4" fill="none" stroke={ink} stroke-width="1.5" />
-          ) : (
-            <rect x={s.x} y={p.cy - h / 2} width={s.w} height={h} fill={washInk} stroke={ink} stroke-width="1.5" />
-          )
-        )}
+        <PlugBody x={x} cy={p.cy} segs={p.segs} />
         {p.pins.map((pin) => (
           <g>
             <line

@@ -7,6 +7,8 @@
  */
 import { getManual } from '../data/manual';
 import Level from './Level.astro';
+import MpIcon from './illustration/MpIcon.astro';
+import { PART_ICONS } from './illustration/icon-map';
 
 const { parts, appendices, buildGuides } = await getManual();
 const liveAppendices = appendices.filter((a) => a.written);
@@ -18,7 +20,10 @@ const liveGuides = buildGuides.filter((b) => b.written);
     parts.map((p) => (
       <section class="mp-contents-part" id={`part-${p.num}`}>
         <header class="mp-contents-head">
-          <span class="mp-partnum">PART {String(p.num).padStart(2, '0')}</span>
+          <span class="mp-head-eyebrow">
+            <MpIcon name={PART_ICONS[p.num]} size={20} />
+            <span class="mp-partnum">PART {String(p.num).padStart(2, '0')}</span>
+          </span>
           <h2>{p.title}</h2>
           <p>{p.desc}</p>
           <span class="mp-meta">{p.chapters.length} chapters · {p.level}</span>
@@ -54,7 +59,10 @@ const liveGuides = buildGuides.filter((b) => b.written);
     liveGuides.length > 0 && (
       <section class="mp-contents-part" id="build-guides">
         <header class="mp-contents-head">
-          <span class="mp-partnum">BUILD GUIDES</span>
+          <span class="mp-head-eyebrow">
+            <MpIcon name="guide" size={20} />
+            <span class="mp-partnum">BUILD GUIDES</span>
+          </span>
           <h2>Build something</h2>
           <p>
             Complete, hands-on builds that put the chapters into practice — parts lists, steps,
@@ -81,7 +89,10 @@ const liveGuides = buildGuides.filter((b) => b.written);
     liveAppendices.length > 0 && (
       <section class="mp-contents-part" id="appendices">
         <header class="mp-contents-head">
-          <span class="mp-partnum">APPENDICES</span>
+          <span class="mp-head-eyebrow">
+            <MpIcon name="contents" size={20} />
+            <span class="mp-partnum">APPENDICES</span>
+          </span>
           <h2>Reference</h2>
           <p>
             Look-up material that supports every chapter: terms, suppliers, tools, fixes, and
@@ -126,5 +137,10 @@ const liveGuides = buildGuides.filter((b) => b.written);
   }
   .mp-contents-part {
     scroll-margin-top: calc(var(--sl-nav-height, 4rem) + 1rem);
+  }
+  .mp-head-eyebrow {
+    display: flex;
+    align-items: center;
+    gap: 10px;
   }
 </style>

@@ -1,0 +1,41 @@
+---
+/**
+ * Sectioned plug body shared by the connector figures (FIG 13 / 22):
+ * rounded tip, dark insulator rings, washed contacts, outlined
+ * barrel. Renders bare SVG elements — use inside an
+ * <svg class="mp-dgm">.
+ */
+import { plugLayout, type PlugSeg } from './geometry';
+
+interface Props {
+  x: number;
+  cy: number;
+  segs: PlugSeg[];
+  h?: number;
+}
+const { x, cy, segs, h = 40 } = Astro.props;
+const laid = plugLayout(x, segs);
+
+const ink = 'var(--mp-charcoal)';
+const dark = 'var(--mp-ink)';
+const washInk = 'color-mix(in srgb, var(--mp-charcoal) 8%, transparent)';
+---
+
+{
+  laid.map((s) =>
+    s.kind === 'tip' ? (
+      <path
+        d={`M ${s.x + s.w} ${cy - h / 2} L ${s.x + 12} ${cy - h / 2} Q ${s.x - 2} ${cy} ${s.x + 12} ${cy + h / 2} L ${s.x + s.w} ${cy + h / 2} Z`}
+        fill={washInk}
+        stroke={ink}
+        stroke-width="1.5"
+      />
+    ) : s.kind === 'ins' ? (
+      <rect x={s.x} y={cy - h / 2} width={s.w} height={h} fill={dark} />
+    ) : s.kind === 'body' ? (
+      <rect x={s.x} y={cy - h / 2 - 8} width={s.w} height={h + 16} rx="4" fill="none" stroke={ink} stroke-width="1.5" />
+    ) : (
+      <rect x={s.x} y={cy - h / 2} width={s.w} height={h} fill={washInk} stroke={ink} stroke-width="1.5" />
+    )
+  )
+}

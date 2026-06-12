@@ -1,0 +1,98 @@
+---
+/**
+ * FIG 17 — ANC: where the microphones sit. Feedforward (external
+ * mic, predicts), feedback (mic at the ear, corrects), hybrid
+ * (both), plus the anti-noise summing line underneath: noise +
+ * inverted anti-noise → residual ≈ 0.
+ */
+import { hatchV, arrowHead, sinePath } from './geometry';
+
+const cy = 180;
+const panels = [
+  { x: 170, name: 'FEEDFORWARD', sub: 'MIC OUTSIDE — PREDICTS', ff: true, fb: false },
+  { x: 410, name: 'FEEDBACK', sub: 'MIC AT THE EAR — CORRECTS', ff: false, fb: true },
+  { x: 650, name: 'HYBRID', sub: 'BOTH — PREDICT + CORRECT', ff: true, fb: true },
+];
+const sumArr1 = arrowHead(341, 404, 0, 5);
+const sumArr2 = arrowHead(436, 404, 0, 5);
+
+const ink = 'var(--mp-charcoal)';
+const accent = 'var(--mp-accent)';
+const dark = 'var(--mp-ink)';
+const label = 'var(--mp-meta)';
+const faint = 'var(--mp-faint)';
+const hair = 'var(--mp-hair)';
+const ground = 'var(--mp-ground)';
+const washInkSoft = 'color-mix(in srgb, var(--mp-charcoal) 5%, transparent)';
+const washAccent = 'color-mix(in srgb, var(--mp-accent) 7%, transparent)';
+---
+
+<svg
+  viewBox="0 92 760 388"
+  class="mp-dgm"
+  role="img"
+  aria-label="Three ANC microphone topologies — feedforward with the mic outside the cup, feedback with the mic at the ear, and hybrid with both — above a summing diagram where noise plus inverted anti-noise leaves a residual near zero"
+>
+  {
+    panels.map((p) => (
+      <g>
+        <path d={`M ${p.x} ${cy - 74} C ${p.x - 104} ${cy - 74} ${p.x - 104} ${cy + 74} ${p.x} ${cy + 74}`} fill={washInkSoft} stroke={ink} stroke-width="2" />
+        <line x1={p.x} y1={cy - 74} x2={p.x} y2={cy + 74} stroke={ink} stroke-width="2.5" />
+        <path d={`M ${p.x} ${cy - 20} A 22 22 0 0 1 ${p.x} ${cy + 20}`} fill={washAccent} stroke={accent} stroke-width="2" />
+        <line x1={p.x + 52} y1={cy - 74} x2={p.x + 52} y2={cy + 74} stroke={hair} stroke-width="1.2" />
+        {hatchV(p.x + 52, cy - 66, cy + 66, 1, 6, 6).map((l) => (
+          <line x1={l.x1} y1={l.y1} x2={l.x2} y2={l.y2} stroke={faint} stroke-width="1" />
+        ))}
+        {p.ff && (
+          <g>
+            <circle cx={p.x - 86} cy={cy - 44} r="6" fill={ground} stroke={accent} stroke-width="2" />
+            <circle cx={p.x - 86} cy={cy - 44} r="1.8" fill={accent} />
+          </g>
+        )}
+        {p.fb && (
+          <g>
+            <circle cx={p.x + 24} cy={cy - 30} r="6" fill={ground} stroke={accent} stroke-width="2" />
+            <circle cx={p.x + 24} cy={cy - 30} r="1.8" fill={accent} />
+          </g>
+        )}
+        <text x={p.x - 50} y={cy + 112} font-size="9.5" font-weight="600" fill={dark} text-anchor="middle">
+          {p.name}
+        </text>
+        <text x={p.x - 50} y={cy + 128} font-size="7.2" font-weight="500" fill={label} text-anchor="middle">
+          {p.sub}
+        </text>
+      </g>
+    ))
+  }
+  <text x="84" y="108" font-size="8.5" font-weight="500" fill={label}>EXTERNAL MIC</text>
+  <line x1="92" y1="114" x2="84" y2={cy - 48} stroke={faint} stroke-width="1"></line>
+  <circle cx="84" cy={cy - 48} r="2.2" fill={faint}></circle>
+  <text x="470" y="108" font-size="8.5" font-weight="500" fill={label}>INTERNAL MIC — IN THE FRONT CAVITY</text>
+  <line x1="478" y1="114" x2="436" y2={cy - 34} stroke={faint} stroke-width="1"></line>
+  <circle cx="436" cy={cy - 34} r="2.2" fill={faint}></circle>
+
+  <path d={sinePath(120, 404, 14, 64, 180)} fill="none" stroke={ink} stroke-width="1.5" stroke-dasharray="4 3"></path>
+  <text x="120" y="376" font-size="8.5" font-weight="500" fill={label}>NOISE</text>
+  <path d={sinePath(120, 404, 14, 64, 180, Math.PI)} fill="none" stroke={accent} stroke-width="2"></path>
+  <text x="196" y="440" font-size="8.5" font-weight="600" fill={accent}>ANTI-NOISE — INVERTED</text>
+  <circle cx="356" cy="404" r="13" fill="none" stroke={ink} stroke-width="1.5"></circle>
+  <text x="356" y="408.5" font-size="11" font-weight="600" fill={dark} text-anchor="middle">Σ</text>
+  <line x1="306" y1="404" x2="341" y2="404" stroke={ink} stroke-width="1.2"></line>
+  <polygon points={sumArr1.points} transform={sumArr1.transform} fill={ink}></polygon>
+  <line x1="371" y1="404" x2="436" y2="404" stroke={ink} stroke-width="1.2"></line>
+  <polygon points={sumArr2.points} transform={sumArr2.transform} fill={ink}></polygon>
+  <line x1="444" y1="404" x2="560" y2="404" stroke={ink} stroke-width="1.5"></line>
+  <text x="576" y="408" font-size="8.5" font-weight="500" fill={label}>RESIDUAL ≈ 0 — SILENCE</text>
+
+  <text x="24" y="470" font-size="10" font-weight="500" fill={label} opacity="0.9"
+    >JUST MIC PLACEMENT — FEEDFORWARD PREDICTS, FEEDBACK CORRECTS, HYBRID DOES BOTH AND COSTS BOTH.</text
+  >
+</svg>
+
+<style>
+  svg {
+    max-width: 100%;
+    height: auto;
+    display: block;
+  }
+</style>

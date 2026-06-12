@@ -12,6 +12,9 @@ description: Moving from a lucky one-off to a repeatable design — matched chan
 excerpt: A headphone that sounds great once is a happy accident. A design is something you can build again and get the same result. Here's how to make that jump.
 ---
 
+import Figure from '../../../components/Figure.astro';
+import ChannelMatching from '../../../components/diagrams/ChannelMatching.astro';
+
 A headphone that sounds great once is a happy accident. A design is something you can build again and get the same result — matched left and right, reproducible from one batch to the next, and pinned down well enough that someone else could build it and hear what you heard. Consistency is the line between a project and a design, and it's where a lot of promising DIY builds quietly fall short: they sound wonderful exactly once, on one head, and can never be repeated.
 
 ## Why consistency matters
@@ -41,6 +44,10 @@ Lock down a calibrated, documented print profile and reuse it exactly — same s
 ## Matching drivers
 
 For a pair where matching matters — which is most over-ear builds — measure and pair your drivers, or at minimum source them from the same batch. Again, the cheaper the driver, the more this matters, because the spread is wider. A few minutes matching a pair saves you chasing a channel imbalance that no amount of damping will fix, because it was never an assembly problem.
+
+<Figure label="Fig. 1" caption="Channel matching against a ±1.5 dB tolerance band — a matched pair ships; a right channel that leaves the band above 2 kHz means swapping the driver, not reaching for damping.">
+  <ChannelMatching />
+</Figure>
 
 ## Controlling assembly
 

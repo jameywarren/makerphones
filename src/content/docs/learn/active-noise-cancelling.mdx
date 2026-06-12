@@ -12,6 +12,9 @@ description: An honest look at how active noise cancelling works, why it's one o
 excerpt: ANC is one of the most-requested features and one of the hardest to build well. Here's how it actually works, why it's so hard, and where your effort really pays off.
 ---
 
+import Figure from '../../../components/Figure.astro';
+import AncMicTopology from '../../../components/diagrams/AncMicTopology.astro';
+
 Active noise cancelling is near the top of every "can I add this?" list, and it's also one of the hardest things to do well in a DIY headphone. This chapter is an honest look at how it works, why it's so difficult, and what's genuinely realistic for a builder — so you go in with clear eyes instead of chasing a frustrating dead end. The short version, which the rest of the chapter earns: nail your passive isolation first, and treat ANC as an advanced sub-project only if the engineering challenge is itself what you want.
 
 ## Passive versus active
@@ -33,6 +36,10 @@ Cancellation works best at low frequencies, where the wavelengths are long and t
 **Feedback.** The mic sits inside the cup, near your ear, and measures the actual error — what you're really hearing — then corrects it. It's more robust to fit and strong at low frequencies, but it has a limited bandwidth and can become unstable if the loop isn't carefully tuned.
 
 **Hybrid.** Both mics together, combining the strengths of each. This is what most good commercial ANC uses, and it's also the most complex to design and tune.
+
+<Figure label="Fig. 1" caption="The three ANC topologies are just mic placement — feedforward predicts, feedback corrects, hybrid does both — and underneath, the anti-noise summing that makes it work.">
+  <AncMicTopology />
+</Figure>
 
 ## Why this is brutal for DIY
 

@@ -12,6 +12,9 @@ description: Adding a mic to turn your headphones into a headset — mic types, 
 excerpt: A microphone turns a pair of headphones into a headset. It's one of the more approachable add-ons — but the placement and wiring choices genuinely shape the result.
 ---
 
+import Figure from '../../../components/Figure.astro';
+import MicWiring from '../../../components/diagrams/MicWiring.astro';
+
 Adding a microphone turns a pair of headphones into a headset — for calls, gaming, streaming, or anything voice. Compared to active noise cancelling, this is refreshingly approachable: no real-time control loops, no co-designed acoustics, just a sensible set of choices about what mic to use, where to put it, and how to wire it. But those choices are real, and they affect both voice quality and whether the thing works at all on the device you plug it into.
 
 ## Mic types
@@ -39,6 +42,10 @@ This is where most headset problems actually live, so it's worth getting right.
 A stereo headphone uses three conductors — tip, ring, sleeve (TRS): left, right, and ground. Add a microphone and you need a fourth conductor, which gives you TRRS: left, right, ground, and mic. TRRS on a single 3.5 mm plug is the headset standard on phones and laptops.
 
 There are two competing TRRS pinouts, and they are not interchangeable. CTIA is the modern standard used by essentially all current phones; OMTP is the older arrangement, with the mic and ground positions swapped. Plug a headset wired for one standard into a device expecting the other and the mic won't work, or the audio comes out wrong. If a headset misbehaves on a particular device, a pinout mismatch is the first thing to check.
+
+<Figure label="Fig. 1" caption="CTIA vs OMTP on the same TRRS plug — the two standards swap mic and ground — and where the capsule lives: boom at the mouth or inline on the cable.">
+  <MicWiring />
+</Figure>
 
 The alternatives: on PCs with separate jacks, you can split into two plugs — a 3.5 mm headphone plug and a separate mic plug. Or you can go USB, where the mic and audio are digitized on board, which needs an onboard DAC and ADC and is a more involved build, but sidesteps the analog pinout question entirely.
 

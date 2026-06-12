@@ -12,6 +12,9 @@ description: How in-ear monitor design differs from over-ears — tiny drivers, 
 excerpt: With IEMs the whole headphone shrinks into your ear canal, the seal becomes everything, and the craft turns to tiny drivers and shells molded to your ear. Here's the map.
 ---
 
+import Figure from '../../../components/Figure.astro';
+import IemCrossSection from '../../../components/diagrams/IemCrossSection.astro';
+
 In-ear monitors are a different discipline from over-ears, but they run on the same fundamentals — the seal, the driver, the chamber, the damping — just shrunk down into your ear canal. For a maker, custom IEMs are among the most rewarding and craft-heavy builds there are, and 3D printing has put the once-exclusive custom-shell process within reach. This chapter maps how IEM design differs from everything you've learned so far, and what a realistic path into it looks like.
 
 ## How IEMs differ
@@ -33,6 +36,10 @@ Planar and electrostatic IEMs exist too, but they're niche; most builds start fr
 The moment you use more than one driver, you need a crossover to send each frequency band to the right driver — and in an IEM that crossover is a handful of tiny components packed into a shell the size of the end of your finger. Tuning it is the hard electrical-and-acoustic work of multi-driver IEM design, and it's unforgiving at this scale.
 
 Just as important, and often underestimated, are the bore acoustics. The little tubes carrying sound from each driver to the nozzle have their own resonances, and tube length, diameter, and acoustic damping — small mesh dampers placed in the bores — are primary voicing tools. This is the IEM's version of chamber design and damping rolled together: see [acoustic chamber design](/learn/acoustic-chamber-design) for the same principles at full size. Many an IEM is voiced as much by its tubes and dampers as by its drivers.
+
+<Figure label="Fig. 1" caption="Inside a multi-driver IEM — balanced armatures and a dynamic driver, the crossover, sound bores to the nozzle, and the ear-tip seal in the canal.">
+  <IemCrossSection />
+</Figure>
 
 ## The shell and the fit
 

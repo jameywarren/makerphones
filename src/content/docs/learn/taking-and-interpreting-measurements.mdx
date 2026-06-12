@@ -12,6 +12,9 @@ description: "How to take headphone measurements you can actually trust — seat
 excerpt: "A rig is only as good as your technique. The same headphone measures differently depending on how you seat it — here's how to get data you can trust, and how to read it."
 ---
 
+import Figure from '../../../components/Figure.astro';
+import MeasurementDiagnosis from '../../../components/diagrams/MeasurementDiagnosis.astro';
+
 A measurement rig is only as good as your technique with it. The same headphone, on the same rig, will give you noticeably different graphs depending on how you seat it — and a graph you can't read is just a wiggly line. This chapter is the bridge between owning a rig and getting something useful out of it: how to take measurements you can trust, and how to interpret what you see.
 
 ## Set up once, correctly
@@ -39,6 +42,10 @@ Then compare to a target. Overlay a target curve — a research-based preference
 Overlay left against right as well. The two channels should track closely; where they diverge you have a matching problem to chase back to the build — a seal, a damping difference, a driver mismatch.
 
 Throughout, keep the trust calibrated. Believe the broad shape and, above all, believe your before-and-after deltas — those are what your rig is genuinely good at. Be skeptical of fine detail above roughly 10 kHz and of the exact frequency and height of features at the extremes, where the rig's limits live.
+
+<Figure label="Fig. 1" caption="Reading a measurement as diagnosis — three flagged features (illustrative trace), each pointing at a cause and a fix: a seal leak, a cavity resonance, a channel mismatch.">
+  <MeasurementDiagnosis />
+</Figure>
 
 ## Turning features into fixes
 

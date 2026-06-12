@@ -1,0 +1,121 @@
+---
+/**
+ * FIG 20 — Channel matching: L/R inside a tolerance band. A matched
+ * pair (both channels inside ±1.5 dB) beside a mismatched reject
+ * whose right channel leaves the band above 2 kHz. Curves are
+ * illustrative, not measured data.
+ */
+import { lgx } from './geometry';
+
+const W = 280,
+  y0 = 330,
+  yZ = 252,
+  px = 6.5,
+  H = 200;
+
+function base(f: number): number {
+  const lg = Math.log10(f);
+  return 4 / (1 + Math.exp((lg - 2.05) * 7)) + 5 * Math.exp(-Math.pow(lg - 3.45, 2) / (2 * 0.17 * 0.17)) - (lg > 3.8 ? (lg - 3.8) * 7 : 0);
+}
+
+function curvePath(x0: number, dev: (f: number, lg: number) => number): string {
+  const pts: string[] = [];
+  for (let lg = Math.log10(20); lg <= Math.log10(20000) + 1e-9; lg += 0.015) {
+    const f = Math.pow(10, lg);
+    pts.push(`${lgx(f, x0, W).toFixed(1)} ${(yZ - (base(f) + dev(f, lg)) * px).toFixed(1)}`);
+  }
+  return 'M ' + pts.join(' L ');
+}
+
+function bandPath(x0: number): string {
+  const up: string[] = [],
+    dn: string[] = [];
+  for (let lg = Math.log10(20); lg <= Math.log10(20000) + 1e-9; lg += 0.03) {
+    const f = Math.pow(10, lg);
+    up.push(`${lgx(f, x0, W).toFixed(1)} ${(yZ - (base(f) + 1.5) * px).toFixed(1)}`);
+    dn.unshift(`${lgx(f, x0, W).toFixed(1)} ${(yZ - (base(f) - 1.5) * px).toFixed(1)}`);
+  }
+  return 'M ' + up.join(' L ') + ' L ' + dn.join(' L ') + ' Z';
+}
+
+const devFlat = () => 0;
+const devMatched = (_f: number, lg: number) => 0.5 * Math.sin(lg * 5);
+const devMismatch = (_f: number, lg: number) => (lg > 3.4 ? Math.pow(lg - 3.4, 1.6) * 7 + 0.4 * Math.sin(lg * 12) : 0.3);
+
+const panels = [
+  { x0: 70, mismatched: false, devR: devMatched },
+  { x0: 420, mismatched: true, devR: devMismatch },
+];
+const ticks: [number, string][] = [
+  [20, '20'],
+  [200, '200'],
+  [2000, '2k'],
+  [20000, '20k'],
+];
+// mismatch flag at 9 kHz on the right channel
+const flagX = lgx(9000, 420, W);
+const flagY = yZ - (base(9000) + devMismatch(9000, Math.log10(9000))) * px;
+
+const ink = 'var(--mp-charcoal)';
+const accent = 'var(--mp-accent)';
+const dark = 'var(--mp-ink)';
+const label = 'var(--mp-meta)';
+const faint = 'var(--mp-faint)';
+const washInkSoft = 'color-mix(in srgb, var(--mp-charcoal) 5%, transparent)';
+---
+
+<svg
+  viewBox="0 70 760 390"
+  class="mp-dgm"
+  role="img"
+  aria-label="Two panels comparing left and right channel response curves inside a plus-or-minus 1.5 decibel tolerance band: a matched pair that ships, and a mismatched reject whose right channel leaves the band above 2 kilohertz"
+>
+  {
+    panels.map((p) => (
+      <g>
+        <path d={bandPath(p.x0)} fill={washInkSoft} />
+        <path d={curvePath(p.x0, devFlat)} fill="none" stroke={ink} stroke-width="1.8" />
+        <path d={curvePath(p.x0, p.devR)} fill="none" stroke={accent} stroke-width="1.8" />
+        <line x1={p.x0} y1={y0} x2={p.x0 + W} y2={y0} stroke={ink} stroke-width="1.5" />
+        <line x1={p.x0} y1={y0} x2={p.x0} y2={y0 - H} stroke={ink} stroke-width="1.5" />
+        {ticks.map(([f, lab]) => (
+          <g>
+            <line x1={lgx(f, p.x0, W)} y1={y0} x2={lgx(f, p.x0, W)} y2={y0 + 5} stroke={faint} stroke-width="1" />
+            <text x={lgx(f, p.x0, W)} y={y0 + 19} font-size="8" font-weight="500" fill={label} text-anchor="middle">
+              {lab}
+            </text>
+          </g>
+        ))}
+        <text x={p.x0} y={y0 + 42} font-size="9.5" font-weight="600" fill={dark}>
+          {p.mismatched ? 'MISMATCHED — REJECT' : 'MATCHED — SHIP IT'}
+        </text>
+        <text x={p.x0} y={y0 + 57} font-size="8" font-weight="500" fill={label}>
+          {p.mismatched ? 'R LEAVES THE BAND ABOVE 2 kHz — SWAP THE DRIVER' : 'BOTH CHANNELS INSIDE ±1.5 dB, 20 Hz – 20 kHz'}
+        </text>
+      </g>
+    ))
+  }
+  <circle cx={flagX} cy={flagY} r="4" fill="none" stroke={accent} stroke-width="1.5"></circle>
+  <line x1={flagX - 4} y1={flagY - 32} x2={flagX - 1} y2={flagY - 6} stroke={faint} stroke-width="1"></line>
+  <circle cx={flagX - 1} cy={flagY - 6} r="2.2" fill={faint}></circle>
+  <text x={flagX - 4} y={flagY - 38} font-size="8" font-weight="500" fill={label} text-anchor="middle">OUT OF BAND</text>
+
+  <line x1="70" y1="92" x2="94" y2="92" stroke={ink} stroke-width="1.8"></line>
+  <text x="102" y="95" font-size="8.5" font-weight="500" fill={label}>LEFT</text>
+  <line x1="150" y1="92" x2="174" y2="92" stroke={accent} stroke-width="1.8"></line>
+  <text x="182" y="95" font-size="8.5" font-weight="500" fill={label}>RIGHT</text>
+  <rect x="232" y="85" width="20" height="12" fill={washInkSoft}></rect>
+  <text x="260" y="95" font-size="8.5" font-weight="500" fill={label}>TOLERANCE — TARGET ±1.5 dB</text>
+
+  <text x="24" y="446" font-size="10" font-weight="500" fill={label} opacity="0.9"
+    >MATCHING IS A SPEC, NOT LUCK — MEASURE EVERY PAIR; TREBLE MISMATCH DRAGS THE IMAGE SIDEWAYS.</text
+  >
+</svg>
+
+<style>
+  svg {
+    max-width: 100%;
+    height: auto;
+    display: block;
+  }
+</style>
