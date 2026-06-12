@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>MakerPhones — Homepage & Illustration System</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Schibsted+Grotesk:wght@500;600;700;800&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,500;0,8..60,600;1,8..60,400&display=swap" rel="stylesheet">
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+<script src="image-slot.js"></script>
+<link rel="stylesheet" href="lib/mp-site.css">
+</head>
+<body data-anim="on">
+<div id="root"></div>
+<script type="text/babel" src="design-canvas.jsx"></script>
+<script type="text/babel" src="tweaks-panel.jsx"></script>
+<script type="text/babel" src="lib/mp-theme.jsx"></script>
+<script type="text/babel" src="lib/mp-listeners.jsx"></script>
+<script type="text/babel" src="lib/mp-hero.jsx"></script>
+<script type="text/babel" src="lib/mp-motifs.jsx"></script>
+<script type="text/babel" src="lib/mp-fig-revisions.jsx"></script>
+<script type="text/babel" src="lib/mp-home.jsx"></script>
+<script type="text/babel" src="lib/mp-pages.jsx"></script>
+<script type="text/babel">
+const {
+  DesignCanvas, DCSection, DCArtboard,
+  useTweaks, TweaksPanel, TweakSection, TweakRadio, TweakToggle, TweakSlider,
+  MP, ML, MotifWave, MotifRuler, MotifFR, MotifArcs, MpIcon, MpDifficulty,
+  HeroExploded, PoseListening, PoseBuilding, PoseReading, PoseInspecting,
+  FigHead, FigPhones, FigStandingV2, FigCSDv2,
+  HomeA, HomeB, HomeC, HomeD,
+} = window;
+
+const TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{
+  "heroWeight": "mass",
+  "heroMotion": "settle",
+  "face": "none",
+  "animations": true,
+  "gridSize": 44
+}/*EDITMODE-END*/;
+
+// ── system sheets ───────────────────────────────────────────────────────────
+function NotesSheet() {
+  return (
+    <div className="sheet" data-screen-label="Read me — assumptions & rulings" style={{ width: '100%', height: '100%' }}>
+      <h2><span className="fig">NOTES</span>ASSUMPTIONS & DESIGN REASONING</h2>
+      <p style={{ marginTop: 14 }}><strong>Context used:</strong> the FIG 00 system-notes sheet, the eight implemented figures (tokens, helpers, and motion CSS reused verbatim), and your brief. The live site wasn't fetchable from here, so all <strong>part titles, intro copy, and bench metadata are placeholder (⚠)</strong> — structure follows your description: hero, author strip, six parts, dark bench band.</p>
+      <ul>
+        <li><strong>Dialect rulings</strong> — see the SYSTEM NOTES v2 sheet alongside this one. Uppercase mono labels and dotted leaders win; the hero is shown in both weight dialects (artboards + a Tweak).</li>
+        <li><strong>Hero recommendation:</strong> <code>weight="mass"</code> for the homepage hero — it gives the page its one dark anchor and holds up next to photography. <code>weight="line"</code> suits the airy cover treatment (Direction C) and in-article use.</li>
+        <li><strong>Iteration 2 rulings:</strong> figures pulled back — <strong>faceless, gestural, marginalia-scale only</strong> (Faces tweak now defaults to none); the human element is real photography in the framed plates. <strong>Direction D (Field Manual)</strong> merges C's cover-plate framing with B's contents list + marginalia chrome, and uses no figures at all — compare against A–C below it.</li>
+        <li><strong>Figures:</strong> contour anatomy is the lead (matches the 1.5/2 stroke discipline); fill and drafted variants are on the anatomy sheet. Face detail is a Tweak (none / closed-eye line / soft) applied everywhere at once.</li>
+        <li><strong>Photo slots:</strong> every framed plate marked "Drop a photo" is live — drag a real image onto it and it persists. Slots: author portrait (×3 directions), workshop/bench, community builds.</li>
+        <li><strong>Tokens:</strong> all SVG emits <code>var(--mp-*)</code> with hex fallbacks; washes are <code>color-mix()</code> on tokens. The dark bench band is the documented token re-scope, not bespoke colors — dark mode comes free.</li>
+      </ul>
+      <p><strong>Next steps:</strong> real six-part titles + copy pass · drop bench photos into the plates · pick a direction (or a mix) · I can then emit each illustration as a standalone .astro component file.</p>
+    </div>
+  );
+}
+
+function SystemSheet() {
+  return (
+    <div className="sheet" data-screen-label="System notes v2 — dialect rulings" style={{ width: '100%', height: '100%' }}>
+      <h2><span className="fig">FIG. 00b</span>SYSTEM NOTES v2 — HOUSE DIALECT RULINGS</h2>
+      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '8px 36px', marginTop: 18 }}>
+        <div>
+          <span className="mono dark" style={{ marginBottom: 6 }}>1 · LABELS — UPPERCASE WINS</span>
+          <p>All diagram labels: JetBrains Mono, uppercase, +8% tracking. Retrofit for the three older components: <code>text-transform: uppercase; letter-spacing: 0.08em</code>. Lowercase mono reads as code comments; uppercase reads as plate annotation.</p>
+          <span className="mono dark" style={{ margin: '10px 0 6px' }}>2 · LEADERS — DOT AT TARGET</span>
+          <p>1px <code>--mp-faint</code> line + 2.2px dot at the target. The dot anchors the leader to a point; adding dots to the old components is one <code>&lt;circle&gt;</code> each.</p>
+          <span className="mono dark" style={{ margin: '10px 0 6px' }}>3 · HERO WEIGHT — BOTH SHOWN</span>
+          <p>Mass-fill vs pure line are both built (Hero section + Tweak). Ruling: <strong>mass for the homepage hero</strong>, line for cover/frontispiece and inline-article use. One component, one prop.</p>
+        </div>
+        <div>
+          <span className="mono dark" style={{ marginBottom: 6 }}>TOKEN MAPPING (EMITTED AS-IS)</span>
+          <ul style={{ fontFamily: 'var(--font-mono)', fontSize: 12, listStyle: 'none', paddingLeft: 0, lineHeight: 1.9 }}>
+            <li>charcoal → <code>var(--mp-charcoal, #2d3748)</code></li>
+            <li>orange → <code>var(--mp-accent, #ea580c)</code></li>
+            <li>mass → <code>var(--mp-ink, #111827)</code></li>
+            <li>labels → <code>var(--mp-meta, #6b7280)</code></li>
+            <li>leaders → <code>var(--mp-faint, #9ca3af)</code></li>
+            <li>washes → <code>color-mix(in srgb, token N%, …)</code></li>
+            <li style={{ color: 'var(--mp-accent)' }}>+ assumed: <code>--mp-ground</code>, <code>--mp-hair</code></li>
+          </ul>
+          <span className="mono dark" style={{ margin: '10px 0 6px' }}>MOTION (UNCHANGED)</span>
+          <p>CSS keyframes only · gated behind <code>prefers-reduced-motion</code> · every figure reads as a static still. Hero ships all three modes as a prop — <code>settle / breathe / hover</code> — default settle; pick per context at implementation.</p>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function MarginaliaStrip() {
+  const poses = [
+    [PoseListening, 150], [PoseBuilding, 205], [PoseReading, 165], [PoseInspecting, 150],
+  ];
+  return (
+    <div className="sheet" data-screen-label="Marginalia scale" style={{ width: '100%' }}>
+      <h2><span className="fig">RULING</span>FIGURES — MARGINALIA SCALE ONLY · FACELESS · GESTURAL</h2>
+      <div style={{ display: 'flex', gap: 28, alignItems: 'flex-end', marginTop: 10 }}>
+        {poses.map(([P, w], i) => (
+          <div key={i} style={{ width: w }}><P anatomy="contour" face="none" annotated={false} /></div>
+        ))}
+        <p className="serif" style={{ maxWidth: '30ch', paddingBottom: 18, color: 'var(--mp-meta)' }}>
+          At this scale the pose carries it — section breaks, build-guide margins, 404s. Never the hero.
+        </p>
+      </div>
+    </div>
+  );
+}
+
+function AnatomySheet({ face }) {
+  const variants = [
+    ['contour', 'A — CONTOUR · PURE LINE (LEAD)'],
+    ['fill', 'B — FILL · CLOTHING WASH'],
+    ['drafted', 'C — DRAFTED · JOINTS + DATUM'],
+  ];
+  return (
+    <div style={{ display: 'flex', gap: 8, padding: '24px 16px 16px', background: 'var(--mp-ground)' }} data-screen-label="Anatomy study">
+      {variants.map(([a, label]) => (
+        <div key={a} style={{ width: 340 }}>
+          <PoseListening anatomy={a} face={face} annotated={false} />
+          <p className="mono" style={{ margin: '6px 0 0 24px' }}>{label}</p>
+        </div>
+      ))}
+    </div>
+  );
+}
+
+function FaceSheet() {
+  const faces = [['none', 'NONE — POSE CARRIES IT'], ['line', 'LINE — CLOSED EYE (LEAD)'], ['soft', 'SOFT — EYE + BROW + MOUTH']];
+  return (
+    <div style={{ display: 'flex', gap: 24, padding: 28, background: 'var(--mp-ground)' }} data-screen-label="Face study">
+      {faces.map(([f, label]) => (
+        <div key={f} style={{ width: 170 }}>
+          <svg viewBox="0 0 150 120" style={{ display: 'block', width: '100%' }}>
+            <g transform="translate(75 64) scale(1.7) translate(-75 -64)">
+              <FigHead cx={75} cy={64} dir={-1} tilt={6} face={f} eye="closed" tone={MP.ground} />
+              <FigPhones cx={75} cy={64} dir={-1} tilt={6} />
+            </g>
+          </svg>
+          <p className="mono" style={{ margin: '10px 0 0', textAlign: 'center' }}>{label}</p>
+        </div>
+      ))}
+    </div>
+  );
+}
+
+function IconSheet() {
+  const parts = [
+    ['fundamentals', 'PART 01'], ['drivers', 'PART 02'], ['enclosures', 'PART 03'],
+    ['materials', 'PART 04'], ['build', 'PART 05'], ['measure', 'PART 06'],
+  ];
+  const way = [['read', 'READ'], ['build', 'BUILD'], ['measure', 'MEASURE'], ['contents', 'CONTENTS'], ['arrow', 'GO']];
+  const cell = { display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 12, padding: '18px 8px', border: '1px solid var(--mp-hair)' };
+  return (
+    <div className="sheet" data-screen-label="Icon set" style={{ width: '100%' }}>
+      <h2><span className="fig">FIG. I</span>ICON SET — 24 GRID · STROKE 1.6 · ONE ACCENT ELEMENT MAX</h2>
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(6, 1fr)', gap: 10, marginTop: 18 }}>
+        {parts.map(([n, l]) => (
+          <div key={n} style={cell}><MpIcon name={n} size={30} /><span className="mono">{l}</span></div>
+        ))}
+      </div>
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(6, 1fr)', gap: 10, marginTop: 10 }}>
+        {[1, 2, 3].map((d) => (
+          <div key={d} style={cell}><MpDifficulty level={d} size={30} /><span className="mono">{['BEGINNER', 'INTERMEDIATE', 'ADVANCED'][d - 1]}</span></div>
+        ))}
+        {way.slice(0, 3).map(([n, l]) => (
+          <div key={n} style={cell}><MpIcon name={n} size={30} /><span className="mono">{l}</span></div>
+        ))}
+      </div>
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(6, 1fr)', gap: 10, marginTop: 10 }}>
+        {way.slice(3).map(([n, l]) => (
+          <div key={n} style={cell}><MpIcon name={n} size={30} /><span className="mono">{l}</span></div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+// ── canvas ──────────────────────────────────────────────────────────────────
+function board(id, label, w, h, node, pad = 0) {
+  return (
+    <DCArtboard id={id} label={label} width={w} height={h}>
+      <div data-screen-label={label} style={{ width: '100%', height: '100%', background: 'var(--mp-ground, #f9fafb)', padding: pad, boxSizing: 'border-box', overflow: 'hidden' }}>
+        {node}
+      </div>
+    </DCArtboard>
+  );
+}
+
+function App() {
+  const [t, setTweak] = useTweaks(TWEAK_DEFAULTS);
+  React.useEffect(() => {
+    document.body.dataset.anim = t.animations ? 'on' : 'off';
+    document.documentElement.style.setProperty('--mp-grid-size', t.gridSize + 'px');
+  }, [t.animations, t.gridSize]);
+
+  return (
+    <div>
+      <DesignCanvas>
+        <DCSection id="notes" title="Read me" subtitle="Assumptions, rulings, next steps">
+          {board('notes', 'Notes', 700, 560, <NotesSheet />)}
+          {board('system', '00b · System notes v2', 760, 560, <SystemSheet />)}
+        </DCSection>
+
+        <DCSection id="home" title="Homepage" subtitle="D is the recommended merge (B+C, photo plates, no figures) · A–C kept for comparison · plates are live drop targets">
+          {board('home-d', 'D · Field Manual — recommended', 1440, 2972, <HomeD t={t} />)}
+          {board('home-a', 'A · Refined Manual', 1440, 3267, <HomeA t={t} />)}
+          {board('home-b', 'B · Field Guide', 1440, 2736, <HomeB t={t} />)}
+          {board('home-c', 'C · Cover & Plates', 1440, 3498, <HomeC t={t} />)}
+        </DCSection>
+
+        <DCSection id="listeners" title="The listeners — pulled back to marginalia" subtitle="Ruling: faceless, gestural, small — never hero mascots. Kept as assets for build-guide margins; photography carries the human element.">
+          {board('marginalia', 'Marginalia scale — the approved usage', 1060, 330, <MarginaliaStrip />)}
+          {board('anatomy', 'Anatomy study — 3 treatments', 1080, 520, <AnatomySheet face={t.face} />)}
+          {board('faces', 'Face study', 620, 240, <FaceSheet />)}
+          {board('pose-1', 'I · The Listener — annotated', 440, 500,
+            <div style={{ width: 380, padding: '24px 30px 0' }}><PoseListening anatomy="contour" face={t.face} annotated={true} /></div>)}
+          {board('pose-2', 'II · The Builder — annotated', 600, 500,
+            <div style={{ width: 545, padding: '24px 28px 0' }}><PoseBuilding anatomy="contour" face={t.face} annotated={true} /></div>)}
+          {board('pose-3', 'III · The Reader — annotated', 500, 500,
+            <div style={{ width: 440, padding: '24px 30px 0' }}><PoseReading anatomy="contour" face={t.face} annotated={true} /></div>)}
+          {board('pose-4', 'IV · The Inspector — annotated', 440, 500,
+            <div style={{ width: 380, padding: '24px 30px 0' }}><PoseInspecting anatomy="contour" face={t.face} annotated={true} /></div>)}
+        </DCSection>
+
+        <DCSection id="hero" title="Hero exploded headphone" subtitle="Two weight dialects — motion mode via Tweaks (hover the figure in 'hover' mode)">
+          {board('hero-mass', 'Mass-fill dialect (recommended for hero)', 1000, 760,
+            <div style={{ padding: 24 }}><HeroExploded weight="mass" motion={t.heroMotion} annotated={true} header="OLD FAITHFUL — EXPLODED" caption="MASS DIALECT — FILLED MAGNETS, WEIGHTED SHELLS" /></div>)}
+          {board('hero-line', 'Pure line dialect', 1000, 760,
+            <div style={{ padding: 24 }}><HeroExploded weight="line" motion={t.heroMotion} annotated={true} header="OLD FAITHFUL — EXPLODED" caption="LINE DIALECT — AIRY, FOR COVER + ARTICLE USE" /></div>)}
+        </DCSection>
+
+        <DCSection id="figrev" title="Figure revisions" subtitle="Requested: FIG 05 second harmonic · FIG 06 denser ridge">
+          {board('fig05b', '05b · Second harmonic', 768, 478, <div style={{ padding: 24 }}><FigStandingV2 harmonic={2} /></div>)}
+          {board('fig06b', '06b · Dense waterfall', 808, 518, <div style={{ padding: 24 }}><FigCSDv2 dense={true} /></div>)}
+        </DCSection>
+
+        <DCSection id="motifs" title="Motifs & texture" subtitle="Quiet — for dividers and faint backgrounds">
+          {board('m-wave', 'Waveform divider', 1240, 130, <div style={{ padding: '28px 20px' }}><MotifWave w={1200} h={72} /></div>)}
+          {board('m-ruler', 'Ruler strip', 1240, 76, <div style={{ padding: '28px 20px 0' }}><MotifRuler w={1200} /></div>)}
+          {board('m-fr', 'FR backdrop (light + dark scope)', 960, 420,
+            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', height: '100%' }}>
+              <div style={{ padding: 24 }}><MotifFR w={420} h={330} /></div>
+              <div className="mp-darkscope" style={{ padding: 24, background: '#111827' }}><MotifFR w={420} h={330} /></div>
+            </div>)}
+          {board('m-arcs', 'Pressure arcs — corner', 300, 300, <div style={{ padding: 20 }}><MotifArcs size={250} corner="tl" animated={true} /></div>)}
+          {board('m-grid', 'Blueprint grid', 360, 300, <div className="mp-grid-bg" style={{ width: '100%', height: '100%' }}></div>)}
+        </DCSection>
+
+        <DCSection id="icons" title="Icon set" subtitle="Six parts · difficulty · wayfinding">
+          {board('icons', 'Icons — line style', 880, 480, <IconSheet />)}
+        </DCSection>
+      </DesignCanvas>
+
+      <TweaksPanel>
+        <TweakSection label="Hero figure" />
+        <TweakRadio label="Weight" value={t.heroWeight} options={['mass', 'line']}
+          onChange={(v) => setTweak('heroWeight', v)} />
+        <TweakRadio label="Motion" value={t.heroMotion} options={['hover', 'settle', 'breathe']}
+          onChange={(v) => setTweak('heroMotion', v)} />
+        <TweakSection label="Figures" />
+        <TweakRadio label="Faces" value={t.face} options={['none', 'line', 'soft']}
+          onChange={(v) => setTweak('face', v)} />
+        <TweakSection label="Texture & motion" />
+        <TweakSlider label="Grid size" value={t.gridSize} min={20} max={44} step={2} unit="px"
+          onChange={(v) => setTweak('gridSize', v)} />
+        <TweakToggle label="Animations" value={t.animations}
+          onChange={(v) => setTweak('animations', v)} />
+      </TweaksPanel>
+    </div>
+  );
+}
+
+ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+</script>
+</body>
+</html>
