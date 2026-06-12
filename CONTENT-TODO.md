@@ -32,7 +32,7 @@ editorial pass, one commit per correction, so the change history is clean.
 
 The canonical bio (Project-Compass.md) is **25+ years; Grace Design
 employee #1, 1997–2001; HeadRoom VP Ops → President & CEO, 2003–2017;
-designed the Cosmic**. These chapters still carry older "30 years"
+now building Old Faithful in the open**. These chapters carried older "30 years"
 framing in body copy (migrated faithfully):
 
 - [x] `how-headphones-create-sound` — opening, "I've built headphones
@@ -50,10 +50,9 @@ not in the frozen 30-chapter handle list (troubleshooting is a planned
 appendix, handle TBD). Decide in the editorial pass: re-point, rewrite,
 or hold until the target exists.
 
-- [ ] `your-first-build` — body links in `how-headphones-create-sound`,
-      `open-vs-closed-back-design`, `cables-connectors-hardware`,
-      `design-methodology`; in `related` frontmatter of those plus
-      `headphone-form-factors` and `driver-selection-guide`.
+- [x] `your-first-build` — now exists as a build guide; the body
+      links in four chapters and the `related` references in six
+      resolve automatically *(June 11, 2026)*.
 - [x] `troubleshooting-guide` — now exists as an appendix; the
       `related` references in `cables-connectors-hardware` and
       `design-methodology` resolve automatically *(June 11, 2026)*.
@@ -85,11 +84,11 @@ The v2 design ships with styled placeholders — swap in real assets:
 - [ ] **Bench portrait** of Jamey — homepage credibility strip
       (`src/components/home/CredStrip.astro`).
 - [ ] **Workshop photo** — About page (`src/content/docs/about.md`).
-- [ ] **The Cosmic's real measurement plot** — the homepage Cosmic band
-      (`src/components/home/CosmicBand.astro`) uses an illustrative FR
-      curve, captioned as such. Replace with the actual measured-vs-
-      target plot (per the Compass: never present invented data as
-      measurement).
+- [ ] **Old Faithful's real measurement plot** — the homepage band
+      (`src/components/home/OldFaithfulBand.astro`) uses an illustrative
+      FR curve, captioned as such. Replace with the actual measured-vs-
+      target plot as the open build progresses (per the Compass: never
+      present invented data as measurement).
 - The hero exploded-headphone diagram, FR-grid, and driver cutaway are
   real vector art from the design handoff — no replacement needed.
 

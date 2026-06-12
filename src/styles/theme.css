@@ -7,7 +7,7 @@
  * customCss ahead of this file).
  *
  * v2: warm foundation, confident orange, diagram system, bench
- * callout, dark Cosmic band, upcoming-chapter states.
+ * callout, dark Old Faithful band, upcoming-chapter states.
  */
 
 :root {
@@ -955,7 +955,7 @@ button[data-open-modal] {
   color: var(--mp-ink);
 }
 
-/* the one dark moment — Cosmic band */
+/* the one dark moment — Old Faithful band */
 .mp-band {
   --mp-ink: #d6dbe3;
   --mp-charcoal: #f3f4f6;

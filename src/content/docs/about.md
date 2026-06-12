@@ -1,6 +1,6 @@
 ---
 title: About
-description: Who writes the MakerPhones Reference Manual, and the headphone that proves the process — the Cosmic.
+description: Who writes the MakerPhones Reference Manual, and the studio headphone being built in the open — Old Faithful.
 tableOfContents: false
 ---
 
@@ -15,7 +15,7 @@ written and maintained by one person, and it's free to read.
 - **Grace Design** — employee #1 (1997–2001)
 - **HeadRoom** — VP of Operations, then President & CEO (2003–2017); relaunched the entire
   headphone-amplifier line
-- Designed his own headphone, the **Cosmic**
+- Now building his own closed-back studio headphone, **Old Faithful**, in the open
 
 That background is the reason this manual exists: production experience at scale, thousands of
 headphones tested, and the kind of manufacturer knowledge that's usually locked behind NDAs —
@@ -23,11 +23,12 @@ written down for makers instead.
 
 <div class="mp-ph" style="height: 220px; margin: 1.5rem 0;" role="img" aria-label="workshop photo placeholder"><span class="mp-ph-label">workshop photo — real shot coming</span></div>
 
-## The Cosmic
+## Old Faithful
 
-The Cosmic is the proof the process works. Driver selection, chamber design, damping, measurement,
-voicing — it was designed with the same methods these chapters teach, and it shipped. The full
-design story, with measurements, is planned as part of the manual's later chapters.
+Old Faithful is the process happening in the open: a closed-back studio headphone being designed
+with the same methods these chapters teach — driver selection, chamber design, damping,
+measurement, voicing. The design story and its measurements will be published here as the build
+progresses.
 
 ## The manual
 

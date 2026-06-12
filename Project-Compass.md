@@ -19,7 +19,7 @@ DIY makers and hobbyist headphone builders who want to understand how headphones
 25+ years in professional audio and the headphone industry:
 - **Grace Design** — employee #1 (1997–2001)
 - **HeadRoom** — VP of Operations → President & CEO (2003–2017); relaunched the entire headphone-amplifier line
-- Designed his own headphone, the **Cosmic**
+- Now building his own closed-back studio headphone, **Old Faithful**, in the open
 
 *This supersedes older project docs that say "30 years" or "Grace Design employee #3." The credibility rests on the bio being exactly right and identical everywhere — reconcile older copies to this.*
 
@@ -38,7 +38,7 @@ Clear, approachable, credible — readable by a first-time builder, grounded in 
 
 ## The manual
 
-30 chapters in six parts — Fundamentals → Components & Materials → Design & Build → Measurement & Tuning → Advanced → Special Topics — plus five appendices. **State: complete — 30 of 30 chapters plus all five appendices written and live.**
+30 chapters in six parts — Fundamentals → Components & Materials → Design & Build → Measurement & Tuning → Advanced → Special Topics — plus five appendices. **State: complete — 30 of 30 chapters, all five appendices, and three build guides written and live.**
 
 ## Relationship to Warren Labs
 
