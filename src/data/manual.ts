@@ -148,6 +148,7 @@ export const BUILD_GUIDE_HANDLES = [
   'simple-open-back-build',
   'closed-back-studio-build',
   'daily-driver-design-spec',
+  'designing-headphones-with-ai',
 ] as const;
 
 export const LEVEL_RANK: Record<string, number> = {
