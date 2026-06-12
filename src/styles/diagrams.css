@@ -1,0 +1,208 @@
+/**
+ * MakerPhones diagram motion system — from the Claude Design diagram
+ * handoff (FIG 00 system notes), kept verbatim. CSS keyframes only,
+ * gated behind prefers-reduced-motion: every figure reads correctly
+ * as a static still; motion is an aid, not a requirement.
+ */
+
+/* shared label typography for the diagram set */
+.mp-dgm text {
+  font-family: var(--mp-mono);
+  letter-spacing: 0.08em;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  /* FIG 01 / 03 — diaphragm excursion */
+  .mp-osc {
+    animation: mpOscX 1.5s ease-in-out infinite;
+  }
+  .mp-osc-s {
+    animation: mpOscXs 1.5s ease-in-out infinite;
+  }
+
+  /* radiating wavefronts */
+  .mp-wave-out {
+    animation: mpWaveOut 2.4s linear infinite;
+  }
+  .mp-wave-out2 {
+    animation: mpWaveOut2 2.4s linear infinite;
+  }
+  .mp-wave-front {
+    animation: mpWaveFront 2.6s linear infinite;
+  }
+  .mp-wave-back {
+    animation: mpWaveBack 2.6s linear infinite;
+  }
+
+  /* FIG 02 — travelling waves */
+  .mp-scroll {
+    animation: mpScroll 1.8s linear infinite;
+  }
+
+  /* FIG 04 — air spring (diaphragm + chamber compression, synced) */
+  .mp-air-s {
+    animation: mpAirS 2.2s ease-in-out infinite;
+  }
+  .mp-air-l {
+    animation: mpAirL 2.2s ease-in-out infinite;
+  }
+  .mp-cham-s {
+    animation: mpChamS 2.2s ease-in-out infinite;
+  }
+  .mp-cham-l {
+    animation: mpChamL 2.2s ease-in-out infinite;
+  }
+
+  /* FIG 05 — standing wave: slow build-up envelope × fast oscillation */
+  .sw-build {
+    animation: swBuild 7s ease-in-out infinite;
+  }
+  .sw-osc {
+    animation: swOsc 1.1s ease-in-out infinite;
+  }
+
+  /* FIG 06 — decay pulse travelling back through the time slices */
+  .csd-slice {
+    animation: csdPulse 4.2s linear infinite;
+  }
+}
+
+@keyframes mpOscX {
+  0%,
+  100% {
+    transform: translateX(-4px);
+  }
+  50% {
+    transform: translateX(4px);
+  }
+}
+@keyframes mpOscXs {
+  0%,
+  100% {
+    transform: translateX(-2px);
+  }
+  50% {
+    transform: translateX(2px);
+  }
+}
+@keyframes mpWaveOut {
+  0% {
+    transform: translateX(0);
+    opacity: 0.85;
+  }
+  100% {
+    transform: translateX(64px);
+    opacity: 0;
+  }
+}
+@keyframes mpWaveOut2 {
+  0% {
+    transform: translateX(0);
+    opacity: 0.85;
+  }
+  100% {
+    transform: translateX(36px);
+    opacity: 0;
+  }
+}
+@keyframes mpWaveFront {
+  0% {
+    transform: translateX(0);
+    opacity: 0.6;
+  }
+  100% {
+    transform: translateX(-52px);
+    opacity: 0;
+  }
+}
+@keyframes mpWaveBack {
+  0% {
+    transform: translateX(0);
+    opacity: 0;
+  }
+  25% {
+    opacity: 0.7;
+  }
+  100% {
+    transform: translateX(-56px);
+    opacity: 0;
+  }
+}
+@keyframes mpScroll {
+  to {
+    transform: translateX(-75px);
+  }
+}
+@keyframes mpAirS {
+  0%,
+  100% {
+    transform: translateX(-5px);
+  }
+  50% {
+    transform: translateX(5px);
+  }
+}
+@keyframes mpAirL {
+  0%,
+  100% {
+    transform: translateX(-9px);
+  }
+  50% {
+    transform: translateX(9px);
+  }
+}
+@keyframes mpChamS {
+  0%,
+  100% {
+    transform: scaleX(1.045);
+  }
+  50% {
+    transform: scaleX(0.955);
+  }
+}
+@keyframes mpChamL {
+  0%,
+  100% {
+    transform: scaleX(1.036);
+  }
+  50% {
+    transform: scaleX(0.964);
+  }
+}
+@keyframes swBuild {
+  0% {
+    transform: scaleY(0.12);
+  }
+  55% {
+    transform: scaleY(1);
+  }
+  88% {
+    transform: scaleY(1);
+  }
+  100% {
+    transform: scaleY(0.12);
+  }
+}
+@keyframes swOsc {
+  0%,
+  100% {
+    transform: scaleY(1);
+  }
+  50% {
+    transform: scaleY(-1);
+  }
+}
+@keyframes csdPulse {
+  0% {
+    opacity: 0.55;
+  }
+  6% {
+    opacity: 1;
+  }
+  16% {
+    opacity: 0.55;
+  }
+  100% {
+    opacity: 0.55;
+  }
+}

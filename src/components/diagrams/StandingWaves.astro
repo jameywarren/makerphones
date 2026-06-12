@@ -1,0 +1,92 @@
+---
+/**
+ * FIG 05 — Standing waves & resonance (animated: build-up envelope ×
+ * oscillation between mirror states). Nodes at the walls, antinode
+ * at center; reinforcement at f₀ ≈ c / 2L.
+ */
+import { hatchV, arrowHead } from './geometry';
+
+const xL = 158,
+  xR = 562,
+  cy = 232,
+  A = 78,
+  L = xR - xL,
+  xm = (xL + xR) / 2;
+
+function env(sign: number): string {
+  const pts: string[] = [];
+  for (let x = xL; x <= xR; x += 4) {
+    const y = cy - sign * A * Math.sin((Math.PI * (x - xL)) / L);
+    pts.push(`${x.toFixed(1)} ${y.toFixed(1)}`);
+  }
+  return 'M ' + pts.join(' L ');
+}
+
+const ink = 'var(--mp-charcoal)';
+const accent = 'var(--mp-accent)';
+const dark = 'var(--mp-ink)';
+const label = 'var(--mp-meta)';
+const faint = 'var(--mp-faint)';
+const hair = 'var(--mp-line)';
+
+const origin = `transform-origin: ${xm}px ${cy}px; transform-box: view-box;`;
+const hatchLeft = hatchV(146, 128, 318, -1, 7);
+const hatchRight = hatchV(574, 128, 318, 1, 7);
+const arrR = arrowHead(335, 128, 0, 6);
+const arrL = arrowHead(385, 140, 180, 6);
+const dimL = arrowHead(xL + 6, 384, 180, 6);
+const dimR = arrowHead(xR - 6, 384, 0, 6);
+---
+
+<svg
+  viewBox="0 44 720 386"
+  class="mp-dgm"
+  role="img"
+  aria-label="A standing wave between two rigid walls: nodes at each wall, antinode at the center, amplitude building with each reflection"
+>
+  <rect x="146" y="120" width="12" height="215" fill={dark}></rect>
+  <rect x="562" y="120" width="12" height="215" fill={dark}></rect>
+  {hatchLeft.map((l) => <line x1={l.x1} y1={l.y1} x2={l.x2} y2={l.y2} stroke={faint} stroke-width="1" />)}
+  {hatchRight.map((l) => <line x1={l.x1} y1={l.y1} x2={l.x2} y2={l.y2} stroke={faint} stroke-width="1" />)}
+
+  <line x1={xL} y1={cy} x2={xR} y2={cy} stroke={hair} stroke-width="1" stroke-dasharray="2 4"></line>
+
+  <line x1="210" y1="128" x2="335" y2="128" stroke={faint} stroke-width="1.2"></line>
+  <polygon points={arrR.points} transform={arrR.transform} fill={faint}></polygon>
+  <line x1="510" y1="140" x2="385" y2="140" stroke={faint} stroke-width="1.2"></line>
+  <polygon points={arrL.points} transform={arrL.transform} fill={faint}></polygon>
+
+  <g class="sw-build" style={origin}>
+    <path d={env(1)} fill="none" stroke={faint} stroke-width="1" stroke-dasharray="4 4"></path>
+    <path d={env(-1)} fill="none" stroke={faint} stroke-width="1" stroke-dasharray="4 4"></path>
+    <g class="sw-osc" style={origin}>
+      <path d={env(1)} fill="none" stroke={accent} stroke-width="2.5"></path>
+    </g>
+  </g>
+
+  <circle cx={xL} cy={cy} r="3" fill={dark}></circle>
+  <circle cx={xR} cy={cy} r="3" fill={dark}></circle>
+  <text x="152" y="358" font-size="9" font-weight="500" fill={label} text-anchor="middle">NODE</text>
+  <text x="568" y="358" font-size="9" font-weight="500" fill={label} text-anchor="middle">NODE</text>
+  <text x={xm} y="96" font-size="9" font-weight="500" fill={label} text-anchor="middle">ANTINODE</text>
+  <line x1={xm} y1="104" x2={xm} y2="148" stroke={faint} stroke-width="1"></line>
+  <circle cx={xm} cy="148" r="2.2" fill={faint}></circle>
+
+  <line x1={xL} y1="378" x2={xL} y2="390" stroke={faint} stroke-width="1"></line>
+  <line x1={xR} y1="378" x2={xR} y2="390" stroke={faint} stroke-width="1"></line>
+  <line x1="345" y1="384" x2={xL + 6} y2="384" stroke={faint} stroke-width="1"></line>
+  <polygon points={dimL.points} transform={dimL.transform} fill={faint}></polygon>
+  <line x1="375" y1="384" x2={xR - 6} y2="384" stroke={faint} stroke-width="1"></line>
+  <polygon points={dimR.points} transform={dimR.transform} fill={faint}></polygon>
+  <text x={xm} y="388" font-size="10.5" font-weight="600" fill={dark} text-anchor="middle">L</text>
+
+  <text x={xm} y="418" font-size="10" font-weight="500" fill={label} opacity="0.9" text-anchor="middle">REFLECTIONS REINFORCE AT f₀ ≈ c / 2L (AND MULTIPLES) — AMPLITUDE BUILDS WITH EACH PASS</text>
+</svg>
+
+<style>
+  svg {
+    max-width: 100%;
+    height: auto;
+    display: block;
+  }
+</style>

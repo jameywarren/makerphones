@@ -110,6 +110,7 @@ export default defineConfig({
         '@fontsource-variable/source-serif-4',
         '@fontsource-variable/jetbrains-mono',
         './src/styles/theme.css',
+        './src/styles/diagrams.css',
       ],
       pagination: true,
       lastUpdated: false,

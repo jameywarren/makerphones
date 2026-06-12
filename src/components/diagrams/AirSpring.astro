@@ -1,0 +1,98 @@
+---
+/**
+ * FIG 04 — The air spring (animated: diaphragm excursion synced with
+ * chamber-air compression). Small sealed volume = stiff spring;
+ * large volume = softer spring.
+ */
+import { zigzagPath, arrowHead } from './geometry';
+
+const ink = 'var(--mp-charcoal)';
+const accent = 'var(--mp-accent)';
+const dark = 'var(--mp-ink)';
+const label = 'var(--mp-meta)';
+const faint = 'var(--mp-faint)';
+const hair = 'var(--mp-line)';
+const lightFill = 'color-mix(in srgb, var(--mp-charcoal) 8%, transparent)';
+
+const cy = 250;
+const panels = [
+  { x0: 50, chamW: 110, title: 'SMALL REAR VOLUME', sub: 'STIFF AIR SPRING', clsAir: 'mp-air-s', clsCham: 'mp-cham-s' },
+  { x0: 430, chamW: 250, title: 'LARGE REAR VOLUME', sub: 'SOFTER AIR SPRING', clsAir: 'mp-air-l', clsCham: 'mp-cham-l' },
+].map((p) => {
+  const baffleX = p.x0 + 120;
+  const backX = baffleX + p.chamW;
+  const airXs: number[] = [];
+  for (let x = baffleX + 20; x <= backX - 12; x += 13) airXs.push(x);
+  return { ...p, baffleX, backX, airXs };
+});
+
+const excArrows = panels.flatMap((p) => [
+  arrowHead(p.baffleX - 12, cy, 0, 6),
+  arrowHead(p.baffleX - 44, cy, 180, 6),
+]);
+const earArrows = panels.map((p) => arrowHead(p.x0 - 30, 250, 180, 6));
+---
+
+<svg
+  viewBox="0 44 880 426"
+  class="mp-dgm"
+  role="img"
+  aria-label="Two sealed chambers compared: a small rear volume acts as a stiff air spring on the diaphragm, a large rear volume as a softer one"
+>
+  {
+    panels.map((p, i) => (
+      <g>
+        <text x={p.x0 + 26} y="84" font-size="12" font-weight="600" fill={dark}>{p.title}</text>
+        <text x={p.x0 + 26} y="102" font-size="9.5" font-weight="500" fill={label}>{p.sub}</text>
+
+        <g class={p.clsCham} style={`transform-origin: ${p.backX}px ${cy}px; transform-box: view-box;`}>
+          {p.airXs.map((x) => (
+            <line x1={x} y1="148" x2={x} y2="352" stroke={hair} stroke-width="1" />
+          ))}
+        </g>
+        <g class={p.clsCham} style={`transform-origin: ${p.backX}px ${cy}px; transform-box: view-box;`}>
+          <path d={zigzagPath(p.baffleX + 12, p.backX - 10, cy, 8, 13)} fill="none" stroke={ink} stroke-width="2" stroke-linejoin="round" />
+        </g>
+
+        <path
+          d={`M ${p.x0 + 26} 132 L ${p.backX - 14} 132 Q ${p.backX} 132 ${p.backX} 146 L ${p.backX} 354 Q ${p.backX} 368 ${p.backX - 14} 368 L ${p.x0 + 26} 368`}
+          fill="none"
+          stroke={ink}
+          stroke-width="6"
+        />
+        <rect x={p.x0 + 6} y="132" width="22" height="64" rx="5" fill={lightFill} stroke={ink} stroke-width="1.5" />
+        <rect x={p.x0 + 6} y="304" width="22" height="64" rx="5" fill={lightFill} stroke={ink} stroke-width="1.5" />
+
+        <rect x={p.baffleX - 6} y="156" width="12" height="14" fill={ink} />
+        <rect x={p.baffleX - 6} y="330" width="12" height="14" fill={ink} />
+        <line class={p.clsAir} x1={p.baffleX} y1="170" x2={p.baffleX} y2="330" stroke={accent} stroke-width="3" />
+        <line x1={p.baffleX - 44} y1={cy} x2={p.baffleX - 12} y2={cy} stroke={accent} stroke-width="1.5" />
+        <polygon points={excArrows[i * 2].points} transform={excArrows[i * 2].transform} fill={accent} />
+        <polygon points={excArrows[i * 2 + 1].points} transform={excArrows[i * 2 + 1].transform} fill={accent} />
+
+        <text x={p.x0 + 73} y="122" font-size="9" font-weight="500" fill={label} text-anchor="middle">FRONT CAVITY</text>
+        <line x1={p.x0 + 73} y1="128" x2={p.x0 + 73} y2="178" stroke={faint} stroke-width="1" />
+        <circle cx={p.x0 + 73} cy="178" r="2.2" fill={faint} />
+        <text x={(p.baffleX + p.backX) / 2} y="122" font-size="9" font-weight="500" fill={label} text-anchor="middle">REAR CHAMBER</text>
+        <line x1={(p.baffleX + p.backX) / 2} y1="128" x2={(p.baffleX + p.backX) / 2} y2="170" stroke={faint} stroke-width="1" />
+        <circle cx={(p.baffleX + p.backX) / 2} cy="170" r="2.2" fill={faint} />
+        <text x={p.x0 - 14} y="232" font-size="8.5" font-weight="500" fill={label} text-anchor="middle">TO EAR</text>
+        <line x1={p.x0 + 2} y1="250" x2={p.x0 - 30} y2="250" stroke={faint} stroke-width="1.2" />
+        <polygon points={earArrows[i].points} transform={earArrows[i].transform} fill={faint} />
+      </g>
+    ))
+  }
+
+  <text x="380" y="418" font-size="9.5" font-weight="500" fill={label}>DIAPHRAGM</text>
+  <line x1="420" y1="406" x2="548" y2="318" stroke={faint} stroke-width="1"></line>
+  <circle cx="548" cy="318" r="2.2" fill={faint}></circle>
+  <text x="50" y="452" font-size="10" font-weight="500" fill={label} opacity="0.9">SEALED AIR BEHIND THE DRIVER ACTS AS A SPRING — A LARGER REAR VOLUME IS A SOFTER SPRING, SO BASS MOVES MORE FREELY</text>
+</svg>
+
+<style>
+  svg {
+    max-width: 100%;
+    height: auto;
+    display: block;
+  }
+</style>

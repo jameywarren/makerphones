@@ -12,6 +12,9 @@ description: "Learn the real differences between open-back and closed-back headp
 excerpt: "Open or closed back isn't just about isolation — it fundamentally changes how headphones sound and how difficult they are to build. Here's what you need to know."
 ---
 
+import Figure from '../../../components/Figure.astro';
+import OpenVsClosedBack from '../../../components/diagrams/OpenVsClosedBack.astro';
+
 One of the first big decisions you'll make when designing headphones is whether to go open-back or closed-back. This isn't just an aesthetic choice or a minor tweak — it fundamentally changes how the headphone sounds, how difficult it is to tune, and what situations it's appropriate for. Let me walk you through the real differences and help you decide which approach makes sense for your build.
 
 ## The Basic Difference
@@ -21,6 +24,11 @@ One of the first big decisions you'll make when designing headphones is whether 
 **Open-back headphones** have vents, grilles, or completely open rear cups. The back of the driver is exposed to the outside air, either directly or through acoustic openings.
 
 But the acoustic implications of this choice are profound.
+
+<Figure label="Fig. 1" caption="The same driver, two rear-cup decisions — and where the rear wave goes.">
+  <OpenVsClosedBack />
+</Figure>
+
 
 ## How Open-Back Works
 

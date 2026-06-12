@@ -12,6 +12,9 @@ description: Mounting the driver, sealing the chambers, and putting the cup toge
 excerpt: This is the hands-on part — seating the driver, getting the seals right, and assembling the cup so it sounds the way the design intended.
 ---
 
+import Figure from '../../../components/Figure.astro';
+import PhaseCancellation from '../../../components/diagrams/PhaseCancellation.astro';
+
 You've designed the cup and printed it. Now you put it together — and assembly is where seals are won or lost. The seal is most of the sound, so this stage matters more than its short word count suggests. Rush it and a well-designed headphone comes out thin and lifeless. Take your time and it sounds like what you drew. The difference between those two outcomes is usually a few minutes of care at a few specific joints.
 
 ## Cleaning up the print first
@@ -37,6 +40,11 @@ There's a quick field test for it: play steady bass and press the cups gently ha
 Solder your leads to the driver terminals, and get the polarity right. Tin the leads and the terminals first, keep the iron on the terminal only as long as it takes — driver terminals sit close to delicate parts, and lingering heat is a risk. Mark positive, and keep both channels in phase with each other.
 
 Two channels wired out of phase cancel in the bass and smear the stereo image. The build goes thin and vague, the center of the image dissolves, and it is a genuinely maddening problem to diagnose if you don't already suspect it — everything measures and looks fine, it just sounds wrong. Checking it takes seconds and saves an evening. Connector and cable choices live in [cables, connectors, and hardware](/learn/cables-connectors-hardware).
+
+<Figure label="Fig. 1" caption="Why polarity matters: in-phase waves add; out-of-phase waves cancel.">
+  <PhaseCancellation />
+</Figure>
+
 
 Add strain relief where the wire meets the driver and where the cable enters the cup — a dab of hot glue, a knot, a heat-shrink anchor. The solder joint at the driver is the weakest mechanical point in the whole headphone, and unrelieved cable flex will eventually crack it.
 

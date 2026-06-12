@@ -1,0 +1,87 @@
+---
+/**
+ * FIG 02 — Phase & cancellation (animated: travelling waves).
+ * In-phase pressures add; 180°-out-of-phase pressures cancel.
+ */
+import { sinePath } from './geometry';
+
+const wl = 75,
+  amp = 20,
+  W = 300;
+const yA = 125,
+  yB = 200,
+  ySum = 315;
+
+const ink = 'var(--mp-charcoal)';
+const accent = 'var(--mp-accent)';
+const dark = 'var(--mp-ink)';
+const label = 'var(--mp-meta)';
+const hair = 'var(--mp-line)';
+
+const panels = [
+  {
+    x: 70,
+    clip: 'mpClipPhL',
+    title: 'IN PHASE — 0°',
+    phaseB: 0,
+    bLabel: 'WAVE B',
+    note: 'PEAKS ALIGN — PRESSURES ADD (+6 dB)',
+  },
+  {
+    x: 420,
+    clip: 'mpClipPhR',
+    title: 'OUT OF PHASE — 180°',
+    phaseB: Math.PI,
+    bLabel: 'WAVE B — INVERTED',
+    note: 'PEAK MEETS TROUGH — PRESSURES CANCEL',
+  },
+];
+---
+
+<svg
+  viewBox="0 44 760 376"
+  class="mp-dgm"
+  role="img"
+  aria-label="Two panels comparing waves in phase, which sum louder, and waves 180 degrees out of phase, which cancel to silence"
+>
+  <defs>
+    {panels.map((p) => (
+      <clipPath id={p.clip}><rect x={p.x} y="88" width={W} height="272" /></clipPath>
+    ))}
+  </defs>
+  {
+    panels.map((p) => (
+      <g>
+        <text x={p.x} y="74" font-size="12" font-weight="600" fill={dark}>{p.title}</text>
+        {[yA, yB, ySum].map((y) => (
+          <line x1={p.x} y1={y} x2={p.x + W} y2={y} stroke={hair} stroke-width="1" stroke-dasharray="2 4" />
+        ))}
+        <text x={p.x} y={yA - 30} font-size="9" font-weight="500" fill={label}>WAVE A</text>
+        <text x={p.x} y={yB - 30} font-size="9" font-weight="500" fill={label}>{p.bLabel}</text>
+        <text x={p.x} y={ySum - 54} font-size="9" font-weight="500" fill={label}>SUM A + B</text>
+        <line x1={p.x} y1="246" x2={p.x + W} y2="246" stroke={hair} stroke-width="1" />
+        <g clip-path={`url(#${p.clip})`}>
+          <path class="mp-scroll" d={sinePath(p.x - wl, yA, amp, wl, W + 2 * wl, 0)} fill="none" stroke={label} stroke-width="1.5" />
+          <path class="mp-scroll" d={sinePath(p.x - wl, yB, amp, wl, W + 2 * wl, p.phaseB)} fill="none" stroke={ink} stroke-width="1.5" stroke-dasharray="5 4" />
+          {p.phaseB === 0 ? (
+            <path class="mp-scroll" d={sinePath(p.x - wl, ySum, amp * 2, wl, W + 2 * wl, 0)} fill="none" stroke={accent} stroke-width="2.5" />
+          ) : (
+            <line x1={p.x} y1={ySum} x2={p.x + W} y2={ySum} stroke={accent} stroke-width="2.5" />
+          )}
+        </g>
+        {p.phaseB !== 0 && (
+          <text x={p.x + W / 2} y={ySum - 12} font-size="9" font-weight="500" fill={label} text-anchor="middle">SILENCE</text>
+        )}
+        <text x={p.x} y="392" font-size="10" font-weight="500" fill={label} opacity="0.9">{p.note}</text>
+      </g>
+    ))
+  }
+</svg>
+
+<style>
+  svg {
+    max-width: 100%;
+    height: auto;
+    display: block;
+  }
+</style>

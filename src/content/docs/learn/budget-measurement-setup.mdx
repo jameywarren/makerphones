@@ -12,11 +12,19 @@ description: "Building a headphone measurement rig on a maker's budget — coupl
 excerpt: "The good news about measuring headphones: a usable rig costs a few hundred dollars or less, and as a maker you can print half of it yourself. Here's what to buy and what to build."
 ---
 
+import Figure from '../../../components/Figure.astro';
+import MeasurementChain from '../../../components/diagrams/MeasurementChain.astro';
+
 The previous chapter made the case for measuring. This one is about what you actually put on the bench to do it — on a DIY budget, without the rigs the industry uses, which run from roughly ten thousand dollars into the tens of thousands. The good news is that a genuinely useful headphone measurement setup costs a few hundred dollars or much less, and because you're a maker, you can 3D-print a real part of it yourself.
 
 ## What a setup is made of
 
 Every measurement rig, cheap or expensive, is the same chain. Something drives the headphone, the headphone plays into an artificial ear, a microphone in that artificial ear captures the sound, and a computer running measurement software turns it into a graph.
+
+<Figure label="Fig. 1" caption="The measurement chain every rig shares, and the loop that does the tuning.">
+  <MeasurementChain />
+</Figure>
+
 
 On the playback side you need a way to drive the headphone — any decent small DAC or headphone amp. One modern note worth absorbing: use an amp with very low output impedance. The old advice to measure through a 120-ohm output is obsolete; today you want the lowest output impedance you can get, so the amp isn't coloring the result.
 

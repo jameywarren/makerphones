@@ -1,0 +1,111 @@
+---
+/**
+ * FIG 08 — Driver technologies at a glance (static). Four panels:
+ * dynamic, planar magnetic, balanced armature, electrostatic —
+ * orange marks the moving element in each.
+ */
+import { arrowHead } from './geometry';
+
+const ink = 'var(--mp-charcoal)';
+const accent = 'var(--mp-accent)';
+const dark = 'var(--mp-ink)';
+const label = 'var(--mp-meta)';
+const faint = 'var(--mp-faint)';
+const sep = 'var(--mp-line)';
+const lightFill = 'color-mix(in srgb, var(--mp-charcoal) 10%, transparent)';
+const lightFill6 = 'color-mix(in srgb, var(--mp-charcoal) 6%, transparent)';
+
+const [c0, c1, c2, c3] = [138, 390, 642, 894];
+
+const arr = (x1: number, y1: number, x2: number, y2: number, size = 6) => {
+  const ang = (Math.atan2(y2 - y1, x2 - x1) * 180) / Math.PI;
+  return {
+    head: arrowHead(x2, y2, ang, size),
+    tail: arrowHead(x1, y1, ang + 180, size),
+  };
+};
+const a0 = arr(c0, 200, c0, 158);
+const a1 = arr(c1, 192, c1, 152);
+const a2 = arr(c2, 146, c2, 118);
+const a2b = arr(c2 + 58, 240, c2 + 58, 264, 5);
+const a3 = arr(c3, 224, c3, 248, 5);
+const a3v = arr(c3 + 30, 196, c3 + 30, 170, 5);
+---
+
+<svg
+  viewBox="0 44 1040 386"
+  class="mp-dgm"
+  role="img"
+  aria-label="Four driver technologies side by side: dynamic, planar magnetic, balanced armature, and electrostatic, with the moving element highlighted in each"
+>
+  {[264, 516, 768].map((x) => <line x1={x} y1="80" x2={x} y2="340" stroke={sep} stroke-width="1" />)}
+
+  <!-- DYNAMIC -->
+  <rect x={c0 - 42} y="282" width="84" height="34" fill={dark}></rect>
+  <rect x={c0 - 42} y="272" width="26" height="10" fill={lightFill} stroke={ink} stroke-width="1.2"></rect>
+  <rect x={c0 + 16} y="272" width="26" height="10" fill={lightFill} stroke={ink} stroke-width="1.2"></rect>
+  <rect x={c0 - 15} y="254" width="7" height="26" fill={ink}></rect>
+  <rect x={c0 + 8} y="254" width="7" height="26" fill={ink}></rect>
+  <line x1={c0 - 42} y1="272" x2={c0 - 66} y2="222" stroke={ink} stroke-width="1.5"></line>
+  <line x1={c0 + 42} y1="272" x2={c0 + 66} y2="222" stroke={ink} stroke-width="1.5"></line>
+  <line x1={c0 - 12} y1="256" x2={c0 - 58} y2="218" stroke={accent} stroke-width="2"></line>
+  <line x1={c0 + 12} y1="256" x2={c0 + 58} y2="218" stroke={accent} stroke-width="2"></line>
+  <path d={`M ${c0 - 12} 256 A 14 14 0 0 0 ${c0 + 12} 256`} fill="none" stroke={accent} stroke-width="2"></path>
+  <line x1={c0} y1="200" x2={c0} y2="158" stroke={accent} stroke-width="1.5"></line>
+  <polygon points={a0.head.points} transform={a0.head.transform} fill={accent}></polygon>
+  <polygon points={a0.tail.points} transform={a0.tail.transform} fill={accent}></polygon>
+  <text x={c0} y="368" font-size="10.5" font-weight="600" fill={dark} text-anchor="middle">DYNAMIC</text>
+  <text x={c0} y="390" font-size="9" font-weight="500" fill={label} text-anchor="middle">COIL-DRIVEN RIGID PISTON</text>
+
+  <!-- PLANAR MAGNETIC -->
+  {[-44, 0, 44].map((o) => <rect x={c1 + o - 12} y="200" width="24" height="14" fill={dark} />)}
+  {[-44, 0, 44].map((o) => <rect x={c1 + o - 12} y="258" width="24" height="14" fill={dark} />)}
+  <line x1={c1 - 66} y1="236" x2={c1 + 66} y2="236" stroke={accent} stroke-width="2.5"></line>
+  {[-50, -30, -10, 10, 30, 50].map((o) => <circle cx={c1 + o} cy="236" r="2.4" fill={dark} />)}
+  <line x1={c1} y1="192" x2={c1} y2="152" stroke={accent} stroke-width="1.5"></line>
+  <polygon points={a1.head.points} transform={a1.head.transform} fill={accent}></polygon>
+  <polygon points={a1.tail.points} transform={a1.tail.transform} fill={accent}></polygon>
+  <text x={c1} y="368" font-size="10.5" font-weight="600" fill={dark} text-anchor="middle">PLANAR MAGNETIC</text>
+  <text x={c1} y="390" font-size="9" font-weight="500" fill={label} text-anchor="middle">WHOLE FILM DRIVEN BY MAGNET ARRAY</text>
+
+  <!-- BALANCED ARMATURE -->
+  <rect x={c2 - 78} y="168" width="156" height="140" rx="3" fill="none" stroke={ink} stroke-width="1.5"></rect>
+  <rect x={c2 - 12} y="152" width="24" height="16" fill={lightFill} stroke={ink} stroke-width="1.2"></rect>
+  <line x1={c2} y1="146" x2={c2} y2="118" stroke={accent} stroke-width="1.5"></line>
+  <polygon points={a2.head.points} transform={a2.head.transform} fill={accent}></polygon>
+  <line x1={c2 - 70} y1="200" x2={c2 + 70} y2="200" stroke={accent} stroke-width="2"></line>
+  <line x1={c2 + 44} y1="200" x2={c2 + 44} y2="252" stroke={ink} stroke-width="1.5"></line>
+  <rect x={c2 - 70} y="244" width="8" height="16" fill={dark}></rect>
+  <line x1={c2 - 62} y1="252" x2={c2 + 44} y2="252" stroke={ink} stroke-width="2.5"></line>
+  <rect x={c2 - 40} y="238" width="36" height="28" fill={lightFill6} stroke={ink} stroke-width="1.2"></rect>
+  <rect x={c2 + 4} y="234" width="32" height="12" fill={dark}></rect>
+  <rect x={c2 + 4} y="258" width="32" height="12" fill={dark}></rect>
+  <line x1={c2 + 58} y1="240" x2={c2 + 58} y2="264" stroke={accent} stroke-width="1.2"></line>
+  <polygon points={a2b.head.points} transform={a2b.head.transform} fill={accent}></polygon>
+  <polygon points={a2b.tail.points} transform={a2b.tail.transform} fill={accent}></polygon>
+  <text x={c2} y="368" font-size="10.5" font-weight="600" fill={dark} text-anchor="middle">BALANCED ARMATURE</text>
+  <text x={c2} y="390" font-size="9" font-weight="500" fill={label} text-anchor="middle">REED PIVOTS IN COIL — PIN DRIVES FILM</text>
+
+  <!-- ELECTROSTATIC -->
+  <line x1={c3 - 66} y1="206" x2={c3 + 66} y2="206" stroke={ink} stroke-width="5" stroke-dasharray="9 7"></line>
+  <line x1={c3 - 66} y1="266" x2={c3 + 66} y2="266" stroke={ink} stroke-width="5" stroke-dasharray="9 7"></line>
+  <line x1={c3 - 66} y1="236" x2={c3 + 66} y2="236" stroke={accent} stroke-width="2"></line>
+  <text x={c3 - 84} y="210" font-size="10" font-weight="500" fill={label} text-anchor="middle">−</text>
+  <text x={c3 - 84} y="270" font-size="10" font-weight="500" fill={label} text-anchor="middle">+</text>
+  <text x={c3 + 84} y="240" font-size="8" font-weight="500" fill={label} text-anchor="middle">BIAS</text>
+  <line x1={c3} y1="224" x2={c3} y2="248" stroke={accent} stroke-width="1.2"></line>
+  <polygon points={a3.head.points} transform={a3.head.transform} fill={accent}></polygon>
+  <polygon points={a3.tail.points} transform={a3.tail.transform} fill={accent}></polygon>
+  <line x1={c3 + 30} y1="196" x2={c3 + 30} y2="170" stroke={faint} stroke-width="1"></line>
+  <polygon points={a3v.head.points} transform={a3v.head.transform} fill={faint}></polygon>
+  <text x={c3} y="368" font-size="10.5" font-weight="600" fill={dark} text-anchor="middle">ELECTROSTATIC</text>
+  <text x={c3} y="390" font-size="9" font-weight="500" fill={label} text-anchor="middle">CHARGED FILM BETWEEN PERFORATED STATORS</text>
+</svg>
+
+<style>
+  svg {
+    max-width: 100%;
+    height: auto;
+    display: block;
+  }
+</style>

@@ -12,6 +12,9 @@ description: Where resonances come from in a headphone — driver, cavities, and
 excerpt: "Every chapter so far has circled the same enemy. This one names it directly: resonance, where it comes from, and how to control it at the source rather than chasing it on a curve."
 ---
 
+import Figure from '../../../components/Figure.astro';
+import StandingWaves from '../../../components/diagrams/StandingWaves.astro';
+
 Every chapter so far has circled the same enemy. The peak you damped, the boxiness you chased, the ring you saw on a decay plot, the one-note bass — those are all resonance, showing up in different places under different names. This chapter names it directly, because once you understand resonance as a single phenomenon with a handful of sources and a handful of cures, a lot of headphone behavior that seemed mysterious turns into something you can reason about.
 
 ## What a resonance is
@@ -39,6 +42,11 @@ Each resonance shows up as a peak and a ringing tail. That means coloration — 
 **Stiffen it or add mass.** This is the right answer when the resonance lives in the structure. Making a panel stiffer raises its resonant frequency — often pushing it up out of the range where it matters — and reduces how much it rings. Adding mass lowers the frequency and deadens it. For a printed cup, the most direct fixes are increasing wall thickness, adding internal ribs, or bumping up the infill, all of which turn a thin ringing shell into a dead one.
 
 **Break up the geometry.** Parallel walls and simple box shapes encourage standing waves, because the sound bounces back and forth between two flat surfaces and reinforces itself at specific frequencies. Non-parallel surfaces, chamfers, and irregular internal shapes spread that energy out instead of letting it build at one frequency. You can design a resonance down before you ever damp it.
+
+<Figure label="Fig. 1" caption="A standing wave between parallel walls — energy building at the cavity’s resonant frequency.">
+  <StandingWaves />
+</Figure>
+
 
 **Decouple it.** Stop vibration from traveling between parts. Isolating the cup from the gimbal and headband keeps structural buzz from reaching the cup; soft-mounting the driver keeps its frame from driving the shell. Sometimes the cure isn't killing a resonance but breaking the path it travels.
 

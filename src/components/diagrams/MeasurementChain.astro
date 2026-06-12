@@ -1,0 +1,94 @@
+---
+/**
+ * FIG 07 — Measurement chain & tuning loop (static). Signal path:
+ * source → amp → headphone on coupler → computer; below, the
+ * measure / change-one-thing loop.
+ */
+import { sinePath, arcPath, arrowHead } from './geometry';
+
+const ink = 'var(--mp-charcoal)';
+const accent = 'var(--mp-accent)';
+const dark = 'var(--mp-ink)';
+const label = 'var(--mp-meta)';
+const faint = 'var(--mp-faint)';
+const hair = 'var(--mp-line)';
+const sep = 'var(--mp-line)';
+const lightFill6 = 'color-mix(in srgb, var(--mp-charcoal) 6%, transparent)';
+
+const lc = { x: 440, y: 318, r: 46 };
+const tip = (a: number): [number, number] => [
+  lc.x + lc.r * Math.cos((a * Math.PI) / 180),
+  lc.y + lc.r * Math.sin((a * Math.PI) / 180),
+];
+const [t1x, t1y] = tip(110);
+const [t2x, t2y] = tip(290);
+const loopArr1 = arrowHead(t1x, t1y, 110 + 90, 7);
+const loopArr2 = arrowHead(t2x, t2y, 290 + 90, 7);
+const flow = [
+  { x1: 180, x2: 233 },
+  { x1: 345, x2: 398 },
+  { x1: 600, x2: 663 },
+].map((f) => ({ ...f, arr: arrowHead(f.x2, 128, 0, 7) }));
+---
+
+<svg
+  viewBox="0 44 880 376"
+  class="mp-dgm"
+  role="img"
+  aria-label="The measurement signal path from source through amplifier to a headphone on a coupler and into measurement software, with the measure-and-change-one-thing tuning loop below"
+>
+  <text x="50" y="64" font-size="9.5" font-weight="500" fill={label}>SIGNAL PATH</text>
+
+  <rect x="50" y="80" width="130" height="96" rx="3" fill="none" stroke={ink} stroke-width="1.5"></rect>
+  <rect x="235" y="80" width="110" height="96" rx="3" fill="none" stroke={ink} stroke-width="1.5"></rect>
+  <rect x="400" y="80" width="200" height="96" rx="3" fill="none" stroke={ink} stroke-width="1.5"></rect>
+  <rect x="665" y="80" width="170" height="96" rx="3" fill="none" stroke={ink} stroke-width="1.5"></rect>
+
+  <path d={sinePath(75, 128, 13, 32, 80)} fill="none" stroke={ink} stroke-width="1.5"></path>
+  <polygon points="266,104 266,152 316,128" fill={lightFill6} stroke={ink} stroke-width="1.5"></polygon>
+  <path d="M 470 138 Q 468 96 500 94 Q 532 96 530 138" fill="none" stroke={ink} stroke-width="2"></path>
+  <line x1="474" y1="132" x2="526" y2="132" stroke={hair} stroke-width="1" stroke-dasharray="3 3"></line>
+  <line x1="455" y1="138" x2="545" y2="138" stroke={ink} stroke-width="2.5"></line>
+  <rect x="494" y="140" width="12" height="18" fill={dark}></rect>
+  <text x="556" y="162" font-size="8.5" font-weight="500" fill={label}>MIC</text>
+  <line x1="552" y1="158" x2="508" y2="152" stroke={faint} stroke-width="1"></line>
+  <circle cx="508" cy="152" r="2.2" fill={faint}></circle>
+  <line x1="685" y1="112" x2="815" y2="112" stroke={hair} stroke-width="0.75"></line>
+  <line x1="685" y1="136" x2="815" y2="136" stroke={hair} stroke-width="0.75"></line>
+  <path d="M 685 134 C 705 120 725 118 748 122 C 772 126 792 112 815 124" fill="none" stroke={accent} stroke-width="1.8"></path>
+
+  <text x="115" y="198" font-size="10" font-weight="600" fill={dark} text-anchor="middle">SOURCE / DAC</text>
+  <text x="115" y="214" font-size="8.5" font-weight="500" fill={label} text-anchor="middle">SINE SWEEP</text>
+  <text x="290" y="198" font-size="10" font-weight="600" fill={dark} text-anchor="middle">AMPLIFIER</text>
+  <text x="290" y="214" font-size="8.5" font-weight="500" fill={label} text-anchor="middle">CLEAN GAIN</text>
+  <text x="500" y="198" font-size="10" font-weight="600" fill={dark} text-anchor="middle">HEADPHONE ON COUPLER</text>
+  <text x="750" y="198" font-size="10" font-weight="600" fill={dark} text-anchor="middle">COMPUTER — FR / CSD</text>
+
+  {
+    flow.map((f) => (
+      <g>
+        <line x1={f.x1} y1="128" x2={f.x2} y2="128" stroke={ink} stroke-width="1.5" />
+        <polygon points={f.arr.points} transform={f.arr.transform} fill={ink} />
+      </g>
+    ))
+  }
+
+  <line x1="50" y1="234" x2="830" y2="234" stroke={sep} stroke-width="1"></line>
+  <text x="50" y="262" font-size="9.5" font-weight="500" fill={label}>TUNING LOOP</text>
+  <path d={arcPath(lc.x, lc.y, lc.r, -50, 110)} fill="none" stroke={accent} stroke-width="2"></path>
+  <polygon points={loopArr1.points} transform={loopArr1.transform} fill={accent}></polygon>
+  <path d={arcPath(lc.x, lc.y, lc.r, 130, 290)} fill="none" stroke={accent} stroke-width="2"></path>
+  <polygon points={loopArr2.points} transform={loopArr2.transform} fill={accent}></polygon>
+  <text x={lc.x} y={lc.y - lc.r - 14} font-size="10.5" font-weight="600" fill={dark} text-anchor="middle">MEASURE</text>
+  <text x={lc.x} y={lc.y + lc.r + 24} font-size="10.5" font-weight="600" fill={dark} text-anchor="middle">CHANGE ONE THING</text>
+  <text x="560" y="314" font-size="9.5" font-weight="500" fill={label}>ONE VARIABLE PER PASS —</text>
+  <text x="560" y="330" font-size="9.5" font-weight="500" fill={label}>MEASURE AGAIN, COMPARE CURVES</text>
+</svg>
+
+<style>
+  svg {
+    max-width: 100%;
+    height: auto;
+    display: block;
+  }
+</style>

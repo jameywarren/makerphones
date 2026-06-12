@@ -12,6 +12,9 @@ description: Beyond frequency response — decay plots, impulse response, and di
 excerpt: Frequency response is a snapshot that throws away time and ignores distortion. These are the measurements that fill in what it leaves out — and the two that are genuinely worth your attention.
 ---
 
+import Figure from '../../../components/Figure.astro';
+import DecayWaterfall from '../../../components/diagrams/DecayWaterfall.astro';
+
 Frequency response is the headline measurement, and for good reason — it tells you most of what you need while you're tuning. But it's a snapshot. It tells you how loud each frequency is and nothing about how long each one rings, and it says nothing about distortion at all. That's why two headphones with nearly identical curves can still sound clearly different from each other. The measurements in this chapter fill in those gaps. You won't need all of them, but a couple are genuinely useful, and it's worth knowing what the rest are for so you can read them when you see them.
 
 ## The time dimension: decay plots
@@ -19,6 +22,11 @@ Frequency response is the headline measurement, and for good reason — it tells
 A frequency response curve has no time axis. It can't tell you that a particular frequency keeps ringing after the signal stops — and that ringing is a big part of what you hear as hardness, smear, or one-note bass.
 
 A decay plot — you'll see it called cumulative spectral decay, a waterfall, or a CSD — adds that missing axis. Picture the familiar frequency-response curve as the front edge, then a series of fainter copies stacked behind it, each one showing the response a fraction of a millisecond later as the energy dies away. Frequencies that stop cleanly drop straight down into the floor; frequencies that ring keep standing tall in those later slices, forming a ridge that runs back into the plot. Those ridges are resonances, and their height and length tell you how badly each one rings.
+
+<Figure label="Fig. 1" caption="A decay waterfall: the ridge that keeps standing is a resonance ringing.">
+  <DecayWaterfall />
+</Figure>
+
 
 This is the single most useful "advanced" plot for a builder, because it shows you exactly which frequencies are misbehaving — the ones to chase with damping or a structural fix — and it shows you whether your fix worked. A clean, fast decay is the tight, controlled sound you're after. Long tails are the smear and fatigue you're trying to get rid of.
 
