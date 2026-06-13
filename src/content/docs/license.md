@@ -17,8 +17,7 @@ Your builds are yours. Anything you make by following the manual — including t
 is not covered by this license; it only covers the written content itself.
 
 **Design files.** The Daily Driver is genuinely open source — and unlike the manual, it carries
-no non-commercial restriction. The hardware source (CAD models, STLs, the headband DXF) is
-released under [CERN-OHL-P-2.0](https://github.com/makerphones/daily-driver/blob/main/LICENSE),
-and its documentation — including the [design spec](/learn/daily-driver-design-spec/) — under
-[CC BY-4.0](https://creativecommons.org/licenses/by/4.0/). Download it, modify it, build it, and
-sell what you make. All I ask is credit to Jamey Warren / Makerphones.
+no non-commercial restriction. The whole repo — CAD models, STLs, the headband DXF, and the
+[design spec](/learn/daily-driver-design-spec/) — is released under the
+[MIT License](https://github.com/makerphones/daily-driver/blob/main/LICENSE). Download it, modify
+it, build it, and sell what you make. All I ask is credit to makerphones by Warren Labs.
