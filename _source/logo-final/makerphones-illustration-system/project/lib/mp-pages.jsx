@@ -35,7 +35,7 @@ function HomeA({ t }) {
           <p className="mono" style={{ marginTop: 36 }}>Six parts · Free · Written from the bench</p>
         </div>
         <div className="mp-heroA-fig">
-          <Plate grid pad={20} label="FIG. H — OLD FAITHFUL, EXPLODED · HOVER TO ASSEMBLE">
+          <Plate grid pad={20} label="FIG. H — DAILY DRIVER, EXPLODED · HOVER TO ASSEMBLE">
             <HeroExploded weight={t.heroWeight} motion={t.heroMotion} annotated={true} />
           </Plate>
         </div>
@@ -95,7 +95,7 @@ function HomeB({ t }) {
             <p className="mono orange" style={{ marginBottom: 18 }}>{MP_CONTENT.eyebrow}</p>
             {[['01', 'A complete manual — driver physics to finished pair'],
               ['02', 'Measured, not vibes: every claim has a curve'],
-              ['03', 'Old Faithful built in the open, below']].map(([n, txt]) => (
+              ['03', 'Daily Driver built in the open, below']].map(([n, txt]) => (
                 <p key={n} className="mp-marginalia">
                   <span className="mono orange">{n}</span>
                   <span className="mono" style={{ textTransform: 'none', letterSpacing: '0.04em' }}>{txt}</span>
@@ -251,7 +251,7 @@ function HomeD({ t }) {
               <div className="mp-heroD-marg">
                 {[['01', 'A complete manual — driver physics to finished pair'],
                   ['02', 'Measured, not vibes: every claim has a curve'],
-                  ['03', 'Old Faithful built in the open, below']].map(([n, txt]) => (
+                  ['03', 'Daily Driver built in the open, below']].map(([n, txt]) => (
                     <p key={n} className="mp-marginalia" style={{ maxWidth: 360 }}>
                       <span className="mono orange">{n}</span>
                       <span className="mono" style={{ textTransform: 'none', letterSpacing: '0.04em' }}>{txt}</span>
@@ -266,7 +266,7 @@ function HomeD({ t }) {
           <div className="mp-cover-botrow">
             <span className="mono">J. Warren</span>
             <span className="mono">Six parts · Free · Written from the bench</span>
-            <span className="mono">FIG. H — OLD FAITHFUL, EXPLODED</span>
+            <span className="mono">FIG. H — DAILY DRIVER, EXPLODED</span>
           </div>
         </div>
       </section>

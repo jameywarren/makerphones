@@ -42,7 +42,7 @@ Clear, approachable, credible — readable by a first-time builder, grounded in 
 
 ## Relationship to Warren Labs
 
-MakerPhones is a sibling project referenced from warrenlabs.com. The deep headphone R&D lives in the Warren Labs lab (and feeds the Old Faithful headphone); MakerPhones is where that knowledge becomes a build-focused resource for makers. Same person, two audiences — keep MakerPhones written for the builder.
+MakerPhones is a sibling project referenced from warrenlabs.com. The deep headphone R&D lives in the Warren Labs lab (and feeds the Daily Driver headphone); MakerPhones is where that knowledge becomes a build-focused resource for makers. Same person, two audiences — keep MakerPhones written for the builder.
 
 ## Parked — don't build or steer toward unless reactivated
 

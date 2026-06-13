@@ -21,12 +21,12 @@ const MP_CONTENT = {
   ],
   bio: {
     name: 'Jamey Warren',
-    text: 'Twenty-five years designing pro audio — Grace Design, HeadRoom — now building Old Faithful, a closed-back studio headphone, in the open. Every chapter in this manual comes off that bench.',
-    meta: ['25+ YRS PRO AUDIO', 'GRACE DESIGN · HEADROOM', 'NOW — OLD FAITHFUL'],
+    text: 'Twenty-five years designing pro audio — Grace Design, HeadRoom — now designing the Daily Driver, an open-back headphone, in the open. Every chapter in this manual comes off that bench.',
+    meta: ['25+ YRS PRO AUDIO', 'GRACE DESIGN · HEADROOM', 'NOW — DAILY DRIVER'],
   },
   bench: {
     eyebrow: 'From the bench',
-    title: 'Old Faithful',
+    title: 'Daily Driver',
     text: 'A closed-back studio headphone, designed and measured in public. Follow the prototypes, the dead ends, and the curves as they happen.',
     meta: [['STATUS', 'PROTOTYPE 04'], ['TARGET', 'CLOSED-BACK STUDIO REFERENCE'], ['LAST PASS', 'BAFFLE REV — REMEASURE']],
     cta: 'Read the bench notes',

@@ -35,7 +35,7 @@ BRAND SYSTEM (keep):
 - Type: Schibsted Grotesk (headings) / Source Serif 4 (body) / JetBrains Mono (uppercase labels).
 - Diagram conventions (from the existing FIG 00 system-notes sheet): stroke weights 1 / 1.5 / 2.5, dashed leader lines with a 2px dot at the target, uppercase mono labels, blueprint-grid texture, motion as CSS keyframes that honor prefers-reduced-motion and always read correctly as a static still.
 
-CURRENT HOMEPAGE (for reference): a hero (eyebrow + "Build Your Own Sound." + intro + two CTAs, with a line-art exploded headphone on a cream grid); an author-bio strip (Jamey Warren — 25+ years in pro audio, Grace Design / HeadRoom, now building his closed-back studio headphone "Old Faithful" in the open); a "manual in six parts" card grid (Part 01–06); and a dark "From the bench / Old Faithful" band with an FR curve (measured vs target, illustrative). The bio and the six-part structure should carry over; everything else is open to reinvention.
+CURRENT HOMEPAGE (for reference): a hero (eyebrow + "Build Your Own Sound." + intro + two CTAs, with a line-art exploded headphone on a cream grid); an author-bio strip (Jamey Warren — 25+ years in pro audio, Grace Design / HeadRoom, now designing his open-back headphone "Daily Driver" in the open); a "manual in six parts" card grid (Part 01–06); and a dark "From the bench / Daily Driver" band with an FR curve (measured vs target, illustrative). The bio and the six-part structure should carry over; everything else is open to reinvention.
 
 DELIVERABLES (all as SVG, for Claude Code to implement as components):
 
@@ -101,7 +101,7 @@ Questions answered:
 - hero_motion: for sure assembly on scroll/hover but a few more options too so I can see. 
 - homepage_variations: Three directions
 - layout_energy: Explore a mix
-- photo_slots: From the bench / Old Faithful band, Workshop / hero supporting shot, Author bio (bench portrait), Per-part cards
+- photo_slots: From the bench / Daily Driver band, Workshop / hero supporting shot, Author bio (bench portrait), Per-part cards
 - listener_cast: 4
 - dark_mode: Light mode only, but tokens mapped so dark 'just works'
 - delivery_shape: Decide for me
@@ -399,7 +399,7 @@ KEEP (these landed):
 - The header nav (The Manual / Bench Notes / Builds / About / V2 · Open Manual).
 - The mass-fill exploded headphone and the dialect ruling (uppercase labels, leader dots).
 - The diagram motifs (waveform divider, pressure arcs, FR backdrop, ruler strip), the icon set, and the FIG 05b / 06b revisions.
-- The "From the bench / Old Faithful" band with its FR curve.
+- The "From the bench / Daily Driver" band with its FR curve.
 
 CHANGE 1 — the human figures. They read a little cheesy at hero scale; the faces and stick-figure proportions undercut the credible-engineering tone. Pull them back hard. The human element should come primarily from REAL PHOTOGRAPHY in the framed plates — bench, prototypes, finished builds, the author — which the plate motif already suits perfectly. Empty plates should read as intentional technical frames (clean borders, plate labels) until photos drop in. If any illustrated figures remain, they must be faceless (pose carries it), gestural, and small — marginalia scale only, never hero mascots. Show a version that leans on photo plates with minimal or no illustrated people so the comparison is clear.
 
