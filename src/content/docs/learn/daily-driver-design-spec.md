@@ -278,12 +278,14 @@ specific driver against the selection criteria above, ideally one with published
 
 ## Design files license
 
-The Daily Driver design files — CAD, STLs, the headband DXF, and this spec — are released
-under **CC BY-NC 4.0**, the same license as the manual: free to use, copy, adapt, and share
-for any non-commercial purpose, with credit. The details live on the [license page](/license/).
+The Daily Driver is open source, commercial use included. The hardware source — CAD, STLs, the
+headband DXF — is licensed [CERN-OHL-P-2.0](https://github.com/makerphones/daily-driver/blob/main/LICENSE);
+this spec and the rest of the documentation are [CC BY-4.0](https://creativecommons.org/licenses/by/4.0/).
+Download, modify, build, and sell what you make — just credit Jamey Warren / Makerphones. More on
+the [license page](/license/).
 
 ---
 
 *v0.2 · 2026-06-12 · Reconciled from the earlier Daily Driver brief and the driver-grounded
 acoustic spec. Update as the form lands and the first prototype is measured. Open decisions:
-specific production driver, final pad confirmation, connector choice. File license: CC BY-NC 4.0.*
+specific production driver, final pad confirmation, connector choice. File license: CERN-OHL-P-2.0 (source) · CC BY-4.0 (docs).*
