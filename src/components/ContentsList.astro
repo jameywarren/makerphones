@@ -103,7 +103,13 @@ const liveGuides = buildGuides.filter((b) => b.written);
         <div class="mp-contents-rows">
           {liveAppendices.map((a) => (
             <a class="mp-chapter-row" href={`/learn/${a.handle}/`}>
-              <span class="mp-partnum">A</span>
+              <span class="mp-partnum">
+                {a.handle === 'listening-safely' ? (
+                  <span class="mp-row-mark"><MpIcon name="listening-safely" size={18} /></span>
+                ) : (
+                  'A'
+                )}
+              </span>
               <span class="mp-row-main">
                 <span class="mp-row-title">{a.title}</span>
               </span>
@@ -142,5 +148,12 @@ const liveGuides = buildGuides.filter((b) => b.written);
     display: flex;
     align-items: center;
     gap: 10px;
+  }
+  /* listening-safely wears its ear mark in the leading column in
+   * place of the generic "A" badge; nudge it onto the title baseline. */
+  .mp-row-mark {
+    display: inline-flex;
+    color: var(--mp-charcoal);
+    transform: translateY(3px);
   }
 </style>

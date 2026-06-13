@@ -18,6 +18,7 @@ export type MpIconName =
   | 'troubleshoot'
   | 'resources'
   | 'suppliers'
+  | 'listening-safely'
   | 'arrow';
 
 /** Part number (1–6) → part icon. */
@@ -25,6 +26,7 @@ export const PART_ICONS: MpIconName[] = ['contents', 'fundamentals', 'drivers', 
 
 /** Appendix handle → its own reference mark. */
 export const APPENDIX_ICONS: Record<string, MpIconName> = {
+  'listening-safely': 'listening-safely',
   glossary: 'glossary',
   'supplier-directory': 'suppliers',
   'design-resources': 'resources',
