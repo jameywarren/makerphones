@@ -1,0 +1,114 @@
+---
+/**
+ * SiteFooter — the single, shared site footer (logo handoff lockup +
+ * full nav). One source of truth, rendered once per page from the
+ * PageFrame override so it sits as a full-width band below the content
+ * and sidebar on every route — the homepage included.
+ *
+ * Self-contained: all type/colour comes from --mp-* tokens and the
+ * component's own scoped styles, so it reads identically whether or not
+ * it's nested inside .mp-home. "Listening safely" lives here as a nav
+ * link, reachable from every page.
+ */
+import DriverMark from './illustration/DriverMark.astro';
+
+const links = [
+  { text: 'Manual', href: '/contents/' },
+  { text: 'Bench notes', href: '/bench-notes/' },
+  { text: 'About', href: '/about/' },
+  { text: 'Listening safely', href: '/learn/listening-safely/' },
+  { text: 'RSS', href: '/rss.xml' },
+  { text: 'License', href: '/license/' },
+  { text: 'Contact', href: 'mailto:jamey@jameywarren.com' },
+];
+---
+
+<footer class="mp-sitefooter not-content">
+  <div class="mp-foot-lockup">
+    <div class="mp-foot-lockup-row">
+      <DriverMark size={31} />
+      <span class="mp-foot-wordmark"
+        >makerphones<span class="mp-foot-dot" aria-hidden="true"></span></span
+      >
+    </div>
+    <span class="mp-foot-tagline">Build your own sound</span>
+  </div>
+  <nav class="mp-foot-nav" aria-label="Site">
+    {links.map((l) => <a href={l.href}>{l.text}</a>)}
+  </nav>
+</footer>
+
+<style>
+  .mp-sitefooter {
+    display: flex;
+    align-items: center;
+    gap: 40px;
+    justify-content: space-between;
+    padding: 36px clamp(1rem, 4vw, 4rem) 44px;
+    border-top: 1px solid var(--mp-hair);
+    flex-wrap: wrap;
+    color: var(--mp-charcoal);
+    font-family: var(--mp-body);
+  }
+
+  /* tagline lockup (logo handoff) — ratios for wordmark size S = 26px:
+   * mark 1.18×S, row gap 0.42×S, column gap 0.34×S, tagline 0.26×S
+   * (floored at 8px for legibility), tagline indent 1.6×S. */
+  .mp-foot-lockup {
+    display: flex;
+    flex-direction: column;
+    gap: 9px;
+    color: var(--mp-charcoal);
+  }
+  .mp-foot-lockup-row {
+    display: flex;
+    align-items: center;
+    gap: 11px;
+  }
+  .mp-foot-wordmark {
+    font-family: var(--mp-sans);
+    font-weight: 700;
+    font-size: 26px;
+    letter-spacing: -0.03em;
+    line-height: 1;
+    white-space: nowrap;
+  }
+  .mp-foot-dot {
+    width: 0.115em;
+    height: 0.115em;
+    border-radius: 50%;
+    background: var(--mp-accent);
+    display: inline-block;
+    margin-left: 0.09em;
+  }
+  .mp-foot-tagline {
+    font-family: var(--mp-mono);
+    font-size: 8px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--mp-meta);
+    margin-left: 42px;
+  }
+
+  .mp-foot-nav {
+    display: flex;
+    gap: 28px;
+    flex-wrap: wrap;
+  }
+  .mp-foot-nav a {
+    font-family: var(--mp-mono);
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    font-weight: 500;
+    color: var(--mp-meta);
+    text-decoration: none;
+  }
+  .mp-foot-nav a:hover {
+    color: var(--mp-accent);
+  }
+  .mp-foot-nav a:focus-visible {
+    outline: 2px solid var(--mp-accent);
+    outline-offset: 3px;
+  }
+</style>

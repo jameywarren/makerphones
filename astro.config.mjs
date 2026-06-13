@@ -153,6 +153,7 @@ export default defineConfig({
         SiteTitle: './src/components/SiteTitle.astro',
         Sidebar: './src/components/Sidebar.astro',
         PageTitle: './src/components/PageTitle.astro',
+        PageFrame: './src/components/PageFrame.astro',
         Footer: './src/components/Footer.astro',
         Header: './src/components/Header.astro',
       },

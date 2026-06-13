@@ -4,15 +4,15 @@
  * cards, ordered by the manual outline across written chapters only —
  * never a link to an unwritten page — plus the page feedback form on
  * every manual page (chapter, appendix, build guide, spec).
- * Non-manual pages get only the site line (the standing Listening
- * Safely link); the homepage composes its own footer instead.
+ * The shared site footer (logo, tagline, full nav incl. Listening
+ * Safely) is rendered site-wide by the PageFrame override, so this
+ * override only adds the manual-page chapter affordances.
  */
 import { getManual } from '../data/manual';
 import PageFeedback from './PageFeedback.astro';
 
 const { id } = Astro.locals.starlightRoute;
 const handle = id.startsWith('learn/') ? id.slice(6) : null;
-const isHome = id === 'index' || id === '';
 const { parts, byHandle } = await getManual();
 const chapter = handle ? byHandle.get(handle) : undefined;
 
@@ -66,29 +66,3 @@ const related = (chapter?.related ?? [])
     </div>
   )
 }
-{
-  !isHome && (
-    <footer class="mp-sitefoot not-content">
-      <a href="/learn/listening-safely/">Listening safely</a>
-    </footer>
-  )
-}
-
-<style>
-  .mp-sitefoot {
-    margin-top: 3rem;
-    padding-top: 0.9rem;
-    border-top: 1px solid var(--mp-hair);
-    font-family: var(--mp-mono);
-    font-size: 0.75rem;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-  }
-  .mp-sitefoot a {
-    color: var(--mp-meta);
-    text-decoration: none;
-  }
-  .mp-sitefoot a:hover {
-    color: var(--mp-link);
-  }
-</style>
