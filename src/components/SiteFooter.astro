@@ -39,12 +39,16 @@ const links = [
 </footer>
 
 <style>
+  /* Full-width band; inner content padded to the SAME horizontal inset
+   * as the site header (--sl-nav-pad-x) so the logo lines up directly
+   * beneath the header logo at the page's left edge and the nav sits at
+   * the right edge. The top hairline spans the full band width. */
   .mp-sitefooter {
     display: flex;
     align-items: center;
     gap: 40px;
     justify-content: space-between;
-    padding: 36px clamp(1rem, 4vw, 4rem) 44px;
+    padding: 36px var(--sl-nav-pad-x) 44px;
     border-top: 1px solid var(--mp-hair);
     flex-wrap: wrap;
     color: var(--mp-charcoal);

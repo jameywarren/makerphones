@@ -101,10 +101,20 @@ const { hasSidebar } = Astro.locals.starlightRoute;
       padding-inline-start: var(--sl-content-inline-start);
     }
 
-    /* Footer band sits below the content + sidebar; inset past the
-     * fixed sidebar the same way .main-frame is. */
+    /* Full-bleed footer band, pinned to the bottom of the page below
+     * the content, the left sidebar, and the right TOC. The sidebar is
+     * position:fixed (z-index 5) and pinned to the viewport bottom, so
+     * the band must paint OVER it: full viewport width, opaque page-bg
+     * fill, and a higher z-index. margin-top:auto pins it to the bottom
+     * on short pages (where the sidebar is taller than the content) via
+     * the .page flex column. Inner content aligns to the header
+     * container — see SiteFooter's --sl-nav-pad-x padding — so the logo
+     * sits directly beneath the header logo and the nav at the edge. */
     .site-footer-frame {
-      padding-inline-start: var(--sl-content-inline-start, 0);
+      margin-top: auto;
+      position: relative;
+      z-index: calc(var(--sl-z-index-menu) + 1);
+      background-color: var(--sl-color-bg);
     }
 
     @media (min-width: 50rem) {
