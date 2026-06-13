@@ -38,19 +38,21 @@ const toc = parts.map((p, i) => ({
 const MARGINALIA: [string, string][] = [
   ['01', 'A complete manual — driver physics to finished pair'],
   ['02', 'Measured, not vibes: every claim has a curve'],
-  ['03', 'Old Faithful built in the open, below'],
+  ['03', 'Daily Driver built in the open, below'],
 ];
 const BIO = {
-  text: 'Twenty-five years designing pro audio — Grace Design, HeadRoom — now building Old Faithful, a closed-back studio headphone, in the open. Every chapter in this manual comes off that bench.',
-  meta: ['25+ YRS PRO AUDIO', 'GRACE DESIGN · HEADROOM', 'NOW — OLD FAITHFUL'],
+  text: 'Twenty-five years designing pro audio — Grace Design, HeadRoom — now designing the Daily Driver, an open-back headphone, in the open, with AI as a design partner. Every chapter in this manual comes off that bench.',
+  meta: ['25+ YRS PRO AUDIO', 'GRACE DESIGN · HEADROOM', 'NOW — DAILY DRIVER'],
 };
+const DD_REPO = 'https://github.com/makerphones/daily-driver';
 const BENCH = {
-  text: 'A closed-back studio headphone, designed and measured in public. Follow the prototypes, the dead ends, and the curves as they happen.',
+  text: 'An open-back headphone, designed in the open with AI as a design partner. Follow the spec, the prototypes, and the dead ends as they happen — the measured curves land once there is hardware to measure.',
+  // [label, value, href?] — SOURCE renders as a link to the build's repo.
   meta: [
-    ['STATUS', 'PROTOTYPE 04'],
-    ['TARGET', 'CLOSED-BACK STUDIO REFERENCE'],
-    ['LAST PASS', 'BAFFLE REV — REMEASURE'],
-  ],
+    ['STATUS', 'Design, in progress'],
+    ['TARGET', 'Open-back, neutral-leaning'],
+    ['SOURCE', 'github.com/makerphones/daily-driver', DD_REPO],
+  ] as [string, string, string?][],
 };
 ---
 
@@ -95,7 +97,7 @@ const BENCH = {
       <div class="mp-cover-botrow">
         <span class="mono">J. Warren</span>
         <span class="mono">Six parts · {writtenCount} of {totalCount} chapters · Free · Written from the bench</span>
-        <span class="mono">FIG. H — OLD FAITHFUL, EXPLODED</span>
+        <span class="mono">FIG. H — DAILY DRIVER, EXPLODED</span>
       </div>
     </div>
   </section>
@@ -151,7 +153,7 @@ const BENCH = {
   <section class="mp-full mp-sec" style="padding-top: 56px;">
     <p class="mono orange" style="margin-bottom: 18px;">The record — prototypes & builds</p>
     <div class="mp-platerow">
-      <PhotoPlate label="PLATE III — PROTOTYPE 04" height={230} placeholder="PROTOTYPE PHOTO" />
+      <PhotoPlate label="PLATE III — FIRST PROTOTYPE" height={230} placeholder="PROTOTYPE PHOTO" />
       <PhotoPlate label="PLATE IV — BUILD 022, COMMUNITY" height={230} placeholder="FINISHED BUILD PHOTO" />
       <PhotoPlate label="PLATE V — FINISHED PAIR" height={230} placeholder="FINISHED PAIR PHOTO" />
     </div>
@@ -162,11 +164,11 @@ const BENCH = {
     <div class="mp-darkscope mp-bench-in">
       <div>
         <p class="mono orange">From the bench</p>
-        <h2 class="h-display" style="font-size: clamp(2rem, 3.4vw, 2.875rem); margin: 14px 0 18px;">Old Faithful</h2>
+        <h2 class="h-display" style="font-size: clamp(2rem, 3.4vw, 2.875rem); margin: 14px 0 18px;">Daily Driver</h2>
         <p class="serif-lg" style="max-width: 44ch;">{BENCH.text}</p>
         <dl class="mp-bench-meta">
-          {BENCH.meta.map(([k, v]) => (
-            <div><dt class="mono">{k}</dt><dd class="mono dark">{v}</dd></div>
+          {BENCH.meta.map(([k, v, href]) => (
+            <div><dt class="mono">{k}</dt><dd class="mono dark">{href ? <a href={href} target="_blank" rel="noopener">{v}</a> : v}</dd></div>
           ))}
         </dl>
         <a class="mp-fbtn" href="/bench-notes/">Read the bench notes <MpIcon name="arrow" size={14} color="currentColor" /></a>
@@ -176,11 +178,11 @@ const BENCH = {
           <span class="pt pt-tl"></span><span class="pt pt-tr"></span>
           <span class="pt pt-bl"></span><span class="pt pt-br"></span>
           <div style="display: flex; justify-content: space-between; padding: 0 8px 6px;">
-            <span class="mono orange">MEASURED — P04</span>
+            <span class="mono orange">NO MEASUREMENT YET</span>
             <span class="mono">TARGET · DASHED</span>
           </div>
           <Motifs kind="fr" w={620} h={250} />
-          <p class="mono" style="padding: 8px 8px 6px; opacity: 0.75;">FR — ILLUSTRATIVE, NOT A PUBLISHED CURVE</p>
+          <p class="mono" style="padding: 8px 8px 6px; opacity: 0.75;">FR — ILLUSTRATIVE TARGET · NO MEASURED CURVE UNTIL THERE'S HARDWARE</p>
         </div>
       </div>
     </div>

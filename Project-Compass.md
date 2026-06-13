@@ -19,7 +19,7 @@ DIY makers and hobbyist headphone builders who want to understand how headphones
 25+ years in professional audio and the headphone industry:
 - **Grace Design** — employee #1 (1997–2001)
 - **HeadRoom** — VP of Operations → President & CEO (2003–2017); relaunched the entire headphone-amplifier line
-- Now building his own closed-back studio headphone, **Old Faithful**, in the open
+- Now designing his own open-back headphone, the **Daily Driver**, in the open — with AI as a design partner
 
 *This supersedes older project docs that say "30 years" or "Grace Design employee #3." The credibility rests on the bio being exactly right and identical everywhere — reconcile older copies to this.*
 
@@ -42,7 +42,7 @@ Clear, approachable, credible — readable by a first-time builder, grounded in 
 
 ## Relationship to Warren Labs
 
-MakerPhones is a sibling project referenced from warrenlabs.com. The deep headphone R&D lives in the Warren Labs lab (and feeds the Old Faithful headphone); MakerPhones is where that knowledge becomes a build-focused resource for makers. Same person, two audiences — keep MakerPhones written for the builder.
+MakerPhones is a sibling project referenced from warrenlabs.com. The deep headphone R&D lives in the Warren Labs lab (and feeds the Daily Driver headphone); MakerPhones is where that knowledge becomes a build-focused resource for makers. Same person, two audiences — keep MakerPhones written for the builder.
 
 ## Parked — don't build or steer toward unless reactivated
 

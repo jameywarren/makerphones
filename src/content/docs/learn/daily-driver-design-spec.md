@@ -12,6 +12,10 @@ excerpt: "Design Specification · v0.2 · 2026-06-12 — the functional spec the
 **Status:** Design phase — CAD in progress. This document is the functional spec the CAD is
 built against, and the reference behind the build guide, the parts list, and the measurements.
 
+**Source:** The CAD, STLs, headband DXF, and this spec are developed in the open at
+[github.com/makerphones/daily-driver](https://github.com/makerphones/daily-driver) — the canonical
+home for the design files.
+
 ---
 
 ## Overview

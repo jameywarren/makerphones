@@ -1,6 +1,6 @@
 ---
 title: About
-description: Who writes the Makerphones Reference Manual, and the studio headphone being built in the open — Old Faithful.
+description: Who writes the Makerphones Reference Manual, and the open-back headphone being designed in the open with AI as a design partner — the Daily Driver.
 tableOfContents: false
 ---
 
@@ -15,7 +15,7 @@ written and maintained by one person, and it's free to read.
 - **Grace Design** — employee #1 (1997–2001)
 - **HeadRoom** — VP of Operations, then President & CEO (2003–2017); relaunched the entire
   headphone-amplifier line
-- Now building his own closed-back studio headphone, **Old Faithful**, in the open
+- Now designing his own open-back headphone, the **Daily Driver**, in the open — with AI as a design partner
 
 That background is the reason this manual exists: production experience at scale, thousands of
 headphones tested, and the kind of manufacturer knowledge that's usually locked behind NDAs —
@@ -23,12 +23,16 @@ written down for makers instead.
 
 <div class="mp-ph" style="height: 220px; margin: 1.5rem 0;" role="img" aria-label="workshop photo placeholder"><span class="mp-ph-label">workshop photo — real shot coming</span></div>
 
-## Old Faithful
+## The Daily Driver
 
-Old Faithful is the process happening in the open: a closed-back studio headphone being designed
-with the same methods these chapters teach — driver selection, chamber design, damping,
-measurement, voicing. The design story and its measurements will be published here as the build
-progresses.
+The Daily Driver is the process happening in the open: an open-back headphone being designed with
+the same methods these chapters teach — driver selection, baffle and enclosure design, damping,
+measurement, voicing — and with AI as a design partner, the workflow the
+[Designing Headphones with AI](/learn/designing-headphones-with-ai/) chapter lays out. The full
+[design spec](/learn/daily-driver-design-spec/) is published in the build guides, and the source
+files live in the open at
+[github.com/makerphones/daily-driver](https://github.com/makerphones/daily-driver). The design
+story and its measurements will follow here as the build progresses.
 
 ## The manual
 

@@ -33,7 +33,7 @@ editorial pass, one commit per correction, so the change history is clean.
 
 The canonical bio (Project-Compass.md) is **25+ years; Grace Design
 employee #1, 1997–2001; HeadRoom VP Ops → President & CEO, 2003–2017;
-now building Old Faithful in the open**. These chapters carried older "30 years"
+now designing the Daily Driver in the open**. These chapters carried older "30 years"
 framing in body copy (migrated faithfully):
 
 - [x] `how-headphones-create-sound` — opening, "I've built headphones
@@ -85,11 +85,12 @@ The v2 design ships with styled placeholders — swap in real assets:
 - [ ] **Bench portrait** of Jamey — homepage credibility strip
       (`src/components/home/CredStrip.astro`).
 - [ ] **Workshop photo** — About page (`src/content/docs/about.md`).
-- [ ] **Old Faithful's real measurement plot** — the homepage band
-      (`src/components/home/OldFaithfulBand.astro`) uses an illustrative
-      FR curve, captioned as such. Replace with the actual measured-vs-
-      target plot as the open build progresses (per the Compass: never
-      present invented data as measurement).
+- [ ] **The Daily Driver's first measurement plot** — the homepage "From
+      the bench" band (`src/components/home/HomePage.astro`) uses an
+      illustrative FR target, captioned as having no measured curve yet.
+      Replace with the actual measured-vs-target plot once there's hardware
+      to measure (per the Compass: never present invented data as
+      measurement).
 - The hero exploded-headphone diagram, FR-grid, and driver cutaway are
   real vector art from the design handoff — no replacement needed.
 

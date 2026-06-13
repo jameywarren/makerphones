@@ -46,7 +46,7 @@ Community features, design-file libraries, videos, and products are all future p
 - 25+ years in professional audio and the headphone industry
 - **Grace Design** — employee #1 (1997–2001)
 - **HeadRoom** — VP of Operations → President & CEO (2003–2017); relaunched the entire headphone-amplifier line
-- Now building his own closed-back studio headphone, **Old Faithful**, in the open
+- Now designing his own open-back headphone, the **Daily Driver**, in the open — with AI as a design partner
 
 This means: production experience at scale, thousands of headphones tested, manufacturer relationships most DIYers never get, and the ability to explain professional concepts accessibly. Building for himself first — an authentic use case.
 

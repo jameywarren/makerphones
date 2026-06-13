@@ -83,7 +83,7 @@ The original doc's detailed page inventory, reorganized as input for the unwritt
 - **vs. DIY Open Headphone** — academic with minimal assembly support; MakerPhones is maker-focused and practical.
 - **vs. Instructables** — one-off projects of varying quality; MakerPhones is curated, explained, and supported.
 
-**Unique position:** the only comprehensive, beginner-to-expert resource for DIY headphone design, backed by 25+ years of professional audio and headphone-industry experience (Grace Design employee #1; HeadRoom VP Ops → President & CEO; now building his own studio headphone, Old Faithful, in the open).
+**Unique position:** the only comprehensive, beginner-to-expert resource for DIY headphone design, backed by 25+ years of professional audio and headphone-industry experience (Grace Design employee #1; HeadRoom VP Ops → President & CEO; now designing his own open-back headphone, the Daily Driver, in the open).
 
 ## Parked (from the original doc)
 

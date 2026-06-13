@@ -15,7 +15,7 @@ export async function GET(context) {
   return rss({
     title: 'Makerphones — Bench Notes',
     description:
-      'The Old Faithful build log — prototypes, measurements, and decisions, published as they happen.',
+      'The Daily Driver build log — the open-back design, prototypes, measurements, and decisions, published as they happen.',
     site: context.site,
     items: posts.map((p) => ({
       title: p.data.title,

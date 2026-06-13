@@ -12,7 +12,7 @@ description: The judgment that separates a good prototype from a headphone peopl
 excerpt: Every chapter so far has been technique. This one is judgment — the things twenty-five years around headphones taught me that the measurements never quite say out loud.
 ---
 
-Every chapter so far has been technique — drivers, chambers, damping, resonance, measurement. This one is about judgment: the things that twenty-five-plus years around headphones taught me that no spec sheet or forum thread quite says out loud. I came up through this industry — early days at Grace Design, then a long run at HeadRoom, and these days building my own closed-back studio headphone, Old Faithful, in the open — and most of what follows is the stuff I had to learn the expensive way. I'm offering it so you can skip some of the tuition.
+Every chapter so far has been technique — drivers, chambers, damping, resonance, measurement. This one is about judgment: the things that twenty-five-plus years around headphones taught me that no spec sheet or forum thread quite says out loud. I came up through this industry — early days at Grace Design, then a long run at HeadRoom, and these days designing my own open-back headphone, the Daily Driver, in the open — and most of what follows is the stuff I had to learn the expensive way. I'm offering it so you can skip some of the tuition.
 
 None of this replaces the technique in the earlier chapters. It's the layer on top: technique gets you a headphone that works, and this is what gets you one worth keeping.
 
