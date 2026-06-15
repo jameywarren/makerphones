@@ -50,6 +50,7 @@ const sidebar = [
       'learn/why-measure-headphones',
       'learn/budget-measurement-setup',
       'learn/taking-and-interpreting-measurements',
+      'learn/measuring-raw-drivers',
       'learn/tuning-with-damping',
       'learn/tuning-with-eq',
       'learn/benchmarking-with-public-measurements',

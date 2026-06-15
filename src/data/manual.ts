@@ -93,6 +93,7 @@ export const MANUAL_PARTS: ManualPart[] = [
       'why-measure-headphones',
       'budget-measurement-setup',
       'taking-and-interpreting-measurements',
+      'measuring-raw-drivers',
       'tuning-with-damping',
       'tuning-with-eq',
       'benchmarking-with-public-measurements',
