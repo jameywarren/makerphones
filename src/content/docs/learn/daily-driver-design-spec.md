@@ -9,6 +9,14 @@ description: "The functional design specification for the Daily Driver — Maker
 excerpt: "Design Specification · v0.2 · 2026-06-12 — the functional spec the CAD is built against, and the reference behind the build guide, the parts list, and the measurements."
 ---
 
+<a href="https://makerphones.github.io/daily-driver/" style="display:flex;align-items:center;gap:14px;text-decoration:none;background:#2d3748;border-left:4px solid #ea580c;border-radius:10px;padding:16px 20px;margin:0 0 1.75rem;color:#f7f7f5;">
+  <span style="font-size:28px;line-height:1;" aria-hidden="true">🧊</span>
+  <span style="line-height:1.45;">
+    <strong style="color:#fff;font-size:1.05rem;">Spin the Daily Driver in 3D</strong><br>
+    <span style="color:#cbd5e1;font-size:.92rem;">Inspect the full assembly in your browser before you build — <span style="color:#ea580c;font-weight:700;">live 3D preview →</span></span>
+  </span>
+</a>
+
 **Status:** Design phase — CAD in progress. This document is the functional spec the CAD is
 built against, and the reference behind the build guide, the parts list, and the measurements.
 
