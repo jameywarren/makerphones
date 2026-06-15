@@ -7,15 +7,19 @@ related: [driver-selection-guide, open-vs-closed-back-design, acoustic-chambers-
 tags: [build-guide, spec, daily-driver, open-back, design, parametric]
 description: "The functional design specification for the Daily Driver — Makerphones' canonical first-build open-back: system architecture, acoustic approach, component specs, parametric setup, and the open design questions."
 excerpt: "Design Specification · v0.2 · 2026-06-12 — the functional spec the CAD is built against, and the reference behind the build guide, the parts list, and the measurements."
+head:
+  # Google <model-viewer> — loaded ONLY on this page (per-page head), powers the
+  # inline 3D preview below. The model itself is hosted on-site at /models/.
+  - tag: script
+    attrs:
+      type: module
+      src: https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js
 ---
 
-<a href="https://makerphones.github.io/daily-driver/" style="display:flex;align-items:center;gap:14px;text-decoration:none;background:#2d3748;border-left:4px solid #ea580c;border-radius:10px;padding:16px 20px;margin:0 0 1.75rem;color:#f7f7f5;">
-  <span style="font-size:28px;line-height:1;" aria-hidden="true">🧊</span>
-  <span style="line-height:1.45;">
-    <strong style="color:#fff;font-size:1.05rem;">Spin the Daily Driver in 3D</strong><br>
-    <span style="color:#cbd5e1;font-size:.92rem;">Inspect the full assembly in your browser before you build — <span style="color:#ea580c;font-weight:700;">live 3D preview →</span></span>
-  </span>
-</a>
+<div style="margin:0 0 1.75rem;">
+  <model-viewer src="/models/daily-driver.glb" alt="Daily Driver open-back headphone — drag to spin and inspect the assembly" camera-controls auto-rotate auto-rotate-delay="0" shadow-intensity="1" exposure="1.1" ar style="width:100%;height:460px;background:#f7f7f5;border:1px solid #e4e4df;border-left:4px solid #ea580c;border-radius:10px;"></model-viewer>
+  <p style="margin:.55rem 0 0;font-size:.85rem;color:#5b6573;"><strong style="color:#2d3748;">🧊 Spin it in 3D</strong> — drag to orbit, scroll to zoom (it auto-rotates on load). One side of the assembly: cup + baffle + fork-yoke + slider, with the head bow as a reference body. Source files: <a href="https://github.com/makerphones/daily-driver" style="color:#ea580c;">github.com/makerphones/daily-driver</a>.</p>
+</div>
 
 **Status:** Design phase — CAD in progress. This document is the functional spec the CAD is
 built against, and the reference behind the build guide, the parts list, and the measurements.
