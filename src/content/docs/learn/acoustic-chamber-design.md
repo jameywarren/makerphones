@@ -30,6 +30,36 @@ This is why the most common complaint about a first closed-back build — thin, 
 
 How much volume? There's no single number, because it depends on the driver. As a working principle: a driver with a lower free-air resonance and more excursion generally wants a larger rear volume to breathe into, while a small, stiff driver can live in a smaller space. Start from any reference build using a similar driver, then treat that as a beginning rather than an answer — your driver and your cup are not theirs.
 
+## Putting numbers on it
+
+All of that is intuition, and intuition is where you start. But you still have to pick a number to print, so here are the ballparks I reach for. Treat them as starting brackets for an over-ear closed-back, not targets — they shift with the driver and the design, and the measurement at the end is the only one that counts.
+
+| Rear volume | What you get |
+| --- | --- |
+| `50–80cc` | Tight, controlled bass, resonance relatively high. You'll feel the limit in sub-bass extension. |
+| `80–120cc` | The sweet spot for most over-ear closed-back builds — deep enough to satisfy, manageable in cup size and weight. |
+| `120–160cc` | Extended, potentially impressive sub-bass, but cups get large and heavy and resonances get harder to control. |
+
+Most commercial over-ear closed-backs land around `~80–130cc`, which is where performance and practicality meet. If you've got nowhere else to start, start there.
+
+### The Thiele-Small parameters worth knowing
+
+If your driver has published specs — most headphone suppliers don't publish them, but some Dayton Audio drivers do, and salvaged drivers from good commercial headphones sometimes have documented numbers — a few Thiele-Small parameters give you real predictive power before you print anything.
+
+- **`Fs` (resonant frequency)** — where the driver resonates on its own suspension. Headphone drivers typically land `30–150Hz`. Lower `Fs` means the driver reaches deeper into the bass naturally; a `40Hz` driver extends further than a `120Hz` one, all else equal.
+- **`Qts` (total Q factor)** — how damped that resonance is, i.e. how peaked or how broad it is. Above `~0.7` is a pronounced peak; below `~0.5` is well-damped and flat. Headphone drivers often sit around `~0.5–1.0`.
+- **`Vas` (equivalent compliance volume)** — the air volume with the same compliance as the driver's suspension. A large `Vas` wants a larger enclosure; a small `Vas` can live in a smaller chamber without going stiff.
+
+### A resonance rule of thumb
+
+Here's the one that ties volume and driver together. For a chamber in that `80–120cc` sweet spot, expect the system resonance to land somewhere around `1.0–1.5×` the driver's free-air `Fs`.
+
+So a driver with `Fs` of `60Hz` in a `100cc` chamber rolls off around `75–90Hz` — deep enough for satisfying bass. Drop in a stiffer `120Hz` driver and that same chamber pushes roll-off up toward `150–180Hz`, which is noticeably light in the low end. It's one more reason to weigh `Fs` when you pick the driver, not after.
+
+:::tip
+These figures are ballparks, not promises. They get you a sensible first print and keep you from guessing in the dark — but the raw measurement off the assembled cup is the final word. If bass rolls off much higher than the rule of thumb predicts, suspect a chamber that's too small or a seal that's leaking.
+:::
+
 ## Sealed or vented
 
 A fully sealed rear chamber gives you the most isolation, but trapping the air also stiffens the spring, and a stiff sealed system tends to throw up a resonance peak — a bump where the bass piles up on one frequency and booms. You can fight that peak three ways: give it a bigger volume, damp it (covered next chapter), or open a vent.

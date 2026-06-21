@@ -15,13 +15,21 @@ The manual uses a fair amount of vocabulary, and it's all defined where it first
 
 **Baffle** — The plate the driver mounts to, separating the front of the diaphragm from the rear. The driver-to-baffle joint is a critical seal.
 
+**ABS** — Acrylonitrile butadiene styrene, a common engineering thermoplastic with good mechanical properties and temperature resistance. Difficult to FDM print due to warping, but vapor-smoothable with acetone.
+
 **Balanced armature (BA)** — A small, efficient driver type that covers a limited frequency band, common in in-ear monitors where several are combined with a crossover.
+
+**Bass reflex** — An enclosure design that uses a tuned port to extend bass response below the driver's sealed-box rolloff. Also called a vented enclosure.
+
+**Break-up mode** — A condition where different parts of the diaphragm move non-uniformly, producing resonances typically above 5 kHz.
 
 **Boundary element method (BEM)** — A simulation technique that solves the wave equation across a 3D mesh, used for radiation and diffraction. More accurate and more demanding than lumped-element modeling.
 
 **Channel matching** — How closely the left and right channels agree. Poor matching smears the stereo image; it's both a mechanical and an electrical concern.
 
 **Closed-back** — A design with a sealed rear chamber, giving isolation and stronger low bass at the cost of a more closed-in sound.
+
+**CLD (Constrained Layer Damping)** — A damping technique using a viscoelastic material (like Dynamat) bonded to a vibrating structure to convert vibration to heat.
 
 **Codec** — The compression scheme used to send audio over Bluetooth (SBC, AAC, aptX, LDAC, LHDC, LC3). Both the source and the headphone must support a codec to use it.
 
@@ -35,7 +43,11 @@ The manual uses a fair amount of vocabulary, and it's all defined where it first
 
 **Diaphragm** — The thin membrane that moves to push air and create sound. The heart of any driver.
 
+**Diffraction** — The bending of sound waves around obstacles (like a baffle edge), creating interference patterns that affect frequency response.
+
 **Driver** — The transducer that turns an electrical signal into sound. Dynamic, planar magnetic, balanced armature, and electrostatic are the main types.
+
+**Dynamat** — Brand name for constrained layer damping material (butyl rubber plus aluminum foil), applied to cup interiors to damp structural vibrations. It is not acoustic absorption.
 
 **Dynamic driver** — The most common driver type: a voice coil attached to a diaphragm, moving in a magnetic gap. Simple, robust, good bass.
 
@@ -43,7 +55,11 @@ The manual uses a fair amount of vocabulary, and it's all defined where it first
 
 **Frequency response (FR)** — How loud a headphone plays at each frequency, the single most-used measurement. Usually shown as a curve.
 
+**Front chamber** — The acoustic space between the driver face and the ear. Its volume is set primarily by ear pad depth, and it affects high-frequency response and soundstage character.
+
 **Fs** — A driver's free-air resonance frequency, one of its Thiele-Small parameters.
+
+**Group delay** — The time delay experienced by each frequency in a system. Non-uniform group delay means different frequencies arrive at the ear at different times.
 
 **Harman target** — A research-based preference curve describing how a neutral-sounding headphone tends to measure on a standard rig. A common reference target, not a law.
 
@@ -51,19 +67,37 @@ The manual uses a fair amount of vocabulary, and it's all defined where it first
 
 **Impedance** — The driver's opposition to current, in ohms, and how it varies with frequency. Affects how it pairs with an amplifier.
 
+**Impulse response** — A measurement showing how a headphone responds to an instantaneous transient. Reveals ringing, resonances, and time-domain behavior not visible in frequency response alone.
+
 **LC3** — The codec for Bluetooth LE Audio, more efficient than older codecs and the basis for broadcast features like Auracast.
 
 **LDAC** — Sony's high-bitrate Bluetooth codec aimed at high-resolution audio.
 
+**LiPo (Lithium Polymer)** — A rechargeable battery chemistry used in wireless audio devices, with a nominal voltage of 3.7 V. Requires a dedicated charging circuit and protection against over-discharge.
+
 **Lumped-element method (LEM)** — Modeling a driver-and-chamber system as an equivalent electrical circuit of masses, compliances, and resistances. The tractable approach for headphone simulation.
+
+**Mass loading** — Adding mass to a vibrating structure to lower its resonant frequency and damp structural vibrations. Different from acoustic damping — it affects the structure, not the air.
+
+**Nominal impedance** — A single representative impedance value for a driver, typically measured at 1 kHz. The actual impedance varies with frequency.
 
 **Open-back** — A design with a vented or open rear, giving a more spacious, natural sound but little isolation and bass that leaks out both ways.
 
+**PETG (Polyethylene Terephthalate Glycol)** — A 3D printing filament with better impact resistance and temperature tolerance than PLA. Recommended for structural headphone components.
+
 **Pinna** — The fleshy outer ear. In a measurement rig, a silicone pinna sits in front of the coupler to load over-ear headphones realistically.
+
+**PLA (Polylactic Acid)** — The most common 3D printing filament. Easy to print but brittle under repeated stress, with a low glass transition temperature (~60°C). Good for prototyping; switch to PETG for final builds.
 
 **Planar magnetic** — A driver type using a flat diaphragm with an embedded conductor between magnet arrays; even, low-distortion sound, usually heavier and less efficient.
 
 **Polarity** — Which way a driver moves for a given signal. Both channels must be in phase, or the bass cancels and the image collapses.
+
+**PPI (Pores Per Inch)** — A specification for acoustic foam density. Higher PPI means smaller pores and more absorption of higher frequencies. Typical range for headphone use is 20–60 PPI.
+
+**Q factor (Qts, Qtc)** — A dimensionless parameter describing the damping of a resonance. High Q means a sharp, peaked resonance; low Q means a broad, well-damped one. Qts is for the driver in free air; Qtc is for the driver in a closed enclosure.
+
+**Rear chamber** — The enclosed volume behind the driver in a closed-back headphone. Its volume directly affects bass extension and resonance behavior.
 
 **Resonance** — A frequency at which something naturally wants to vibrate, where energy piles up and rings. Sources include the driver, the air cavities, and the structure.
 
@@ -75,6 +109,8 @@ The manual uses a fair amount of vocabulary, and it's all defined where it first
 
 **Sensitivity** — How loud a driver plays for a given input, often quoted in dB per milliwatt or per volt. Together with impedance, it tells you how easy a headphone is to drive.
 
+**Sorbothane** — A proprietary viscoelastic material used for vibration isolation and damping. Effective for reducing the mechanical transmission of vibrations.
+
 **Soundstage** — The perceived sense of space and width in the sound, influenced strongly by open versus closed design.
 
 **SPL (sound pressure level)** — Loudness, measured in decibels. Calibrating SPL lets a measurement read absolute levels.
@@ -85,6 +121,12 @@ The manual uses a fair amount of vocabulary, and it's all defined where it first
 
 **THD (total harmonic distortion)** — How much a driver adds harmonics not in the original signal. Usually low; a sudden spike often signals a mechanical fault.
 
+**TP4056** — A widely used single-cell LiPo battery charging IC, available as inexpensive module boards. The standard DIY choice for Bluetooth headphone charging circuits.
+
 **TRRS** — A four-conductor plug (tip, ring, ring, sleeve) carrying left, right, ground, and mic — the single-jack headset standard. The CTIA pinout is the modern standard.
+
+**TRS** — A three-conductor plug (tip, ring, sleeve) carrying left, right, and ground — the standard stereo audio connector, with no microphone contact.
+
+**Vas (equivalent compliance volume)** — The volume of air with the same acoustic compliance as the driver's suspension. A larger Vas means more compliance and benefits from a larger enclosure.
 
 **Voice coil** — The coil of wire attached to a dynamic driver's diaphragm; current through it in the magnetic gap is what moves the diaphragm.

@@ -38,6 +38,22 @@ A measurement-driven loop is only as good as the measurement. Before you trust a
 
 **Channel mismatch.** Overlay the left and right curves and match the damping and seal until they sit on top of each other. This is pure mechanical matching — same material, same placement, both sides — and the graph makes a mismatch you'd never hear plainly visible.
 
+## Reading the problem, choosing the material
+
+The advice above tells you *which way* to move; this table tells you *what to reach for*. Different frequency problems respond to different materials in different places, and reaching for the wrong one wastes an evening. Match what you measure to the first thing worth trying, then run the loop.
+
+| What you measure | What to try first |
+| --- | --- |
+| Boomy / elevated bass (`80–300Hz`) | Foam on the rear chamber walls — start with one wall. An alternative for excess mid-bass is a small amount of cotton fill in the rear chamber, acting as an acoustic mass that smooths the resonance. |
+| Hollow / boxy midrange (`300Hz–1kHz`) | Chamber standing waves. Thin felt on the interior side walls often helps more than foam here — felt absorbs well in the mids without killing everything else. Try one wall at a time. |
+| Forward / intense upper mids (`1–4kHz`) | Swap to pads with a more absorptive inner surface (velour over pleather), or add padding on the front baffle around — not over — the driver to cut reflections. |
+| Harsh / sibilant treble (`4–8kHz`) | Thin felt in front of the driver, applied sparingly. Start small — a `2cm` circle of craft felt across part of the driver face is enough to see an effect. This spot is sensitive, so go slowly. |
+| Narrow resonance spike (anywhere) | Find the source first. Tap the cup with the driver out and listen for a tonal ring — that's the mode. Treat it at the chamber, or in front of the driver if the break-up is in the driver itself. |
+
+:::caution
+A *dip* is usually not a damping problem. Damping removes energy; it can't add it, so no amount of foam will fill a hole in the response. A thin low end means the headphone isn't producing enough down there — check the seal, the chamber volume, and the pad depth, or change the driver. Fix the design, not the damping.
+:::
+
 ## What one pass actually looks like
 
 Say your build measures with a tall, narrow peak in the upper bass and an otherwise reasonable curve. You take it three times, re-seating between each, and the peak holds steady every time — so it's real, not an artifact. You add a small amount of fill behind the driver, nothing else, and remeasure with the same seating routine. The peak drops by a few decibels and widens slightly; the rest of the curve barely moves. Good — that's the placement working. You note the change in your log, listen to confirm the boom has eased without the bass going lifeless, and decide whether the remaining peak is worth another small pass or whether you've reached the point of diminishing returns.

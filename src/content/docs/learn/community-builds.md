@@ -22,6 +22,34 @@ A great shared build is one another person could actually replicate, and that co
 
 Beyond the spec, a few things lift a write-up. Measurements, if you have them, so others can see what you achieved and aim at it. The process, including what went wrong and how you fixed it, because that's where the real teaching happens. And photos, because seeing the build is half of understanding it. None of this needs to be polished — an honest, well-documented build beats a beautiful one with no details every time.
 
+## Modding a commercial headphone first
+
+Plenty of good builds don't start from a printed shell at all — they start by modifying a commercial headphone. You begin with working mechanical hardware and a driver that already sounds decent, then tune from there. The platforms below come up again and again because they're widely available, cheap enough to experiment on, and backed by communities that have already documented what each change does.
+
+| Platform | Cost (stock) | Difficulty | Mod notes |
+| --- | --- | --- | --- |
+| Koss Porta Pro (on-ear, open) | ~$30 | Beginner | The canonical first mod. Foam replacement (the stock foams color the sound a lot), cable replacement (the stock cable fails eventually), and pad swaps. Modded, measured, and documented more thoroughly than almost any other headphone — start here to learn what a foam change does to a frequency response. |
+| Sony MDR-7506 (over-ear, closed) | ~$100 | Easy | The industry workhorse with a well-documented signature (forward upper mids, slightly rolled bass). Ear pad replacement changes front-chamber geometry and shifts bass and lower mids; driver damping to tame the 8–10kHz peak; cable replacement. A well-measured baseline to work from. |
+| Beyerdynamic DT770 / DT990 (over-ear, closed/open) | ~$180 | Easy–Mid | Good drivers, metal-reinforced build. DT770 for closed designs, DT990 for open. Beyerdynamic sells replacement parts directly, including drivers, so you can build a DT-style headphone from known-quality parts. The treble peak around 8–10kHz responds well to damping. |
+| Sennheiser HD58X / HD6XX (over-ear, open) | ~$150–220 | Easy | The Drop (formerly Massdrop) variants of classic Sennheiser designs — excellent drivers and build, obsessively measured. Worth modding for headband comfort and cosmetics more than sound; the acoustic design is hard to improve without replacing the drivers. Better as a reference for your own designs than a mod platform. |
+| Grado SR80 / SR325 (on-ear, open) | ~$100–300 | Mid | A cult favorite in the DIY community. Good driver, deliberately minimal (some call it underdamped) housing, and an extensive mod space — cup materials, chamber volumes, damping approaches all thoroughly explored. The community has built everything from wood cups to 3D-printed alternatives. |
+
+:::tip
+If you've never modded a headphone, start with the Koss Porta Pro. The community documentation is unmatched, the stakes are low, and the acoustic effect of each change is well understood from years of community measurement.
+:::
+
+## What makes a good first build
+
+The best first build is the one you actually finish. That means constrained scope, parts you can get, and a design that doesn't depend on getting everything right on the first try. A few principles make that more likely.
+
+**Use a driver with published specs.** A driver with full published Thiele-Small parameters lets you check your design intent against real numbers before you cut or print anything, instead of guessing and hoping.
+
+**Plan for disassembly.** You will open the headphone at least five times during tuning, so design the closure to be reopened — screws rather than glue for driver mounting, a solid mechanical pad attachment, accessible wiring. Builds that are hard to take apart stop getting tuned, which is the same as stopping before they're good.
+
+**Measure at each step.** Without measurement you're guessing; with it you're iterating, and the difference shows in the final result. You don't need expensive gear — the budget measurement setup guide covers a rig that gets you there for not much money.
+
+**Keep a dated build journal.** Note what you changed, when, and what it did. Acoustic tuning has enough variables that memory alone isn't reliable, and even a plain text file with dated notes means you can reproduce your successes and actually understand your failures.
+
 ## How to share yours
 
 Bring your build to the community. Post it where builders gather, document it the way you'd want to find it documented, and answer the questions it provokes. The most useful submissions aren't the most impressive headphones — they're the ones explained clearly enough that someone else can follow the path you took.

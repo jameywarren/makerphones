@@ -37,7 +37,15 @@ There's a quick field test for it: play steady bass and press the cups gently ha
 
 ## Wiring and polarity
 
-Solder your leads to the driver terminals, and get the polarity right. Tin the leads and the terminals first, keep the iron on the terminal only as long as it takes — driver terminals sit close to delicate parts, and lingering heat is a risk. Mark positive, and keep both channels in phase with each other.
+Solder your leads to the driver terminals, and get the polarity right. Tin the leads and the terminals first, keep the iron on the terminal only as long as it takes — driver terminals sit close to delicate parts, and lingering heat is a risk. Run the iron around `~350°C` (about `660°F`) for lead-free solder, and make each joint quick: too hot for too long risks heat-damaging the voice coil. Mark positive, and keep both channels in phase with each other.
+
+Out at the plug, a standard stereo `3.5mm` TRS connector wires up in a fixed pattern. Keep this map handy when you're terminating the cable:
+
+- **Tip** — left positive
+- **Ring** — right positive
+- **Sleeve** — both grounds/returns (left and right share a common return)
+
+That shared sleeve is the catch with three-conductor TRS: left and right return down the same wire. If your cable is a four-conductor arrangement instead — TRRS or a balanced setup — each channel gets its own separate ground/return rather than sharing the sleeve.
 
 Two channels wired out of phase cancel in the bass and smear the stereo image. The build goes thin and vague, the center of the image dissolves, and it is a genuinely maddening problem to diagnose if you don't already suspect it — everything measures and looks fine, it just sounds wrong. Checking it takes seconds and saves an evening. Connector and cable choices live in [cables, connectors, and hardware](/learn/cables-connectors-hardware).
 
@@ -54,7 +62,7 @@ Left and right need to match — same mounting, same gasket, same seal, same wir
 
 ## Order of operations
 
-Damp and wire the driver before you close the cup, and test before final assembly. Wire it up, play both channels with the cup still open, and confirm three things: both sides make sound, polarity is correct (a mono track should image dead center), and there are no rattles or buzzes from a loose part or a diaphragm fouling on something. Only then commit to sealing or gluing anything shut.
+Damp and wire the driver before you close the cup, and test before final assembly. Start with a multimeter: probe each channel at the plug, and you should read roughly the driver's nominal impedance — `~32Ω` for most DIY drivers. An open circuit means a broken or cold joint; a short means you've got a wiring error to chase. Once continuity checks out, wire it up, play both channels with the cup still open, and confirm three things: both sides make sound, polarity is correct (a mono track should image dead center), and there are no rattles or buzzes from a loose part or a diaphragm fouling on something. Only then commit to sealing or gluing anything shut.
 
 :::tip
 Before you glue or close anything, wire it up and play both channels with a mono track. It should image as a single point right between your ears. If it sounds wide, hollow, or sucked-out, one channel is out of phase — fix it now, while the cup is still open, not after you've glued it shut.

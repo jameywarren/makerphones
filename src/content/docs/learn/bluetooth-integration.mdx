@@ -43,7 +43,13 @@ For chips, a few define the current landscape. The **Qualcomm QCC3034** is a com
 
 ## The rest of the subsystem
 
-The part builders forget is everything *around* the board. Bluetooth needs power, which means a battery — typically a small lithium-polymer cell — plus a charging and protection circuit, either a small USB-C charging board or one integrated into the module. Runtime depends on the battery's capacity and the amplifier's draw; the Bluetooth chips themselves sip power, often single-digit milliamps while streaming, so the amp and the cell size set how long it plays.
+The part builders forget is everything *around* the board. Bluetooth needs power, which means a battery — typically a small lithium-polymer cell — plus a charging and protection circuit. For charging, the canonical DIY part is the `TP4056` board: a dedicated LiPo charger that handles the full CC/CV cycle and termination, costs a couple of dollars, and takes `5V` in over USB. It sits between your USB port and the cell. Runtime depends on the battery's capacity and the amplifier's draw; the Bluetooth chips themselves sip power, so the amp and the cell size set how long it plays.
+
+### Sizing the battery
+
+The math is worth running before you commit to a cup. A Bluetooth audio module pulls roughly `15–30mA` at normal volume, and a small amp adds another `~20–50mA`, so total system draw at normal listening lands around `40–80mA`. A `500mAh` LiPo then gives you roughly `6–12 hours` of playback — fine for a DIY build. Commercial headphones target `20–30 hours`, but that needs a `1500–2500mAh` cell, and those are large and heavy. For a build that actually fits in a cup, a small cell and shorter runtime is the honest tradeoff.
+
+If the module doesn't have a built-in amp, the common DIY choice is the `PAM8403`, an inexpensive Class-D amp board that works well for headphone duty. That's the amp draw the sizing math above accounts for.
 
 Then there's the charging port to place on the cup, the antenna to position where it isn't buried in metal or shielding that would kill its range, and the controls — power, pairing, play and pause, volume — to wire to the board. None of it is hard individually, but together it's a real subsystem that changes the weight, the complexity, and the maintenance story of your headphone, because a battery is a finite-life part that will eventually need replacing.
 

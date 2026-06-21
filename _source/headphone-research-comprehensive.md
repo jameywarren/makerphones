@@ -102,7 +102,7 @@ For closed-back headphones:
 
 Formula consideration (simplified lumped parameter):
 ```
-Resonant frequency â‰ˆ c/(2Ï€) Ã— âˆš(S/(VÃ—L))
+Resonant frequency ≈ c/(2π) × √(S/(V×L))
 
 Where:
 c = speed of sound
@@ -140,7 +140,7 @@ L = acoustic mass (related to vent size)
 
 **Ear pad thickness is therefore not just comfort** - it's a fundamental tuning parameter.
 
-**Practical implication:** When swapping ear pads, you're changing the entire acoustic system. Thicker pads â‰  just more comfort.
+**Practical implication:** When swapping ear pads, you're changing the entire acoustic system. Thicker pads ≠ just more comfort.
 
 ### Resonances and Standing Waves
 
@@ -174,7 +174,7 @@ This represents professional-level thinking that DIYers rarely access.
 - Voice coil wound around former
 - Suspended in permanent magnetic field  
 - Current through coil creates electromagnetic force
-- Force moves diaphragm â†’ pushes air â†’ sound
+- Force moves diaphragm → pushes air → sound
 
 **Advantages for DIY:**
 - Widely available ($8-200+ per pair)
@@ -191,12 +191,12 @@ This represents professional-level thinking that DIYers rarely access.
 
 **Key Specifications:**
 
-**Impedance (8-600Î© typical):**
-- **8-16Î©:** "Low impedance" - easy to drive, works with phones
-- **32Î©:** Most common consumer headphones, good compromise
-- **64-80Î©:** Requires decent amp, often better damping
-- **150-300Î©:** Studio standard (better driver control)
-- **600Î©:** Professional use, requires powerful amplification
+**Impedance (8-600Ω typical):**
+- **8-16Ω:** "Low impedance" - easy to drive, works with phones
+- **32Ω:** Most common consumer headphones, good compromise
+- **64-80Ω:** Requires decent amp, often better damping
+- **150-300Ω:** Studio standard (better driver control)
+- **600Ω:** Professional use, requires powerful amplification
 
 **Sensitivity (dB/mW or dB/V):**
 - **Higher sensitivity (100+ dB/mW):** Easier to drive, may have more distortion
@@ -455,7 +455,7 @@ Best practices from extensive T50RP modding:
 - Pinnae (outer ear) simulation
 - Considers HRTF effects
 
-**BrÃ¼el & KjÃ¦r 4152** artificial ear: ~$8,000+
+**Brüel & Kjær 4152** artificial ear: ~$8,000+
 - Long-time standard in industry
 - Highly accurate, repeatable
 
@@ -471,7 +471,7 @@ But the good news: Budget options now exist that are "good enough" for DIY purpo
 **What it is:** Calibrated omni-directional measurement microphone
 
 **Specifications:**
-- Frequency response: 20Hz-20kHz (Â±1dB with calibration)
+- Frequency response: 20Hz-20kHz (±1dB with calibration)
 - USB Audio Class 1.0 (driverless - works with all OS)
 - Unique calibration file per unit (download from MiniDSP)
 
@@ -1408,7 +1408,7 @@ Research shows this is **poorly understood and documented** in DIY community.
 - Biodegradable (corn-based)
 
 **Cons:**
-- **Low glass transition temperature** (~60Â°C/140Â°F)
+- **Low glass transition temperature** (~60°C/140°F)
   - Can deform in hot car
   - Heat-sensitive for shipping
   - Not suitable for headband (fatigue issues)
@@ -1438,7 +1438,7 @@ One builder reported: "My first PLA headband, despite feeling sturdy, was slowly
 
 **Pros:**
 - **Much better fatigue resistance** than PLA
-- Higher temperature resistance (80Â°C/176Â°F glass transition)
+- Higher temperature resistance (80°C/176°F glass transition)
 - More flexible (won't snap as easily)
 - Good layer adhesion
 - Reasonably easy to print
@@ -1541,7 +1541,7 @@ One builder reported: "My first PLA headband, despite feeling sturdy, was slowly
 - Design to minimize supports when possible
 
 **Tolerances:**
-- FDM printing: Â±0.2mm typical
+- FDM printing: ±0.2mm typical
 - Critical for driver mounting
 - Ear pad attachment needs some tolerance
 - Test fit before final design
@@ -1625,7 +1625,7 @@ One builder reported: "My first PLA headband, despite feeling sturdy, was slowly
 
 **What made it modding gold:**
 
-1. **Stock sound has issues** - Bloated mid-bass, harsh treble â†’ obvious room for improvement
+1. **Stock sound has issues** - Bloated mid-bass, harsh treble → obvious room for improvement
 2. **Affordable planar** - Entry to planar technology without $500+ investment
 3. **Easy to disassemble** - Designed to come apart
 4. **Known quantity** - Consistent driver performance unit to unit
@@ -1658,7 +1658,7 @@ One builder reported: "My first PLA headband, despite feeling sturdy, was slowly
 **Key innovation:** 3D printed cups (2013-2014)
 **What they proved:** DIY mods can become professional products
 
-**Quote from reviewer (Headfonia):** "The Alpha Dog is easier to like with its more dynamic sound, but is also superior in terms of technicalitiesâ€¦ This is the best T50RP-mod headphones I've heardâ€¦ The depth in the sound. The Alpha Dog is superior to every other T50RP-mod I know in terms of depth."
+**Quote from reviewer (Headfonia):** "The Alpha Dog is easier to like with its more dynamic sound, but is also superior in terms of technicalities… This is the best T50RP-mod headphones I've heard… The depth in the sound. The Alpha Dog is superior to every other T50RP-mod I know in terms of depth."
 
 #### Mayflower Electronics
 
@@ -1941,7 +1941,7 @@ One builder reported: "My first PLA headband, despite feeling sturdy, was slowly
 - Expert resources are inaccessible
 
 **Missing:**
-- Foundation â†’ Implementation â†’ Advanced
+- Foundation → Implementation → Advanced
 - Clear skill progression
 - When you're ready for next level
 
@@ -2091,7 +2091,7 @@ One builder reported: "My first PLA headband, despite feeling sturdy, was slowly
 **Video Series Opportunities:**
 
 1. "Complete Build Documentary" (your first design, warts and all)
-2. "Measurement Tutorial Series" (UMIK-1 setup â†’ interpretation â†’ design changes)
+2. "Measurement Tutorial Series" (UMIK-1 setup → interpretation → design changes)
 3. "Material Testing Comparison" (foam types, felt, combinations)
 4. "Driver Comparison Shootout" (cheap vs. expensive, measured and listened)
 5. "Design Iteration Process" (show the evolution, not just result)

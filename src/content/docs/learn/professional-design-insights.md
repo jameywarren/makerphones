@@ -40,6 +40,26 @@ Over-engineering is a trap. More parts means more variation, more cost, more way
 
 Everything else supports them. Spend your attention, and your budget, where it actually moves the needle. A beautiful cup wrapped around a mediocre driver is a beautiful disappointment, and no amount of careful damping rescues a driver that was the wrong choice. When you're deciding where to put effort, start from the two parts that determine most of the result and work outward.
 
+## What manufacturers actually optimize for
+
+Here's the thing visiting manufacturers and talking with their engineers taught me: when you buy a commercial headphone, the acoustics are not the only thing that got optimized, and for most mass-market products they're not even the primary thing. The team balanced acoustics against manufacturing cost, assembly time, component yield, warranty return rate, packaging appeal, and competitive positioning against everything else at that price point. The acoustic engineer usually knows the headphone could sound better with different materials — and the margin doesn't support those materials. So it ships at the margin target, not the acoustic ideal.
+
+That's not cynicism, it's just how product development works at scale, and it's completely reasonable given the constraints. But it changes how you read commercial products: some of their design decisions are compromises you simply don't have to make. You're not building to a margin, you have no assembly-line clock, and you can use materials and methods that would be impractical in production. Copy the good decisions, not the compromised ones.
+
+## Every serious manufacturer measures — "by ear alone" is mostly mythology
+
+The romantic idea that real audiophile designers work by ear and leave the test gear to the bean counters is, in my experience, backwards. Every serious manufacturer measures extensively — GRAS ear simulators, anechoic chambers, distortion rigs — and the listening sessions come *after* the measurements, not instead of them. The best work integrates both, which is exactly the discipline the [measurement chapters](/learn/why-measure-headphones) are trying to hand you. Don't let anyone talk you out of the rig.
+
+One thing that stays genuinely hidden, though, is damping. The specific combination of damping materials, their precise placement, and the reasoning behind those choices is some of the most proprietary knowledge in the industry. The ZMF damping patent this manual references is a rare public glimpse — most of it stays internal. The good news is that systematic measurement and iteration can reverse-engineer the *effects* even when the exact recipe stays locked in someone's lab.
+
+## Expect to build more prototypes than you think
+
+If there's one number worth tattooing somewhere, it's this: serious headphone designs go through roughly `15–40 prototypes` before a version ships. The first one almost never sounds right, the fourth is closer, and the design the company ships might be revision twenty. So when a DIY builder gets frustrated and walks away after `3–4 iterations`, they're not failing — they're stopping early by professional standards. Version one is a draft whose whole job is to tell you what to fix in version two.
+
+## Where DIY builders actually win
+
+For all that, you hold advantages no product company can touch. Your iteration is fast because cost isn't a variable in the loop — you can make ten damping changes over two weekends without a single margin meeting. You're fitting one specific head, so clamp, pad depth, and cup size can all be tuned for the person actually wearing them, which no mass-market product can do. You're free to chase walnut cups, odd driver pairings, and experimental damping, because the worst case is that you learn something and reprint. And you can document everything honestly — the tuning decisions and dead ends a company has to keep as competitive secrets, you can publish, and get feedback that makes the next build better.
+
 ## Listen to people who live with it
 
 Not just the measurement, and not just the loudest voice on the forum. What spec-sheets well and what people actually reach for every day are not always the same headphone. Real, long-term listening — is it comfortable for hours, is it fatiguing, do I keep coming back to it — tells you things a five-minute graph never will. Get your builds onto other heads and ask what they notice after a week, not after a minute. The forum will tell you what's fashionable; the person who quietly keeps wearing your build will tell you what's good.
