@@ -6,7 +6,8 @@
     "@fontsource-variable/schibsted-grotesk": "^5.2.8",
     "@fontsource-variable/source-serif-4": "^5.2.9",
     "astro": "^6.4.6",
-    "sharp": "^0.35.1"
+    "sharp": "^0.35.1",
+    "three": "^0.184.0"
   },
   "name": "makerphones",
   "private": true,

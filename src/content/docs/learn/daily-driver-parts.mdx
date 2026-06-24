@@ -1,0 +1,42 @@
+---
+title: "Daily Driver — Parts & Exploded View"
+handle: daily-driver-parts
+type: build-guide
+read_time: 4
+related: [daily-driver-design-spec, simple-open-back-build, driver-mounting-and-assembly]
+tags: [build-guide, daily-driver, parts, 3d-print, exploded-view]
+description: "Every Daily Driver part you print, in 3D — pull the assembly apart and put it back together, isolate any part, and see exactly what to print and how."
+excerpt: "Spin the whole headphone, drag the slider to explode it, click any part to isolate it — then check the print list below for what each part needs."
+---
+
+import PartsViewer from '../../../components/PartsViewer.astro';
+import PartsGallery from '../../../components/PartsGallery.astro';
+
+This is the Daily Driver as an interactive model. Drag the slider to **pull the
+assembly apart and back together**, toggle the **sub-assemblies** (earcup, gimbal,
+headband), or **click any part to isolate it** and inspect it on its own. It's the
+live design — the same model that's developed in the open at
+[github.com/makerphones/daily-driver](https://github.com/makerphones/daily-driver),
+so it updates as the design does.
+
+<PartsViewer />
+
+The headphone is built from a small set of 3D-printed parts plus one bought metal
+headband bow. Everything below is exactly what you print to make one pair — the
+quantities are per complete headphone (two ears).
+
+## Parts to print
+
+<PartsGallery />
+
+For sourcing the bought hardware (the bow, M3 shoulder screws, and heat-set
+inserts) and rough costs, see the build's bill of materials in the
+[design spec](/learn/daily-driver-design-spec/). Each printed part is a starting
+point you can modify — the model is fully parametric, so changing a driver, a pad,
+or the head size regenerates the parts to match.
+
+:::note[It's a work in progress]
+The Daily Driver is in active design — nothing has been print-verified yet. Some
+parts (the headband pad, the head fit/kinematics) are deliberately rough drafts.
+Follow along, and fork freely.
+:::

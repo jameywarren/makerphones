@@ -19,7 +19,7 @@ head:
 
 <div style="margin:0 0 1.75rem;">
   <model-viewer src="https://makerphones.github.io/daily-driver/models/daily-driver.glb" alt="Daily Driver open-back headphone — drag to spin and inspect the assembly" camera-controls auto-rotate auto-rotate-delay="0" shadow-intensity="1" exposure="1.1" ar style="width:100%;height:460px;background:#f7f7f5;border:1px solid #e4e4df;border-left:4px solid #ea580c;border-radius:10px;"></model-viewer>
-  <p style="margin:.55rem 0 0;font-size:.85rem;color:#5b6573;"><strong style="color:#2d3748;">🧊 Spin it in 3D</strong> — drag to orbit, scroll to zoom (it auto-rotates on load). One side of the assembly: cup + baffle + fork-yoke + slider, with the head bow as a reference body. Source files: <a href="https://github.com/makerphones/daily-driver" style="color:#ea580c;">github.com/makerphones/daily-driver</a>.</p>
+  <p style="margin:.55rem 0 0;font-size:.85rem;color:#5b6573;"><strong style="color:#2d3748;">🧊 Spin it in 3D</strong> — drag to orbit, scroll to zoom (it auto-rotates on load). Both earcups + the headband — cups, baffles, fork-yokes, sliders, and the steel bow. Source files: <a href="https://github.com/makerphones/daily-driver" style="color:#ea580c;">github.com/makerphones/daily-driver</a>. <strong style="color:#2d3748;">Want every part?</strong> <a href="/learn/daily-driver-parts/" style="color:#ea580c;">Pull it apart, isolate any part, and see what to print →</a></p>
 </div>
 
 **Status:** Design phase — CAD in progress. This document is the functional spec the CAD is

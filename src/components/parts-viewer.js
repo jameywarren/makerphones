@@ -1,0 +1,185 @@
+// Interactive parts viewer for the Daily Driver — explode/collapse, sub-assembly
+// toggles, and click-to-isolate. Loads the SINGLE published assembly GLB + the
+// sub-assembly manifest cross-origin from the daily-driver repo's GitHub Pages
+// (nothing copied on-site). Per-part nodes are named (cup_R, baffle_L, …); the
+// manifest groups them. Explode is computed at runtime from part centroids — no
+// baked animation, no per-part GLBs.
+import * as THREE from 'three';
+import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
+import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
+
+const K_LOCAL = 1.1;   // separation of parts WITHIN a sub-assembly at full explode
+const K_GROUP = 0.45;  // separation of sub-assemblies from each other
+
+export function initPartsViewer(root) {
+  const canvas = root.querySelector('[data-pv-canvas]');
+  if (!canvas || root.dataset.pvReady) return;
+  root.dataset.pvReady = '1';
+  const glbUrl = root.dataset.glb;
+  const groupsUrl = root.dataset.groups;
+  const explodeEl = root.querySelector('[data-pv-explode]');
+  const groupsEl = root.querySelector('[data-pv-groups]');
+  const resetEl = root.querySelector('[data-pv-reset]');
+  const statusEl = root.querySelector('[data-pv-status]');
+  const setStatus = (t) => { if (statusEl) statusEl.textContent = t; };
+
+  // Lazy: don't spin up WebGL until the viewer scrolls near the viewport.
+  let started = false;
+  const io = new IntersectionObserver((entries) => {
+    if (!started && entries.some((e) => e.isIntersecting)) {
+      started = true;
+      io.disconnect();
+      start().catch((err) => { console.error('[parts-viewer]', err); setStatus('Could not load the 3D model. Try a hard refresh.'); });
+    }
+  }, { rootMargin: '300px' });
+  io.observe(root);
+
+  async function start() {
+    setStatus('Loading 3D model…');
+    const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true });
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
+    renderer.outputColorSpace = THREE.SRGBColorSpace;
+    renderer.toneMapping = THREE.ACESFilmicToneMapping;
+    renderer.toneMappingExposure = 1.1;
+
+    const scene = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera(38, 1, 0.1, 100000);
+    scene.add(new THREE.HemisphereLight(0xffffff, 0x40424a, 2.2));
+    const key = new THREE.DirectionalLight(0xffffff, 2.4); key.position.set(1, 1.4, 1.2); scene.add(key);
+    const fill = new THREE.DirectionalLight(0xffffff, 0.8); fill.position.set(-1.2, 0.5, -1.0); scene.add(fill);
+
+    // On-demand render (throttled to one per animation frame). Defined BEFORE the
+    // controls listener so the first controls.update()'s 'change' can call it safely.
+    let pending = false;
+    function requestRender() {
+      if (pending) return;
+      pending = true;
+      requestAnimationFrame(() => { pending = false; renderer.render(scene, camera); });
+    }
+
+    const controls = new OrbitControls(camera, canvas);
+    controls.enableDamping = false;            // render only on input → 0% idle CPU
+    controls.addEventListener('change', requestRender);
+
+    const [groupsData, gltf] = await Promise.all([
+      fetch(groupsUrl).then((r) => r.json()).catch(() => ({ groups: [], bought: [] })),
+      new GLTFLoader().loadAsync(glbUrl),
+    ]);
+    scene.add(gltf.scene);
+    gltf.scene.updateWorldMatrix(true, true);
+
+    // Reparent each named mesh to the scene root so its local frame == world frame
+    // (glTF's Y-up root rotation no longer skews the explode math).
+    const parts = [];
+    gltf.scene.traverse((o) => { if (o.isMesh && o.name) parts.push(o); });
+    for (const p of parts) scene.attach(p);
+
+    const byName = new Map(parts.map((p) => [p.name, p]));
+    const nodeGroup = new Map();
+    for (const g of groupsData.groups || []) for (const n of g.nodes) nodeGroup.set(n, g.id);
+
+    // Centers: whole model + per sub-assembly (world space).
+    const worldBox = (o) => new THREE.Box3().setFromObject(o);
+    const center = worldBox(scene).getCenter(new THREE.Vector3());
+    const gBox = new Map();
+    for (const p of parts) {
+      const gid = nodeGroup.get(p.name) || '_';
+      if (!gBox.has(gid)) gBox.set(gid, new THREE.Box3().makeEmpty());
+      gBox.get(gid).expandByObject(p);
+    }
+    const gCenter = new Map([...gBox].map(([gid, b]) => [gid, b.getCenter(new THREE.Vector3())]));
+
+    // Per-part rest + explode offset: separate within the group, then push groups apart.
+    for (const p of parts) {
+      const gc = gCenter.get(nodeGroup.get(p.name) || '_') || center;
+      const pc = worldBox(p).getCenter(new THREE.Vector3());
+      const off = pc.clone().sub(gc).multiplyScalar(K_LOCAL)
+        .add(gc.clone().sub(center).multiplyScalar(K_GROUP));
+      p.userData.rest = p.position.clone();
+      p.userData.off = off;
+    }
+
+    // Frame the camera.
+    const sph = worldBox(scene).getBoundingSphere(new THREE.Sphere());
+    const dist = (sph.radius / Math.sin((camera.fov * Math.PI) / 180 / 2)) * 1.2;
+    camera.position.copy(sph.center).add(new THREE.Vector3(0.85, 0.5, 1).normalize().multiplyScalar(dist));
+    camera.near = dist / 100; camera.far = dist * 10; camera.updateProjectionMatrix();
+    controls.target.copy(sph.center); controls.update();
+
+    // Explode slider.
+    const applyExplode = (t) => {
+      for (const p of parts) p.position.copy(p.userData.rest).addScaledVector(p.userData.off, t);
+      requestRender();
+    };
+    explodeEl?.addEventListener('input', () => applyExplode(parseFloat(explodeEl.value) || 0));
+
+    // Sub-assembly toggles (built from the manifest).
+    if (groupsEl) {
+      groupsEl.innerHTML = '';
+      for (const g of groupsData.groups || []) {
+        const label = document.createElement('label');
+        label.className = 'pv-toggle';
+        const cb = document.createElement('input');
+        cb.type = 'checkbox'; cb.checked = true;
+        cb.addEventListener('change', () => {
+          isolated = null;
+          for (const n of g.nodes) { const o = byName.get(n); if (o) o.visible = cb.checked; }
+          requestRender();
+        });
+        label.append(cb, document.createTextNode(' ' + g.label));
+        groupsEl.appendChild(label);
+      }
+    }
+
+    // Click (not drag) to isolate a single part.
+    const ray = new THREE.Raycaster();
+    const v = new THREE.Vector2();
+    let isolated = null;
+    canvas.addEventListener('pointerdown', (e) => {
+      const x0 = e.clientX, y0 = e.clientY;
+      const onUp = (e2) => {
+        canvas.removeEventListener('pointerup', onUp);
+        if (Math.hypot(e2.clientX - x0, e2.clientY - y0) > 4) return; // it was an orbit drag
+        const r = canvas.getBoundingClientRect();
+        v.x = ((e2.clientX - r.left) / r.width) * 2 - 1;
+        v.y = -((e2.clientY - r.top) / r.height) * 2 + 1;
+        ray.setFromCamera(v, camera);
+        const hit = ray.intersectObjects(parts, false)[0];
+        if (!hit) return;
+        isolated = hit.object;
+        for (const p of parts) p.visible = p === isolated;
+        setStatus(`Isolated: ${prettyName(isolated.name)} — Reset to show all`);
+        requestRender();
+      };
+      canvas.addEventListener('pointerup', onUp);
+    });
+
+    resetEl?.addEventListener('click', () => {
+      isolated = null;
+      for (const p of parts) p.visible = true;
+      groupsEl?.querySelectorAll('input').forEach((cb) => { cb.checked = true; });
+      if (explodeEl) { explodeEl.value = '0'; }
+      applyExplode(0);
+      setStatus('');
+    });
+
+    function resize() {
+      const w = canvas.clientWidth || 640, h = canvas.clientHeight || 460;
+      renderer.setSize(w, h, false);
+      camera.aspect = w / h; camera.updateProjectionMatrix();
+      requestRender();
+    }
+    new ResizeObserver(resize).observe(canvas);
+    resize();
+
+    canvas.setAttribute('tabindex', '0');
+    canvas.setAttribute('aria-label', 'Daily Driver 3D parts viewer — drag to orbit, use the slider to explode, click a part to isolate it');
+    setStatus('');
+    requestRender();
+  }
+}
+
+function prettyName(name) {
+  const side = /_R\b/.test(name) ? ' (right)' : /_L\b/.test(name) ? ' (left)' : '';
+  return name.replace(/_(R|L)\b/, '').replace(/_(p|m)\b/, '').replace(/_/g, ' ') + side;
+}

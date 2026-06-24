@@ -84,6 +84,7 @@ const sidebar = [
       'learn/your-first-build',
       'learn/simple-open-back-build',
       'learn/closed-back-studio-build',
+      'learn/daily-driver-parts',
     ],
   },
   {
