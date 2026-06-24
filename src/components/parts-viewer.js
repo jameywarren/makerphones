@@ -68,10 +68,18 @@ export function initPartsViewer(root) {
     scene.add(gltf.scene);
     gltf.scene.updateWorldMatrix(true, true);
 
-    // Reparent each named mesh to the scene root so its local frame == world frame
-    // (glTF's Y-up root rotation no longer skews the explode math).
-    const parts = [];
-    gltf.scene.traverse((o) => { if (o.isMesh && o.name) parts.push(o); });
+    // Collect WHOLE-PART nodes by name — NOT the leaf face-meshes. OCCT exports one
+    // glTF primitive per B-rep face, which GLTFLoader splits into many sub-meshes;
+    // exploding those individually would fragment a part into its faces. Each part
+    // node (a Group of face-meshes) moves/hides as one rigid body. Reparent to the
+    // scene root so the local frame == world (no glTF Y-up skew on the explode math).
+    const names = (groupsData.groups || []).flatMap((g) => g.nodes);
+    let parts = [];
+    for (const n of names) { const o = gltf.scene.getObjectByName(n); if (o && !parts.includes(o)) parts.push(o); }
+    if (!parts.length) {  // fallback: the named children of the assembly root
+      const root = gltf.scene.getObjectByName('daily_driver') || gltf.scene;
+      parts = root.children.filter((c) => c.name);
+    }
     for (const p of parts) scene.attach(p);
 
     const byName = new Map(parts.map((p) => [p.name, p]));
@@ -144,11 +152,14 @@ export function initPartsViewer(root) {
         v.x = ((e2.clientX - r.left) / r.width) * 2 - 1;
         v.y = -((e2.clientY - r.top) / r.height) * 2 + 1;
         ray.setFromCamera(v, camera);
-        const hit = ray.intersectObjects(parts, false)[0];
+        const hit = ray.intersectObjects(parts, true)[0];   // recursive: into the face-meshes
         if (!hit) return;
-        isolated = hit.object;
-        for (const p of parts) p.visible = p === isolated;
-        setStatus(`Isolated: ${prettyName(isolated.name)} — Reset to show all`);
+        let node = hit.object;                                // walk up to the whole-part node
+        while (node && !parts.includes(node)) node = node.parent;
+        if (!node) return;
+        isolated = node;
+        for (const p of parts) p.visible = p === node;
+        setStatus(`Isolated: ${prettyName(node.name)} — Reset to show all`);
         requestRender();
       };
       canvas.addEventListener('pointerup', onUp);
