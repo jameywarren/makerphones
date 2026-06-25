@@ -5,8 +5,8 @@ type: build-guide
 read_time: 12
 related: [driver-selection-guide, open-vs-closed-back-design, acoustic-chambers-and-enclosures, ear-pads-and-comfort, damping-materials, taking-and-interpreting-measurements, simple-open-back-build]
 tags: [build-guide, spec, daily-driver, open-back, design, parametric]
-description: "The functional design specification for the Daily Driver — Makerphones' canonical first-build open-back: system architecture, acoustic approach, component specs, parametric setup, and the open design questions."
-excerpt: "Design Specification · v0.2 · 2026-06-12 — the functional spec the CAD is built against, and the reference behind the build guide, the parts list, and the measurements."
+description: "The functional design specification for the Daily Driver, Makerphones' canonical first-build open-back: system architecture, acoustic approach, component specs, parametric setup, and the open design questions."
+excerpt: "Design Specification · v0.2 · 2026-06-12, the functional spec the CAD is built against, and the reference behind the build guide, the parts list, and the measurements."
 head:
   # Google <model-viewer> — loaded ONLY on this page (per-page head), powers the
   # inline 3D preview below. The GLB is loaded cross-origin from the daily-driver
@@ -18,15 +18,15 @@ head:
 ---
 
 <div style="margin:0 0 1.75rem;">
-  <model-viewer src="https://makerphones.github.io/daily-driver/models/daily-driver.glb" alt="Daily Driver open-back headphone — drag to spin and inspect the assembly" camera-controls auto-rotate auto-rotate-delay="0" shadow-intensity="1" exposure="1.1" ar style="width:100%;height:460px;background:#f7f7f5;border:1px solid #e4e4df;border-left:4px solid #ea580c;border-radius:10px;"></model-viewer>
-  <p style="margin:.55rem 0 0;font-size:.85rem;color:#5b6573;"><strong style="color:#2d3748;">🧊 Spin it in 3D</strong> — drag to orbit, scroll to zoom (it auto-rotates on load). Both earcups + the headband — cups, baffles, fork-yokes, sliders, and the steel bow. Source files: <a href="https://github.com/makerphones/daily-driver" style="color:#ea580c;">github.com/makerphones/daily-driver</a>. <strong style="color:#2d3748;">Want every part?</strong> <a href="/learn/daily-driver-parts/" style="color:#ea580c;">Pull it apart, isolate any part, and see what to print →</a></p>
+  <model-viewer src="https://makerphones.github.io/daily-driver/models/daily-driver.glb" alt="Daily Driver open-back headphone, drag to spin and inspect the assembly" camera-controls auto-rotate auto-rotate-delay="0" shadow-intensity="1" exposure="1.1" ar style="width:100%;height:460px;background:#f7f7f5;border:1px solid #e4e4df;border-left:4px solid #ea580c;border-radius:10px;"></model-viewer>
+  <p style="margin:.55rem 0 0;font-size:.85rem;color:#5b6573;"><strong style="color:#2d3748;">🧊 Spin it in 3D</strong>: drag to orbit, scroll to zoom (it auto-rotates on load). Both earcups + the headband: cups, baffles, fork-yokes, sliders, and the steel bow. Source files: <a href="https://github.com/makerphones/daily-driver" style="color:#ea580c;">github.com/makerphones/daily-driver</a>. <strong style="color:#2d3748;">Want every part?</strong> <a href="/learn/daily-driver-parts/" style="color:#ea580c;">Pull it apart, isolate any part, and see what to print →</a></p>
 </div>
 
-**Status:** Design phase — CAD in progress. This document is the functional spec the CAD is
+**Status:** Design phase, CAD in progress. This document is the functional spec the CAD is
 built against, and the reference behind the build guide, the parts list, and the measurements.
 
 **Source:** The CAD, STLs, headband DXF, and this spec are developed in the open at
-[github.com/makerphones/daily-driver](https://github.com/makerphones/daily-driver) — the canonical
+[github.com/makerphones/daily-driver](https://github.com/makerphones/daily-driver), the canonical
 home for the design files.
 
 ---
@@ -35,13 +35,13 @@ home for the design files.
 
 The Daily Driver is the canonical first build: a 40 mm [open-back](/learn/open-vs-closed-back-design/)
 headphone that's forgiving to design and to assemble, buildable by a first-timer, and good
-enough to keep wearing once it's done. It's fully parametric and built to be modified — change
+enough to keep wearing once it's done. It's fully parametric and built to be modified: change
 the driver, the pad, or the head size and the model follows. A pre-sourced kit may be offered
 later; everything here is also exactly what you need to build it yourself. For the same
 architecture as a hands-on walkthrough, see the
 [simple open-back build](/learn/simple-open-back-build/).
 
-Honest sonic target: a **bright, open, detailed open-back** — strong mids and treble, modest
+Honest sonic target: a **bright, open, detailed open-back**, strong mids and treble, modest
 bass. That's the nature of a small driver in an open baffle, and the design leans into it
 rather than chasing sub-bass the hardware can't make.
 
@@ -68,17 +68,17 @@ touching the others.
 
 ## Acoustic approach (open-back)
 
-- **Open rear.** The back of the cup is an open vent pattern, not a sealed chamber — that's
+- **Open rear.** The back of the cup is an open vent pattern, not a sealed chamber. That's
   what makes the design forgiving and gives the open, airy character.
-- **Front cavity = pad depth.** Driver-to-ear distance is set by pad thickness — see
+- **Front cavity = pad depth.** Driver-to-ear distance is set by pad thickness, see
   [ear pads and comfort](/learn/ear-pads-and-comfort/) for why. Deeper is more comfortable and
   slightly warmer; shallower is more present and brighter. This is the main tuning lever, and
   it's why the pad choice is locked into the spec.
 - **Light rear damping.** A disc of acoustic felt or thin open-cell foam across the rear vent
-  tames cone breakup and reflections — [damping materials](/learn/damping-materials/) covers
+  tames cone breakup and reflections: [damping materials](/learn/damping-materials/) covers
   the options. Start light, tune by ear and
   [measurement](/learn/taking-and-interpreting-measurements/).
-- **No sealed volume to get right** — the reason an open-back is the right first build.
+- **No sealed volume to get right**: the reason an open-back is the right first build.
 - **Expected response:** forward mids, extended/airy treble, gentle rolloff in the low bass.
 
 ---
@@ -86,47 +86,47 @@ touching the others.
 ## Design decisions
 
 ### Cup shell
-- **Symmetric** — identical left and right; L/R marked in the surface only.
-- **~90 cc internal acoustic volume** — starting point, parameterized for easy adjustment
+- **Symmetric**: identical left and right; L/R marked in the surface only.
+- **~90 cc internal acoustic volume**: starting point, parameterized for easy adjustment
   (the reasoning lives in [acoustic chambers and enclosures](/learn/acoustic-chambers-and-enclosures/)).
-- **Open-back vent** — ring of 6–8 oval slots on the rear face, ~40% open area.
-- **Pad attachment** — tension-ring lip, 61–62 mm OD to accept Brainwavz HM5 and compatible
+- **Open-back vent**: ring of 6–8 oval slots on the rear face, ~40% open area.
+- **Pad attachment**: tension-ring lip, 61–62 mm OD to accept Brainwavz HM5 and compatible
   pads.
-- **Walls** — 3 mm minimum shell, 4 mm at structural points (baffle flange, yoke boss).
-- **Print orientation** — open face down, no supports.
-- **Material** — PLA+ for prototyping, PETG for durable/kit parts.
+- **Walls**: 3 mm minimum shell, 4 mm at structural points (baffle flange, yoke boss).
+- **Print orientation**: open face down, no supports.
+- **Material**: PLA+ for prototyping, PETG for durable/kit parts.
 
 ### Baffle plate
-- **Separate from the cup** — 4× M3 screws into heat-set inserts; removable for driver swaps
+- **Separate from the cup**: 4× M3 screws into heat-set inserts; removable for driver swaps
   and tuning.
-- **Driver cutout** — acoustic aperture only; the driver sits on a ledge (the frame doesn't
+- **Driver cutout**: acoustic aperture only; the driver sits on a ledge (the frame doesn't
   pass through).
-- **Gasket channel** — 2 mm wide × 1.5 mm deep around the driver cutout.
-- **Insert placement** — 4 inserts, symmetric, ~70% of radius from center.
-- **Cable entry** — 6–7 mm hole near one edge, toward the headband side.
-- **Print orientation** — flat, no supports.
+- **Gasket channel**: 2 mm wide × 1.5 mm deep around the driver cutout.
+- **Insert placement**: 4 inserts, symmetric, ~70% of radius from center.
+- **Cable entry**: 6–7 mm hole near one edge, toward the headband side.
+- **Print orientation**: flat, no supports.
 
 ### Yoke
-- **Separate from the cup** — lets the cup and yoke iterate independently.
-- **Own pivot spec** — a 6 mm-diameter post, deliberately *not* cross-compatible with
+- **Separate from the cup**: lets the cup and yoke iterate independently.
+- **Own pivot spec**: a 6 mm-diameter post, deliberately *not* cross-compatible with
   commercial (e.g. Beyerdynamic) yokes; this is the project's own interface.
-- **Pivot post** — 6 mm diameter, 8 mm tall, one flat face, M3 through-hole for a retention
+- **Pivot post**: 6 mm diameter, 8 mm tall, one flat face, M3 through-hole for a retention
   screw.
-- **Rotation** — ±20° tilt, with hard stops in the geometry to protect the cable.
-- **Single axis** — tilt only; no fold mechanism on v1.
-- **Left/right** — mirror images, two files.
+- **Rotation**: ±20° tilt, with hard stops in the geometry to protect the cable.
+- **Single axis**: tilt only; no fold mechanism on v1.
+- **Left/right**: mirror images, two files.
 
 ### Slider
 - **Wraps the spring steel arc** on three sides.
-- **Adjustment** — friction clamp: a printed spring arm presses on the steel face.
-- **Detent-ready** — the boss geometry also works with punched holes in the steel for a
+- **Adjustment**: friction clamp: a printed spring arm presses on the steel face.
+- **Detent-ready**: the boss geometry also works with punched holes in the steel for a
   click-fit upgrade.
-- **Carries the pivot post** — 6 mm post matching the yoke bore, M3 retention screw.
+- **Carries the pivot post**: 6 mm post matching the yoke bore, M3 retention screw.
 
 ### Cable
-- **Dual entry** — each cup has its own exit; Y-split at chin level. No routing through the
-  headband arc — simpler wiring, easier assembly.
-- **Strain relief** — raised ring at the entry; jacket clamped before it enters the cup.
+- **Dual entry**: each cup has its own exit; Y-split at chin level. No routing through the
+  headband arc: simpler wiring, easier assembly.
+- **Strain relief**: raised ring at the entry; jacket clamped before it enters the cup.
 
 ---
 
@@ -153,12 +153,12 @@ another builder. Good options sit in the $12–18 range at Parts Express or Madi
 
 > **Budget option, with a caveat.** The Dayton CE38MB-32 (~$3.49, 40 mm frame, 32 Ω, Ø35.5 mm
 > opening, ~5.6 mm deep) is the cheapest way in, but it has a peaky upper midrange that takes
-> extra damping work to tame — workable, but not the easiest first-build driver. Choose it
+> extra damping work to tame, workable, but not the easiest first-build driver. Choose it
 > only if cost is the priority, and expect to spend more time on damping.
 
 ### Ear pads
 - Brainwavz HM5 velour, 90 mm oval (widely available; the design is built to this pad).
-- Friction-ring attachment — pushes over the cup's pad lip.
+- Friction-ring attachment: pushes over the cup's pad lip.
 - Confirm the HM5 inner ring diameter with calipers before finalizing the lip OD (nominal
   ~60 mm; cup lip OD target 61–62 mm).
 
@@ -173,24 +173,24 @@ another builder. Good options sit in the $12–18 range at Parts Express or Madi
 | Developed (flat) length | ~370 mm | ~100 mm radius × ~90° arc + 30 mm terminations each end |
 | Detent holes (optional) | 3 mm dia., 6 mm spacing | Punched at cut time for click-adjust |
 
-**Sourcing the steel — the clever part.** Draw the arc as a *flat developed profile* (imagine
+**Sourcing the steel, the clever part.** Draw the arc as a *flat developed profile* (imagine
 the arc unrolled), export a DXF, and order it laser-cut in 1095 spring steel from a service
 like SendCutSend (~$10–15 delivered at low quantity). They ship flat precision blanks; you
 form the curve cold over a printed radius jig. No metal shop, no minimum orders. (Builders on
-a tighter budget can salvage spring steel from a cheap fashion headset — functional, but
+a tighter budget can salvage spring steel from a cheap fashion headset, functional, but
 imprecise.) The DXF ships alongside the STLs so anyone can order their own.
 
 ---
 
 ## 3D-print guidance
 
-- **Material:** PETG (durable, slight flex — good for cups and the stressed gimbal/headband
+- **Material:** PETG (durable, slight flex, good for cups and the stressed gimbal/headband
   parts) or PLA+ (easy, rigid, fine for prototypes). Avoid brittle plain PLA on any stressed
   part.
 - **Tolerances:** start 0.2 mm clearance for a friction fit, 0.3–0.4 mm for a slip fit; tune
   to your printer.
 - **Heat-set inserts:** M3 brass inserts in printed bosses for any joint opened and closed
-  (driver retention, gimbal) — far more durable than screwing into plastic.
+  (driver retention, gimbal), far more durable than screwing into plastic.
 - **Orientation:** put the best surface on visible faces; print the grille flat; orient the
   yoke so stress runs *along* layer lines, not across them (layer adhesion is the weak axis).
 - **Supports:** designed to be support-free where possible (overhangs ≤45° chamfered).
@@ -216,7 +216,7 @@ vent_slot_count       = 7
 vent_open_fraction    = 0.40
 ```
 
-**Cup approach — interior first.** Model the acoustic void as the primary geometry (revolve
+**Cup approach, interior first.** Model the acoustic void as the primary geometry (revolve
 the half-profile of the interior, then shell outward to `wall_thickness`), then add the pad
 lip, baffle flange, yoke boss, and vent array. Build order: cup → baffle → yoke → slider, each
 constrained by the part before it.
@@ -226,7 +226,7 @@ constrained by the part before it.
 ## Printing the parts without your own printer
 
 If you don't have a printer, FDM print services (e.g. JLCPCB, Xometry) will print the part set
-inexpensively — order a few iterations at once to batch the shipping wait. For a show finish
+inexpensively: order a few iterations at once to batch the shipping wait. For a show finish
 on the cups, an SLA service gives a smoother surface. Once a design is stable and you're
 iterating often, an inexpensive desktop printer pays for itself quickly.
 
@@ -254,7 +254,7 @@ end.
 
 ## Open design questions
 
-These are the live problems still being worked — documented as the design develops.
+These are the live problems still being worked, documented as the design develops.
 
 **Spring steel arc radius.** Arc radius and steel thickness together set clamping force: too
 tight is uncomfortable, too loose falls off. Approach: print forming jigs at 95 / 105 / 115 mm
@@ -264,7 +264,7 @@ the target. If the best radius gives the wrong clamping force, change thickness 
 lighter, 0.8 mm firmer) before changing geometry.
 
 **Driver confirmation.** The baffle is parametric specifically so the production driver can be
-locked late — update `driver_od` / `driver_aperture` and the baffle follows. Confirm a
+locked late: update `driver_od` / `driver_aperture` and the baffle follows. Confirm a
 specific driver against the selection criteria above, ideally one with published measurements.
 
 ---
@@ -283,7 +283,7 @@ specific driver against the selection criteria above, ideally one with published
 **Open (the form playground):**
 
 - Cup profile and outer form
-- Rear vent geometry and pattern — the signature look
+- Rear vent geometry and pattern: the signature look
 - Yoke / slider styling within the pivot and clamp constraints
 - Color, finish, and overall aesthetic language
 
@@ -291,9 +291,9 @@ specific driver against the selection criteria above, ideally one with published
 
 ## Design files license
 
-The Daily Driver is open source under the [MIT License](https://github.com/makerphones/daily-driver/blob/main/LICENSE)
-— one license over the whole repo, design and docs alike. Download it, modify it, build it, and
-sell what you make, commercial use included. All we ask is credit to makerphones by Warren Labs.
+The Daily Driver is open source under the [MIT License](https://github.com/makerphones/daily-driver/blob/main/LICENSE),
+one license over the whole repo, design and docs alike. Download it, modify it, build it, and
+sell what you make, commercial use included. All we ask is credit to makerphones by [Warren Labs](https://warrenlabs.com).
 More on the [license page](/license/).
 
 ---

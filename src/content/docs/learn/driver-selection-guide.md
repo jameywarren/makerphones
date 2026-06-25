@@ -8,7 +8,7 @@ prerequisites: [driver-technologies, impedance-and-sensitivity]
 related: [sourcing-components, impedance-and-sensitivity, driver-technologies, your-first-build]
 read_time: 7
 tags: [components, beginner, drivers, selection, practical]
-description: "Learn how to choose the right drivers for your DIY headphone build — size, impedance, materials, and specific recommendations for beginners."
+description: "Learn how to choose the right drivers for your DIY headphone build: size, impedance, materials, and specific recommendations for beginners."
 excerpt: "Hundreds of drivers are available, but which one is right for your build? Here's a practical guide to driver selection based on 25+ years of experience."
 ---
 
@@ -22,7 +22,7 @@ Before you even look at specs, answer these questions:
 
 **What's your sound signature preference?** Neutral and accurate, or fun and colored? Warm and smooth, or bright and detailed? This guides driver material and design choices.
 
-**What's your budget?** Be realistic. You can build excellent headphones with $15 Dayton Audio drivers, or spend $100+ on premium drivers. Neither is "wrong" — they're different starting points.
+**What's your budget?** Be realistic. You can build excellent headphones with $15 Dayton Audio drivers, or spend $100+ on premium drivers. Neither is "wrong." They're different starting points.
 
 **Is this your first build?** If yes, choose forgiving drivers. Well-reviewed, popular options from known manufacturers. Save the exotic experiments for build #3.
 
@@ -40,7 +40,7 @@ For portable use: 32Ω. Full stop. For desktop use with amplification: 32–150�
 
 ### Sensitivity: How Loud Will They Get?
 
-For portable use, you need at least 95 dB/mW, ideally 100+ dB/mW. For desktop use with a proper amp, sensitivity matters less — your amp compensates.
+For portable use, you need at least 95 dB/mW, ideally 100+ dB/mW. For desktop use with a proper amp, sensitivity matters less. Your amp compensates.
 
 ### Frequency Response: What Does It Show?
 
@@ -56,9 +56,9 @@ Lower is generally better, but for headphone drivers, distortion at normal liste
 
 ### Budget Tier ($10–20 per pair)
 
-**Dayton Audio CE38MB-32 (38mm, 32Ω):** The one part in Dayton's catalog actually marketed as a headphone replacement driver, and remarkably good for the price. A solid first driver — decent frequency response, forgiving of enclosure variations, and cheap enough to buy extras for experimentation. One build note: the Mylar diaphragm is fragile, and Dayton specifies installing it behind a grille — design your baffle accordingly.
+**Dayton Audio CE38MB-32 (38mm, 32Ω):** The one part in Dayton's catalog actually marketed as a headphone replacement driver, and remarkably good for the price. A solid first driver: decent frequency response, forgiving of enclosure variations, and cheap enough to buy extras for experimentation. One build note: the Mylar diaphragm is fragile, and Dayton specifies installing it behind a grille. Design your baffle accordingly.
 
-A word about the rest of Dayton's CE series, because the names look tempting: it's mostly small *loudspeaker* drivers — 4 and 8 ohm, paper or aluminum cones — that happen to be headphone-sized. The tell for headphone use is 32-ohm impedance with a Mylar diaphragm, the "MB-32" type like the CE38MB-32. Don't drop a 4 or 8 ohm cone driver into a headphone build and expect headphone behavior.
+A word about the rest of Dayton's CE series, because the names look tempting: it's mostly small *loudspeaker* drivers, 4 and 8 ohm, paper or aluminum cones, that happen to be headphone-sized. The tell for headphone use is 32-ohm impedance with a Mylar diaphragm, the "MB-32" type like the CE38MB-32. Don't drop a 4 or 8 ohm cone driver into a headphone build and expect headphone behavior.
 
 ### Mid-Range Tier ($20–50 per pair)
 
@@ -78,7 +78,7 @@ If you use AliExpress:
 
 - Buy from sellers with thousands of positive reviews
 - Check if measurements are available online from other builders
-- Order extras — expect some duds
+- Order extras, expect some duds
 - Never use them for a build you care about until you've verified the specific lot
 
 For your first build, stick with Parts Express, Madisound, or other established audio component suppliers. The extra cost is worth the reliability.
@@ -89,7 +89,7 @@ If you're using drivers salvaged from commercial headphones:
 
 **Verify they work:** Connect to an amp and play audio before you spend time designing around them.
 
-**Check channel matching:** Do both sound similar? A multimeter can check DC resistance — they should be within 1–2Ω of each other for a matched pair.
+**Check channel matching:** Do both sound similar? A multimeter can check DC resistance. They should be within 1–2Ω of each other for a matched pair.
 
 **Measure if possible:** If you have measurement equipment, take baseline measurements before building. This helps you understand what you're working with.
 
@@ -111,4 +111,4 @@ If you're using drivers salvaged from commercial headphones:
 
 ## What's Next
 
-Now that you know how to choose drivers, you need to know where to actually buy them — and all the other components you'll need. In [Sourcing Components](/learn/sourcing-components/), we'll cover suppliers, what to buy, and how to build a complete parts list for your project.
+Now that you know how to choose drivers, you need to know where to actually buy them, and all the other components you'll need. In [Sourcing Components](/learn/sourcing-components/), we'll cover suppliers, what to buy, and how to build a complete parts list for your project.

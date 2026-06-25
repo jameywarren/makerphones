@@ -8,24 +8,24 @@ prerequisites: [driver-technologies, headphone-form-factors]
 related: [driver-technologies, headphone-form-factors, driver-selection-guide, acoustic-chamber-design, ear-pads-and-comfort]
 read_time: 11
 tags: [iem, in-ear, balanced-armature, crossover, custom-fit]
-description: How in-ear monitor design differs from over-ears — tiny drivers, tuned tubes, crossovers, and shells molded to your ear — and a realistic path into building them.
+description: "How in-ear monitor design differs from over-ears: tiny drivers, tuned tubes, crossovers, and shells molded to your ear, and a realistic path into building them."
 excerpt: With IEMs the whole headphone shrinks into your ear canal, the seal becomes everything, and the craft turns to tiny drivers and shells molded to your ear. Here's the map.
 ---
 
 import Figure from '../../../components/Figure.astro';
 import IemCrossSection from '../../../components/diagrams/IemCrossSection.astro';
 
-In-ear monitors are a different discipline from over-ears, but they run on the same fundamentals — the seal, the driver, the chamber, the damping — just shrunk down into your ear canal. For a maker, custom IEMs are among the most rewarding and craft-heavy builds there are, and 3D printing has put the once-exclusive custom-shell process within reach. This chapter maps how IEM design differs from everything you've learned so far, and what a realistic path into it looks like.
+In-ear monitors are a different discipline from over-ears, but they run on the same fundamentals: the seal, the driver, the chamber, the damping, just shrunk down into your ear canal. For a maker, custom IEMs are among the most rewarding and craft-heavy builds there are, and 3D printing has put the once-exclusive custom-shell process within reach. This chapter maps how IEM design differs from everything you've learned so far, and what a realistic path into it looks like.
 
 ## How IEMs differ
 
-The biggest shift is that the "cup" is now your ear canal, and the seal is even more decisive than it is over-ears — and it was already decisive there. With an IEM a poor seal doesn't just soften the bass, it eliminates it, instantly and completely. There's no large chamber doing acoustic work; the sound is dominated by the canal, the little tube or bore that carries sound to the nozzle, and the seal. The drivers are tiny and sit very close to your eardrum, which changes everything about how you tune them.
+The biggest shift is that the "cup" is now your ear canal, and the seal is even more decisive than it is over-ears. And it was already decisive there. With an IEM a poor seal doesn't just soften the bass, it eliminates it, instantly and completely. There's no large chamber doing acoustic work; the sound is dominated by the canal, the little tube or bore that carries sound to the nozzle, and the seal. The drivers are tiny and sit very close to your eardrum, which changes everything about how you tune them.
 
 ## Driver types in IEMs
 
-**Dynamic (DD).** A miniature moving-coil driver, the same principle as an over-ear driver shrunk down. It gives good bass, single-driver coherence, and simplicity — one driver, no crossover.
+**Dynamic (DD).** A miniature moving-coil driver, the same principle as an over-ear driver shrunk down. It gives good bass, single-driver coherence, and simplicity: one driver, no crossover.
 
-**Balanced armature (BA).** Tiny, efficient, and fast, a BA covers a limited frequency band well, so multi-BA designs stack several — say a bass armature, a midrange armature, and a treble armature — and split the signal between them. See [driver technologies](/learn/driver-technologies) for how these differ from dynamics. The two major BA manufacturers are `Knowles` and `Sonion`; their datasheets are publicly available, with frequency response curves, dimensions, and suggested acoustic configurations, and both sell samples directly in small quantities through their distributor pages.
+**Balanced armature (BA).** Tiny, efficient, and fast, a BA covers a limited frequency band well, so multi-BA designs stack several, say a bass armature, a midrange armature, and a treble armature, and split the signal between them. See [driver technologies](/learn/driver-technologies) for how these differ from dynamics. The two major BA manufacturers are `Knowles` and `Sonion`; their datasheets are publicly available, with frequency response curves, dimensions, and suggested acoustic configurations, and both sell samples directly in small quantities through their distributor pages.
 
 **Hybrid.** A dynamic driver for bass paired with balanced armatures for mids and treble, combining the DD's low-end with the BA's speed up top. This is a common arrangement in higher-end IEMs.
 
@@ -33,13 +33,13 @@ Planar and electrostatic IEMs exist too, but they're niche; most builds start fr
 
 ## Multi-driver and crossovers
 
-The moment you use more than one driver, you need a crossover to send each frequency band to the right driver — and in an IEM that crossover is a handful of tiny components packed into a shell the size of the end of your finger. Tuning it is the hard electrical-and-acoustic work of multi-driver IEM design, and it's unforgiving at this scale.
+The moment you use more than one driver, you need a crossover to send each frequency band to the right driver. And in an IEM that crossover is a handful of tiny components packed into a shell the size of the end of your finger. Tuning it is the hard electrical-and-acoustic work of multi-driver IEM design, and it's unforgiving at this scale.
 
-Just as important, and often underestimated, are the bore acoustics. The little tubes carrying sound from each driver to the nozzle have their own resonances, and tube length, diameter, and acoustic damping — small mesh dampers placed in the bores — are primary voicing tools. This is the IEM's version of chamber design and damping rolled together: see [acoustic chamber design](/learn/acoustic-chamber-design) for the same principles at full size. Many an IEM is voiced as much by its tubes and dampers as by its drivers.
+Just as important, and often underestimated, are the bore acoustics. The little tubes carrying sound from each driver to the nozzle have their own resonances, and tube length, diameter, and acoustic damping, small mesh dampers placed in the bores, are primary voicing tools. This is the IEM's version of chamber design and damping rolled together: see [acoustic chamber design](/learn/acoustic-chamber-design) for the same principles at full size. Many an IEM is voiced as much by its tubes and dampers as by its drivers.
 
-Don't guess at those values when you don't have to. `Knowles` and `Sonion` publish reference tubing configurations and damper resistance values in their datasheets — genuine starting points for tube lengths and crossover behavior, where a given damper resistance acts as an acoustic low-pass and sets where the driver rolls off. Starting from the manufacturer's published numbers is far more efficient than designing the bores from first principles, and guessing instead is one of the most common ways a multi-driver build goes sideways.
+Don't guess at those values when you don't have to. `Knowles` and `Sonion` publish reference tubing configurations and damper resistance values in their datasheets: genuine starting points for tube lengths and crossover behavior, where a given damper resistance acts as an acoustic low-pass and sets where the driver rolls off. Starting from the manufacturer's published numbers is far more efficient than designing the bores from first principles, and guessing instead is one of the most common ways a multi-driver build goes sideways.
 
-<Figure label="Fig. 1" caption="Inside a multi-driver IEM — balanced armatures and a dynamic driver, the crossover, sound bores to the nozzle, and the ear-tip seal in the canal.">
+<Figure label="Fig. 1" caption="Inside a multi-driver IEM: balanced armatures and a dynamic driver, the crossover, sound bores to the nozzle, and the ear-tip seal in the canal.">
   <IemCrossSection />
 </Figure>
 
@@ -49,22 +49,22 @@ This is where the maker craft really lives, and where you choose your path.
 
 A universal-fit IEM uses a generic shell and silicone or foam tips to seal against your canal. It's the easier route, the seal is good but not perfect, and the tips do the sealing work.
 
-A custom-fit IEM is molded to your ear from an impression, giving a perfect seal, all-day comfort, and excellent isolation — and it's the craft-heavy path. The process starts with an ear impression, taken by an audiologist who fills your ear and canal with a silicone compound, then scanning or casting that impression and building the shell — 3D printed in resin, or hand-built in acrylic — around the drivers and tubes. The seal and fit dominate the result, which is exactly why custom molding is where the magic is, and 3D printing from a scanned impression is what has opened that door to makers.
+A custom-fit IEM is molded to your ear from an impression, giving a perfect seal, all-day comfort, and excellent isolation. And it's the craft-heavy path. The process starts with an ear impression, taken by an audiologist who fills your ear and canal with a silicone compound, then scanning or casting that impression and building the shell, 3D printed in resin, or hand-built in acrylic, around the drivers and tubes. The seal and fit dominate the result, which is exactly why custom molding is where the magic is, and 3D printing from a scanned impression is what has opened that door to makers.
 
-For the printing itself, resin (SLA/DLP) is the method, not FDM — it produces the fine detail and smooth inner surfaces these tiny shells need, and FDM's layer lines and rougher walls change the acoustic behavior inside such a small volume. The good news is the hardware is cheap: printers like the `Elegoo Mars` or `Anycubic Photon` run roughly `$200–300` and produce IEM-quality shells. FDM is fine for checking the rough shape, but print anything you actually intend to wear in resin.
+For the printing itself, resin (SLA/DLP) is the method, not FDM: it produces the fine detail and smooth inner surfaces these tiny shells need, and FDM's layer lines and rougher walls change the acoustic behavior inside such a small volume. The good news is the hardware is cheap: printers like the `Elegoo Mars` or `Anycubic Photon` run roughly `$200–300` and produce IEM-quality shells. FDM is fine for checking the rough shape, but print anything you actually intend to wear in resin.
 
 ## Assembly realities
 
-Everything here is tiny and tight. Fitting drivers, tubes, a crossover, and wiring into a shell molded to the contours of your ear is fiddly, precise work, and sealing, driver placement, and tube routing are all unforgiving at this scale. The cable typically attaches with a small detachable connector — the common two-pin and MMCX standards — so a worn or damaged cable can be replaced without rebuilding the monitor. Two-pin uses `0.78mm` spacing and is the more secure of the two; MMCX rotates freely, which is handy, but it's more prone to connector wear over many cycles. Pick one standard and stick with it across the build — the cables aren't interchangeable between the two.
+Everything here is tiny and tight. Fitting drivers, tubes, a crossover, and wiring into a shell molded to the contours of your ear is fiddly, precise work, and sealing, driver placement, and tube routing are all unforgiving at this scale. The cable typically attaches with a small detachable connector, the common two-pin and MMCX standards, so a worn or damaged cable can be replaced without rebuilding the monitor. Two-pin uses `0.78mm` spacing and is the more secure of the two; MMCX rotates freely, which is handy, but it's more prone to connector wear over many cycles. Pick one standard and stick with it across the build. The cables aren't interchangeable between the two.
 
 ## A realistic path
 
-Start simple. A single dynamic-driver universal IEM is a genuinely approachable first build: one driver, no crossover, off-the-shelf tips for the seal. It teaches you the thing that matters most — that in an IEM the canal and the seal are everything — without the crossover-and-tube complexity, and it's satisfying on its own terms.
+Start simple. A single dynamic-driver universal IEM is a genuinely approachable first build: one driver, no crossover, off-the-shelf tips for the seal. It teaches you the thing that matters most, that in an IEM the canal and the seal are everything, without the crossover-and-tube complexity, and it's satisfying on its own terms.
 
 Multi-driver custom monitors are the advanced end: crossover tuning, bore acoustics, and a custom shell built from ear impressions add up to a real project. But it's an achievable one with patience and a resin printer, and it's one of the most impressive things a headphone maker can build.
 
 :::tip
-Build a single-dynamic-driver universal IEM first. One driver, no crossover, off-the-shelf tips for the seal — it teaches you the IEM fundamentals, where the canal and the seal decide everything, without the crossover-and-tube complexity to wrestle at the same time. It's a real, satisfying build on its own, and the perfect on-ramp before you attempt a multi-driver custom.
+Build a single-dynamic-driver universal IEM first. One driver, no crossover, off-the-shelf tips for the seal. It teaches you the IEM fundamentals, where the canal and the seal decide everything, without the crossover-and-tube complexity to wrestle at the same time. It's a real, satisfying build on its own, and the perfect on-ramp before you attempt a multi-driver custom.
 :::
 
 ## Common Mistakes
@@ -79,4 +79,4 @@ Build a single-dynamic-driver universal IEM first. One driver, no crossover, off
 
 ## What's Next
 
-That's the last of the special topics — and with it, the reference manual now spans the whole arc, from how a headphone makes sound to wireless, noise cancelling, mics, and monitors molded to your ear. From here the path turns hands-on: the build guides, where all of this technique and judgment finally meets a workbench, starting with a complete first build you can follow end to end. The rest, as always, is reps — build, measure, listen, and build again.
+That's the last of the special topics. And with it, the reference manual now spans the whole arc, from how a headphone makes sound to wireless, noise cancelling, mics, and monitors molded to your ear. From here the path turns hands-on: the build guides, where all of this technique and judgment finally meets a workbench, starting with a complete first build you can follow end to end. The rest, as always, is reps: build, measure, listen, and build again.

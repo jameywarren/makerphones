@@ -1,10 +1,10 @@
 ---
 title: Bench Notes
-description: The Daily Driver build log — the open-back design, prototypes, measurements, and decisions, published as they happen.
+description: "The Daily Driver build log: the open-back design, prototypes, measurements, and decisions, published as they happen."
 tableOfContents: false
 ---
 
-Bench notes are where the Daily Driver build gets documented in public — the open-back design,
+Bench notes are where the Daily Driver build gets documented in public: the open-back design,
 the prototypes, the measurements, the dead ends, and the decisions, posted as they happen rather
 than after the story has a tidy ending.
 

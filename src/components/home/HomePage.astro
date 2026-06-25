@@ -36,17 +36,20 @@ const toc = parts.map((p, i) => ({
 }));
 
 const MARGINALIA: [string, string][] = [
-  ['01', 'A complete manual — driver physics to finished pair'],
+  ['01', 'A complete manual: driver physics to finished pair'],
   ['02', 'Measured, not vibes: every claim has a curve'],
   ['03', 'Daily Driver built in the open, below'],
 ];
 const BIO = {
-  text: 'Twenty-five years designing pro audio — Grace Design, HeadRoom — now designing the Daily Driver, an open-back headphone, in the open, with AI as a design partner. Every chapter in this manual comes off that bench.',
+  paras: [
+    'MakerPhones is the open-source side of Warren Labs, my audio lab. Warren Labs is where I research how headphones work. MakerPhones is what happens when I give that research away for free: the full build manual, open files, and a pair you print and tune yourself.',
+    "I'm Jamey Warren. Twenty-five years in audio, from Grace Design to HeadRoom, now designing the Daily Driver in the open with AI as a design partner. Every chapter in this manual comes off that bench.",
+  ],
   meta: ['25+ YRS PRO AUDIO', 'GRACE DESIGN · HEADROOM', 'NOW — DAILY DRIVER'],
 };
 const DD_REPO = 'https://github.com/makerphones/daily-driver';
 const BENCH = {
-  text: 'An open-back headphone, designed in the open with AI as a design partner. Follow the spec, the prototypes, and the dead ends as they happen — the measured curves land once there is hardware to measure.',
+  text: 'An open-back headphone, designed in the open with AI as a design partner. Follow the spec, the prototypes, and the dead ends as they happen. The measured curves land once there is hardware to measure.',
   // [label, value, href?] — SOURCE renders as a link to the build's repo.
   meta: [
     ['STATUS', 'Design, in progress'],
@@ -73,7 +76,7 @@ const BENCH = {
             Build Your<br />Own Sound<span style="color: var(--mp-accent);">.</span>
           </h1>
           <p class="serif-lg" style="max-width: 42ch; margin-bottom: 32px;">
-            A field guide to building headphones you can trust your ears to — how drivers make
+            A field guide to building headphones you can trust your ears to: how drivers make
             sound, why enclosures behave the way they do, and how to measure, tune, and prove the
             result.
           </p>
@@ -95,7 +98,7 @@ const BENCH = {
         </div>
       </div>
       <div class="mp-cover-botrow">
-        <span class="mono">J. Warren</span>
+        <span class="mono">WARREN LABS · J. Warren</span>
         <span class="mono">Six parts · {writtenCount} of {totalCount} chapters · Free · Written from the bench</span>
         <span class="mono">FIG. H — DAILY DRIVER, EXPLODED</span>
       </div>
@@ -137,7 +140,9 @@ const BENCH = {
     </div>
     <div>
       <p class="mono orange" style="margin-bottom: 14px;">Who is writing this</p>
-      <p class="serif-lg" style="max-width: 46ch;">{BIO.text}</p>
+      {BIO.paras.map((p, i) => (
+        <p class="serif-lg" style={`max-width: 46ch;${i > 0 ? ' margin-top: 1em;' : ''}`}>{p}</p>
+      ))}
       <div class="mp-meta-row">
         {BIO.meta.map((m) => <span class="mono">{m}</span>)}
       </div>

@@ -8,20 +8,20 @@ prerequisites: [cables-connectors-hardware, impedance-and-sensitivity]
 related: [cables-connectors-hardware, impedance-and-sensitivity, active-noise-cancelling, microphone-integration, driver-mounting-and-assembly]
 read_time: 12
 tags: [bluetooth, wireless, codec, module, battery]
-description: "Adding wireless to your build — how Bluetooth audio works, the codec landscape, the receiver boards a DIY builder can integrate, and the battery-and-charging subsystem it all rides on."
-excerpt: "Wireless is one of the most-requested features, and unlike noise cancelling it's genuinely achievable in a DIY build. But it's a whole subsystem, not a small add-on — here's the map."
+description: "Adding wireless to your build: how Bluetooth audio works, the codec landscape, the receiver boards a DIY builder can integrate, and the battery-and-charging subsystem it all rides on."
+excerpt: "Wireless is one of the most-requested features, and unlike noise cancelling it's genuinely achievable in a DIY build. But it's a whole subsystem, not a small add-on: here's the map."
 ---
 
 import Figure from '../../../components/Figure.astro';
 import WirelessSignalChain from '../../../components/diagrams/WirelessSignalChain.astro';
 
-Wireless is near the top of every "can I add this?" list, and the good news is that, unlike active noise cancelling, it's genuinely achievable in a DIY build. The catch is that Bluetooth isn't a small add-on you bolt to a driver — it's a whole subsystem with a receiver board, a battery, a charging circuit, and an antenna. This chapter maps how Bluetooth audio actually works, the codec landscape everyone asks about, and the realistic path to integrating it without designing wireless electronics from scratch.
+Wireless is near the top of every "can I add this?" list, and the good news is that, unlike active noise cancelling, it's genuinely achievable in a DIY build. The catch is that Bluetooth isn't a small add-on you bolt to a driver: it's a whole subsystem with a receiver board, a battery, a charging circuit, and an antenna. This chapter maps how Bluetooth audio actually works, the codec landscape everyone asks about, and the realistic path to integrating it without designing wireless electronics from scratch.
 
 ## How Bluetooth audio works
 
-The chain is worth picturing end to end. Your source — a phone, usually — compresses the audio with a codec and transmits it. A Bluetooth receiver chip inside your headphone catches that signal and decodes it back into a standard digital audio stream. That stream feeds a DAC, which converts it to analog, which feeds an amplifier, which drives your driver. A Bluetooth headphone, in other words, is a small computer plus a DAC plus an amp plus a battery, all wrapped around the driver you built.
+The chain is worth picturing end to end. Your source, a phone, usually, compresses the audio with a codec and transmits it. A Bluetooth receiver chip inside your headphone catches that signal and decodes it back into a standard digital audio stream. That stream feeds a DAC, which converts it to analog, which feeds an amplifier, which drives your driver. A Bluetooth headphone, in other words, is a small computer plus a DAC plus an amp plus a battery, all wrapped around the driver you built.
 
-<Figure label="Fig. 1" caption="Wired vs Bluetooth signal chain — Bluetooth moves the DAC and amp inside the cup, and the codec sets the quality ceiling.">
+<Figure label="Fig. 1" caption="Wired vs Bluetooth signal chain: Bluetooth moves the DAC and amp inside the cup, and the codec sets the quality ceiling.">
   <WirelessSignalChain />
 </Figure>
 
@@ -29,41 +29,41 @@ The chain is worth picturing end to end. Your source — a phone, usually — co
 
 Codecs are where most of the questions live, so here's the landscape as it stands.
 
-**SBC** is the universal baseline. Every Bluetooth audio device supports it, it's the lowest quality of the bunch, and it's your guaranteed fallback when nothing better is shared. **AAC** is the standard on Apple devices and sounds good there. The **aptX family** from Qualcomm runs from plain aptX, through aptX HD for higher quality, to aptX Adaptive, which adjusts its bitrate to the connection and latency, up to aptX Lossless, which reaches CD quality. **LDAC**, Sony's codec, targets high-resolution audio at high bitrates, and **LHDC** is a comparable codec with narrower support. **LC3** is the newer codec built for Bluetooth LE Audio, more efficient than the old ones and the foundation for broadcast features like Auracast — LC3 is to LE Audio what SBC is to classic Bluetooth, and it's the direction the standard is heading.
+**SBC** is the universal baseline. Every Bluetooth audio device supports it, it's the lowest quality of the bunch, and it's your guaranteed fallback when nothing better is shared. **AAC** is the standard on Apple devices and sounds good there. The **aptX family** from Qualcomm runs from plain aptX, through aptX HD for higher quality, to aptX Adaptive, which adjusts its bitrate to the connection and latency, up to aptX Lossless, which reaches CD quality. **LDAC**, Sony's codec, targets high-resolution audio at high bitrates, and **LHDC** is a comparable codec with narrower support. **LC3** is the newer codec built for Bluetooth LE Audio, more efficient than the old ones and the foundation for broadcast features like Auracast. LC3 is to LE Audio what SBC is to classic Bluetooth, and it's the direction the standard is heading.
 
-Here is the rule that matters more than any quality ranking: a codec only works if *both* ends support it. A board boasting LDAC or aptX does nothing if your phone doesn't speak that codec — the connection simply falls back to SBC. So the codecs on the box are a ceiling, not a promise, and SBC is the floor that always works.
+Here is the rule that matters more than any quality ranking: a codec only works if *both* ends support it. A board boasting LDAC or aptX does nothing if your phone doesn't speak that codec. The connection simply falls back to SBC. So the codecs on the box are a ceiling, not a promise, and SBC is the floor that always works.
 
 ## The DIY path: receiver boards
 
 The realistic approach is not to design Bluetooth electronics but to integrate a pre-made Bluetooth audio receiver board, which takes the entire wireless-and-decoding job off your hands.
 
-These come in two output styles. A board with **analog output** has a DAC, and sometimes a headphone amp, built in — the simplest option, since you can run it almost straight to your driver. A board with **I²S digital output** hands you the raw digital stream to feed into your own separate DAC and amp — more work, and more potential for quality if you care to chase it.
+These come in two output styles. A board with **analog output** has a DAC, and sometimes a headphone amp, built in, the simplest option, since you can run it almost straight to your driver. A board with **I²S digital output** hands you the raw digital stream to feed into your own separate DAC and amp, more work, and more potential for quality if you care to chase it.
 
 For chips, a few define the current landscape. The **Qualcomm QCC3034** is a common entry point. The **QCC5125** is the popular enthusiast choice, supporting the aptX family and, through community firmware, LDAC; inexpensive receiver boards built on it output I²S on solder pads and ship with an antenna. The newer **QCC5181** flagship adds LDAC, LHDC, and LC3. And fully integrated modules like the IOT747 IDC series deliver LE Audio with LC3 and Auracast alongside classic aptX and aptX Lossless on Bluetooth 5.3, in a tiny pre-certified package. Pick a board by the codecs you actually want and the output style you prefer.
 
 ## The rest of the subsystem
 
-The part builders forget is everything *around* the board. Bluetooth needs power, which means a battery — typically a small lithium-polymer cell — plus a charging and protection circuit. For charging, the canonical DIY part is the `TP4056` board: a dedicated LiPo charger that handles the full CC/CV cycle and termination, costs a couple of dollars, and takes `5V` in over USB. It sits between your USB port and the cell. Runtime depends on the battery's capacity and the amplifier's draw; the Bluetooth chips themselves sip power, so the amp and the cell size set how long it plays.
+The part builders forget is everything *around* the board. Bluetooth needs power, which means a battery, typically a small lithium-polymer cell, plus a charging and protection circuit. For charging, the canonical DIY part is the `TP4056` board: a dedicated LiPo charger that handles the full CC/CV cycle and termination, costs a couple of dollars, and takes `5V` in over USB. It sits between your USB port and the cell. Runtime depends on the battery's capacity and the amplifier's draw; the Bluetooth chips themselves sip power, so the amp and the cell size set how long it plays.
 
 ### Sizing the battery
 
-The math is worth running before you commit to a cup. A Bluetooth audio module pulls roughly `15–30mA` at normal volume, and a small amp adds another `~20–50mA`, so total system draw at normal listening lands around `40–80mA`. A `500mAh` LiPo then gives you roughly `6–12 hours` of playback — fine for a DIY build. Commercial headphones target `20–30 hours`, but that needs a `1500–2500mAh` cell, and those are large and heavy. For a build that actually fits in a cup, a small cell and shorter runtime is the honest tradeoff.
+The math is worth running before you commit to a cup. A Bluetooth audio module pulls roughly `15–30mA` at normal volume, and a small amp adds another `~20–50mA`, so total system draw at normal listening lands around `40–80mA`. A `500mAh` LiPo then gives you roughly `6–12 hours` of playback, fine for a DIY build. Commercial headphones target `20–30 hours`, but that needs a `1500–2500mAh` cell, and those are large and heavy. For a build that actually fits in a cup, a small cell and shorter runtime is the honest tradeoff.
 
 If the module doesn't have a built-in amp, the common DIY choice is the `PAM8403`, an inexpensive Class-D amp board that works well for headphone duty. That's the amp draw the sizing math above accounts for.
 
-Then there's the charging port to place on the cup, the antenna to position where it isn't buried in metal or shielding that would kill its range, and the controls — power, pairing, play and pause, volume — to wire to the board. None of it is hard individually, but together it's a real subsystem that changes the weight, the complexity, and the maintenance story of your headphone, because a battery is a finite-life part that will eventually need replacing.
+Then there's the charging port to place on the cup, the antenna to position where it isn't buried in metal or shielding that would kill its range, and the controls, power, pairing, play and pause, volume, to wire to the board. None of it is hard individually, but together it's a real subsystem that changes the weight, the complexity, and the maintenance story of your headphone, because a battery is a finite-life part that will eventually need replacing.
 
-Two more realities worth holding onto. Wireless audio is compressed — even "lossless" Bluetooth works within constraints a wire doesn't — so a cable still wins for ultimate fidelity, and many builders wire the board so the headphone also works passively through a cable, which is the best of both worlds. And Bluetooth has latency, which matters for video and gaming; low-latency modes and LE Audio help, but it's a consideration, not a solved problem.
+Two more realities worth holding onto. Wireless audio is compressed, even "lossless" Bluetooth works within constraints a wire doesn't, so a cable still wins for ultimate fidelity, and many builders wire the board so the headphone also works passively through a cable, which is the best of both worlds. And Bluetooth has latency, which matters for video and gaming; low-latency modes and LE Audio help, but it's a consideration, not a solved problem.
 
 :::tip
-Choose your module by matching its codec support to the devices you actually use. An LDAC or aptX board buys you nothing if your phone doesn't speak that codec, because it'll just fall back to SBC anyway. Check what your phone and your other sources support first, then pick the board to match — not the other way around, which is how people end up paying for codecs they can never use.
+Choose your module by matching its codec support to the devices you actually use. An LDAC or aptX board buys you nothing if your phone doesn't speak that codec, because it'll just fall back to SBC anyway. Check what your phone and your other sources support first, then pick the board to match, not the other way around, which is how people end up paying for codecs they can never use.
 :::
 
 ## Common Mistakes
 
 :::caution
 - **Buying for a codec your source can't use.** A high-end-codec board falls back to SBC if the phone doesn't share that codec. Match the board to your devices.
-- **Treating Bluetooth as a small add-on.** It's a subsystem — board, battery, charging, antenna, controls. Plan it as one.
+- **Treating Bluetooth as a small add-on.** It's a subsystem: board, battery, charging, antenna, controls. Plan it as one.
 - **Burying the antenna.** Metal and shielding around the antenna wreck range. Give it a clear spot.
 - **Forgetting the battery is a finite-life part.** It will age and need replacing. Design so it can be serviced.
 - **Expecting wireless to match wired fidelity.** It's compressed audio. Wire the board for passive cable use too, and keep a wire for critical listening.
@@ -71,4 +71,4 @@ Choose your module by matching its codec support to the devices you actually use
 
 ## What's Next
 
-Wireless and noise cancelling are close cousins — the same builds that go cordless often want to go quiet, and they share the same hard questions about power and electronics. The next chapter takes an honest look at what active noise cancelling really demands: [active noise cancelling](/learn/active-noise-cancelling).
+Wireless and noise cancelling are close cousins, the same builds that go cordless often want to go quiet, and they share the same hard questions about power and electronics. The next chapter takes an honest look at what active noise cancelling really demands: [active noise cancelling](/learn/active-noise-cancelling).

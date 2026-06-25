@@ -13,12 +13,25 @@ import DriverMark from './illustration/DriverMark.astro';
 const href = '/';
 ---
 
-<a {href} class="site-title sl-flex">
-  <DriverMark size={22} />
-  <span class="mp-wordmark">makerphones<span class="mp-wordmark-dot" aria-hidden="true"></span></span>
-</a>
+<div class="mp-brand">
+  <a {href} class="site-title sl-flex">
+    <DriverMark size={22} />
+    <span class="mp-wordmark">makerphones<span class="mp-wordmark-dot" aria-hidden="true"></span></span>
+  </a>
+  <a class="mp-brand-sub" href="https://warrenlabs.com" target="_blank" rel="noopener">A Warren Labs project</a>
+</div>
 
 <style>
+  /* Brand column: the home-linked lockup, with a quiet Warren Labs
+   * attribution byline tucked under the wordmark. The byline is muted
+   * mono micro-type so it never competes with the wordmark. */
+  .mp-brand {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    min-width: 0;
+    flex: none;
+  }
   .site-title {
     align-items: center;
     gap: 8px; /* 0.42 × wordmark size (19px) per the lockup spec */
@@ -26,6 +39,25 @@ const href = '/';
     min-width: 0;
     flex: none;
     color: var(--mp-charcoal);
+  }
+  .mp-brand-sub {
+    margin-left: 30px; /* align under the wordmark: mark 22px + 8px gap */
+    font-family: var(--mp-mono);
+    font-size: 9px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    font-weight: 500;
+    line-height: 1;
+    color: var(--mp-meta);
+    text-decoration: none;
+    white-space: nowrap;
+  }
+  .mp-brand-sub:hover {
+    color: var(--mp-accent);
+  }
+  .mp-brand-sub:focus-visible {
+    outline: 2px solid var(--mp-accent);
+    outline-offset: 2px;
   }
   .mp-wordmark {
     font-family: var(--mp-sans);

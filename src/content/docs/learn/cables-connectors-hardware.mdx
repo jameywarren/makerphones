@@ -8,8 +8,8 @@ prerequisites: []
 related: [driver-selection-guide, sourcing-components, driver-mounting-and-assembly, troubleshooting-guide]
 read_time: 10
 tags: [components, beginner, intermediate, assembly, cables, connectors, hardware]
-description: "Learn which cables, connectors, and hardware actually matter for DIY headphones — and which expensive options you can skip."
-excerpt: "Good cables and hardware are invisible — they just work. Bad ones create failures and frustration. Here's how to choose components that last."
+description: "Learn which cables, connectors, and hardware actually matter for DIY headphones, and which expensive options you can skip."
+excerpt: "Good cables and hardware are invisible. They just work. Bad ones create failures and frustration. Here's how to choose components that last."
 ---
 
 import Figure from '../../../components/Figure.astro';
@@ -23,7 +23,7 @@ Let's start with the controversial bit: **for headphone cables carrying analog a
 
 I've done blind listening tests with $5 cables and $500 cables at HeadRoom. With properly matched levels, nobody could hear a difference. Not me, not our trained listeners, not visiting audiophiles. The expensive cables felt nicer, looked better, and sometimes lasted longer - but they didn't sound different.
 
-**What DOES matter:** proper gauge (thickness) for the signal and impedance; adequate shielding to reject noise and interference; mechanical durability — flex life, strain relief, jacket material; connector quality — secure connection, low resistance contacts.
+**What DOES matter:** proper gauge (thickness) for the signal and impedance; adequate shielding to reject noise and interference; mechanical durability: flex life, strain relief, jacket material; connector quality: secure connection, low resistance contacts.
 
 **What usually DOESN'T matter audibly:** exotic conductor materials (oxygen-free copper vs. regular copper), cable geometry beyond basic twisted-pair design, "burn-in" claims, directional arrows on cables, or cryogenic treatment.
 
@@ -37,16 +37,16 @@ Wire gauge matters for two reasons: electrical resistance and mechanical durabil
 
 Wire thickness is measured in AWG. **Smaller numbers = thicker wire.** Yes, it's backwards.
 
-- **24 AWG** — Standard for most headphone cables, good for 3-10 feet
-- **26 AWG** — Thinner, more flexible, fine for short runs (under 5 feet)
-- **28 AWG** — Very thin, flexible, use only for very short runs or low-power applications
-- **22 AWG** — Thicker, stiffer, only needed for very long runs or special cases
+- **24 AWG**: Standard for most headphone cables, good for 3-10 feet
+- **26 AWG**: Thinner, more flexible, fine for short runs (under 5 feet)
+- **28 AWG**: Very thin, flexible, use only for very short runs or low-power applications
+- **22 AWG**: Thicker, stiffer, only needed for very long runs or special cases
 
 **For DIY headphones: 24 AWG is your sweet spot.** Flexible enough to work with, thick enough to be durable, low enough resistance for any headphone impedance.
 
 ### Resistance Matters (A Little)
 
-Cable resistance creates a voltage divider with your headphone [impedance](/learn/impedance-and-sensitivity/). For typical headphones, cable resistance under 1Ω is fine for low-impedance headphones, under 2Ω for medium impedance. 24 AWG copper wire has about 0.025Ω per foot — even a 10-foot cable is negligible compared to headphone impedance.
+Cable resistance creates a voltage divider with your headphone [impedance](/learn/impedance-and-sensitivity/). For typical headphones, cable resistance under 1Ω is fine for low-impedance headphones, under 2Ω for medium impedance. 24 AWG copper wire has about 0.025Ω per foot. Even a 10-foot cable is negligible compared to headphone impedance.
 
 ## Shielding: When You Need It
 
@@ -62,7 +62,7 @@ Shielding blocks electromagnetic interference (EMI) from getting into your audio
 
 Connectors are where most DIY builds fail. A broken connector makes perfect headphones useless. Let's go through your options.
 
-<Figure label="Fig. 1" caption="TRS and TRRS contact layout — tip is always left; the conductor map is the wiring step builders most often get wrong.">
+<Figure label="Fig. 1" caption="TRS and TRRS contact layout: tip is always left; the conductor map is the wiring step builders most often get wrong.">
   <ConnectorWiring />
 </Figure>
 
@@ -98,7 +98,7 @@ Tiny footprint, rotates freely (good for cable management), many aftermarket cab
 
 ### Screws and Fasteners
 
-**For 3D printed parts:** Heat-set inserts (brass threaded inserts) are the best option — install with a soldering iron, create durable metal threads in plastic. Self-tapping screws work but wear out plastic threads over time.
+**For 3D printed parts:** Heat-set inserts (brass threaded inserts) are the best option: install with a soldering iron, create durable metal threads in plastic. Self-tapping screws work but wear out plastic threads over time.
 
 **Recommended sizes:** M3 x 0.5mm pitch for most headphone assembly; M4 x 0.7mm pitch for larger/heavier components; M2 x 0.4mm for small detail work.
 
@@ -108,7 +108,7 @@ Tiny footprint, rotates freely (good for cable management), many aftermarket cab
 
 **Adjustment mechanisms:** Ratchet/detent system clicks into position and stays put; friction fit is simple and reliable but can slip; spring-loaded pins are secure and adjustable but require more complex design.
 
-**Materials for headband structure:** PETG (3D printed flexible plastic) is better than PLA — PLA fatigues and breaks. Steel spring bands are durable but can be uncomfortable. Aluminum is light and strong but expensive to fabricate.
+**Materials for headband structure:** PETG (3D printed flexible plastic) is better than PLA. PLA fatigues and breaks. Steel spring bands are durable but can be uncomfortable. Aluminum is light and strong but expensive to fabricate.
 
 ### Ear Cup Pivots and Hinges
 
@@ -122,11 +122,11 @@ Cable failures almost always happen at the entry point to the ear cup. Strain re
 
 ## Practical Sourcing Guide
 
-**Wire and cable — Budget option:** Parts Express (24 AWG speaker wire, $0.15-0.30/foot), Amazon ("headphone cable bulk wire"), Monoprice. **Better option:** Mogami 2893 (professional miniature quad cable, $2-3/foot), Canare L-4E6S (star quad, excellent noise rejection, $1-2/foot), Redco Audio.
+**Wire and cable, Budget option:** Parts Express (24 AWG speaker wire, $0.15-0.30/foot), Amazon ("headphone cable bulk wire"), Monoprice. **Better option:** Mogami 2893 (professional miniature quad cable, $2-3/foot), Canare L-4E6S (star quad, excellent noise rejection, $1-2/foot), Redco Audio.
 
-**Connectors — 3.5mm TRS jacks:** Neutrik NMJ4HF (gold standard, $3-5 each), Amphenol KS3P (good quality, $1-2 each). **Mini-XLR:** Neutrik NC3MRX (3-pin right angle, $5-7 each). **MMCX:** Mouser/Digikey ($2-4 each, reliable).
+**Connectors, 3.5mm TRS jacks:** Neutrik NMJ4HF (gold standard, $3-5 each), Amphenol KS3P (good quality, $1-2 each). **Mini-XLR:** Neutrik NC3MRX (3-pin right angle, $5-7 each). **MMCX:** Mouser/Digikey ($2-4 each, reliable).
 
-**Hardware — Heat-set inserts:** McMaster-Carr (M3 brass inserts, $0.10-0.30 each) or Amazon kits ($10-15 for 100 pieces). **Screws:** McMaster-Carr for best selection; Amazon for assortment kits.
+**Hardware, Heat-set inserts:** McMaster-Carr (M3 brass inserts, $0.10-0.30 each) or Amazon kits ($10-15 for 100 pieces). **Screws:** McMaster-Carr for best selection; Amazon for assortment kits.
 
 ## Assembly Considerations
 
@@ -134,7 +134,7 @@ Cable failures almost always happen at the entry point to the ear cup. Strain re
 
 **Heat shrink tubing:** Slide on BEFORE soldering (obvious but easy to forget); 2:1 shrink ratio minimum; heat evenly.
 
-**Testing before final assembly:** Use multimeter on continuity mode — test each connection from connector to driver, test for shorts between channels. Then do a listening test with drivers in free air before final assembly.
+**Testing before final assembly:** Use multimeter on continuity mode: test each connection from connector to driver, test for shorts between channels. Then do a listening test with drivers in free air before final assembly.
 
 ## Common Mistakes to Avoid
 
@@ -160,6 +160,6 @@ Cable failures almost always happen at the entry point to the ear cup. Strain re
 
 That's the full tour of components and materials: you understand [drivers](/learn/driver-selection-guide/), [chambers](/learn/acoustic-chambers-and-enclosures/), [pads](/learn/ear-pads-and-comfort/), [damping](/learn/damping-materials/), and now cables and hardware.
 
-Next, we put all this knowledge into practice. Start with [Design Methodology](/learn/design-methodology/) — the complete workflow from concept to finished headphones — then continue through 3D design, chamber design, assembly, and damping strategy.
+Next, we put all this knowledge into practice. Start with [Design Methodology](/learn/design-methodology/), the complete workflow from concept to finished headphones, then continue through 3D design, chamber design, assembly, and damping strategy.
 
 Or if you want to jump straight into building, check out [Your First Build](/learn/your-first-build/) where we walk through a simple, achievable first project.

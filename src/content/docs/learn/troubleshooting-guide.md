@@ -2,8 +2,8 @@
 title: Troubleshooting Guide
 handle: troubleshooting-guide
 type: appendix
-description: "The common things that go wrong in a build and how to fix them — organized by symptom, from no bass to a dead channel to a rattle, with the usual cause and the cure."
-excerpt: "Something's wrong with your build? Start here. Organized by what you're hearing, with the most likely cause and the fix for each — and a link to the chapter that goes deeper."
+description: "The common things that go wrong in a build and how to fix them, organized by symptom, from no bass to a dead channel to a rattle, with the usual cause and the cure."
+excerpt: "Something's wrong with your build? Start here. Organized by what you're hearing, with the most likely cause and the fix for each, and a link to the chapter that goes deeper."
 related: [driver-mounting-and-assembly, damping-strategy-and-application, acoustic-chamber-design, tuning-with-damping]
 tags: [troubleshooting, reference, appendix, problems]
 ---
@@ -12,23 +12,23 @@ When a build sounds wrong, the cause is usually one of a handful of familiar cul
 
 ## No bass, or thin and hollow sound
 
-Almost always one of two things. First, **reversed polarity** — if one channel is wired out of phase, the two cancel in the bass and the stereo image goes vague and hollow. Play a mono track; it should image as a single point dead center. If it sounds wide or sucked-out, swap the leads on one channel. Second, a **broken seal** — air leaking around the driver-to-baffle joint or between the cup and your head collapses the low end. Press the cups gently harder; if the bass swells, you have a leak to chase. See [driver mounting and assembly](/learn/driver-mounting-and-assembly).
+Almost always one of two things. First, **reversed polarity**: if one channel is wired out of phase, the two cancel in the bass and the stereo image goes vague and hollow. Play a mono track; it should image as a single point dead center. If it sounds wide or sucked-out, swap the leads on one channel. Second, a **broken seal**: air leaking around the driver-to-baffle joint or between the cup and your head collapses the low end. Press the cups gently harder; if the bass swells, you have a leak to chase. See [driver mounting and assembly](/learn/driver-mounting-and-assembly).
 
 ## Boomy, one-note, or boxy bass
 
-The chamber, not the damping. A **rear chamber that's too small** is the classic cause — the trapped air stiffens and piles the bass onto one frequency. The fix is volume or venting, not foam: open a vent, or move to a larger rear volume. A small, pluggable vent opened one hole at a time is the cheapest way to dial it in. See [acoustic chamber design](/learn/acoustic-chamber-design).
+The chamber, not the damping. A **rear chamber that's too small** is the classic cause: the trapped air stiffens and piles the bass onto one frequency. The fix is volume or venting, not foam: open a vent, or move to a larger rear volume. A small, pluggable vent opened one hole at a time is the cheapest way to dial it in. See [acoustic chamber design](/learn/acoustic-chamber-design).
 
 ## One channel dead or quiet
 
-A wiring fault. Check the **solder joints** at the driver and the connector — a cracked joint at the driver is the single most common long-term failure, usually from cable flex with no strain relief. A multimeter helps you find the break. Re-solder, and add strain relief at both ends so it doesn't happen again.
+A wiring fault. Check the **solder joints** at the driver and the connector: a cracked joint at the driver is the single most common long-term failure, usually from cable flex with no strain relief. A multimeter helps you find the break. Re-solder, and add strain relief at both ends so it doesn't happen again.
 
 ## Left and right sound different
 
-A **channel mismatch**, and it's mechanical as often as electrical. Confirm both cups have the same damping (weigh the fill), the same seal, the same pads, and matched drivers. The reliable cure is to rebuild both channels identically, in one session — and a quick measurement overlay makes a mismatch you can hear but can't place obvious. See [manufacturing for consistency](/learn/manufacturing-for-consistency).
+A **channel mismatch**, and it's mechanical as often as electrical. Confirm both cups have the same damping (weigh the fill), the same seal, the same pads, and matched drivers. The reliable cure is to rebuild both channels identically, in one session, and a quick measurement overlay makes a mismatch you can hear but can't place obvious. See [manufacturing for consistency](/learn/manufacturing-for-consistency).
 
 ## Harsh, hard, or fatiguing treble
 
-Usually a **resonance** ringing somewhere. If it's a sharp peak, a thin ring of damping in the front cavity can tame it — but apply it sparingly, because too much dulls the whole top end. If the hardness is more of a smear, it's often the cup walls or reflections; line the walls with felt. See [damping strategy and application](/learn/damping-strategy-and-application).
+Usually a **resonance** ringing somewhere. If it's a sharp peak, a thin ring of damping in the front cavity can tame it, but apply it sparingly, because too much dulls the whole top end. If the hardness is more of a smear, it's often the cup walls or reflections; line the walls with felt. See [damping strategy and application](/learn/damping-strategy-and-application).
 
 ## Dead, lifeless, no air
 
@@ -40,7 +40,7 @@ A mechanical fault, not a tuning one. Something is loose: a **slack lead** touch
 
 ## The plastic cup itself rings
 
-A **structural resonance** — thin printed walls ring like a drum, and no amount of felt fixes it, because the energy is in the plastic, not the air. Tap the empty cup: a sharp "ting" confirms it. The cure is stiffness, not absorption — thicker walls, internal ribs, more infill, or a less ringy material. See [resonance control](/learn/resonance-control).
+A **structural resonance**: thin printed walls ring like a drum, and no amount of felt fixes it, because the energy is in the plastic, not the air. Tap the empty cup: a sharp "ting" confirms it. The cure is stiffness, not absorption: thicker walls, internal ribs, more infill, or a less ringy material. See [resonance control](/learn/resonance-control).
 
 ## It measures fine but sounds wrong
 
@@ -48,12 +48,12 @@ You've been **tuning to the graph instead of your ears**. A technically flat cur
 
 ## The bass changes every time you put them on
 
-That's **seating and seal variation**, and it's normal to a degree — but if it's dramatic, your seal is marginal. Check the pad-to-head seal and the driver-to-baffle seal. On a measurement rig, this shows up as scatter between re-seatings; establish a repeatable seal before you trust any measurement.
+That's **seating and seal variation**, and it's normal to a degree, but if it's dramatic, your seal is marginal. Check the pad-to-head seal and the driver-to-baffle seal. On a measurement rig, this shows up as scatter between re-seatings; establish a repeatable seal before you trust any measurement.
 
 ## Measurements that don't match anyone else's
 
-Expected, and not a fault. Different rigs aren't comparable, and a hobby rig isn't an industry-standard head — it's reliable to roughly 10 kHz and reads relative, not absolute. Use your measurements to track *your* changes and match *your* channels, not to chase someone else's graph. See [budget measurement setup](/learn/budget-measurement-setup).
+Expected, and not a fault. Different rigs aren't comparable, and a hobby rig isn't an industry-standard head: it's reliable to roughly 10 kHz and reads relative, not absolute. Use your measurements to track *your* changes and match *your* channels, not to chase someone else's graph. See [budget measurement setup](/learn/budget-measurement-setup).
 
 ## When in doubt
 
-Check the boring things first, in this order: is the seal good, is the polarity right, are the pads fresh and matched, is the fit right on your head. The large majority of mystery problems are one of those four — and chasing them in the tuning, when the real cause is a leak or a worn pad, is how you lose a weekend to the wrong problem.
+Check the boring things first, in this order: is the seal good, is the polarity right, are the pads fresh and matched, is the fit right on your head. The large majority of mystery problems are one of those four, and chasing them in the tuning, when the real cause is a leak or a worn pad, is how you lose a weekend to the wrong problem.

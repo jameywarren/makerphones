@@ -8,7 +8,7 @@ prerequisites: []
 related: [understanding-frequency-response, driver-technologies, open-vs-closed-back-design, impedance-and-sensitivity, your-first-build]
 read_time: 8
 tags: [fundamentals, beginner, theory, driver-technology]
-description: "Learn how headphones create sound — voice coil, magnet, and diaphragm working together. Essential knowledge for building your own."
+description: "Learn how headphones create sound: voice coil, magnet, and diaphragm working together. Essential knowledge for building your own."
 excerpt: "After 25+ years in professional audio, here's the explanation of how headphones work that actually makes it click."
 ---
 
@@ -16,34 +16,34 @@ import Figure from '../../../components/Figure.astro';
 import DriverCrossSection from '../../../components/diagrams/DriverCrossSection.astro';
 
 :::note
-This hobby puts drivers an inch from your eardrums — before you build or test anything, take two minutes with [Listening Safely](/learn/listening-safely/).
+This hobby puts drivers an inch from your eardrums. Before you build or test anything, take two minutes with [Listening Safely](/learn/listening-safely/).
 :::
 
-You know how when you're learning something new, there's always that one person who can explain it in a way that just *clicks*? That's what I'm going for here. After 25+ years working with headphones — from manufacturing at Grace Design to running HeadRoom — I've explained this stuff hundreds of times. Let's break it down together.
+You know how when you're learning something new, there's always that one person who can explain it in a way that just *clicks*? That's what I'm going for here. After 25+ years working with headphones, from manufacturing at Grace Design to running HeadRoom, I've explained this stuff hundreds of times. Let's break it down together.
 
 ## The Basic Magic Trick
 
-At their core, headphones do something pretty remarkable: they turn electricity into sound waves that your brain interprets as music. But here's the thing — understanding *how* they do this isn't just interesting trivia. When you're designing your own headphones, this knowledge becomes practical. Every design decision you make connects back to these fundamentals.
+At their core, headphones do something pretty remarkable: they turn electricity into sound waves that your brain interprets as music. But here's the thing: understanding *how* they do this isn't just interesting trivia. When you're designing your own headphones, this knowledge becomes practical. Every design decision you make connects back to these fundamentals.
 
 So let's start at the beginning.
 
 ## The Three Parts That Matter
 
-A dynamic driver — the type used in the vast majority of headphones — has three main components working together:
+A dynamic driver, the type used in the vast majority of headphones, has three main components working together:
 
 **The voice coil** is a coil of very fine wire wound in a precise pattern. When electrical current flows through this coil, it creates a magnetic field. Remember making electromagnets in school with a nail and some wire? Same principle, just much more precise.
 
 **The permanent magnet** creates a fixed magnetic field. This is usually a strong neodymium or ferrite magnet arranged in a specific structure. The voice coil sits in the gap of this magnetic field.
 
-**The diaphragm** is the part that actually moves air — and moving air is what creates sound. It's attached to the voice coil, so when the voice coil moves, the diaphragm moves with it.
+**The diaphragm** is the part that actually moves air, and moving air is what creates sound. It's attached to the voice coil, so when the voice coil moves, the diaphragm moves with it.
 
-Here's how it works: Your music player sends an electrical signal to the voice coil. This signal is constantly changing — that's your music, converted to electricity. As the current changes, the electromagnetic field from the voice coil interacts with the permanent magnet's field. Sometimes they attract, sometimes they repel. This makes the voice coil move back and forth rapidly.
+Here's how it works: Your music player sends an electrical signal to the voice coil. This signal is constantly changing. That's your music, converted to electricity. As the current changes, the electromagnetic field from the voice coil interacts with the permanent magnet's field. Sometimes they attract, sometimes they repel. This makes the voice coil move back and forth rapidly.
 
 Since the diaphragm is attached to the voice coil, it moves too. And when the diaphragm moves, it pushes and pulls on the air in front of it, creating pressure waves. Those pressure waves travel through the air, into your ear canal, vibrate your eardrum, and your brain interprets them as sound.
 
 Pretty elegant, right?
 
-<Figure label="Fig. 1" caption="The dynamic driver in cross-section — the moving parts are in orange.">
+<Figure label="Fig. 1" caption="The dynamic driver in cross-section. The moving parts are in orange.">
   <DriverCrossSection />
 </Figure>
 
@@ -56,15 +56,15 @@ Not quite. And understanding the difference is crucial when you start designing 
 
 With speakers in a room, the sound travels several feet through air before reaching your ears. Your head and outer ears (pinnae) shape the sound in specific ways. You get reflections off walls, floors, ceilings. Your whole body feels bass frequencies. It's a complete acoustic experience.
 
-With headphones, the driver is maybe an inch from your eardrum. There's no room, no natural acoustic space. The sound doesn't interact with your outer ear the same way. You don't feel bass with your chest — you only hear it.
+With headphones, the driver is maybe an inch from your eardrum. There's no room, no natural acoustic space. The sound doesn't interact with your outer ear the same way. You don't feel bass with your chest. You only hear it.
 
 This creates some interesting challenges:
 
 **Bass needs artificial boost.** In a room with speakers, bass frequencies get reinforced naturally. With headphones, if you tune them "flat," they sound thin and bass-light. We'll talk about [target curves](/learn/understanding-frequency-response/) later, but just know: headphones that measure flat don't sound neutral.
 
-**Proximity matters.** Because the driver is so close to your ear, tiny changes in distance create big changes in sound. This is why [ear pad thickness](/learn/ear-pads-and-comfort/) isn't just about comfort — it's a fundamental tuning parameter.
+**Proximity matters.** Because the driver is so close to your ear, tiny changes in distance create big changes in sound. This is why [ear pad thickness](/learn/ear-pads-and-comfort/) isn't just about comfort. It's a fundamental tuning parameter.
 
-**The sealed environment changes everything.** Most headphones create at least a partial seal around your ear. This affects bass response dramatically. We're not working with open air like speakers — we're working with an acoustic chamber.
+**The sealed environment changes everything.** Most headphones create at least a partial seal around your ear. This affects bass response dramatically. We're not working with open air like speakers. We're working with an acoustic chamber.
 
 ## The Complete System (Not Just the Driver)
 
@@ -74,11 +74,11 @@ Think of it this way: **Driver + Ear Cup + Ear Pads + Your Ear Canal = The Sound
 
 Change any one of these elements, and you change the entire sound. This is why you can't just grab a good driver, stick it in any enclosure, and expect magic. It all has to work together.
 
-**The ear cup** isn't just a housing — it's an [acoustic chamber](/learn/acoustic-chambers-and-enclosures/). Its volume, shape, and internal surfaces all affect the sound. Too small and your bass rolls off early. Too large and you might get resonances that make things sound weird.
+**The ear cup** isn't just a housing. It's an [acoustic chamber](/learn/acoustic-chambers-and-enclosures/). Its volume, shape, and internal surfaces all affect the sound. Too small and your bass rolls off early. Too large and you might get resonances that make things sound weird.
 
 **The ear pads** determine how far the driver sits from your ear. They also affect the seal. A better seal means better bass. Different pad materials absorb different frequencies differently. Even the depth of the pad matters. We'll cover all of this in [Ear Pads and Comfort](/learn/ear-pads-and-comfort/).
 
-**Damping materials** inside the cup absorb certain frequencies, tame resonances, and shape the overall response. This is one of your most powerful tuning tools — and one of the easiest to get wrong. More on this in [Damping Materials](/learn/damping-materials/).
+**Damping materials** inside the cup absorb certain frequencies, tame resonances, and shape the overall response. This is one of your most powerful tuning tools, and one of the easiest to get wrong. More on this in [Damping Materials](/learn/damping-materials/).
 
 ## What This Means When You're Building
 
@@ -94,7 +94,7 @@ This is actually good news for DIY builders. It means expensive components don't
 
 **Measurements and listening both matter.** Some people in the DIY community worship measurements. Others ignore them entirely and just listen. The reality is you need both. Measurements tell you what's happening objectively. Listening tells you whether it matters to your ears. Neither alone is complete.
 
-**Your first build won't be perfect — and that's fine.** I've built headphones for 25+ years and I still have to iterate. Your first pair is a learning experience. Plan for it, embrace it, and don't beat yourself up when things don't sound exactly right on the first try. That's how this works.
+**Your first build won't be perfect, and that's fine.** I've built headphones for 25+ years and I still have to iterate. Your first pair is a learning experience. Plan for it, embrace it, and don't beat yourself up when things don't sound exactly right on the first try. That's how this works.
 
 The goal is to make something that sounds good to you. Measurements are tools to help you get there.
 

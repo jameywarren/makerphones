@@ -30,14 +30,14 @@ const { url, title } = Astro.props;
     </label>
     <div class="mp-fb-row">
       <label class="mp-fb-label mp-fb-email">
-        <span>Email — optional, if you'd like a reply</span>
+        <span>Email: optional, if you'd like a reply</span>
         <input type="email" name="email" autocomplete="email" placeholder="you@example.com" />
       </label>
       <button type="submit" class="mp-fb-send">Send</button>
     </div>
   </form>
-  <p class="mp-fb-done" hidden>Thanks — your note is on its way to the bench.</p>
-  <p class="mp-fb-error" hidden>That didn't send — please try again, or email <a href="mailto:jamey@jameywarren.com">jamey@jameywarren.com</a>.</p>
+  <p class="mp-fb-done" hidden>Thanks, your note is on its way to the bench.</p>
+  <p class="mp-fb-error" hidden>That didn't send. Please try again, or email <a href="mailto:jamey@jameywarren.com">jamey@jameywarren.com</a>.</p>
 </aside>
 
 <script>

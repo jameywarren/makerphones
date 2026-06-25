@@ -14,7 +14,7 @@ const PARTS = [
   { group: 'Earcup', base: 'baffle', label: 'Baffle', qty: '×2', material: 'PETG / PLA+',
     orient: 'Flat', supports: 'No', note: 'Front plate: pad lip, driver guard + recess, 4 M3 rim holes, vents. Guard prints over the aperture.' },
   { group: 'Earcup', base: 'grille_dot', label: 'Accent dot', qty: '×2', material: 'Orange filament',
-    orient: 'Any', supports: 'No', note: 'Press-in accent cap at the grille center — the only brand accent. Print in the warm orange.' },
+    orient: 'Any', supports: 'No', note: 'Press-in accent cap at the grille center, the only brand accent. Print in the warm orange.' },
   // --- Gimbal ---
   { group: 'Gimbal', base: 'yoke', label: 'Fork-yoke', qty: '×2 (L/R mirror)', material: 'PETG',
     orient: 'Stress along layer lines', supports: 'No', note: 'Curved wishbone. M3 shoulder-screw pivot, ±20° tilt with a hard stop. Mirror for left/right.' },
@@ -24,15 +24,15 @@ const PARTS = [
   { group: 'Headband', base: 'headband_pad', label: 'Headband pad', qty: '×1', material: 'Foam or printed TPU',
     orient: 'Not specified', supports: 'Not specified', note: 'Rough-draft crown cushion; channel grips the bow. Form/retention TBD.' },
   { group: 'Headband', base: 'bow', label: 'Head bow', qty: '×1', bought: true, material: 'Beyerdynamic Metal Head Bow (~$11) or DIY 1095 spring steel',
-    orient: '—', supports: '—', note: 'NOT printed — the sprung headband is a bought/formed metal part (reference only).' },
+    orient: '—', supports: '—', note: 'NOT printed: the sprung headband is a bought/formed metal part (reference only).' },
   // --- Optional ---
   { group: 'Optional', base: 'adapter_ring', label: 'Driver adapter ring', qty: 'optional', material: 'PETG',
-    orient: 'Flat', supports: 'No', note: 'Step-down ring to host a smaller driver in a larger baffle — NOT acoustically neutral.' },
+    orient: 'Flat', supports: 'No', note: 'Step-down ring to host a smaller driver in a larger baffle, NOT acoustically neutral.' },
 ];
 
 const GROUP_ORDER = ['Earcup', 'Gimbal', 'Headband', 'Optional'];
 const GROUP_NOTE = {
-  Gimbal: 'Plus the bought hardware per pivot (M3 shoulder screws + brass heat-set inserts) — see the bill of materials.',
+  Gimbal: 'Plus the bought hardware per pivot (M3 shoulder screws + brass heat-set inserts). See the bill of materials.',
 };
 const grouped = GROUP_ORDER
   .map((g) => ({ group: g, parts: PARTS.filter((p) => p.group === g) }))
@@ -49,7 +49,7 @@ const grouped = GROUP_ORDER
           <article class={`pg-card${p.bought ? ' pg-bought' : ''}`}>
             {p.bought
               ? <div class="pg-noimg">Bought part</div>
-              : <img class="pg-img" src={`${R}/${p.base}_iso.png`} alt={`${p.label} — 3D render`} loading="lazy" decoding="async" width="360" height="360" />}
+              : <img class="pg-img" src={`${R}/${p.base}_iso.png`} alt={`${p.label}, 3D render`} loading="lazy" decoding="async" width="360" height="360" />}
             <div class="pg-body">
               <h4 class="pg-name">{p.label}<span class="pg-qty">{p.qty}</span></h4>
               <dl class="pg-meta">

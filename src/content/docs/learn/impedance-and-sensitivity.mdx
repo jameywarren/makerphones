@@ -9,7 +9,7 @@ related: [driver-selection-guide, open-vs-closed-back-design, understanding-freq
 read_time: 7
 tags: [fundamentals, beginner, theory, specifications, drivers]
 description: "Learn what impedance and sensitivity actually mean for headphone builders, why these specs matter, and how to match drivers to your amplifier."
-excerpt: "Impedance and sensitivity aren't just numbers on a spec sheet — they determine whether your headphones will actually work well with your gear. Here's what you need to know."
+excerpt: "Impedance and sensitivity aren't just numbers on a spec sheet: they determine whether your headphones will actually work well with your gear. Here's what you need to know."
 ---
 
 import Figure from '../../../components/Figure.astro';
@@ -27,19 +27,19 @@ Technically, impedance is the opposition to alternating current (AC) flow in a c
 
 **The voice coil resistance:** This is just the DC resistance of the copper wire in the coil. It's constant across all frequencies.
 
-**Inductance:** The coil is, well, a coil — which means it has inductance. This causes impedance to increase at high frequencies.
+**Inductance:** The coil is, well, a coil, which means it has inductance. This causes impedance to increase at high frequencies.
 
 **Mechanical impedance:** The moving parts of the driver (diaphragm, suspension, voice coil mass) also present impedance that varies with frequency. This creates the impedance peak you see near the resonant frequency.
 
 ### Why Impedance Varies with Frequency
 
-When you see a headphone listed as "150Ω," that's the nominal impedance — a single number representing a complicated curve. If you measure impedance across the full frequency range, you'll see it's NOT constant.
+When you see a headphone listed as "150Ω," that's the nominal impedance: a single number representing a complicated curve. If you measure impedance across the full frequency range, you'll see it's NOT constant.
 
-There's a big peak at the driver's resonant frequency (Fs) — often 50–150Hz for headphone drivers. Below that, impedance drops. Above that, impedance gradually rises due to inductance. The "nominal" impedance is typically measured at 1kHz, where things are relatively stable.
+There's a big peak at the driver's resonant frequency (Fs), often 50–150Hz for headphone drivers. Below that, impedance drops. Above that, impedance gradually rises due to inductance. The "nominal" impedance is typically measured at 1kHz, where things are relatively stable.
 
 This matters because your amplifier's output impedance interacts with the headphone impedance. If your amp has high output impedance (common in tube amps), the frequency response actually changes based on the impedance curve. A 300Ω headphone on a high-impedance amp will sound different than the same headphone on a low-impedance amp.
 
-<Figure label="Fig. 1" caption="Impedance is a curve, not a number (illustrative) — the resonance peak, the inductive rise, and what sensitivity and impedance mean for amp matching.">
+<Figure label="Fig. 1" caption="Impedance is a curve, not a number (illustrative): the resonance peak, the inductive rise, and what sensitivity and impedance mean for amp matching.">
   <ImpedanceSensitivity />
 </Figure>
 
@@ -47,7 +47,7 @@ This matters because your amplifier's output impedance interacts with the headph
 
 **Portable use (phone, laptop):** Stick to 32Ω or lower. These sources have high output impedance and limited current. High-impedance headphones won't be driven properly.
 
-**Desktop use with dedicated amp:** Any impedance works. Higher impedance (150–300Ω) can have advantages — more turns of wire in the voice coil, potentially better high-frequency response.
+**Desktop use with dedicated amp:** Any impedance works. Higher impedance (150–300Ω) can have advantages: more turns of wire in the voice coil, potentially better high-frequency response.
 
 **First build:** Use 32Ω. It's the universal value that works everywhere. You can experiment with impedance later once you understand the system better.
 
@@ -55,13 +55,13 @@ This matters because your amplifier's output impedance interacts with the headph
 
 Sensitivity tells you how much sound pressure a driver produces for a given electrical input. It's usually expressed as dB SPL per milliwatt (dB/mW) or dB SPL per volt (dB/V) at 1kHz.
 
-You'll see values like "103 dB/mW" or "110 dB/V." Higher number = louder for the same input. But wait — dB/mW and dB/V are different scales, and you can't compare them directly without knowing the impedance. This trips up a lot of people.
+You'll see values like "103 dB/mW" or "110 dB/V." Higher number = louder for the same input. But wait, dB/mW and dB/V are different scales, and you can't compare them directly without knowing the impedance. This trips up a lot of people.
 
 ### Making Sense of the Numbers
 
 Here's what matters practically:
 
-**For portable use (phone/laptop):** You need high sensitivity — around 100 dB/mW or higher. These sources are power-limited. Low sensitivity means low volume.
+**For portable use (phone/laptop):** You need high sensitivity, around 100 dB/mW or higher. These sources are power-limited. Low sensitivity means low volume.
 
 **For desktop use with amplification:** Sensitivity matters less. Almost any driver will get loud enough with a proper amp.
 
@@ -101,7 +101,7 @@ This is where the theory becomes practical. Here's a simplified decision tree:
 
 **"Higher impedance sounds better."** No. Impedance affects system matching, not inherent sound quality. A well-designed 32Ω driver can sound better than a poorly-designed 300Ω driver.
 
-**"Sensitivity is fixed."** Nope. It varies with frequency. The listed sensitivity is nominal — a representative value. The actual sensitivity curve can vary significantly, especially around the driver's resonant frequency.
+**"Sensitivity is fixed."** Nope. It varies with frequency. The listed sensitivity is nominal, a representative value. The actual sensitivity curve can vary significantly, especially around the driver's resonant frequency.
 
 :::
 

@@ -8,61 +8,61 @@ prerequisites: [why-measure-headphones, tuning-with-damping]
 related: [why-measure-headphones, tuning-with-damping, resonance-control, understanding-frequency-response, sources-and-further-reading]
 read_time: 10
 tags: [measurement, distortion, decay, csd, diagnostics]
-description: Beyond frequency response — decay plots, impulse response, and distortion measurements, what they reveal, and which ones a DIY builder actually acts on.
-excerpt: Frequency response is a snapshot that throws away time and ignores distortion. These are the measurements that fill in what it leaves out — and the two that are genuinely worth your attention.
+description: "Beyond frequency response: decay plots, impulse response, and distortion measurements, what they reveal, and which ones a DIY builder actually acts on."
+excerpt: Frequency response is a snapshot that throws away time and ignores distortion. These are the measurements that fill in what it leaves out, and the two that are genuinely worth your attention.
 ---
 
 import Figure from '../../../components/Figure.astro';
 import DecayWaterfall from '../../../components/diagrams/DecayWaterfall.astro';
 
-Frequency response is the headline measurement, and for good reason — it tells you most of what you need while you're tuning. But it's a snapshot. It tells you how loud each frequency is and nothing about how long each one rings, and it says nothing about distortion at all. That's why two headphones with nearly identical curves can still sound clearly different from each other. The measurements in this chapter fill in those gaps. You won't need all of them, but a couple are genuinely useful, and it's worth knowing what the rest are for so you can read them when you see them.
+Frequency response is the headline measurement, and for good reason: it tells you most of what you need while you're tuning. But it's a snapshot. It tells you how loud each frequency is and nothing about how long each one rings, and it says nothing about distortion at all. That's why two headphones with nearly identical curves can still sound clearly different from each other. The measurements in this chapter fill in those gaps. You won't need all of them, but a couple are genuinely useful, and it's worth knowing what the rest are for so you can read them when you see them.
 
 ## The time dimension: decay plots
 
-A frequency response curve has no time axis. It can't tell you that a particular frequency keeps ringing after the signal stops — and that ringing is a big part of what you hear as hardness, smear, or one-note bass.
+A frequency response curve has no time axis. It can't tell you that a particular frequency keeps ringing after the signal stops, and that ringing is a big part of what you hear as hardness, smear, or one-note bass.
 
-A decay plot — you'll see it called cumulative spectral decay, a waterfall, or a CSD — adds that missing axis. Picture the familiar frequency-response curve as the front edge, then a series of fainter copies stacked behind it, each one showing the response a fraction of a millisecond later as the energy dies away. Frequencies that stop cleanly drop straight down into the floor; frequencies that ring keep standing tall in those later slices, forming a ridge that runs back into the plot. Those ridges are resonances, and their height and length tell you how badly each one rings.
+A decay plot, you'll see it called cumulative spectral decay, a waterfall, or a CSD, adds that missing axis. Picture the familiar frequency-response curve as the front edge, then a series of fainter copies stacked behind it, each one showing the response a fraction of a millisecond later as the energy dies away. Frequencies that stop cleanly drop straight down into the floor; frequencies that ring keep standing tall in those later slices, forming a ridge that runs back into the plot. Those ridges are resonances, and their height and length tell you how badly each one rings.
 
 <Figure label="Fig. 1" caption="A decay waterfall: the ridge that keeps standing is a resonance ringing.">
   <DecayWaterfall dense />
 </Figure>
 
 
-This is the single most useful "advanced" plot for a builder, because it shows you exactly which frequencies are misbehaving — the ones to chase with damping or a structural fix — and it shows you whether your fix worked. A clean, fast decay is the tight, controlled sound you're after. Long tails are the smear and fatigue you're trying to get rid of.
+This is the single most useful "advanced" plot for a builder, because it shows you exactly which frequencies are misbehaving, the ones to chase with damping or a structural fix, and it shows you whether your fix worked. A clean, fast decay is the tight, controlled sound you're after. Long tails are the smear and fatigue you're trying to get rid of.
 
 ## Impulse and step response
 
-The impulse and step responses show the driver's raw reaction to a sharp input in the time domain — how it starts and how it stops. A clean impulse rises sharply and settles quickly back to the line; a messy one wobbles, overshoots, or shows a delayed second bump. That second bump is the tell you care about: it usually means a reflection or resonance bouncing around inside the cup and arriving late, the same problem the decay plot shows from a different angle.
+The impulse and step responses show the driver's raw reaction to a sharp input in the time domain: how it starts and how it stops. A clean impulse rises sharply and settles quickly back to the line; a messy one wobbles, overshoots, or shows a delayed second bump. That second bump is the tell you care about: it usually means a reflection or resonance bouncing around inside the cup and arriving late, the same problem the decay plot shows from a different angle.
 
-For day-to-day tuning you'll act on these rarely — the decay plot presents the same information in a form that's easier to act on — but they're the raw material the decay plot is built from, and they're good for spotting gross timing problems at a glance.
+For day-to-day tuning you'll act on these rarely, the decay plot presents the same information in a form that's easier to act on, but they're the raw material the decay plot is built from, and they're good for spotting gross timing problems at a glance.
 
 ## Distortion
 
-A real driver isn't perfectly linear — it adds harmonics that weren't in the original signal, and a distortion plot shows how much, across frequency, usually as a percentage. For a decent driver at normal listening levels, distortion is low and inaudible. It tends to climb in the deep bass, where the diaphragm moves the most and works hardest, and at high volume, where the driver is being pushed near its limits. Seeing it rise in those two places is normal and expected.
+A real driver isn't perfectly linear: it adds harmonics that weren't in the original signal, and a distortion plot shows how much, across frequency, usually as a percentage. For a decent driver at normal listening levels, distortion is low and inaudible. It tends to climb in the deep bass, where the diaphragm moves the most and works hardest, and at high volume, where the driver is being pushed near its limits. Seeing it rise in those two places is normal and expected.
 
-For a builder, though, the most valuable use of a distortion plot isn't grading the driver — it's catching faults. Different faults leave different signatures. A buzz from a loose part or a slack wire tends to throw up sharp distortion spikes at specific frequencies. A rubbing or bottoming driver smears distortion across a broad range. An air leak can show up as noise or a whistle riding on top. The common thread: when distortion jumps somewhere it has no business jumping, or turns rough where it should be smooth, stop tuning and go look for a physical cause. A distortion plot is the best lie-detector you have for "is this a tuning problem or did something come loose."
+For a builder, though, the most valuable use of a distortion plot isn't grading the driver: it's catching faults. Different faults leave different signatures. A buzz from a loose part or a slack wire tends to throw up sharp distortion spikes at specific frequencies. A rubbing or bottoming driver smears distortion across a broad range. An air leak can show up as noise or a whistle riding on top. The common thread: when distortion jumps somewhere it has no business jumping, or turns rough where it should be smooth, stop tuning and go look for a physical cause. A distortion plot is the best lie-detector you have for "is this a tuning problem or did something come loose."
 
 ## Spectrograms and the rest
 
-A spectrogram gives you a fuller time-and-frequency picture — frequency on one axis, time on another, intensity as color or brightness — and it's a nice way to see resonances and reflections laid out at once. It's genuinely informative and genuinely optional. Treat it, and the other exotic plots your measurement software can produce, as things worth understanding so you're not lost when you see them, not as part of your regular workflow.
+A spectrogram gives you a fuller time-and-frequency picture, frequency on one axis, time on another, intensity as color or brightness, and it's a nice way to see resonances and reflections laid out at once. It's genuinely informative and genuinely optional. Treat it, and the other exotic plots your measurement software can produce, as things worth understanding so you're not lost when you see them, not as part of your regular workflow.
 
 ## What actually matters for DIY
 
-For the vast majority of builds, frequency response plus a decay plot covers nearly everything you can act on, and an occasional distortion sweep catches gross faults. The rest are worth knowing about and rarely worth running. Don't let collecting impressive-looking graphs replace acting on the two that matter — a wall of plots you don't change anything based on is just decoration.
+For the vast majority of builds, frequency response plus a decay plot covers nearly everything you can act on, and an occasional distortion sweep catches gross faults. The rest are worth knowing about and rarely worth running. Don't let collecting impressive-looking graphs replace acting on the two that matter: a wall of plots you don't change anything based on is just decoration.
 
 ## Read them as relative, not absolute
 
-The same honesty from earlier applies, doubly. A hobby rig measures the driver and the rig together, so absolute decay and distortion numbers aren't trustworthy, and the high treble is especially noisy across all of these plots. Use them comparatively — before versus after a change, left versus right, this build versus that one — and never as an absolute score. And remember that decay and distortion both shift with seating, so re-seat and re-run before you believe a small feature is real.
+The same honesty from earlier applies, doubly. A hobby rig measures the driver and the rig together, so absolute decay and distortion numbers aren't trustworthy, and the high treble is especially noisy across all of these plots. Use them comparatively, before versus after a change, left versus right, this build versus that one, and never as an absolute score. And remember that decay and distortion both shift with seating, so re-seat and re-run before you believe a small feature is real.
 
 :::tip
-When a decay plot shows a stubborn ridge at one frequency, that's your target — note the frequency, apply a fix (damping if it's a cavity, stiffening if it's structural), and re-run the plot to watch the tail shorten. Seeing the ridge collapse is the most satisfying confirmation in the whole hobby that you fixed the right thing, rather than just moved a bump on a curve.
+When a decay plot shows a stubborn ridge at one frequency, that's your target: note the frequency, apply a fix (damping if it's a cavity, stiffening if it's structural), and re-run the plot to watch the tail shorten. Seeing the ridge collapse is the most satisfying confirmation in the whole hobby that you fixed the right thing, rather than just moved a bump on a curve.
 :::
 
 ## Common Mistakes
 
 :::caution
 - **Reading absolute distortion numbers as gospel.** A hobby rig's absolute figures aren't reliable. Compare, don't grade.
-- **Ignoring a distortion spike that's really a rattle.** A sharp spike often means a mechanical fault — a loose part or a leak — not a voicing issue. Go find the physical cause.
+- **Ignoring a distortion spike that's really a rattle.** A sharp spike often means a mechanical fault, a loose part or a leak, not a voicing issue. Go find the physical cause.
 - **Chasing top-octave decay wiggles.** Tiny tails up high are usually rig artifacts. Re-seat and re-run before acting.
 - **Collecting plots you don't act on.** Impressive graphs aren't progress. Frequency response plus a decay plot is where the action is.
 - **Forgetting that seating moves everything.** Decay and distortion both change with position. Establish a repeatable baseline first.
@@ -70,4 +70,4 @@ When a decay plot shows a stubborn ridge at one frequency, that's your target �
 
 ## What's Next
 
-These plots are how you *find* resonances — the ringing ridges on a decay plot are resonances made visible. The next chapter is about controlling them at the source, in the driver, the cavities, and the structure of the headphone itself: [resonance control](/learn/resonance-control).
+These plots are how you *find* resonances: the ringing ridges on a decay plot are resonances made visible. The next chapter is about controlling them at the source, in the driver, the cavities, and the structure of the headphone itself: [resonance control](/learn/resonance-control).

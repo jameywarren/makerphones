@@ -8,18 +8,18 @@ prerequisites: [cables-connectors-hardware, driver-mounting-and-assembly]
 related: [cables-connectors-hardware, driver-mounting-and-assembly, active-noise-cancelling, bluetooth-integration, headphone-form-factors]
 read_time: 11
 tags: [microphone, headset, wiring, trrs, voice]
-description: Adding a mic to turn your headphones into a headset — mic types, boom versus inline placement, and the wiring and connector choices that actually matter.
-excerpt: A microphone turns a pair of headphones into a headset. It's one of the more approachable add-ons — but the placement and wiring choices genuinely shape the result.
+description: "Adding a mic to turn your headphones into a headset: mic types, boom versus inline placement, and the wiring and connector choices that actually matter."
+excerpt: A microphone turns a pair of headphones into a headset. It's one of the more approachable add-ons, but the placement and wiring choices genuinely shape the result.
 ---
 
 import Figure from '../../../components/Figure.astro';
 import MicWiring from '../../../components/diagrams/MicWiring.astro';
 
-Adding a microphone turns a pair of headphones into a headset — for calls, gaming, streaming, or anything voice. Compared to active noise cancelling, this is refreshingly approachable: no real-time control loops, no co-designed acoustics, just a sensible set of choices about what mic to use, where to put it, and how to wire it. But those choices are real, and they affect both voice quality and whether the thing works at all on the device you plug it into.
+Adding a microphone turns a pair of headphones into a headset, for calls, gaming, streaming, or anything voice. Compared to active noise cancelling, this is refreshingly approachable: no real-time control loops, no co-designed acoustics, just a sensible set of choices about what mic to use, where to put it, and how to wire it. But those choices are real, and they affect both voice quality and whether the thing works at all on the device you plug it into.
 
 ## Mic types
 
-**Electret condenser.** Cheap, common, and good enough for most voice work, the electret is the workhorse of headset boom mics. It needs a small bias voltage — "plug-in power" — supplied by the host device, which most headset jacks and audio interfaces provide.
+**Electret condenser.** Cheap, common, and good enough for most voice work, the electret is the workhorse of headset boom mics. It needs a small bias voltage, "plug-in power", supplied by the host device, which most headset jacks and audio interfaces provide.
 
 **MEMS.** Tiny silicon microphones, the kind in phones and laptops. They come in analog and digital flavors and are ideal where space is tight, like an inline or in-cup mic. Compact and consistent, they're increasingly the default for small integrations.
 
@@ -27,7 +27,7 @@ Adding a microphone turns a pair of headphones into a headset — for calls, gam
 
 ## Placement and form
 
-Placement matters more for intelligibility than the element itself — getting the mic close to your mouth does more for clean voice than any upgrade in the capsule.
+Placement matters more for intelligibility than the element itself, getting the mic close to your mouth does more for clean voice than any upgrade in the capsule.
 
 **Boom mic.** An arm carries the mic near your mouth. This is the best choice for voice quality and noise rejection, and it's what gaming and broadcast headsets use. A boom can be fixed, detachable, or flip-to-mute, and a directional or noise-cancelling element near the mouth rejects room noise nicely.
 
@@ -39,34 +39,34 @@ Placement matters more for intelligibility than the element itself — getting t
 
 This is where most headset problems actually live, so it's worth getting right.
 
-A stereo headphone uses three conductors — tip, ring, sleeve (TRS): left, right, and ground. Add a microphone and you need a fourth conductor, which gives you TRRS: left, right, ground, and mic. TRRS on a single 3.5 mm plug is the headset standard on phones and laptops.
+A stereo headphone uses three conductors: tip, ring, sleeve (TRS): left, right, and ground. Add a microphone and you need a fourth conductor, which gives you TRRS: left, right, ground, and mic. TRRS on a single 3.5 mm plug is the headset standard on phones and laptops.
 
 There are two competing TRRS pinouts, and they are not interchangeable. CTIA is the modern standard used by essentially all current phones; OMTP is the older arrangement, with the mic and ground positions swapped. Plug a headset wired for one standard into a device expecting the other and the mic won't work, or the audio comes out wrong. If a headset misbehaves on a particular device, a pinout mismatch is the first thing to check.
 
-<Figure label="Fig. 1" caption="CTIA vs OMTP on the same TRRS plug — the two standards swap mic and ground — and where the capsule lives: boom at the mouth or inline on the cable.">
+<Figure label="Fig. 1" caption="CTIA vs OMTP on the same TRRS plug, the two standards swap mic and ground, and where the capsule lives: boom at the mouth or inline on the cable.">
   <MicWiring />
 </Figure>
 
-The alternatives: on PCs with separate jacks, you can split into two plugs — a 3.5 mm headphone plug and a separate mic plug. Or you can go USB, where the mic and audio are digitized on board, which needs an onboard DAC and ADC and is a more involved build, but sidesteps the analog pinout question entirely.
+The alternatives: on PCs with separate jacks, you can split into two plugs: a 3.5 mm headphone plug and a separate mic plug. Or you can go USB, where the mic and audio are digitized on board, which needs an onboard DAC and ADC and is a more involved build, but sidesteps the analog pinout question entirely.
 
-Inside the build, route the mic wire with care. Use shielded mic cable to avoid picking up hum, keep it away from the driver leads, and give it strain relief at the connector and the boom joint — the same discipline from [cables, connectors, and hardware](/learn/cables-connectors-hardware) and [driver mounting and assembly](/learn/driver-mounting-and-assembly). Mic signals are low-level and far more vulnerable to noise than your driver leads.
+Inside the build, route the mic wire with care. Use shielded mic cable to avoid picking up hum, keep it away from the driver leads, and give it strain relief at the connector and the boom joint, the same discipline from [cables, connectors, and hardware](/learn/cables-connectors-hardware) and [driver mounting and assembly](/learn/driver-mounting-and-assembly). Mic signals are low-level and far more vulnerable to noise than your driver leads.
 
 ## A few practical notes
 
-A small connector on the cup that makes the boom mic detachable is the most flexible arrangement — headset when you want it, clean headphones when you don't. Remember that an electret needs the host to supply plug-in power; most jacks and interfaces do, but a few don't, and a mic that's dead on one device but fine on another may simply be missing its bias. Sidetone — hearing your own voice in the headphones — is usually handled by the host or its software rather than by the headphone itself, but it's worth knowing the term when someone asks why they can't hear themselves. And always test on the actual target device, because pinout and power vary between a phone, a PC, and an audio interface.
+A small connector on the cup that makes the boom mic detachable is the most flexible arrangement, headset when you want it, clean headphones when you don't. Remember that an electret needs the host to supply plug-in power; most jacks and interfaces do, but a few don't, and a mic that's dead on one device but fine on another may simply be missing its bias. Sidetone, hearing your own voice in the headphones, is usually handled by the host or its software rather than by the headphone itself, but it's worth knowing the term when someone asks why they can't hear themselves. And always test on the actual target device, because pinout and power vary between a phone, a PC, and an audio interface.
 
 ## Getting clean voice
 
-A few habits do more for how you sound than any capsule upgrade. Position a boom mic just off to the side of your mouth rather than dead in front of it — directly in the breath stream is where plosive pops and breath noise come from. A cheap foam windscreen over the element kills most of those pops and breath sounds for a dollar. Set the gain on the host so your normal speaking voice sits well below clipping but comfortably above the noise floor; too hot and you clip and distort, too low and you bury the voice in hiss. And remember that a directional element placed close to your mouth beats any amount of software noise suppression — physics first, processing second. The reliable way to judge any of this is to record yourself and listen back, rather than trusting "can you hear me okay?"
+A few habits do more for how you sound than any capsule upgrade. Position a boom mic just off to the side of your mouth rather than dead in front of it, directly in the breath stream is where plosive pops and breath noise come from. A cheap foam windscreen over the element kills most of those pops and breath sounds for a dollar. Set the gain on the host so your normal speaking voice sits well below clipping but comfortably above the noise floor; too hot and you clip and distort, too low and you bury the voice in hiss. And remember that a directional element placed close to your mouth beats any amount of software noise suppression: physics first, processing second. The reliable way to judge any of this is to record yourself and listen back, rather than trusting "can you hear me okay?"
 
 :::tip
-Make the boom mic detachable with a small connector on the cup. You get a proper near-mouth mic for calls and gaming when you want it, and clean, mic-free headphones when you don't — the best of both worlds, and it's easy to wire. A flip-to-mute or detachable boom also keeps the mic out of your face when you're just listening.
+Make the boom mic detachable with a small connector on the cup. You get a proper near-mouth mic for calls and gaming when you want it, and clean, mic-free headphones when you don't, the best of both worlds, and it's easy to wire. A flip-to-mute or detachable boom also keeps the mic out of your face when you're just listening.
 :::
 
 ## Common Mistakes
 
 :::caution
-- **TRRS pinout mismatch.** CTIA versus OMTP will leave the mic dead or the audio wrong. Match the device's standard — CTIA for modern phones.
+- **TRRS pinout mismatch.** CTIA versus OMTP will leave the mic dead or the audio wrong. Match the device's standard: CTIA for modern phones.
 - **Unshielded mic wire next to driver leads.** Low-level mic signals pick up hum easily. Use shielded cable and route it away from the driver wiring.
 - **Inline placement when voice quality matters.** Far from the mouth means more room noise. Use a boom for streaming or gaming.
 - **Forgetting plug-in power.** An electret needs bias from the host. A mic that's dead on one device but works on another is often just missing its power.
@@ -75,4 +75,4 @@ Make the boom mic detachable with a small connector on the cup. You get a proper
 
 ## What's Next
 
-The last special topic is a different world entirely — the headphone shrinks until it lives inside your ear canal, the seal becomes everything, and the craft turns to tiny drivers, tuned tubes, and shells molded to your ear: [custom IEM design](/learn/custom-iem-design).
+The last special topic is a different world entirely: the headphone shrinks until it lives inside your ear canal, the seal becomes everything, and the craft turns to tiny drivers, tuned tubes, and shells molded to your ear: [custom IEM design](/learn/custom-iem-design).

@@ -47,7 +47,7 @@ export const MANUAL_PARTS: ManualPart[] = [
     num: 1,
     title: 'Fundamentals',
     level: 'Beginner',
-    desc: 'How headphones create sound — frequency response, impedance, form factors, and driver technologies.',
+    desc: 'How headphones create sound: frequency response, impedance, form factors, and driver technologies.',
     handles: [
       'how-headphones-create-sound',
       'understanding-frequency-response',
@@ -61,7 +61,7 @@ export const MANUAL_PARTS: ManualPart[] = [
     num: 2,
     title: 'Components & Materials',
     level: 'Beginner → Intermediate',
-    desc: 'Drivers, chambers, pads, damping, cables — what each part does, and where to actually get it.',
+    desc: 'Drivers, chambers, pads, damping, cables: what each part does, and where to actually get it.',
     handles: [
       'driver-selection-guide',
       'sourcing-components',

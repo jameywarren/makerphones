@@ -20,7 +20,9 @@ const links = [
   { text: 'RSS', href: '/rss.xml' },
   { text: 'License', href: '/license/' },
   { text: 'Contact', href: 'mailto:jamey@jameywarren.com' },
+  { text: 'Warren Labs ↗', href: 'https://warrenlabs.com' },
 ];
+const isExternal = (href: string) => /^https?:/.test(href);
 ---
 
 <footer class="mp-sitefooter not-content">
@@ -32,9 +34,16 @@ const links = [
       >
     </div>
     <span class="mp-foot-tagline">Build your own sound</span>
+    <span class="mp-foot-byline">A Warren Labs project</span>
   </div>
   <nav class="mp-foot-nav" aria-label="Site">
-    {links.map((l) => <a href={l.href}>{l.text}</a>)}
+    {links.map((l) =>
+      isExternal(l.href) ? (
+        <a href={l.href} target="_blank" rel="noopener">{l.text}</a>
+      ) : (
+        <a href={l.href}>{l.text}</a>
+      )
+    )}
   </nav>
 </footer>
 
@@ -90,6 +99,15 @@ const links = [
     font-size: 8px;
     letter-spacing: 0.18em;
     text-transform: uppercase;
+    color: var(--mp-meta);
+    margin-left: 42px;
+  }
+  /* Quiet Warren Labs attribution: its own line under the tagline,
+   * muted mono, deliberately not joined to "Build your own sound". */
+  .mp-foot-byline {
+    font-family: var(--mp-mono);
+    font-size: 9px;
+    letter-spacing: 0.1em;
     color: var(--mp-meta);
     margin-left: 42px;
   }

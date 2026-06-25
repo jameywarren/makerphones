@@ -8,59 +8,59 @@ prerequisites: [budget-measurement-setup, why-measure-headphones]
 related: [budget-measurement-setup, why-measure-headphones, tuning-with-damping, understanding-frequency-response, resonance-control, sources-and-further-reading]
 read_time: 11
 tags: [measurement, rew, technique, frequency-response, interpretation]
-description: "How to take headphone measurements you can actually trust — seating, repeatability, smoothing — and how to read the resulting graph instead of chasing noise."
-excerpt: "A rig is only as good as your technique. The same headphone measures differently depending on how you seat it — here's how to get data you can trust, and how to read it."
+description: "How to take headphone measurements you can actually trust: seating, repeatability, smoothing, and how to read the resulting graph instead of chasing noise."
+excerpt: "A rig is only as good as your technique. The same headphone measures differently depending on how you seat it. Here's how to get data you can trust, and how to read it."
 ---
 
 import Figure from '../../../components/Figure.astro';
 import MeasurementDiagnosis from '../../../components/diagrams/MeasurementDiagnosis.astro';
 
-A measurement rig is only as good as your technique with it. The same headphone, on the same rig, will give you noticeably different graphs depending on how you seat it — and a graph you can't read is just a wiggly line. This chapter is the bridge between owning a rig and getting something useful out of it: how to take measurements you can trust, and how to interpret what you see.
+A measurement rig is only as good as your technique with it. The same headphone, on the same rig, will give you noticeably different graphs depending on how you seat it. And a graph you can't read is just a wiggly line. This chapter is the bridge between owning a rig and getting something useful out of it: how to take measurements you can trust, and how to interpret what you see.
 
 ## Set up once, correctly
 
-Before any of it means anything, get the basics right. Load your microphone and coupler calibration file in REW so the rig's known errors are corrected. Set the SPL calibration so your levels are meaningful rather than arbitrary. Drive the headphone from a low-impedance amp. And use a logarithmic sweep — REW's standard measurement — at a sensible level, loud enough to sit well above the noise floor but nowhere near clipping. Once this is dialed in, it stays put, and you can stop thinking about it.
+Before any of it means anything, get the basics right. Load your microphone and coupler calibration file in REW so the rig's known errors are corrected. Set the SPL calibration so your levels are meaningful rather than arbitrary. Drive the headphone from a low-impedance amp. And use a logarithmic sweep, REW's standard measurement, at a sensible level, loud enough to sit well above the noise floor but nowhere near clipping. Once this is dialed in, it stays put, and you can stop thinking about it.
 
 ## Seating is everything
 
 Here is the single biggest source of variation in headphone measurement: how the headphone sits on the rig. Clamping force, centering, and the quality of the seal against the pinna all move the result, and they move it most in the regions that matter. So consistency is the whole discipline. Place the headphone the same way every time, with the same downforce and the same seal.
 
-And then don't trust a single placement. Take several measurements, lifting and re-seating the headphone between each one. Real features of the headphone stay put across those seatings; artifacts of the rig and the fit move around — usually up in the treble, which is exactly where these rigs are least reliable anyway. Overlay your seatings, or average them, and let the agreement between them tell you what's real. Where three measurements land on top of each other, you're looking at the headphone. Where they scatter, you're looking at the seating.
+And then don't trust a single placement. Take several measurements, lifting and re-seating the headphone between each one. Real features of the headphone stay put across those seatings; artifacts of the rig and the fit move around, usually up in the treble, which is exactly where these rigs are least reliable anyway. Overlay your seatings, or average them, and let the agreement between them tell you what's real. Where three measurements land on top of each other, you're looking at the headphone. Where they scatter, you're looking at the seating.
 
-Measure both channels under identical conditions, too — same seating routine, same level — or any left-right comparison you make later is comparing your technique, not your build.
+Measure both channels under identical conditions, too, same seating routine, same level, or any left-right comparison you make later is comparing your technique, not your build.
 
 ## Smooth it, or you'll chase noise
 
-A raw measurement is far too spiky to interpret — every tiny ripple, real or not, is on display. Apply smoothing, somewhere in the range of a twelfth to a twenty-fourth of an octave, or REW's psychoacoustic smoothing, so that what you see is the shape rather than the hash. You're trying to read the headphone's character, and the character lives in the broad strokes, not in needle-thin spikes that no ear would ever resolve.
+A raw measurement is far too spiky to interpret: every tiny ripple, real or not, is on display. Apply smoothing, somewhere in the range of a twelfth to a twenty-fourth of an octave, or REW's psychoacoustic smoothing, so that what you see is the shape rather than the hash. You're trying to read the headphone's character, and the character lives in the broad strokes, not in needle-thin spikes that no ear would ever resolve.
 
 ## Reading the graph
 
-Work from the big picture down. First take in the overall tilt — the broad balance from bass to treble — because that, more than any single feature, is what you hear as the headphone's signature. Then look at the major features: the bass shelf, any obvious peaks or dips, the presence region up in the upper midrange and lower treble.
+Work from the big picture down. First take in the overall tilt, the broad balance from bass to treble, because that, more than any single feature, is what you hear as the headphone's signature. Then look at the major features: the bass shelf, any obvious peaks or dips, the presence region up in the upper midrange and lower treble.
 
-Then compare to a target. Overlay a target curve — a research-based preference curve (see [Sources & Further Reading](/learn/sources-and-further-reading/) for where these come from) or your own reference — and read your measurement as *deviation from that target*, not as distance from a flat line. As covered earlier, flat is not the goal, and a graph read against the right target tells you far more than one read against zero. Where you sit above the target, you have too much; where you sit below, too little.
+Then compare to a target. Overlay a target curve, a research-based preference curve (see [Sources & Further Reading](/learn/sources-and-further-reading/) for where these come from) or your own reference, and read your measurement as *deviation from that target*, not as distance from a flat line. As covered earlier, flat is not the goal, and a graph read against the right target tells you far more than one read against zero. Where you sit above the target, you have too much; where you sit below, too little.
 
-Overlay left against right as well. The two channels should track closely; where they diverge you have a matching problem to chase back to the build — a seal, a damping difference, a driver mismatch.
+Overlay left against right as well. The two channels should track closely; where they diverge you have a matching problem to chase back to the build: a seal, a damping difference, a driver mismatch.
 
-Throughout, keep the trust calibrated. Believe the broad shape and, above all, believe your before-and-after deltas — those are what your rig is genuinely good at. Be skeptical of fine detail above roughly 10 kHz and of the exact frequency and height of features at the extremes, where the rig's limits live.
+Throughout, keep the trust calibrated. Believe the broad shape and, above all, believe your before-and-after deltas. Those are what your rig is genuinely good at. Be skeptical of fine detail above roughly 10 kHz and of the exact frequency and height of features at the extremes, where the rig's limits live.
 
-<Figure label="Fig. 1" caption="Reading a measurement as diagnosis — three flagged features (illustrative trace), each pointing at a cause and a fix: a seal leak, a cavity resonance, a channel mismatch.">
+<Figure label="Fig. 1" caption="Reading a measurement as diagnosis, three flagged features (illustrative trace), each pointing at a cause and a fix: a seal leak, a cavity resonance, a channel mismatch.">
   <MeasurementDiagnosis />
 </Figure>
 
 ## Turning features into fixes
 
-A graph is only useful if it points at an action, and by now you have the chapters to act. A sharp peak is a resonance — head for [resonance control](/learn/resonance-control) and your damping. A boomy, oversized bass shelf points back at the chamber and venting. A left-right divergence is an assembly and seal problem. And the whole measure-read-adjust loop comes together in [tuning with damping](/learn/tuning-with-damping), where each measurement drives one targeted change and the next measurement checks it.
+A graph is only useful if it points at an action, and by now you have the chapters to act. A sharp peak is a resonance. Head for [resonance control](/learn/resonance-control) and your damping. A boomy, oversized bass shelf points back at the chamber and venting. A left-right divergence is an assembly and seal problem. And the whole measure-read-adjust loop comes together in [tuning with damping](/learn/tuning-with-damping), where each measurement drives one targeted change and the next measurement checks it.
 
 ## Keep a record
 
-Save every measurement with a name that says what it was — the build, the date, the change you'd just made. REW lets you keep many traces open at once, so you can overlay tonight's result against last week's and see the whole arc of a build rather than a single snapshot. A folder of well-named measurements is what turns a pile of graphs into a history you can actually learn from, and it's the same habit that makes the tuning loop work and repeatable builds possible. The five seconds it takes to name a file is nothing against the hour it saves when you're trying to remember what you did three sessions ago.
+Save every measurement with a name that says what it was: the build, the date, the change you'd just made. REW lets you keep many traces open at once, so you can overlay tonight's result against last week's and see the whole arc of a build rather than a single snapshot. A folder of well-named measurements is what turns a pile of graphs into a history you can actually learn from, and it's the same habit that makes the tuning loop work and repeatable builds possible. The five seconds it takes to name a file is nothing against the hour it saves when you're trying to remember what you did three sessions ago.
 
 ## When a measurement is good enough
 
-You don't need perfection, and over-measuring wastes evenings. A measurement is good enough when it's consistent across re-seatings, the channels track, and the shape makes physical sense for what you built. When those three hold, stop measuring and start acting — or, if the build is where you want it, stop and go listen.
+You don't need perfection, and over-measuring wastes evenings. A measurement is good enough when it's consistent across re-seatings, the channels track, and the shape makes physical sense for what you built. When those three hold, stop measuring and start acting, or, if the build is where you want it, stop and go listen.
 
 :::tip
-Take at least three measurements, re-seating the headphone each time, and overlay them before you trust anything. Where the three agree is real; where they scatter — almost always up high — is the rig and the seating, not the headphone. This one habit, more than any gear upgrade, separates useful data from data that quietly leads you astray.
+Take at least three measurements, re-seating the headphone each time, and overlay them before you trust anything. Where the three agree is real; where they scatter, almost always up high, is the rig and the seating, not the headphone. This one habit, more than any gear upgrade, separates useful data from data that quietly leads you astray.
 :::
 
 ## Common Mistakes
@@ -75,4 +75,4 @@ Take at least three measurements, re-seating the headphone each time, and overla
 
 ## What's Next
 
-You can now take a measurement you trust and read what it's telling you — which is exactly what the tuning loop runs on. [Tuning with damping](/learn/tuning-with-damping) puts this to work: measure, make one change, measure again, and watch the build move toward your target. With this chapter, the measurement section is complete.
+You can now take a measurement you trust and read what it's telling you, which is exactly what the tuning loop runs on. [Tuning with damping](/learn/tuning-with-damping) puts this to work: measure, make one change, measure again, and watch the build move toward your target. With this chapter, the measurement section is complete.
