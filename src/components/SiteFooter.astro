@@ -20,31 +20,25 @@ const links = [
   { text: 'RSS', href: '/rss.xml' },
   { text: 'License', href: '/license/' },
   { text: 'Contact', href: 'mailto:jamey@jameywarren.com' },
-  { text: 'Warren Labs ↗', href: 'https://warrenlabs.com' },
 ];
-const isExternal = (href: string) => /^https?:/.test(href);
 ---
 
 <footer class="mp-sitefooter not-content">
-  <div class="mp-foot-lockup">
-    <div class="mp-foot-lockup-row">
-      <DriverMark size={31} />
-      <span class="mp-foot-wordmark"
-        >makerphones<span class="mp-foot-dot" aria-hidden="true"></span></span
-      >
+  <div class="mp-foot-main">
+    <div class="mp-foot-lockup">
+      <div class="mp-foot-lockup-row">
+        <DriverMark size={31} />
+        <span class="mp-foot-wordmark"
+          >makerphones<span class="mp-foot-dot" aria-hidden="true"></span></span
+        >
+      </div>
+      <span class="mp-foot-tagline">Build your own sound</span>
     </div>
-    <span class="mp-foot-tagline">Build your own sound</span>
-    <span class="mp-foot-byline">A Warren Labs project</span>
+    <nav class="mp-foot-nav" aria-label="Site">
+      {links.map((l) => <a href={l.href}>{l.text}</a>)}
+    </nav>
   </div>
-  <nav class="mp-foot-nav" aria-label="Site">
-    {links.map((l) =>
-      isExternal(l.href) ? (
-        <a href={l.href} target="_blank" rel="noopener">{l.text}</a>
-      ) : (
-        <a href={l.href}>{l.text}</a>
-      )
-    )}
-  </nav>
+  <a class="mp-foot-attrib" href="https://warrenlabs.com" target="_blank" rel="noopener">A Warren Labs project</a>
 </footer>
 
 <style>
@@ -54,14 +48,20 @@ const isExternal = (href: string) => /^https?:/.test(href);
    * the right edge. The top hairline spans the full band width. */
   .mp-sitefooter {
     display: flex;
+    flex-direction: column;
+    gap: 24px;
+    padding: 36px var(--sl-nav-pad-x) 44px;
+    border-top: 1px solid var(--mp-hair);
+    color: var(--mp-charcoal);
+    font-family: var(--mp-body);
+  }
+  /* Top row: logo lockup pinned to the left edge, nav to the right edge. */
+  .mp-foot-main {
+    display: flex;
     align-items: center;
     gap: 40px;
     justify-content: space-between;
-    padding: 36px var(--sl-nav-pad-x) 44px;
-    border-top: 1px solid var(--mp-hair);
     flex-wrap: wrap;
-    color: var(--mp-charcoal);
-    font-family: var(--mp-body);
   }
 
   /* tagline lockup (logo handoff) — ratios for wordmark size S = 26px:
@@ -102,14 +102,26 @@ const isExternal = (href: string) => /^https?:/.test(href);
     color: var(--mp-meta);
     margin-left: 42px;
   }
-  /* Quiet Warren Labs attribution: its own line under the tagline,
-   * muted mono, deliberately not joined to "Build your own sound". */
-  .mp-foot-byline {
+  /* Quiet Warren Labs attribution on its own centered line below the
+   * logo/nav row, linking out to warrenlabs.com. Mono micro-type matching
+   * the nav links so it stays low-key. */
+  .mp-foot-attrib {
+    align-self: center;
     font-family: var(--mp-mono);
-    font-size: 9px;
-    letter-spacing: 0.1em;
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    font-weight: 500;
     color: var(--mp-meta);
-    margin-left: 42px;
+    text-decoration: none;
+    text-align: center;
+  }
+  .mp-foot-attrib:hover {
+    color: var(--mp-accent);
+  }
+  .mp-foot-attrib:focus-visible {
+    outline: 2px solid var(--mp-accent);
+    outline-offset: 3px;
   }
 
   .mp-foot-nav {

@@ -399,17 +399,8 @@
 .mp-hnav a[aria-current='page'] {
   color: var(--mp-accent);
 }
-.mp-hver {
-  font-family: var(--mp-mono);
-  font-size: 11px;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--mp-meta);
-  white-space: nowrap;
-}
 @media (max-width: 64rem) {
-  .mp-hnav,
-  .mp-hver {
+  .mp-hnav {
     display: none;
   }
 }

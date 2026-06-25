@@ -845,6 +845,13 @@ button[data-open-modal] {
 .content-panel:has(.mp-home, .mp-contents-page) .sl-markdown-content {
   max-width: none;
 }
+/* Splash pages (home, contents, 404) hide the page title, which leaves
+   Starlight's title content-panel rendered but empty — collapse any first
+   panel that has neither a title nor body content so there's no dead band
+   of whitespace under the header. Regular pages keep their <h1> panel. */
+main > .content-panel:first-child:not(:has(h1)):not(:has(.sl-markdown-content)) {
+  display: none;
+}
 .mp-full {
   width: 100%;
 }
