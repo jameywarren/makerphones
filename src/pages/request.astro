@@ -1,0 +1,200 @@
+---
+// makerphones.com/request — Stage-1 public headphone design intake.
+// Backend-free (static GitHub Pages): the form assembles a BRIEF markdown in the
+// browser, then hands it off via "Copy" or a prefilled mailto. No server, no LLM,
+// no per-submission cost, no data stored on a server. Mirrors the /headphone-intake
+// skill + builds/daily-driver/docs/new-build-intake.md. NOT linked in nav yet —
+// flip that on once reviewed.
+const MAKER_EMAIL = "jamey@jameywarren.com";
+---
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Suggest a headphone — MakerPhones</title>
+  <meta name="description" content="Tell us about a headphone you'd like designed. Builds a structured design brief you can send us." />
+  <style>
+    :root { --bg:#0f1115; --panel:#171a21; --ink:#e8eaed; --muted:#9aa0ab; --line:#2a2f3a; --accent:#e8843c; }
+    * { box-sizing: border-box; }
+    body { margin:0; background:var(--bg); color:var(--ink); font:16px/1.55 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif; }
+    .wrap { max-width: 760px; margin: 0 auto; padding: 2.5rem 1.25rem 5rem; }
+    h1 { font-size: 1.9rem; margin: 0 0 .25rem; }
+    .lede { color: var(--muted); margin: 0 0 2rem; }
+    fieldset { border:1px solid var(--line); border-radius:10px; background:var(--panel); margin:0 0 1.1rem; padding:1.1rem 1.2rem 1.3rem; }
+    legend { padding:0 .5rem; font-weight:600; color:var(--accent); }
+    label { display:block; margin:.7rem 0 .25rem; font-size:.92rem; color:var(--ink); }
+    .hint { color:var(--muted); font-size:.82rem; font-weight:400; }
+    input, select, textarea { width:100%; padding:.5rem .6rem; background:#0c0e12; color:var(--ink); border:1px solid var(--line); border-radius:7px; font:inherit; }
+    textarea { min-height:64px; resize:vertical; }
+    .row { display:grid; grid-template-columns:1fr 1fr; gap:.6rem; }
+    .row3 { display:grid; grid-template-columns:1fr 1fr 1fr; gap:.6rem; }
+    @media (max-width:540px){ .row,.row3{ grid-template-columns:1fr; } }
+    .actions { display:flex; gap:.6rem; flex-wrap:wrap; margin-top:1.4rem; }
+    button { font:inherit; font-weight:600; border:0; border-radius:8px; padding:.7rem 1.1rem; cursor:pointer; }
+    .primary { background:var(--accent); color:#1a1206; }
+    .ghost { background:transparent; color:var(--ink); border:1px solid var(--line); }
+    #out { margin-top:1.6rem; display:none; }
+    #brief { width:100%; min-height:320px; font:13px/1.5 ui-monospace,SFMono-Regular,Menlo,monospace; }
+    .ok { color:#7fd28b; font-size:.9rem; }
+    a { color: var(--accent); }
+  </style>
+</head>
+<body>
+  <main class="wrap">
+    <h1>Suggest a headphone</h1>
+    <p class="lede">Open-source, 3D-printed, parametric. Answer what you can — blanks are fine
+      (we mark them <em>to be measured</em>). This builds a structured <strong>design brief</strong>
+      in your browser; nothing is sent until you hit copy or email.</p>
+
+    <form id="f">
+      <fieldset><legend>1 · Use-case & vibe</legend>
+        <div class="row">
+          <div><label>Back type</label>
+            <select name="back"><option>not sure</option><option>open-back</option><option>closed-back</option></select></div>
+          <div><label>Primary use</label>
+            <select name="use"><option>not sure</option><option>studio / mixing</option><option>commute / travel</option><option>desk / gaming</option><option>audiophile listening</option></select></div>
+        </div>
+        <label>Vibe</label>
+        <select name="vibe"><option>not sure</option><option>soft & rounded</option><option>angular & technical</option><option>minimal / clean</option></select>
+        <label>Reference headphones / images <span class="hint">(names or links)</span></label>
+        <textarea name="refs"></textarea>
+      </fieldset>
+
+      <fieldset><legend>2 · Driver</legend>
+        <div class="row3">
+          <div><label>Size</label><select name="driver_size"><option>not sure</option><option>40 mm</option><option>50 mm</option><option>other</option></select></div>
+          <div><label>Impedance <span class="hint">(Ω)</span></label><input name="driver_imp" placeholder="e.g. 32" /></div>
+          <div><label>Model <span class="hint">(if known)</span></label><input name="driver_model" /></div>
+        </div>
+      </fieldset>
+
+      <fieldset><legend>3 · Earpad</legend>
+        <label>Model</label><input name="pad_model" placeholder="e.g. Dekoni Universal 100 mm" />
+        <div class="row3">
+          <div><label>Outer Ø <span class="hint">mm</span></label><input name="pad_od" /></div>
+          <div><label>Ear opening ID <span class="hint">mm</span></label><input name="pad_id" /></div>
+          <div><label>Mount-skirt Ø <span class="hint">mm — what the cup grips</span></label><input name="pad_mount" /></div>
+        </div>
+      </fieldset>
+
+      <fieldset><legend>4 · Headband / bow</legend>
+        <label>Type</label>
+        <select name="bow_type"><option>not sure</option><option>bought spring band (e.g. Beyer metal bow)</option><option>DIY blank</option></select>
+        <div class="row3">
+          <div><label>Relaxed radius <span class="hint">mm</span></label><input name="bow_r" /></div>
+          <div><label>Rolled-out length <span class="hint">mm</span></label><input name="bow_len" /></div>
+          <div><label>Width <span class="hint">mm</span></label><input name="bow_w" /></div>
+        </div>
+      </fieldset>
+
+      <fieldset><legend>5 · Mechanism & fit</legend>
+        <div class="row">
+          <div><label>Band ↔ slider attach</label><select name="attach"><option>not sure</option><option>bolt-on at end tabs</option><option>telescoping clamp</option></select></div>
+          <div><label>Clamp feel</label><select name="clamp"><option>not sure</option><option>firm</option><option>medium</option><option>light</option></select></div>
+        </div>
+        <label>Tilt / fit notes</label><input name="fit" />
+      </fieldset>
+
+      <fieldset><legend>6 · Aesthetic</legend>
+        <div class="row">
+          <div><label>Grille pattern</label><input name="grille" placeholder="e.g. concentric rings, lattice" /></div>
+          <div><label>Accent colour</label><input name="accent" /></div>
+        </div>
+        <div class="row">
+          <div><label>Edge treatment</label><select name="edges"><option>not sure</option><option>rounded / soft</option><option>chamfered</option><option>sharp / technical</option></select></div>
+          <div><label>Signature / branding</label><input name="sig" /></div>
+        </div>
+      </fieldset>
+
+      <fieldset><legend>7 · Constraints</legend>
+        <div class="row">
+          <div><label>Printer bed <span class="hint">mm</span></label><input name="bed" placeholder="e.g. 220×220" /></div>
+          <div><label>Material</label><input name="mat" placeholder="e.g. PETG" /></div>
+        </div>
+        <div class="row">
+          <div><label>Target cost / unit</label><input name="cost" /></div>
+          <div><label>License preference</label><input name="lic" /></div>
+        </div>
+      </fieldset>
+
+      <fieldset><legend>8 · You</legend>
+        <div class="row">
+          <div><label>Name / handle</label><input name="who" /></div>
+          <div><label>Email <span class="hint">(so we can reply)</span></label><input name="email" type="email" /></div>
+        </div>
+        <label>Anything else?</label><textarea name="notes"></textarea>
+      </fieldset>
+
+      <div class="actions">
+        <button type="button" class="primary" id="gen">Build my brief</button>
+      </div>
+    </form>
+
+    <div id="out">
+      <p class="ok">✓ Brief assembled below. Copy it, or email it straight to us.</p>
+      <textarea id="brief" readonly></textarea>
+      <div class="actions">
+        <button type="button" class="primary" id="copy">Copy brief</button>
+        <a id="mail" class="ghost" style="text-decoration:none;display:inline-block">Email it to MakerPhones</a>
+      </div>
+    </div>
+  </main>
+
+  <script is:inline define:vars={{ MAKER_EMAIL }}>
+    const f = document.getElementById('f');
+    const g = (n) => (f.elements[n]?.value || '').trim();
+    const v = (val) => val ? val : '_TBD — to be measured_';
+    function buildBrief() {
+      const name = g('who') || 'Anonymous';
+      const title = (g('refs') ? g('refs').split('\n')[0].slice(0,40) : 'New headphone') ;
+      return `# ${title} — design brief (from web intake)
+Status: DRAFT · submitted by ${name}${g('email') ? ' <'+g('email')+'>' : ''}
+
+## 1. Use-case & vibe
+- Back: ${g('back')} | Use: ${g('use')} | Vibe: ${g('vibe')}
+- References: ${v(g('refs'))}
+
+## 2. Driver
+- Size ${g('driver_size')} | Impedance ${v(g('driver_imp'))} | Model ${v(g('driver_model'))}
+
+## 3. Earpad
+- Model: ${v(g('pad_model'))}
+- Outer Ø ${v(g('pad_od'))} | Ear ID ${v(g('pad_id'))} | Mount-skirt Ø ${v(g('pad_mount'))}  [confidence: as-entered]
+
+## 4. Headband / bow
+- Type: ${g('bow_type')}
+- Relaxed R ${v(g('bow_r'))} | Rolled-out length ${v(g('bow_len'))} | Width ${v(g('bow_w'))}
+
+## 5. Mechanism & fit
+- Band↔slider attach: ${g('attach')} | Clamp: ${g('clamp')}
+- Fit notes: ${v(g('fit'))}
+
+## 6. Aesthetic
+- Grille: ${v(g('grille'))} | Accent: ${v(g('accent'))} | Edges: ${g('edges')} | Signature: ${v(g('sig'))}
+
+## 7. Constraints
+- Bed: ${v(g('bed'))} | Material: ${v(g('mat'))} | Target cost: ${v(g('cost'))} | License: ${v(g('lic'))}
+
+## Notes
+${v(g('notes'))}
+
+---
+_Generated by makerphones.com/request. TBD fields need a real measurement before a first print._`;
+    }
+    document.getElementById('gen').addEventListener('click', () => {
+      const b = buildBrief();
+      document.getElementById('brief').value = b;
+      document.getElementById('out').style.display = 'block';
+      const subj = encodeURIComponent('Headphone design suggestion — ' + (g('who')||'web'));
+      document.getElementById('mail').href = `mailto:${MAKER_EMAIL}?subject=${subj}&body=${encodeURIComponent(b)}`;
+      document.getElementById('out').scrollIntoView({ behavior: 'smooth' });
+    });
+    document.getElementById('copy').addEventListener('click', async (e) => {
+      try { await navigator.clipboard.writeText(document.getElementById('brief').value);
+        e.target.textContent = 'Copied ✓'; setTimeout(()=>e.target.textContent='Copy brief',1500);
+      } catch { document.getElementById('brief').select(); }
+    });
+  </script>
+</body>
+</html>
