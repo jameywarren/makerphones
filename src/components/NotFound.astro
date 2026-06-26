@@ -1,0 +1,216 @@
+---
+/**
+ * 404 — "signal lost." On-brand gag for an audio-measurement site:
+ * a frequency-response trace that runs clean, then falls off a cliff
+ * straight into the noise floor at exactly 404 Hz. The page you wanted
+ * is the dead air where the response should be. Built from the same
+ * measurement-chart visual language as the diagrams, theme-variable
+ * colors, motion gated behind prefers-reduced-motion.
+ */
+
+// Plot box
+const L = 64, R = 716, T = 44, B = 300;
+const floor = 262; // noise-floor baseline
+
+// The trace: a believable FR wiggle, then the dropout at 404 Hz (x≈348),
+// then a jagged-but-flat noise floor out to the right edge.
+const signal = 'M 64 150 L 100 142 L 140 150 L 180 128 L 220 140 L 260 126 L 300 144 L 335 134 L 346 138';
+const cliff = 'L 350 262';
+const noise = 'L 386 260 L 420 264 L 456 258 L 492 265 L 528 259 L 564 264 L 600 257 L 636 264 L 672 259 L 716 262';
+const trace = `${signal} ${cliff} ${noise}`;
+
+const dropX = 348; // 404 Hz on a 20 Hz–20 kHz log axis
+
+const ink = 'var(--mp-charcoal)';
+const accent = 'var(--mp-accent)';
+const meta = 'var(--mp-meta)';
+const hair = 'var(--mp-hair)';
+const faint = 'var(--mp-faint)';
+
+const freqTicks = [
+  { x: L, label: '20' },
+  { x: 216, label: '100' },
+  { x: dropX, label: '404' },
+  { x: 433, label: '1k' },
+  { x: 651, label: '10k' },
+  { x: R, label: '20k' },
+];
+const dbLines = [92, 150, 208]; // faint horizontal grid
+---
+
+<section class="nf">
+  <p class="nf-eyebrow">Error 404 · Signal lost</p>
+  <h1 class="nf-title">This page dropped off the curve.</h1>
+
+  <figure class="nf-fig">
+    <svg
+      viewBox="0 0 760 360"
+      class="nf-svg"
+      role="img"
+      aria-label="A frequency-response chart. The trace runs flat and healthy across the low frequencies, then falls off a cliff into the noise floor at 404 hertz and stays there — the page you were looking for is the missing signal."
+    >
+      <!-- faint grid -->
+      {dbLines.map((y) => (
+        <line x1={L} y1={y} x2={R} y2={y} stroke={faint} stroke-width="1" stroke-dasharray="2 4" />
+      ))}
+      {freqTicks.map((t) => (
+        <line x1={t.x} y1={T} x2={t.x} y2={B} stroke={faint} stroke-width="1" stroke-dasharray="2 5" opacity="0.6" />
+      ))}
+
+      <!-- axes -->
+      <line x1={L} y1={T} x2={L} y2={B} stroke={ink} stroke-width="1.5" />
+      <line x1={L} y1={B} x2={R} y2={B} stroke={ink} stroke-width="1.5" />
+
+      <!-- the big dead-air 404, where the response should be -->
+      <text x="524" y="168" class="nf-ghost" text-anchor="middle">404</text>
+
+      <!-- dropout marker at 404 Hz -->
+      <line x1={dropX} y1={T} x2={dropX} y2={B} stroke={accent} stroke-width="1.4" stroke-dasharray="4 4" class="nf-drop" />
+      <text x={dropX + 8} y={T + 16} class="nf-droplabel">DROPOUT · 404 Hz</text>
+
+      <!-- the trace -->
+      <path d={trace} class="nf-trace" fill="none" stroke={accent} stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round" />
+
+      <!-- "signal lost" point at the cliff foot -->
+      <circle cx="350" cy="262" r="4.5" fill={accent} class="nf-pt" />
+
+      <!-- axis labels -->
+      {freqTicks.map((t) => (
+        <text x={t.x} y={B + 18} class="nf-tick" text-anchor="middle">{t.label}</text>
+      ))}
+      <text x={(L + R) / 2} y="350" class="nf-axis" text-anchor="middle">FREQUENCY (Hz)</text>
+      <text x="20" y={(T + B) / 2} class="nf-axis" text-anchor="middle" transform={`rotate(-90 20 ${(T + B) / 2})`}>LEVEL (dB)</text>
+    </svg>
+    <figcaption class="nf-cap">
+      <span class="nf-blip" aria-hidden="true"></span>
+      Clean response, then nothing past 404 Hz. Either this page was never measured, it moved, or you found a notch. No signal to tune here.
+    </figcaption>
+  </figure>
+
+  <nav class="nf-nav" aria-label="Get back on the curve">
+    <a class="nf-btn" href="/contents/">Back to the contents</a>
+    <a class="nf-btn nf-btn-ghost" href="/learn/how-headphones-create-sound/">Start at chapter one →</a>
+  </nav>
+</section>
+
+<style>
+  .nf {
+    max-width: 56rem;
+    margin: 0 auto;
+    padding: 1rem 0 2rem;
+    text-align: center;
+  }
+  .nf-eyebrow {
+    font-family: var(--mp-mono);
+    font-size: 0.6875rem;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--mp-accent);
+    margin: 0 0 0.5rem;
+  }
+  .nf-title {
+    font-family: var(--mp-sans, var(--mp-body));
+    font-size: clamp(1.6rem, 4vw, 2.4rem);
+    line-height: 1.1;
+    margin: 0 0 1.5rem;
+    color: var(--mp-ink);
+  }
+  .nf-fig {
+    margin: 0 0 1.75rem;
+    padding: 1rem 1.1rem 0.9rem;
+    border: 1px solid var(--mp-line);
+    border-left: 4px solid var(--mp-accent);
+    background: color-mix(in srgb, var(--mp-charcoal) 2%, transparent);
+  }
+  .nf-svg {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+  .nf-ghost {
+    font-family: var(--mp-mono);
+    font-size: 132px;
+    font-weight: 700;
+    fill: var(--mp-accent);
+    opacity: 0.1;
+    letter-spacing: 0.02em;
+  }
+  .nf-droplabel,
+  .nf-tick,
+  .nf-axis {
+    font-family: var(--mp-mono);
+    fill: var(--mp-meta);
+  }
+  .nf-droplabel { font-size: 10px; font-weight: 600; letter-spacing: 0.06em; }
+  .nf-tick { font-size: 10.5px; }
+  .nf-axis { font-size: 9.5px; font-weight: 600; letter-spacing: 0.1em; fill: var(--mp-faint); }
+
+  .nf-cap {
+    font-family: var(--mp-body);
+    font-size: 0.875rem;
+    line-height: 1.55;
+    color: var(--mp-meta);
+    margin: 0.7rem 0 0;
+    text-align: left;
+  }
+  .nf-blip {
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--mp-accent);
+    margin-right: 0.45rem;
+    vertical-align: baseline;
+    animation: nf-blink 1.4s steps(1) infinite;
+  }
+  .nf-nav {
+    display: flex;
+    gap: 0.75rem;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  .nf-btn {
+    font-family: var(--mp-mono);
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    text-decoration: none;
+    padding: 11px 22px;
+    color: var(--mp-bg);
+    background: var(--mp-btn-bg, var(--mp-accent));
+    border: 1px solid var(--mp-accent);
+  }
+  .nf-btn:hover { background: var(--mp-btn-bg-hover, var(--mp-accent-hover)); }
+  .nf-btn-ghost {
+    color: var(--mp-accent);
+    background: transparent;
+  }
+  .nf-btn-ghost:hover {
+    background: color-mix(in srgb, var(--mp-accent) 8%, transparent);
+  }
+
+  /* trace draws itself in, then the dropout point pulses once it lands */
+  .nf-trace {
+    stroke-dasharray: 1400;
+    stroke-dashoffset: 1400;
+    animation: nf-draw 1.6s ease-out forwards;
+  }
+  .nf-pt {
+    transform-box: fill-box;
+    transform-origin: center;
+    animation: nf-pulse 1.6s ease-out 1.5s infinite;
+  }
+  @keyframes nf-draw { to { stroke-dashoffset: 0; } }
+  @keyframes nf-pulse {
+    0%, 60%, 100% { opacity: 1; r: 4.5px; }
+    20% { opacity: 0.35; r: 7px; }
+  }
+  @keyframes nf-blink { 0%, 50% { opacity: 1; } 51%, 100% { opacity: 0.15; } }
+
+  @media (prefers-reduced-motion: reduce) {
+    .nf-trace { stroke-dashoffset: 0; animation: none; }
+    .nf-pt, .nf-blip { animation: none; }
+  }
+</style>
