@@ -1,6 +1,6 @@
 # MakerPhones — Content & Style Guide
 
-**Version 1.1 · June 11, 2026**
+**Version 1.2 · June 26, 2026**
 
 *The working "how to write a chapter" guide. Positioning, the canonical author bio, and the voice north star live in **Project-Compass.md** — read that first; this expands the mechanics. Full historical/planning docs live in the repo, which is the source of truth.*
 
@@ -154,6 +154,9 @@ Frozen handles — use these verbatim for filenames and cross-links. Live source
 - ✓ your-first-build
 - ✓ simple-open-back-build
 - ✓ closed-back-studio-build
+- ✓ daily-driver-design-spec
+- ✓ daily-driver-parts
+- ✓ designing-headphones-with-ai
 
 **Appendices** (no nav numbering; outside the chapter chain)
 - ✓ glossary
