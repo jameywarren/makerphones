@@ -154,6 +154,7 @@ export const BUILD_GUIDE_HANDLES = [
   'simple-open-back-build',
   'closed-back-studio-build',
   'daily-driver-design-spec',
+  'daily-driver-parts',
   'designing-headphones-with-ai',
 ] as const;
 
