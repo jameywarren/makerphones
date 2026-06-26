@@ -1,10 +1,10 @@
 # MakerPhones — Site Structure & Content Strategy
 
-**Version 2.0 · June 11, 2026**
+**Version 2.1 · June 26, 2026**
 
 *Ported from the January 2026 planning doc, pruned to resource mode. The original (with monetization, launch plan, and platform evaluation) is preserved verbatim in `_source/makerphones-site-structure.md`.*
 
-**What supersedes what:** the manual's six-part, 30-chapter structure with frozen handles (Project-Compass.md + the Content & Style Guide) supersedes this doc's original three-tier site map. The actual platform is **Astro + Starlight on GitHub Pages** (not the Ghost/WordPress evaluation in the original). Voice and article-structure rules live in the Content & Style Guide. What remains here: the gaps analysis, the long-range content map (useful when writing Parts 3–6 and the appendices), and the differentiation framing.
+**What supersedes what:** the manual's six-part, 32-chapter structure with frozen handles (Project-Compass.md + the Content & Style Guide) supersedes this doc's original three-tier site map. The actual platform is **Astro + Starlight on GitHub Pages** (not the Ghost/WordPress evaluation in the original). Voice and article-structure rules live in the Content & Style Guide. What remains here: the gaps analysis, the long-range content map (useful when writing Parts 3–6 and the appendices), and the differentiation framing.
 
 ---
 
@@ -34,7 +34,7 @@
 - **/learn/<handle>** — the Reference Manual, one route per chapter, six sidebar groups in manual order. Difficulty, read time, prerequisites, and related links surface from frontmatter on every chapter.
 - Search (Pagefind), on-page TOC, and prev/next navigation are on throughout.
 
-The manual's structure is fixed: **Fundamentals → Components & Materials → Design & Build → Measurement & Tuning → Advanced → Special Topics**, plus five appendices (glossary, supplier directory, design resources, troubleshooting, community builds). Status: **complete — 30/30 chapters and all five appendices live.**
+The manual's structure is fixed: **Fundamentals → Components & Materials → Design & Build → Measurement & Tuning → Advanced → Special Topics**, plus six appendices (glossary, supplier directory, design resources, sources & further reading, troubleshooting, community builds) and six build guides. Status: **complete — 32/32 chapters, all six appendices, and six build guides live.**
 
 ## Long-range content map
 
