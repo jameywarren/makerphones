@@ -140,28 +140,74 @@ export function initPartsViewer(root) {
     };
     explodeEl?.addEventListener('input', () => applyExplode(parseFloat(explodeEl.value) || 0));
 
-    // Sub-assembly toggles (built from the manifest).
+    // Visibility = per-part-TYPE toggles × a SIDE filter (both / one earcup). Re-frames
+    // the camera to whatever's visible so a single earcup fills the view (no zooming
+    // past the other ear). Part names: cup_R, driver_clamp_L, insert_p_R, bow_ref, …
+    const typeOf = (n) => n.replace(/_(R|L)$/, '').replace(/_(p|m)$/, '').replace(/_ref$/, '');
+    const HW = new Set(['insert', 'screw']);
+    const typeKey = (n) => { const t = typeOf(n); return HW.has(t) ? 'hardware' : t; };
+    const sideOf = (n) => (/_R$/.test(n) ? 'R' : /_L$/.test(n) ? 'L' : 'both');
+    const TYPE_LABEL = {
+      cup: 'Cup', baffle: 'Baffle', driver: 'Driver', driver_clamp: 'Driver clamp',
+      yoke: 'Yoke', slider: 'Slider', bow: 'Bow', headband_pad: 'Headband pad', hardware: 'Hardware',
+    };
+    const types = [];
+    for (const p of parts) { const k = typeKey(p.name); if (!types.includes(k)) types.push(k); }
+    const typeOn = new Map(types.map((t) => [t, true]));
+    let sideFilter = 'both';
+    let isolated = null;
+
+    function applyVisibility() {
+      isolated = null;
+      for (const p of parts) {
+        const okType = typeOn.get(typeKey(p.name)) !== false;
+        const s = sideOf(p.name);
+        const okSide = sideFilter === 'both' ? true : s === sideFilter;  // one earcup hides the other side + the shared headband
+        p.visible = okType && okSide;
+      }
+      requestRender();
+    }
+
+    function frameVisible() {
+      const box = new THREE.Box3();
+      let any = false;
+      for (const p of parts) if (p.visible) { box.expandByObject(p); any = true; }
+      if (!any) return;
+      const sph = box.getBoundingSphere(new THREE.Sphere());
+      const dir = camera.position.clone().sub(controls.target).normalize();
+      const d = (sph.radius / Math.sin((camera.fov * Math.PI) / 180 / 2)) * 1.3;
+      camera.position.copy(sph.center).add(dir.multiplyScalar(d));
+      camera.near = Math.max(d / 100, 0.05); camera.far = d * 10; camera.updateProjectionMatrix();
+      controls.target.copy(sph.center); controls.update();
+      requestRender();
+    }
+
+    // Per-type toggles (built from the parts present).
     if (groupsEl) {
       groupsEl.innerHTML = '';
-      for (const g of groupsData.groups || []) {
+      for (const t of types) {
         const label = document.createElement('label');
         label.className = 'pv-toggle';
         const cb = document.createElement('input');
         cb.type = 'checkbox'; cb.checked = true;
-        cb.addEventListener('change', () => {
-          isolated = null;
-          for (const n of g.nodes) { const o = byName.get(n); if (o) o.visible = cb.checked; }
-          requestRender();
-        });
-        label.append(cb, document.createTextNode(' ' + g.label));
+        cb.addEventListener('change', () => { typeOn.set(t, cb.checked); applyVisibility(); });
+        label.append(cb, document.createTextNode(' ' + (TYPE_LABEL[t] || t)));
         groupsEl.appendChild(label);
       }
     }
 
+    // Side selector (Both / one earcup).
+    const sideEl = root.querySelector('[data-pv-side]');
+    sideEl?.addEventListener('change', () => {
+      sideFilter = sideEl.value;
+      applyVisibility();
+      frameVisible();
+      setStatus(sideFilter === 'both' ? '' : `Showing the ${sideFilter === 'R' ? 'right' : 'left'} earcup only`);
+    });
+
     // Click (not drag) to isolate a single part.
     const ray = new THREE.Raycaster();
     const v = new THREE.Vector2();
-    let isolated = null;
     canvas.addEventListener('pointerdown', (e) => {
       const x0 = e.clientX, y0 = e.clientY;
       const onUp = (e2) => {
@@ -185,11 +231,13 @@ export function initPartsViewer(root) {
     });
 
     resetEl?.addEventListener('click', () => {
-      isolated = null;
-      for (const p of parts) p.visible = true;
+      sideFilter = 'both'; if (sideEl) sideEl.value = 'both';
+      for (const t of types) typeOn.set(t, true);
       groupsEl?.querySelectorAll('input').forEach((cb) => { cb.checked = true; });
       if (explodeEl) { explodeEl.value = '0'; }
+      applyVisibility();
       applyExplode(0);
+      frameVisible();
       setStatus('');
     });
 
