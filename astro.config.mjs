@@ -46,7 +46,9 @@ const sidebar = [
   {
     label: 'Measurement & Tuning',
     items: [
-      // Part 4 — complete
+      // Part 4 — complete. measuring-raw-drivers is a full part-4 chapter
+      // (type: chapter, the schema default), in the numbered chain via
+      // manual.ts MANUAL_PARTS — correctly grouped here, not a loose note.
       'learn/why-measure-headphones',
       'learn/budget-measurement-setup',
       'learn/taking-and-interpreting-measurements',
@@ -92,7 +94,11 @@ const sidebar = [
   {
     label: 'Appendices',
     items: [
-      // Reference pages — no nav numbering, outside the chapter chain
+      // Reference pages — no nav numbering, outside the chapter chain.
+      // listening-safely is the standing safety note (type: chapter, the
+      // schema default) that deliberately leads the appendices — it is NOT
+      // an appendix-typed file; the placement is intentional and mirrors
+      // manual.ts APPENDIX_HANDLES. The entries below it are type: appendix.
       'learn/listening-safely',
       'learn/glossary',
       'learn/supplier-directory',
