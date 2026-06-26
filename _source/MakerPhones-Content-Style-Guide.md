@@ -1,6 +1,6 @@
 # MakerPhones — Content & Style Guide
 
-**Version 1.2 · June 26, 2026**
+**Version 1.3 · June 26, 2026**
 
 *The working "how to write a chapter" guide. Positioning, the canonical author bio, and the voice north star live in **Project-Compass.md** — read that first; this expands the mechanics. Full historical/planning docs live in the repo, which is the source of truth.*
 
@@ -63,7 +63,7 @@ Occasional mild profanity ("damn," "hell") is fine and authentic; keep it worksh
 
 ## Canonical format: Markdown + frontmatter
 
-One source of truth per chapter: a Markdown file under `src/content/docs/learn/<handle>.md`, route `/learn/<handle>`. Frontmatter carries the manual metadata and the Shopify mapping:
+One source of truth per chapter: a Markdown file under `src/content/docs/learn/<handle>.md`, built with Astro + Starlight and served at route `/learn/<handle>` on GitHub Pages. Frontmatter carries the manual metadata; it also pre-maps onto Shopify page fields, kept ready for the *parked* store migration:
 
 ```yaml
 ---
@@ -76,15 +76,15 @@ prerequisites: [driver-selection-guide]
 related: [driver-selection-guide, acoustic-chambers-and-enclosures]
 read_time: 9
 tags: [components, sourcing, suppliers]
-description: "..."                     # Starlight meta + Shopify SEO description
-excerpt: "..."                        # Shopify excerpt
+description: "..."                     # Starlight meta (doubles as Shopify SEO description, parked)
+excerpt: "..."                        # chapter excerpt (also the parked Shopify excerpt field)
 ---
 ```
 
 - `title` and `description` are Starlight-native; the rest are custom fields (the content schema is extended to allow them).
 - Callouts use Starlight asides: `:::caution` for Common Mistakes, `:::tip` for insights.
 - Specs, measurements, and parameters go in monospace / code blocks.
-- Markdown → Shopify HTML is deterministic; the frontmatter maps straight onto Shopify page fields at migration time.
+- The site builds with Astro + Starlight to GitHub Pages. The Markdown → Shopify HTML conversion stays deterministic and the frontmatter maps straight onto Shopify page fields — held ready for the parked store migration, not used today.
 
 ---
 
@@ -104,7 +104,7 @@ excerpt: "..."                        # Shopify excerpt
 
 ## Appendix: chapter handle reference
 
-Frozen handles — use these verbatim for filenames and cross-links. Live source of truth is the repo (`src/content/docs/learn/`). Routes are `/learn/<handle>`; at Shopify migration these become `/pages/<handle>` with identical handles. **✓ = written (32 of 32 — complete).**
+Frozen handles — use these verbatim for filenames and cross-links. Live source of truth is the repo (`src/content/docs/learn/`). Routes are `/learn/<handle>` (canonical, live on GitHub Pages). If the parked store migration ever happens, these map to Shopify `/pages/<handle>` with identical handles. **✓ = written (32 of 32 — complete).**
 
 **Part 1 — Fundamentals**
 - ✓ how-headphones-create-sound
