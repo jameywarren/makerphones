@@ -3,6 +3,11 @@ dist/
 # generated types
 .astro/
 
+# hardware build repos — each is its own standalone git repo
+# (e.g. builds/daily-driver -> github.com/makerphones/daily-driver),
+# tracked independently, not vendored into the website repo.
+builds/
+
 # dependencies
 node_modules/
 
