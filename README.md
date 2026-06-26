@@ -1,6 +1,6 @@
 # MakerPhones
 
-**Version 1.1 · June 26, 2026**
+**Version 1.2 · June 26, 2026**
 
 The MakerPhones Reference Manual — an open reference for designing and
 building your own headphones. Astro + Starlight, deployed to GitHub Pages
@@ -48,7 +48,9 @@ Deploys on push to `main` via `.github/workflows/deploy.yml`
 - ~1,200–1,800 words per chapter; structure: why it matters → concept →
   technical detail → practical application → Common Mistakes (`:::caution`)
   → What's Next.
-- Slugs are frozen — `_source/Website_URL_slug_Reference` verbatim.
+- Slugs are frozen — see the handle appendix in
+  `_source/MakerPhones-Content-Style-Guide.md` (the live handle reference;
+  it supersedes the old `Website_URL_slug_Reference`).
 
 ## Status
 
