@@ -1,38 +1,43 @@
 ---
 /**
  * Daily Driver printable-parts gallery — grouped "what you need to print" cards.
- * Posters are the per-part renders published by the daily-driver repo (served from
- * its GitHub Pages, same origin as the GLB — single source, nothing copied here).
- * Print metadata is editorial (from the design spec / build log).
+ * Each card shows the per-part render poster and a "View in 3D" button that swaps in
+ * a Google <model-viewer> loading the per-part GLB (both published by the daily-driver
+ * repo's GitHub Pages — single source, nothing copied here). Print metadata is
+ * editorial (from the design spec / build log).
  */
 const R = 'https://makerphones.github.io/daily-driver/renders';
+const M = 'https://makerphones.github.io/daily-driver/models';
 
 const PARTS = [
-  // --- Earcup ---
-  { group: 'Earcup', base: 'cup', label: 'Cup', qty: '×2', material: 'PLA+ (proto) / PETG (durable)',
-    orient: 'Open face down', supports: 'No', note: 'Shell + logo grille + pivot bosses. The 45° back chamfer and grille print support-free.' },
+  // --- Earcup (now a modular split: permanent front frame + removable rear module) ---
+  { group: 'Earcup', base: 'frame', label: 'Front frame', qty: '×2', material: 'PETG',
+    orient: 'Joint face down', supports: 'Light (pivot bosses)', note: 'Permanent frame: baffle seat, earpad lip, the yoke pivots, and the joint socket. The hinge load path lives here.' },
+  { group: 'Earcup', base: 'module', label: 'Rear module', qty: '×2', material: 'PETG',
+    orient: 'Grille face down', supports: 'No', note: 'Removable acoustic shell: cavity + triangular-lattice grille with the flush logo + the joint spigot. Swap it to change damping or run open vs sealed.' },
   { group: 'Earcup', base: 'baffle', label: 'Baffle', qty: '×2', material: 'PETG / PLA+',
-    orient: 'Flat', supports: 'No', note: 'Front plate: pad lip, driver guard + recess, 4 M3 rim holes, vents. Guard prints over the aperture.' },
-  { group: 'Earcup', base: 'grille_dot', label: 'Accent dot', qty: '×2', material: 'Orange filament',
-    orient: 'Any', supports: 'No', note: 'Press-in accent cap at the grille center, the only brand accent. Print in the warm orange.' },
+    orient: 'Flat', supports: 'No', note: 'Front driver-mount plate: driver guard + recess, 4 M3 rim holes, vents. The guard prints over the aperture.' },
   // --- Gimbal ---
   { group: 'Gimbal', base: 'yoke', label: 'Fork-yoke', qty: '×2 (L/R mirror)', material: 'PETG',
-    orient: 'Stress along layer lines', supports: 'No', note: 'Curved wishbone. M3 shoulder-screw pivot, ±20° tilt with a hard stop. Mirror for left/right.' },
+    orient: 'Flat in its plane', supports: 'Minimal', note: 'Wraparound bracket. M3 shoulder-screw pivot, ±20° tilt with a hard stop. Mirror for left/right.' },
   // --- Headband ---
   { group: 'Headband', base: 'slider', label: 'Slider', qty: '×2', material: 'PETG',
-    orient: 'Not specified', supports: 'Not specified', note: 'Clamp block that rides the bow; M3 grub screw sets height.' },
+    orient: 'Swivel bore vertical', supports: 'Light', note: 'Bolts to the bow end tab (2× M3) and carries the fork swivel. Sized for the 33 mm Beyer band.' },
   { group: 'Headband', base: 'headband_pad', label: 'Headband pad', qty: '×1', material: 'Foam or printed TPU',
-    orient: 'Not specified', supports: 'Not specified', note: 'Rough-draft crown cushion; channel grips the bow. Form/retention TBD.' },
+    orient: 'Arch on its side', supports: 'Light', note: 'Rough-draft crown cushion; the channel grips the bow. Form/retention TBD.' },
   { group: 'Headband', base: 'bow', label: 'Head bow', qty: '×1', bought: true, material: 'Beyerdynamic Metal Head Bow (~$11) or DIY 1095 spring steel',
     orient: '—', supports: '—', note: 'NOT printed: the sprung headband is a bought/formed metal part (reference only).' },
   // --- Optional ---
+  { group: 'Optional', base: 'grille_dot', label: 'Logo accent cap', qty: 'optional', material: 'Accent filament',
+    orient: 'Any', supports: 'No', note: 'Optional press-in cap at the grille centre. The logo is flush single-colour by default — add this only if you want a contrasting accent.' },
   { group: 'Optional', base: 'adapter_ring', label: 'Driver adapter ring', qty: 'optional', material: 'PETG',
-    orient: 'Flat', supports: 'No', note: 'Step-down ring to host a smaller driver in a larger baffle, NOT acoustically neutral.' },
+    orient: 'Flat', supports: 'No', note: 'Step-down ring to host a smaller driver in a larger baffle. NOT acoustically neutral.' },
 ];
 
 const GROUP_ORDER = ['Earcup', 'Gimbal', 'Headband', 'Optional'];
 const GROUP_NOTE = {
   Gimbal: 'Plus the bought hardware per pivot (M3 shoulder screws + brass heat-set inserts). See the bill of materials.',
+  Earcup: 'The earcup is a modular split — the rear module twist-/bolt-fits to the front frame, so you can swap the grille or change damping without reprinting the frame.',
 };
 const grouped = GROUP_ORDER
   .map((g) => ({ group: g, parts: PARTS.filter((p) => p.group === g) }))
@@ -49,7 +54,12 @@ const grouped = GROUP_ORDER
           <article class={`pg-card${p.bought ? ' pg-bought' : ''}`}>
             {p.bought
               ? <div class="pg-noimg">Bought part</div>
-              : <img class="pg-img" src={`${R}/${p.base}_iso.png`} alt={`${p.label}, 3D render`} loading="lazy" decoding="async" width="360" height="360" />}
+              : (
+                <div class="pg-media" data-glb={`${M}/${p.base}.glb`} data-label={p.label}>
+                  <img class="pg-img" src={`${R}/${p.base}_iso.png`} alt={`${p.label}, 3D render`} loading="lazy" decoding="async" width="360" height="360" />
+                  <button type="button" class="pg-3d" aria-label={`View ${p.label} in 3D`}>⤢ View in 3D</button>
+                </div>
+              )}
             <div class="pg-body">
               <h4 class="pg-name">{p.label}<span class="pg-qty">{p.qty}</span></h4>
               <dl class="pg-meta">
@@ -66,14 +76,56 @@ const grouped = GROUP_ORDER
   ))}
 </div>
 
+<script>
+  // Load Google model-viewer once, then wire each card's "View in 3D" button to
+  // swap the static poster for a live model-viewer on the per-part GLB.
+  if (!customElements.get('model-viewer')) {
+    const s = document.createElement('script');
+    s.type = 'module';
+    s.src = 'https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js';
+    document.head.appendChild(s);
+  }
+  const wire = () => document.querySelectorAll('.pg-media .pg-3d').forEach((btn) => {
+    if (btn.dataset.wired) return;
+    btn.dataset.wired = '1';
+    btn.addEventListener('click', () => {
+      const media = btn.closest('.pg-media');
+      if (!media || media.dataset.live) return;
+      media.dataset.live = '1';
+      const mv = document.createElement('model-viewer');
+      mv.setAttribute('src', media.dataset.glb);
+      mv.setAttribute('camera-controls', '');
+      mv.setAttribute('auto-rotate', '');
+      mv.setAttribute('auto-rotate-delay', '0');
+      mv.setAttribute('environment-image', 'neutral');
+      mv.setAttribute('exposure', '1.15');
+      mv.setAttribute('shadow-intensity', '0.4');
+      mv.setAttribute('alt', (media.dataset.label || 'part') + ' — 3D model');
+      mv.className = 'pg-mv';
+      media.replaceChildren(mv);
+    });
+  });
+  if (document.readyState !== 'loading') wire();
+  else document.addEventListener('DOMContentLoaded', wire);
+</script>
+
 <style>
   .parts-gallery { margin: 1.5rem 0; display: grid; gap: 1.75rem; }
   .pg-group-title { margin: 0 0 0.25rem; font-size: 1.05rem; }
   .pg-group-note { margin: 0 0 0.75rem; font-size: 0.82rem; color: var(--sl-color-gray-3); }
   .pg-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 1rem; }
   .pg-card { border: 1px solid var(--sl-color-gray-5); border-radius: 10px; overflow: hidden; display: flex; flex-direction: column; }
-  .pg-img, .pg-noimg { width: 100%; aspect-ratio: 1 / 1; background: #f7f7f5; display: block; object-fit: contain; }
-  .pg-noimg { display: flex; align-items: center; justify-content: center; color: #8a93a0; font-size: 0.85rem; border-bottom: 1px solid var(--sl-color-gray-5); }
+  .pg-media { position: relative; width: 100%; aspect-ratio: 1 / 1; background: #f7f7f5; }
+  .pg-img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; display: block; }
+  .pg-3d {
+    position: absolute; left: 50%; bottom: 0.5rem; transform: translateX(-50%);
+    font-size: 0.75rem; padding: 0.28rem 0.65rem; border: 1px solid #cfd2cf;
+    border-radius: 6px; background: rgba(255, 255, 255, 0.9); color: #2d3748;
+    cursor: pointer; backdrop-filter: blur(2px);
+  }
+  .pg-3d:hover { border-color: #ea580c; color: #ea580c; }
+  .pg-mv { width: 100%; height: 100%; background: #f7f7f5; --poster-color: transparent; }
+  .pg-noimg { width: 100%; aspect-ratio: 1 / 1; background: #f7f7f5; display: flex; align-items: center; justify-content: center; color: #8a93a0; font-size: 0.85rem; border-bottom: 1px solid var(--sl-color-gray-5); }
   .pg-bought { border-left: 3px solid #9aa3af; }
   .pg-body { padding: 0.7rem 0.8rem 0.85rem; display: grid; gap: 0.45rem; }
   .pg-name { margin: 0; font-size: 0.95rem; display: flex; justify-content: space-between; align-items: baseline; gap: 0.5rem; }

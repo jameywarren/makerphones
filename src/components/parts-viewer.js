@@ -7,9 +7,10 @@
 import * as THREE from 'three';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
+import { RoomEnvironment } from 'three/examples/jsm/environments/RoomEnvironment.js';
 
-const K_LOCAL = 1.1;   // separation of parts WITHIN a sub-assembly at full explode
-const K_GROUP = 0.45;  // separation of sub-assemblies from each other
+const K_LOCAL = 2.8;   // separation of parts WITHIN a sub-assembly at full explode
+const K_GROUP = 1.1;   // separation of sub-assemblies from each other
 
 export function initPartsViewer(root) {
   const canvas = root.querySelector('[data-pv-canvas]');
@@ -21,7 +22,20 @@ export function initPartsViewer(root) {
   const groupsEl = root.querySelector('[data-pv-groups]');
   const resetEl = root.querySelector('[data-pv-reset]');
   const statusEl = root.querySelector('[data-pv-status]');
+  const fsEl = root.querySelector('[data-pv-fullscreen]');
   const setStatus = (t) => { if (statusEl) statusEl.textContent = t; };
+
+  // Fullscreen toggle — wired up-front (independent of the WebGL lazy-start). The
+  // canvas re-sizes via its ResizeObserver when the stage grows/shrinks.
+  if (fsEl) {
+    fsEl.addEventListener('click', () => {
+      if (document.fullscreenElement) (document.exitFullscreen || document.webkitExitFullscreen)?.call(document);
+      else (root.requestFullscreen || root.webkitRequestFullscreen)?.call(root);
+    });
+    document.addEventListener('fullscreenchange', () => {
+      fsEl.textContent = document.fullscreenElement === root ? '✕ Exit fullscreen' : '⤢ Fullscreen';
+    });
+  }
 
   // Lazy: don't spin up WebGL until the viewer scrolls near the viewport.
   let started = false;
@@ -40,13 +54,18 @@ export function initPartsViewer(root) {
     renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
     renderer.outputColorSpace = THREE.SRGBColorSpace;
     renderer.toneMapping = THREE.ACESFilmicToneMapping;
-    renderer.toneMappingExposure = 1.1;
+    renderer.toneMappingExposure = 1.3;
 
     const scene = new THREE.Scene();
     const camera = new THREE.PerspectiveCamera(38, 1, 0.1, 100000);
-    scene.add(new THREE.HemisphereLight(0xffffff, 0x40424a, 2.2));
-    const key = new THREE.DirectionalLight(0xffffff, 2.4); key.position.set(1, 1.4, 1.2); scene.add(key);
-    const fill = new THREE.DirectionalLight(0xffffff, 0.8); fill.position.set(-1.2, 0.5, -1.0); scene.add(fill);
+    // Image-based lighting (a neutral room) so PBR parts read evenly and BRIGHT —
+    // the bare directional lights here looked darker than the model-viewer preview,
+    // which lifts the model with a default environment. This matches that.
+    const pmrem = new THREE.PMREMGenerator(renderer);
+    scene.environment = pmrem.fromScene(new RoomEnvironment(), 0.04).texture;
+    scene.add(new THREE.HemisphereLight(0xffffff, 0x40424a, 1.6));
+    const key = new THREE.DirectionalLight(0xffffff, 1.8); key.position.set(1, 1.4, 1.2); scene.add(key);
+    const fill = new THREE.DirectionalLight(0xffffff, 0.7); fill.position.set(-1.2, 0.5, -1.0); scene.add(fill);
 
     // On-demand render (throttled to one per animation frame). Defined BEFORE the
     // controls listener so the first controls.update()'s 'change' can call it safely.

@@ -18,6 +18,7 @@ const {
 <div class="parts-viewer not-content" data-glb={glb} data-groups={groups}>
   <div class="pv-stage">
     <canvas data-pv-canvas></canvas>
+    <button type="button" class="pv-fs" data-pv-fullscreen aria-label="Toggle fullscreen">⤢ Fullscreen</button>
     <p class="pv-status" data-pv-status aria-live="polite">Scroll into view to load · drag to orbit</p>
   </div>
   <div class="pv-controls">
@@ -43,12 +44,23 @@ const {
   /* Hardcoded neutral studio backdrop (like the spec-page teaser) so the charcoal
      parts always read, in light or dark site themes. */
   .pv-stage {
-    position: relative; width: 100%; height: 460px;
+    position: relative; width: 100%; height: 520px;
     background: #f7f7f5; border: 1px solid #e4e4df; border-left: 4px solid #ea580c;
     border-radius: 10px; overflow: hidden;
   }
   .pv-stage canvas { width: 100%; height: 100%; display: block; touch-action: none; cursor: grab; }
   .pv-stage canvas:active { cursor: grabbing; }
+  /* Fullscreen button — overlay, top-right of the stage. */
+  .pv-fs {
+    position: absolute; top: 0.6rem; right: 0.6rem; z-index: 2;
+    font-size: 0.78rem; padding: 0.3rem 0.62rem; border: 1px solid #cfd2cf;
+    border-radius: 6px; background: rgba(255, 255, 255, 0.88); color: #2d3748;
+    cursor: pointer; backdrop-filter: blur(2px);
+  }
+  .pv-fs:hover { border-color: #ea580c; color: #ea580c; }
+  /* In fullscreen, let the stage fill the screen and keep the controls below it. */
+  .parts-viewer:fullscreen { background: #f7f7f5; padding: 1rem; box-sizing: border-box; display: flex; flex-direction: column; gap: 0.75rem; }
+  .parts-viewer:fullscreen .pv-stage { flex: 1 1 auto; height: auto; }
   .pv-status { position: absolute; left: 0.8rem; bottom: 0.55rem; margin: 0; font-size: 0.8rem; color: #5b6573; pointer-events: none; }
   .pv-controls { display: flex; flex-wrap: wrap; align-items: center; gap: 0.5rem 1.2rem; }
   .pv-explode-row { display: flex; align-items: center; gap: 0.6rem; flex: 1 1 280px; font-size: 0.85rem; }
