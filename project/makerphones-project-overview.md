@@ -1,6 +1,6 @@
 # MakerPhones — Project Overview
 
-**Version 2.0 · June 11, 2026**
+**Version 2.1 · June 26, 2026**
 
 *Ported from the January 2026 planning doc and rewritten to resource mode. The original (commerce-forward) version is preserved verbatim in `_source/makerphones-project-overview.md`. Positioning, the canonical bio, and voice rules live in `Project-Compass.md` — that doc wins on any conflict.*
 
@@ -16,7 +16,7 @@
 
 The parts/kit store, pricing, and all commerce are **parked** — deferred until wholesale suppliers exist. The manual's content stays portable (Markdown + frontmatter with frozen handles) so a Shopify cutover is a deterministic conversion plus a redirect map when that day comes. Nothing on the site should build toward, hint at, or depend on commerce until it's reactivated.
 
-**Status: complete — 30 of 30 chapters plus all five appendices written and live.**
+**Status: complete — 32 of 32 chapters, all six appendices, and six build guides written and live.**
 
 ## The core problem
 
@@ -33,7 +33,7 @@ The existing resources — Instructables one-offs, Head-Fi's scattered depth, Ho
 
 ## The solution (resource mode)
 
-1. **The Reference Manual** — 30 chapters in six parts (Fundamentals → Components & Materials → Design & Build → Measurement & Tuning → Advanced → Special Topics) plus five appendices. A structured learning path from first principles to original designs.
+1. **The Reference Manual** — 32 chapters in six parts (Fundamentals → Components & Materials → Design & Build → Measurement & Tuning → Advanced → Special Topics) plus six appendices and six build guides. A structured learning path from first principles to original designs.
 2. **Practical sourcing knowledge** — actual suppliers, actual parts, budget measurement setups ($100–500 instead of $10k). Verified, never invented.
 3. **Professional knowledge synthesis** — best practices from forums, papers, and manufacturers, filtered through real industry experience and explained plainly.
 
@@ -90,7 +90,7 @@ This means: production experience at scale, thousands of headphones tested, manu
 
 Resource mode succeeds on usefulness and credibility, not revenue:
 
-- The manual gets finished — 30 chapters plus appendices, every one meeting the style guide.
+- The manual gets finished — 32 chapters plus appendices and build guides, every one meeting the style guide.
 - Readers report actually learning and building successfully.
 - External sites and communities link to it as the reference for DIY headphone design.
 - The content holds up — facts verified, corrections tracked, nothing rotting silently.
@@ -122,4 +122,4 @@ MakerPhones is the resource I wish existed when I started. It's sharing the know
 **Project start:** January 2026
 **Project lead:** Jamey Warren
 **Legal entity:** Free River Studios LLC
-**Status:** Resource mode — manual complete: 30/30 chapters + 5/5 appendices live
+**Status:** Resource mode — manual complete: 32/32 chapters + 6/6 appendices + 6 build guides live
