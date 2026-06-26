@@ -10,11 +10,9 @@ const R = 'https://makerphones.github.io/daily-driver/renders';
 const M = 'https://makerphones.github.io/daily-driver/models';
 
 const PARTS = [
-  // --- Earcup (now a modular split: permanent front frame + removable rear module) ---
-  { group: 'Earcup', base: 'frame', label: 'Front frame', qty: '×2', material: 'PETG',
-    orient: 'Joint face down', supports: 'Light (pivot bosses)', note: 'Permanent frame: baffle seat, earpad lip, the yoke pivots, and the joint socket. The hinge load path lives here.' },
-  { group: 'Earcup', base: 'module', label: 'Rear module', qty: '×2', material: 'PETG',
-    orient: 'Grille face down', supports: 'No', note: 'Removable acoustic shell: cavity + triangular-lattice grille with the flush logo + the joint spigot. Swap it to change damping or run open vs sealed.' },
+  // --- Earcup (one piece) ---
+  { group: 'Earcup', base: 'cup', label: 'Cup', qty: '×2', material: 'PETG',
+    orient: 'Grille face down', supports: 'Light (pivot bosses)', note: 'One-piece earcup: triangular-lattice grille with the flush logo, buttressed baffle bosses, the yoke pivot bosses, and the earpad retaining lip. Damping is accessed from the front (baffle off).' },
   { group: 'Earcup', base: 'baffle', label: 'Baffle', qty: '×2', material: 'PETG / PLA+',
     orient: 'Flat', supports: 'No', note: 'Front driver-mount plate: driver guard + recess, 4 M3 rim holes, vents. The guard prints over the aperture.' },
   // --- Gimbal ---
@@ -37,7 +35,6 @@ const PARTS = [
 const GROUP_ORDER = ['Earcup', 'Gimbal', 'Headband', 'Optional'];
 const GROUP_NOTE = {
   Gimbal: 'Plus the bought hardware per pivot (M3 shoulder screws + brass heat-set inserts). See the bill of materials.',
-  Earcup: 'The earcup is a modular split — the rear module twist-/bolt-fits to the front frame, so you can swap the grille or change damping without reprinting the frame.',
 };
 const grouped = GROUP_ORDER
   .map((g) => ({ group: g, parts: PARTS.filter((p) => p.group === g) }))
