@@ -146,7 +146,7 @@ export const APPENDIX_HANDLES = [
 /**
  * Build guides — hands-on companion builds (type: build-guide),
  * plus the design specs behind them (same type, no time_estimate).
- * Like appendices: no nav numbering, outside the 1–30 chain,
+ * Like appendices: no nav numbering, outside the 1–32 chain,
  * resolved in byHandle so cross-references link correctly.
  */
 export const BUILD_GUIDE_HANDLES = [
