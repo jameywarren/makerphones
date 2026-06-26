@@ -1,6 +1,6 @@
 # MakerPhones
 
-**Version 1.0 · June 11, 2026**
+**Version 1.1 · June 26, 2026**
 
 The MakerPhones Reference Manual — an open reference for designing and
 building your own headphones. Astro + Starlight, deployed to GitHub Pages
@@ -52,9 +52,11 @@ Deploys on push to `main` via `.github/workflows/deploy.yml`
 
 ## Status
 
-**All 32 chapters, six appendices, and three build guides live**
+**All 32 chapters, six appendices, and six build guides live**
 under `/learn/` — the manual is complete, with hands-on companion
-builds (Your First Build, Simple Open-Back, Closed-Back Studio). Handles are frozen per the Content &
+builds (Your First Build, Simple Open-Back, Closed-Back Studio) and the
+Daily Driver build guides (Design Spec, Parts, Designing Headphones with
+AI). Handles are frozen per the Content &
 Style Guide appendix (`_source/MakerPhones-Content-Style-Guide.md`).
 
 To add a chapter: write `src/content/docs/learn/<handle>.md` with the
