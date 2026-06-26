@@ -54,11 +54,11 @@ Deploys on push to `main` via `.github/workflows/deploy.yml`
 
 ## Status
 
-**All 32 chapters, six appendices, and six build guides live**
-under `/learn/` — the manual is complete, with hands-on companion
-builds (Your First Build, Simple Open-Back, Closed-Back Studio) and the
-Daily Driver build guides (Design Spec, Parts, Designing Headphones with
-AI). Handles are frozen per the Content &
+**All 32 chapters, six appendices, and seven build guides live**
+under `/learn/` — the manual is complete, with a printer buying guide
+(Choosing a 3D Printer), hands-on companion builds (Your First Build,
+Simple Open-Back, Closed-Back Studio) and the Daily Driver build guides
+(Design Spec, Parts, Designing Headphones with AI). Handles are frozen per the Content &
 Style Guide appendix (`_source/MakerPhones-Content-Style-Guide.md`).
 
 To add a chapter: write `src/content/docs/learn/<handle>.md` with the
