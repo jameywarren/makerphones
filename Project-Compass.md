@@ -1,6 +1,6 @@
 # MakerPhones — Project Compass
 
-**Version 1.1 · June 11, 2026** *(1.1: numbering rule updated for the v2 design — decimal numbers allowed in nav chrome)*
+**Version 1.2 · June 26, 2026** *(1.2: "The manual" counts reconciled to the filesystem — 32 chapters, 6 appendices, 6 build guides; chapter index range corrected to 1–32. 1.1: numbering rule updated for the v2 design — decimal numbers allowed in nav chrome)*
 
 *The single source of positioning, voice, and author bio for chat sessions. The repo is the source of truth for everything else (content, site, detailed docs). Keep only this + the voice/content rules + the slug reference in project knowledge; everything else lives in git.*
 
@@ -29,7 +29,7 @@ Clear, approachable, credible — readable by a first-time builder, grounded in 
 
 ## Content rules that don't change
 
-- Chapter titles (H1) stay **clean — no numbers**. Decimal numbers (1.1–6.4, Part.WithinPartIndex) appear in **nav chrome only**: sidebar, contents, breadcrumb, prev/next, on-page TOC. No numbers or part-references in body prose. (The frontmatter `chapter` field is the internal global 1–30 index — never displayed.)
+- Chapter titles (H1) stay **clean — no numbers**. Decimal numbers (1.1–6.4, Part.WithinPartIndex) appear in **nav chrome only**: sidebar, contents, breadcrumb, prev/next, on-page TOC. No numbers or part-references in body prose. (The frontmatter `chapter` field is the internal global 1–32 index — never displayed.)
 - Cross-references use **natural language**, never "Chapter 7" or "see 2.3."
 - Target **~1,200–1,800 words** per chapter.
 - Structure: why it matters → concept → technical detail → practical application → **Common Mistakes** → **What's Next**.
@@ -38,7 +38,7 @@ Clear, approachable, credible — readable by a first-time builder, grounded in 
 
 ## The manual
 
-30 chapters in six parts — Fundamentals → Components & Materials → Design & Build → Measurement & Tuning → Advanced → Special Topics — plus five appendices. **State: complete — 30 of 30 chapters, all five appendices, and three build guides written and live.**
+32 chapters in six parts — Fundamentals → Components & Materials → Design & Build → Measurement & Tuning → Advanced → Special Topics — plus six appendices. **State: complete — 32 of 32 chapters, all six appendices, and six build guides written and live.**
 
 ## Relationship to Warren Labs
 
