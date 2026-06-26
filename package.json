@@ -16,6 +16,7 @@
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
+    "book": "astro build && node scripts/to-book/collect.mjs",
     "astro": "astro"
   }
 }

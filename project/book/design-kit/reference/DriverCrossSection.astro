@@ -1,0 +1,88 @@
+---
+/**
+ * FIG 01 — Dynamic driver cross-section (animated: diaphragm
+ * excursion + radiating pressure waves). From the Claude Design
+ * diagram set; geometry as designed, hexes mapped to --mp-* tokens.
+ */
+import { arcPath, angleDeg, arrowHead } from './geometry';
+
+const cy = 240;
+const ink = 'var(--mp-charcoal)';
+const accent = 'var(--mp-accent)';
+const dark = 'var(--mp-ink)';
+const label = 'var(--mp-meta)';
+const faint = 'var(--mp-faint)';
+const lightFill = 'color-mix(in srgb, var(--mp-charcoal) 8%, transparent)';
+
+const exc = arrowHead(336, cy, 0, 6);
+const excBack = arrowHead(300, cy, 180, 6);
+---
+
+<svg
+  viewBox="0 44 720 396"
+  class="mp-dgm"
+  role="img"
+  aria-label="Cross-section of a dynamic driver: magnets and pole piece drive a voice coil attached to the diaphragm, which radiates pressure waves"
+>
+  <rect x="140" y="140" width="18" height="200" fill={lightFill} stroke={ink} stroke-width="1.5"></rect>
+  <rect x="158" y="212" width="80" height="56" fill={lightFill} stroke={ink} stroke-width="1.5"></rect>
+  <rect x="158" y="140" width="56" height="48" fill={dark}></rect>
+  <rect x="158" y="292" width="56" height="48" fill={dark}></rect>
+  <rect x="214" y="140" width="24" height="48" fill={lightFill} stroke={ink} stroke-width="1.5"></rect>
+  <rect x="214" y="292" width="24" height="48" fill={lightFill} stroke={ink} stroke-width="1.5"></rect>
+
+  <line x1="238" y1="150" x2="322" y2="108" stroke={ink} stroke-width="2"></line>
+  <line x1="238" y1="330" x2="322" y2="372" stroke={ink} stroke-width="2"></line>
+  <circle cx="322" cy="108" r="2.5" fill={ink}></circle>
+  <circle cx="322" cy="372" r="2.5" fill={ink}></circle>
+
+  <path d="M 322 108 Q 338 120 320 132" fill="none" stroke={ink} stroke-width="1.5"></path>
+  <path d="M 322 372 Q 338 360 320 348" fill="none" stroke={ink} stroke-width="1.5"></path>
+
+  <g class="mp-osc">
+    <rect x="222" y="190" width="12" height="22" fill={ink}></rect>
+    <rect x="222" y="268" width="12" height="22" fill={ink}></rect>
+    <line x1="234" y1="196" x2="258" y2="196" stroke={ink} stroke-width="1.5"></line>
+    <line x1="234" y1="284" x2="258" y2="284" stroke={ink} stroke-width="1.5"></line>
+    <path d="M 258 196 Q 286 172 320 132" fill="none" stroke={accent} stroke-width="2.5"></path>
+    <path d="M 258 284 Q 286 308 320 348" fill="none" stroke={accent} stroke-width="2.5"></path>
+    <path d="M 258 196 A 46 46 0 0 1 258 284" fill="color-mix(in srgb, var(--mp-accent) 6%, transparent)" stroke={accent} stroke-width="2.5"></path>
+  </g>
+
+  <line x1="300" y1={cy} x2="336" y2={cy} stroke={accent} stroke-width="1.5"></line>
+  <polygon points={exc.points} transform={exc.transform} fill={accent}></polygon>
+  <polygon points={excBack.points} transform={excBack.transform} fill={accent}></polygon>
+
+  <path class="mp-wave-out" d={arcPath(348, cy, 30, -52, 52)} fill="none" stroke={accent} stroke-width="1.8" opacity="0.85"></path>
+  <path class="mp-wave-out" style="animation-delay: -0.8s;" d={arcPath(348, cy, 58, -52, 52)} fill="none" stroke={accent} stroke-width="1.8" opacity="0.55"></path>
+  <path class="mp-wave-out" style="animation-delay: -1.6s;" d={arcPath(348, cy, 86, -52, 52)} fill="none" stroke={accent} stroke-width="1.8" opacity="0.3"></path>
+
+  <text x="360" y="84" font-size="11" font-weight="500" fill={label}>BASKET</text>
+  <line x1="356" y1="88" x2="292" y2="123" stroke={faint} stroke-width="1"></line>
+  <circle cx="292" cy="123" r="2.2" fill={faint}></circle>
+  <text x="420" y="128" font-size="11" font-weight="500" fill={label}>DIAPHRAGM</text>
+  <line x1="414" y1="124" x2="307" y2="146" stroke={faint} stroke-width="1"></line>
+  <circle cx="307" cy="146" r="2.2" fill={faint}></circle>
+  <text x="62" y="168" font-size="11" font-weight="500" fill={label}>MAGNET</text>
+  <line x1="120" y1="164" x2="160" y2="162" stroke={faint} stroke-width="1"></line>
+  <circle cx="160" cy="162" r="2.2" fill={faint}></circle>
+  <text x="40" y="246" font-size="11" font-weight="500" fill={label}>MAGNET GAP</text>
+  <line x1="114" y1="250" x2="218" y2="276" stroke={faint} stroke-width="1"></line>
+  <circle cx="218" cy="276" r="2.2" fill={faint}></circle>
+  <text x="300" y="400" font-size="11" font-weight="500" fill={label}>VOICE COIL</text>
+  <line x1="296" y1="396" x2="231" y2="293" stroke={faint} stroke-width="1"></line>
+  <circle cx="231" cy="293" r="2.2" fill={faint}></circle>
+  <text x="468" y="328" font-size="11" font-weight="500" fill={label}>PRESSURE WAVES</text>
+  <line x1="462" y1="324" x2="412" y2="304" stroke={faint} stroke-width="1"></line>
+  <circle cx="412" cy="304" r="2.2" fill={faint}></circle>
+
+  <text x="24" y="430" font-size="10" font-weight="500" fill={label} opacity="0.9">ALTERNATING COIL CURRENT FORCES THE DIAPHRAGM IN AND OUT — AIR BECOMES SOUND</text>
+</svg>
+
+<style>
+  svg {
+    max-width: 100%;
+    height: auto;
+    display: block;
+  }
+</style>
