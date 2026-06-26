@@ -1,6 +1,6 @@
 # MakerPhones — Project Compass
 
-**Version 1.4 · June 26, 2026** *(1.4: build-guide count updated to 7 — added the "Choosing a 3D Printer for Headphones" buying guide. 1.3: content-format line updated to the current Astro + Starlight / GitHub Pages stack — Shopify mapping marked parked, not current; slug pointer aimed at the Content & Style Guide handle appendix. 1.2: "The manual" counts reconciled to the filesystem — 32 chapters, 6 appendices, 6 build guides; chapter index range corrected to 1–32. 1.1: numbering rule updated for the v2 design — decimal numbers allowed in nav chrome)*
+**Version 1.5 · June 26, 2026** *(1.5: chapter count corrected to 33 — `measuring-raw-drivers` is counted in the numbered chain (manual.ts / astro.config), so Part 4 is eight chapters and the manual is 33; index range 1–33. 1.4: build-guide count updated to 7 — added the "Choosing a 3D Printer for Headphones" buying guide. 1.3: content-format line updated to the current Astro + Starlight / GitHub Pages stack — Shopify mapping marked parked, not current; slug pointer aimed at the Content & Style Guide handle appendix. 1.2: "The manual" counts reconciled to the filesystem — 32 chapters, 6 appendices, 6 build guides; chapter index range corrected to 1–32. 1.1: numbering rule updated for the v2 design — decimal numbers allowed in nav chrome)*
 
 *The single source of positioning, voice, and author bio for chat sessions. The repo is the source of truth for everything else (content, site, detailed docs). Keep only this + the voice/content rules + the slug reference in project knowledge; everything else lives in git.*
 
@@ -38,7 +38,7 @@ Clear, approachable, credible — readable by a first-time builder, grounded in 
 
 ## The manual
 
-32 chapters in six parts — Fundamentals → Components & Materials → Design & Build → Measurement & Tuning → Advanced → Special Topics — plus six appendices. **State: complete — 32 of 32 chapters, all six appendices, and seven build guides written and live.**
+33 chapters in six parts — Fundamentals → Components & Materials → Design & Build → Measurement & Tuning → Advanced → Special Topics — plus six appendices. **State: complete — 33 of 33 chapters, all six appendices, and seven build guides written and live.**
 
 ## Relationship to Warren Labs
 

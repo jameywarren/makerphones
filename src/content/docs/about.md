@@ -36,5 +36,5 @@ story and its measurements will follow here as the build progresses.
 
 ## The manual
 
-Six parts, 32 chapters, published openly as they're finished: [browse the contents](/contents/).
+Six parts, 33 chapters, published openly as they're finished: [browse the contents](/contents/).
 The manual is the product: there's nothing to buy here, and the chapters stay free to read.

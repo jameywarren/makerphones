@@ -17,6 +17,9 @@
     "build": "astro build",
     "preview": "astro preview",
     "book": "astro build && node scripts/to-book/collect.mjs",
+    "book:press": "astro build && node scripts/to-book/collect.mjs --press",
+    "book:pdf": "npm run book && node scripts/to-book/render.mjs",
+    "book:press:pdf": "npm run book:press && node scripts/to-book/render.mjs --press --cmyk",
     "astro": "astro"
   }
 }

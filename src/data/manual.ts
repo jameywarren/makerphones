@@ -4,9 +4,8 @@
  * Handle order matches the Content & Style Guide appendix
  * (_source/Makerphones-Content-Style-Guide.md) verbatim. Nav-chrome
  * decimal numbers (1.1–6.4) derive from position here — they are
- * NEVER stored in content. Titles for written chapters come from
- * frontmatter at build time (see chapterInfo); titles listed here are
- * working titles for chapters that don't exist yet.
+ * NEVER stored in content. Chapter titles come from frontmatter at
+ * build time (see chapterInfo).
  *
  * Part-level descriptions/levels are nav-chrome copy from the v2
  * design handoff.
@@ -20,27 +19,6 @@ export interface ManualPart {
   desc: string;
   handles: string[];
 }
-
-/** Working titles for unwritten chapters (from the frozen outline). */
-const WORKING_TITLES: Record<string, string> = {
-  '3d-design-for-headphones': '3D Design for Headphones',
-  'acoustic-chamber-design': 'Acoustic Chamber Design',
-  'driver-mounting-and-assembly': 'Driver Mounting and Assembly',
-  'damping-strategy-and-application': 'Damping Strategy and Application',
-  'why-measure-headphones': 'Why Measure Headphones',
-  'budget-measurement-setup': 'Budget Measurement Setup',
-  'taking-and-interpreting-measurements': 'Taking and Interpreting Measurements',
-  'tuning-with-damping': 'Tuning with Damping',
-  'advanced-measurement-topics': 'Advanced Measurement Topics',
-  'acoustic-modeling': 'Acoustic Modeling',
-  'resonance-control': 'Resonance Control',
-  'manufacturing-for-consistency': 'Manufacturing for Consistency',
-  'professional-design-insights': 'Professional Design Insights',
-  'bluetooth-integration': 'Bluetooth Integration',
-  'active-noise-cancelling': 'Active Noise Cancelling',
-  'microphone-integration': 'Microphone Integration',
-  'custom-iem-design': 'Custom IEM Design',
-};
 
 export const MANUAL_PARTS: ManualPart[] = [
   {
@@ -206,7 +184,7 @@ export async function getManual(): Promise<{
         num: `${part.num}.${i + 1}`,
         partNum: part.num,
         partTitle: part.title,
-        title: entry?.data.title ?? WORKING_TITLES[handle] ?? handle,
+        title: entry?.data.title ?? handle,
         written: Boolean(entry),
         difficulty: entry?.data.difficulty,
         readTime: entry?.data.read_time,

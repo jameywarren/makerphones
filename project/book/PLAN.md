@@ -176,13 +176,25 @@ build for `#ea580c`.
 
 | Phase | What | Effort | State |
 |-------|------|--------|-------|
-| 0 | Reconcile stale numbers (`WORKING_TITLES`, "32"→33, Compass) | ½ day | ☐ todo |
-| 1 | PDF v0.1 — `scripts/to-book/` + `book.css` + `npm run book` | 1 weekend | ◑ in progress |
-| 2 | Editorial prep — figure numbering, front/back matter, **index** | 1–2 wk | ☐ todo |
+| 0 | Reconcile stale numbers (`WORKING_TITLES`, "32"→33, Compass) | ½ day | ✅ done |
+| 1 | PDF v0.1 — `scripts/to-book/` + `book.css` + `npm run book` | 1 weekend | ✅ done |
+| 2 | Editorial prep — figure numbering ✅, front/back matter ✅, **index** ☐ | 1–2 wk | ◑ index left |
 | 3 | Design system — hand `design-kit/` to Claude Design, wire `book.css` | parallel | ☐ todo |
-| 4 | Print colorways + parts-viewer stills | 3–5 d | ☐ todo |
-| 5 | Press file (PDF/X CMYK) + POD setup (KDP + Ingram, ISBN) | 1 wk | ☐ todo |
+| 4 | Print colorways + parts stills — press geometry ✅, interim CMYK accent ✅, stills ☐ | 3–5 d | ◑ stills left |
+| 5 | Press file + POD — `render.mjs --cmyk` + cover scaffold ✅; gs+ICC, accounts, ISBN ☐ | 1 wk | ◑ accounts left |
 | 6 | Proof, correct, publish | 1–2 wk | ☐ todo |
+
+**What's built (2026-06-26):** the whole pipeline runs. `npm run book` →
+`dist/book.html` (Letter, all 47 chapters, Fig. 1–23 + List of Figures,
+title/copyright/contents/preface/colophon). `npm run book:press` →
+`dist/book-press.html` (7×10, 3 mm bleed, crop marks, CMYK-tamed accent).
+`npm run book:pdf` / `book:press:pdf` drive a headless render via
+`scripts/to-book/render.mjs` (needs Chromium via npx + Ghostscript for CMYK —
+not available in the build sandbox, runs on your machine). Cover scaffold +
+spine math in `project/book/cover/`. **Left, and they're the author's calls:**
+the back-of-book **index**, parts-viewer **stills** (GLBs are in
+`builds/daily-driver/docs/models/`), the **real CMYK build** + POD **accounts
+/ ISBN**, and the **design system** (kit is ready to hand off).
 
 **Calendar to first printed proof:** ~3–6 weeks, dominated by the index,
 CMYK figure proofing, and proof shipping — not platform setup.
@@ -192,3 +204,10 @@ CMYK figure proofing, and proof shipping — not platform setup.
 - 2026-06-26 — Plan documented; Track 1 scaffold created
   (`scripts/to-book/collect.mjs`, `src/styles/book.css`, `npm run book`);
   design-kit brief drafted.
+- 2026-06-26 — Pushed both tracks: Phase 0 count reconciliation (dead
+  `WORKING_TITLES` removed; "32"→33 in `contents.mdx` / `about.md` /
+  Compass v1.5); document-wide figure numbering (Fig. 1–23) + List of
+  Figures; preface + colophon + enriched copyright; press mode
+  (`book-press.css`, `npm run book:press`); headless render +
+  CMYK helper (`render.mjs`, `book:pdf` / `book:press:pdf`); cover scaffold
+  (`project/book/cover/`).

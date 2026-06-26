@@ -65,8 +65,12 @@ body { font-family: var(--mp-body); color: var(--mp-ink); }
 .book-title-page .bt-rule { width: 56px; height: 3px; background: var(--mp-accent);
   border: 0; margin: 0 0 2rem; }
 
-.book-copyright { break-after: page; font: 400 10pt/1.6 var(--mp-mono); color: var(--mp-meta); }
+.book-copyright { break-after: page; font: 400 10pt/1.6 var(--mp-mono); color: var(--mp-meta);
+  display: flex; flex-direction: column; justify-content: flex-end; min-height: 80vh; }
 .book-copyright p { margin: 0 0 .6rem; }
+.book-copyright .cr-title { color: var(--mp-charcoal); font-weight: 500; }
+.book-copyright .cr-fill { color: var(--mp-accent); }      /* [imprint] / [ISBN] placeholders */
+.book-copyright code { font-family: var(--mp-mono); }
 
 .book-toc { break-after: page; }
 .book-toc h2 { font: 600 20pt var(--mp-sans); color: var(--mp-charcoal); margin: 0 0 1.4rem; }
@@ -75,6 +79,23 @@ body { font-family: var(--mp-body); color: var(--mp-ink); }
 .book-toc ol { list-style: none; padding: 0; margin: 0; }
 .book-toc li { font: 400 11pt/1.7 var(--mp-body); color: var(--mp-ink);
   border-bottom: 1px solid var(--mp-line); padding: .25rem 0; }
+
+/* ---- list of figures ----------------------------------------------- */
+.book-lof { break-before: page; break-after: page; page: plain; }
+.book-lof h2 { font: 600 20pt var(--mp-sans); color: var(--mp-charcoal); margin: 0 0 1.4rem; }
+.book-lof ol { list-style: none; padding: 0; margin: 0; }
+.book-lof li { font: 400 10.5pt/1.6 var(--mp-body); color: var(--mp-ink); padding: .15rem 0; }
+.book-lof .lof-n { font: 400 9pt var(--mp-mono); color: var(--mp-accent);
+  display: inline-block; min-width: 4.5em; }
+
+/* ---- preface / colophon -------------------------------------------- */
+.book-preface, .book-colophon { break-before: page; page: plain; }
+.book-preface h2, .book-colophon h2 { font: 600 22pt var(--mp-sans);
+  color: var(--mp-charcoal); margin: 0 0 1.2rem; }
+.book-preface p, .book-colophon p { font: 400 10.5pt/1.55 var(--mp-body);
+  color: var(--mp-ink); max-width: 34em; margin: 0 0 .9rem; }
+.book-preface .pf-draft { font-family: var(--mp-mono); font-size: 9pt; color: var(--mp-accent); }
+.book-colophon { color: var(--mp-meta); }
 
 /* ---- part openers --------------------------------------------------- */
 .part-opener {

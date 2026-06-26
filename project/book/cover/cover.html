@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Cover — The Art and Science of Headphone Design</title>
+<!--
+  Parametric full-wrap cover scaffold. SET --spine to the final spine width
+  (see SPEC.md), then render:  pagedjs-cli cover.html -o cover.pdf
+  This is a STARTING POINT for the design phase, not the finished cover.
+  Fonts here are system fallbacks; the real cover should embed the brand
+  fonts (Schibsted Grotesk / Source Serif 4 / JetBrains Mono).
+-->
+<style>
+  :root {
+    /* EDIT THIS — final spine width in inches (page count x paper thickness). */
+    --spine: 0.55in;          /* placeholder: ~260pp KDP white */
+    --trim-w: 7in;
+    --trim-h: 10in;
+    --bleed: 0.125in;
+
+    --ink: #111827;
+    --paper: #faf8f5;
+    --accent: #d2521e;        /* CMYK-tamed orange (matches book-press.css) */
+    --meta: #6b7280;
+  }
+
+  /* wrap = bleed + back + spine + front + bleed  x  bleed + trim + bleed */
+  @page {
+    size: calc(var(--bleed)*2 + var(--trim-w)*2 + var(--spine))
+          calc(var(--bleed)*2 + var(--trim-h));
+    margin: 0;
+    marks: crop cross;
+    bleed: var(--bleed);
+  }
+
+  html, body { margin: 0; }
+  .wrap {
+    display: grid;
+    grid-template-columns: calc(var(--bleed) + var(--trim-w)) var(--spine) calc(var(--trim-w) + var(--bleed));
+    height: calc(var(--bleed)*2 + var(--trim-h));
+    background: var(--paper);
+    color: var(--ink);
+    font-family: 'Schibsted Grotesk', system-ui, sans-serif;
+  }
+  .panel { padding: calc(var(--bleed) + 0.35in); box-sizing: border-box; }
+
+  /* ---- back panel ---- */
+  .back { display: flex; flex-direction: column; justify-content: space-between; }
+  .back .blurb { font-family: 'Source Serif 4', Georgia, serif; font-size: 11pt;
+    line-height: 1.5; max-width: 5in; color: var(--ink); }
+  .back .blurb .lead { font-size: 13pt; color: var(--accent); margin-bottom: .8rem; }
+  .back .barcode { width: 2in; height: 1.2in; border: 1px dashed var(--meta);
+    color: var(--meta); font: 8pt 'JetBrains Mono', monospace; display: flex;
+    align-items: center; justify-content: center; align-self: flex-end; }
+
+  /* ---- spine ---- */
+  .spine { background: var(--ink); color: var(--paper); display: flex;
+    align-items: center; justify-content: center; }
+  .spine .txt { writing-mode: vertical-rl; transform: rotate(180deg);
+    font-size: 11pt; letter-spacing: .04em; white-space: nowrap; }
+  .spine .txt b { color: var(--accent); font-weight: 600; }
+
+  /* ---- front panel ---- */
+  .front { display: flex; flex-direction: column; justify-content: center; }
+  .front .kicker { font: 600 11pt 'JetBrains Mono', monospace; letter-spacing: .14em;
+    text-transform: uppercase; color: var(--accent); }
+  .front .rule { width: 64px; height: 4px; background: var(--accent); margin: 1rem 0 1.4rem; border: 0; }
+  .front .title { font-size: 30pt; line-height: 1.08; font-weight: 600; max-width: 6in; margin: 0; }
+  .front .author { margin-top: auto; font-size: 13pt; color: var(--meta); }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <section class="panel back">
+    <div class="blurb">
+      <p class="lead">A field manual for building real headphones.</p>
+      <p>[Back-cover copy to be written — what the book is, who it's for, what
+      you'll be able to do after reading it. Pull a line or two from the
+      preface and the site's about page.]</p>
+    </div>
+    <div class="barcode">ISBN barcode</div>
+  </section>
+
+  <section class="spine">
+    <div class="txt"><b>The Art and Science of Headphone Design</b> · Jamey Warren</div>
+  </section>
+
+  <section class="panel front">
+    <div class="kicker">Makerphones</div>
+    <hr class="rule">
+    <h1 class="title">The Art and Science of Headphone Design</h1>
+    <div class="author">Jamey Warren</div>
+  </section>
+
+</div>
+</body>
+</html>

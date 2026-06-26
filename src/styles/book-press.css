@@ -1,0 +1,45 @@
+/**
+ * book-press.css — Track 2 press overrides, layered after book.css.
+ *
+ * Inlined by scripts/to-book/collect.mjs ONLY in --press mode
+ * (dist/book-press.html). Turns the screen PDF geometry into a print-ready
+ * page: 7x10 trim, 3mm bleed, and crop/registration marks, plus a
+ * CMYK-tamed accent so the orange survives RGB->CMYK conversion.
+ *
+ * This produces a press-GEOMETRY RGB PDF. The actual CMYK / PDF-X conversion
+ * is a separate Ghostscript step — see scripts/to-book/render.mjs --cmyk and
+ * project/book/PLAN.md (Phase 5). The accent value below is an interim
+ * print-safe approximation; the final CMYK build comes from the design
+ * system (project/book/design-kit/BRIEF.md -> print-tokens.json).
+ */
+
+/* ---- trim, bleed, marks -------------------------------------------- */
+@page {
+  size: 7in 10in;            /* technical-book trim */
+  bleed: 3mm;                /* full-bleed art runs to here */
+  marks: crop cross;         /* crop + registration marks for the printer */
+  margin: 18mm 16mm 20mm 22mm; /* top right bottom left — left = inside/gutter */
+}
+
+/* mirrored margins: wider gutter on the binding edge of each side */
+@page :left  { margin: 18mm 22mm 20mm 16mm; }   /* verso: gutter on the right */
+@page :right { margin: 18mm 16mm 20mm 22mm; }    /* recto: gutter on the left */
+
+/* ---- CMYK-tamed colorway ------------------------------------------- */
+/* #ea580c is out of CMYK gamut (dulls to brick). Pin a tamed orange so the
+ * Ghostscript CMYK pass is predictable. Keep the text/chrome contrast split:
+ * reading-surface orange stays the darker, more printable build. */
+:root {
+  --mp-accent: #d2521e;        /* interim CMYK-safe orange (chrome marks) */
+  --mp-accent-hover: #b9431a;  /* text-bearing orange */
+  --mp-accent-active: #9a3412;
+  --mp-accent-tint: #fbeee6;   /* opaque warm wash (no transparency for press) */
+  --mp-link: var(--mp-accent-hover);
+}
+
+/* rich black for the one dark moment (Daily Driver band) so it doesn't print
+ * as flat, muddy 100% K. The printer's profile honors this 4-color build. */
+.mp-band, .mp-bench, [data-theme] .mp-band { color: #fff; }
+
+/* full-bleed figures: let plate art extend into the 3mm bleed if marked */
+.mp-figure.bleed { margin-left: -16mm; margin-right: -16mm; }
