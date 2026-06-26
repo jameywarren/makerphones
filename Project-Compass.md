@@ -1,6 +1,6 @@
 # MakerPhones — Project Compass
 
-**Version 1.2 · June 26, 2026** *(1.2: "The manual" counts reconciled to the filesystem — 32 chapters, 6 appendices, 6 build guides; chapter index range corrected to 1–32. 1.1: numbering rule updated for the v2 design — decimal numbers allowed in nav chrome)*
+**Version 1.3 · June 26, 2026** *(1.3: content-format line updated to the current Astro + Starlight / GitHub Pages stack — Shopify mapping marked parked, not current; slug pointer aimed at the Content & Style Guide handle appendix. 1.2: "The manual" counts reconciled to the filesystem — 32 chapters, 6 appendices, 6 build guides; chapter index range corrected to 1–32. 1.1: numbering rule updated for the v2 design — decimal numbers allowed in nav chrome)*
 
 *The single source of positioning, voice, and author bio for chat sessions. The repo is the source of truth for everything else (content, site, detailed docs). Keep only this + the voice/content rules + the slug reference in project knowledge; everything else lives in git.*
 
@@ -34,7 +34,7 @@ Clear, approachable, credible — readable by a first-time builder, grounded in 
 - Target **~1,200–1,800 words** per chapter.
 - Structure: why it matters → concept → technical detail → practical application → **Common Mistakes** → **What's Next**.
 - Footer: difficulty, prerequisites, related links.
-- Canonical content format is **Markdown + YAML frontmatter** (frontmatter carries the Shopify mapping). Slugs are frozen — see the slug reference.
+- Canonical content format is **Markdown + YAML frontmatter**, built with Astro + Starlight and deployed to GitHub Pages. Frontmatter carries the manual metadata; it also pre-maps cleanly onto Shopify page fields, kept ready for the *parked* store migration. Slugs are frozen — see the handle appendix in the Content & Style Guide.
 
 ## The manual
 
