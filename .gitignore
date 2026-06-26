@@ -20,3 +20,6 @@ npm-debug.log*
 
 # macOS
 .DS_Store
+
+# editor / harness local config
+.claude/
