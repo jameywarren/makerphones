@@ -50,7 +50,7 @@ This is where DIY gets interesting. For your first build, you have a few options
 
 **Salvage from broken headphones:** The headband and adjustment mechanism are often the hardest parts to design from scratch. A broken headphone with good mechanical components (even if the drivers are blown) is a valuable resource. Thrift stores and eBay are excellent sources.
 
-**3D print your own:** Once you have CAD skills (covered in [3D Design for Headphones](/learn/3d-design-for-headphones/)), you can print adjustment sliders, cups, and other structural components. Use PETG for structural parts: PLA is too brittle for parts that see repeated stress.
+**3D print your own:** Once you have CAD skills (covered in [3D Design for Headphones](/learn/3d-design-for-headphones/)), you can print adjustment sliders, cups, and other structural components. Use PETG for structural parts: PLA is too brittle for parts that see repeated stress. If you're deciding *which* printer to buy, or whether you need one at all, [Choosing a 3D Printer for Headphones](/learn/choosing-a-3d-printer/) breaks down what actually matters for these small parts: the machine recommendations stay current there rather than here.
 
 **Headband kits:** A few suppliers offer headband components. Search "headphone headband parts" on eBay and Amazon. Quality varies dramatically.
 

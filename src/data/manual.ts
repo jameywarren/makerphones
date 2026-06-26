@@ -150,6 +150,7 @@ export const APPENDIX_HANDLES = [
  * resolved in byHandle so cross-references link correctly.
  */
 export const BUILD_GUIDE_HANDLES = [
+  'choosing-a-3d-printer',
   'your-first-build',
   'simple-open-back-build',
   'closed-back-studio-build',

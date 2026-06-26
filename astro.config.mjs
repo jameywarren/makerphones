@@ -83,6 +83,7 @@ const sidebar = [
     label: 'Build Guides',
     items: [
       // Hands-on companion builds — no nav numbering, outside the chapter chain
+      'learn/choosing-a-3d-printer',
       'learn/your-first-build',
       'learn/simple-open-back-build',
       'learn/closed-back-studio-build',
