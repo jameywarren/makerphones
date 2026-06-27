@@ -21,6 +21,13 @@ That background is the reason this manual exists: production experience at scale
 headphones tested, and the kind of manufacturer knowledge that's usually locked behind NDAs,
 written down for makers instead.
 
+### With thanks
+
+Two debts sit behind this manual. I owe my headphone knowledge, specifically, to **Tyll
+Hertsens** of HeadRoom — much of what's here traces back to him. And my real audio-engineering
+education came from **Michael and Eben Grace**: the years I spent at Grace Design, working
+directly under the two brothers, were my true schooling in this craft.
+
 <div class="mp-ph" style="height: 220px; margin: 1.5rem 0;" role="img" aria-label="workshop photo placeholder"><span class="mp-ph-label">workshop photo, real shot coming</span></div>
 
 ## The Daily Driver

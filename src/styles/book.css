@@ -376,6 +376,18 @@ figure, .mp-figure, .sl-markdown-content svg, table { break-inside: avoid; }
 .book-lof li { font: 400 10.5pt/1.7 var(--mp-body); color: var(--mp-ink); display: flex; gap: 10pt; padding: 0.12rem 0; }
 .book-lof .lof-n { font: 400 8.5pt var(--mp-mono); color: var(--mp-accent-text); min-width: 4.5em; flex: none; }
 
+/* dedication — recto, quiet, serif italic, vertically centered */
+.book-dedication { page: plain; break-before: right; break-after: page;
+  display: flex; flex-direction: column; justify-content: center; min-height: 72vh; }
+.book-dedication p { font: italic 400 13pt/1.7 var(--mp-body); color: var(--mp-charcoal);
+  max-width: 32em; margin: 0 0 1rem; }
+
+/* acknowledgments */
+.book-acknowledgments { page: plain; break-before: page; }
+.book-acknowledgments h2 { font: 700 20pt var(--mp-sans); color: var(--mp-charcoal); margin: 0 0 1.2rem; }
+.book-acknowledgments p { font: 400 11pt/1.6 var(--mp-body); color: var(--mp-ink); max-width: 34em; margin: 0 0 12pt; }
+.book-acknowledgments strong { color: var(--mp-charcoal); font-weight: 600; }
+
 /* preface + colophon */
 .book-preface, .book-colophon { page: plain; break-before: page; }
 .book-preface h2, .book-colophon h2 { font: 700 20pt var(--mp-sans); color: var(--mp-charcoal); margin: 0 0 1.2rem; }

@@ -342,6 +342,12 @@ ${pressCss}
   the 3D parts viewer, visit the website.</p>
 </section>
 
+<section class="book-dedication">
+  <p>For Piper and Jessica.</p>
+  <p>For my parents, Curt and Margie, and my sister, Jennifer.</p>
+  <p>And for all my family, near and far.</p>
+</section>
+
 ${toc}
 
 ${lofHtml}
@@ -361,6 +367,21 @@ ${lofHtml}
   <p>Some things on the website can't fit on a page — most of all the
   interactive 3D parts viewer. Where that happens, the book points you to
   makerphones.com.</p>
+</section>
+
+<section class="book-acknowledgments">
+  <h2>Acknowledgments</h2>
+  <p>This book carries a lot of other people's teaching.</p>
+  <p>I owe my understanding of headphones, specifically, to
+  <strong>Tyll Hertsens</strong> of HeadRoom. So much of what's in these pages
+  traces back to him. Thank you, Tyll.</p>
+  <p>My real audio-engineering education came from <strong>Michael and Eben
+  Grace</strong>. Seven years at Grace Design, working directly under the two
+  brothers, taught me more than any classroom could — I've always called it my
+  University of Rock &amp; Roll. Before that, the Conservatory of Recording
+  Arts &amp; Sciences gave me the formal grounding to build on.</p>
+  <p>And to the others — mentors, colleagues, and friends in this small field —
+  whose names I'll keep adding as I remember them: thank you.</p>
 </section>
 
 ${body}
