@@ -39,25 +39,23 @@ html,body{ margin:0; padding:0; background:#fff; }
 .panel.back{ width:var(--back); }
 .panel.front{ width:var(--front); }
 .spine{ position:relative; width:var(--spine); height:10in; background:var(--mp-bg);
-  border-left:1px solid rgba(45,55,72,.12); border-right:1px solid rgba(45,55,72,.12); }
+  border-left:1px solid #dcdad6; border-right:1px solid #dcdad6; }
 
-/* shared chrome */
-.blueprint{ position:absolute; inset:0; pointer-events:none; z-index:0;
-  background-image:linear-gradient(to right,rgba(45,55,72,.07) 1px,transparent 1px),
-    linear-gradient(to bottom,rgba(45,55,72,.07) 1px,transparent 1px);
-  background-size:0.25in 0.25in; }
-.ruler{ height:11px; position:relative; margin:0;
-  background-image:repeating-linear-gradient(to right,var(--mp-line) 0 1px,transparent 1px 14px);
-  border-bottom:1px solid var(--mp-line); }
-.ruler::after{ content:''; position:absolute; left:0; bottom:-1px; width:56px;
-  border-bottom:2px solid var(--cover-accent); }
+/* shared chrome — grid + ruler are inline SVG (vector), not CSS gradients, so
+   Chrome's print-to-PDF keeps them crisp instead of rasterizing to low-res tiles. */
+.blueprint{ position:absolute; inset:0; pointer-events:none; z-index:0; }
+.grid-svg{ position:absolute; inset:0; width:100%; height:100%; }
+/* solid-color rule + orange lead — all vector (no gradient ticks to rasterize) */
+.ruler{ height:0; position:relative; margin:0; border-top:1px solid var(--mp-line); }
+.ruler::after{ content:''; position:absolute; left:0; top:-2px; width:56px; height:0;
+  border-top:3px solid var(--cover-accent); }
 .logo{ display:inline-flex; align-items:center; gap:8px; }
 .logo-name{ font-family:var(--sans); font-weight:700; font-size:15px; letter-spacing:-.02em; color:var(--mp-charcoal); }
 .kicker-foot{ font-size:10.5px; letter-spacing:.18em; text-transform:uppercase; color:var(--mp-meta); }
 
 /* FR plate */
-.fr-plate{ margin:0; background:var(--mp-surface); border:1px solid var(--mp-line); border-radius:8px;
-  padding:20px 22px 14px; position:relative; box-shadow:var(--shadow-warm); }
+.fr-plate{ margin:0; background:var(--mp-surface); border:1.5px solid var(--fr-grid); border-radius:8px;
+  padding:22px 24px 15px; position:relative; }
 .fr-holder{ width:100%; line-height:0; }
 .fr-holder svg{ display:block; width:100%; height:auto; }
 .fr-holder text.ax,.fr-holder .ax{ font-family:var(--mono); font-size:11px; fill:var(--mp-meta); letter-spacing:.04em; }
@@ -76,8 +74,10 @@ html,body{ margin:0; padding:0; background:#fff; }
 .cf-a .cf-inner{ flex:1; display:flex; flex-direction:column; justify-content:space-between; padding:0.66in 0.62in 0.56in; }
 .cf-title{ font-family:var(--sans); font-weight:700; color:var(--mp-charcoal); letter-spacing:-.022em; margin:0; }
 .cf-title .tl{ display:block; }
-.cf-a .ruler{ margin-bottom:22px; }
+.cf-a .ruler{ margin-bottom:26px; }
 .cf-a .cf-title{ font-size:56px; line-height:.97; }
+/* bleed the FR plate wider than the text column so the curve reads as the hero */
+.cf-a .fr-plate{ margin:0 -0.32in; }
 .cf-a .cf-tag{ font-family:var(--body); font-style:italic; font-size:15.5px; line-height:1.45; color:var(--mp-meta); margin:18px 0 0; max-width:30ch; }
 .cf-a .cf-foot{ display:flex; align-items:flex-end; justify-content:space-between; }
 .foot-r{ display:flex; flex-direction:column; align-items:flex-end; gap:7px; text-align:right; }

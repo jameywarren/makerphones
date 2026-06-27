@@ -121,6 +121,7 @@ async function main() {
       '-dBATCH', '-dNOPAUSE', '-dSAFER', '-sDEVICE=pdfwrite',
       '-dProcessColorModel=/DeviceCMYK', '-sColorConversionStrategy=CMYK',
       '-dOverrideICC=true', '-dRenderIntent=1',
+      '-dTransferFunctionInfo=/Remove',          // strip transfer curves (IngramSpark preflight warning)
       `-sOutputFile=${cmykPdf}`, rgbPdf,
     ]);
     console.log(`  ✓ ${path.relative(ROOT, cmykPdf)}  (CMYK — KDP-ready)`);

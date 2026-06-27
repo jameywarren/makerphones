@@ -28,6 +28,17 @@
       '<span class="logo-name" style="font-weight:600;font-size:12px;letter-spacing:.2em;' +
       'text-transform:uppercase;color:var(--mp-charcoal)">Warren Labs</span></span>';
   }
+  /* Faint engineering grid as EXPLICIT inline-SVG lines (not a <pattern> or CSS
+   * gradient — Chrome rasterizes those to low-res tiles in print-to-PDF; explicit
+   * <line> primitives stay vector). 0.25in cells over the 7×10in panel. */
+  function gridSVG() {
+    var W = 700, H = 1000, step = 25, l = '';
+    for (var x = step; x < W; x += step) l += '<line x1="' + x + '" y1="0" x2="' + x + '" y2="' + H + '"></line>';
+    for (var y = step; y < H; y += step) l += '<line x1="0" y1="' + y + '" x2="' + W + '" y2="' + y + '"></line>';
+    return '<svg class="grid-svg" viewBox="0 0 ' + W + ' ' + H + '" preserveAspectRatio="none" ' +
+      'xmlns="http://www.w3.org/2000/svg" aria-hidden="true" ' +
+      'stroke="var(--fr-ink,#2d3748)" stroke-width="1" opacity="0.05">' + l + '</svg>';
+  }
   const titleHTML = () => TITLE_LINES.map((l) => '<span class="tl">' + l + '</span>').join('');
   function plate(figId) {
     return '<figure class="fr-plate">' +
@@ -41,7 +52,7 @@
   /* ── front cover ────────────────────────────────────────────────────── */
   function front() {
     return '<div class="cf cf-a">' +
-      '<div class="blueprint"></div>' +
+      '<div class="blueprint">' + gridSVG() + '</div>' +
       '<div class="cf-inner">' +
         '<div class="cf-top">' +
           '<div class="ruler"></div>' +
@@ -60,7 +71,7 @@
   /* ── back cover ─────────────────────────────────────────────────────── */
   function backCover() {
     return '<div class="cb">' +
-      '<div class="blueprint"></div>' +
+      '<div class="blueprint">' + gridSVG() + '</div>' +
       '<div class="cb-inner">' +
         '<div class="cb-top">' +
           '<div class="ruler"></div>' +
