@@ -21,8 +21,12 @@ import { join, relative } from 'node:path';
 const DIST = new URL('../dist', import.meta.url).pathname;
 const PATTERN = /\b(Chapter|Part)\s+\d+\b/i;
 
-/** Landing/nav pages — entirely navigation chrome, not manual content. */
-const SKIP = new Set(['index.html', 'contents/index.html', '404.html']);
+/** Landing/nav pages — entirely navigation chrome, not manual content.
+ *  book.html / book-press.html are the print build (concatenated chapters
+ *  with derived "Chapter N" openers — numbering is intentional in the book). */
+const SKIP = new Set([
+  'index.html', 'contents/index.html', '404.html', 'book.html', 'book-press.html',
+]);
 
 /** Known violations tracked in CONTENT-TODO.md — warn, don't fail. */
 const ALLOWLIST = new Set([
