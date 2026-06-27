@@ -56,5 +56,13 @@ recompute and update `--spine` in `project/book/cover/cover-print.html`.
 - Engine: `../cover/covers.js`. Warren Labs W-sine-wave logo is inline SVG; recolored
   to warm charcoal. Spine = author (top) · title (center) · Warren Labs + mark (foot),
   evenly-spaced orange-dot separators.
-- Open option: swap the FR field-plate hero for a **line-art exploded headphone**
-  (reuse `src/components/illustration/HeroExploded.astro` in `weight="line"`).
+- **Hero = the exploded "blowout" headphone** (line-mode `HeroExploded`, static SVG in
+  `hero-svgs.js`), framed as FIG. 1. Renders to both the KDP (0.635in spine) and Ingram
+  (0.705in spine) wraps via `npm run book:cover` / `book:cover:ingram`.
+
+## KDP paperback — draft in progress (title id P7ACH508QJK)
+Filled + saved: all Details (3 categories, 7 keywords), Content (own ISBN, Warren Labs,
+premium color, 7×10, bleed, matte cover). **Author-only remaining:** upload the two KDP
+files, answer the AI-content question, run the previewer, set price ($39.99 / all
+territories / Expanded Distribution OFF — Pricing page is gated until the uploads land),
+order proof / publish.
