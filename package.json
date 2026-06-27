@@ -22,6 +22,7 @@
     "book:press:pdf": "npm run book:press && node scripts/to-book/render.mjs --press --cmyk",
     "book:press:pdfx": "npm run book:press && node scripts/to-book/render.mjs --press --pdfx",
     "book:parts": "node scripts/to-book/render-parts.mjs",
+    "book:cover": "node scripts/to-book/render-cover.mjs --cmyk",
     "astro": "astro"
   },
   "devDependencies": {
