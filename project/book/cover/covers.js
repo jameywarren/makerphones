@@ -85,14 +85,15 @@
 
   /* ── spine ──────────────────────────────────────────────────────────── */
   function spineEl() {
+    // mark sits WITH the Warren Labs imprint at the foot (not alone at the head)
     return '<div class="sp-inner">' +
-      '<span class="sp-mark">' + wlMark(16) + '</span>' +
       '<div class="sp-text">' +
         '<span class="sp-title">The Art and Science of Headphone Design</span>' +
         '<span class="sp-dot">·</span>' +
         '<span class="sp-author mono">Jamey Warren</span>' +
       '</div>' +
-      '<span class="sp-imprint mono">Warren Labs</span>' +
+      '<span class="sp-imprint mono" style="display:flex;align-items:center;gap:6px">' +
+        wlMark(13) + 'Warren Labs</span>' +
     '</div>';
   }
   window.spineEl = spineEl;
