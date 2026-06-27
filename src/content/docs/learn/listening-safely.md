@@ -13,7 +13,7 @@ Building headphones means putting transducers an inch from your eardrums and the
 
 ## The two real risks
 
-Two things actually put your hearing at risk here. The first is a sudden loud blast from a fault: a source left at full volume, a driver fed a signal you didn't expect, a glitch, or simply plugging in while the volume's up. A spike like that, right against your ear, can do damage in an instant. The second is slower: long tuning sessions where the volume creeps up without you noticing, and an hour later you're listening far louder than you started.
+Your hearing is at risk here in two ways. The first is a sudden loud blast from a fault: a source left at full volume, a driver fed a signal you didn't expect, a glitch, or just plugging in while the volume's up. A spike like that, right against your ear, can do damage in an instant. The second is slower: long tuning sessions where the volume creeps up without you noticing, and an hour later you're listening far louder than you started.
 
 ## The habits that handle it
 
@@ -25,10 +25,10 @@ The fixes are easy, and worth making automatic.
 
 **Keep test levels modest.** You don't need a loud sweep to get a clean measurement. Moderate is plenty, and it's gentler on both your ears and the driver.
 
-**Watch the clock and the creep.** If you've been tuning for an hour and keep nudging the volume up, that's your ears fatiguing, not the headphones changing. Take a break. Your read on the sound gets worse as your ears tire anyway, so breaks make you a better tuner, not just a safer one.
+**Watch the clock and the creep.** If you've been tuning for an hour and keep nudging the volume up, that's your ears getting tired. The headphones haven't changed — you have. Take a break. Your read on the sound gets worse as your ears tire anyway, so breaks make you a better tuner, not just a safer one.
 
 ## A rough yardstick
 
 Around 85 dB is roughly the level you can listen to all day safely, and the safe time drops fast above that: cut about in half for every 3 dB louder. The catch is you can't really know your level by ear, which is exactly why the habits matter more than any number. A simple gut check: if the music's loud enough that you couldn't hold a normal conversation over it, it's loud enough to add up over time.
 
-None of this is about being precious. Hearing damage is cumulative and permanent, and tinnitus is a genuine occupational hazard in audio. Plenty of people who've spent a career around sound have the ringing to show for it. Protecting your ears isn't caution for its own sake. It's protecting the only tool that tells you whether any of this actually sounds good.
+None of this is about being precious. Hearing damage is cumulative and permanent, and tinnitus is a genuine occupational hazard in audio. Plenty of people who've spent a career around sound have the ringing to show for it. Protecting your ears isn't caution for its own sake. You're protecting the only tool you've got for judging whether the thing sounds good.

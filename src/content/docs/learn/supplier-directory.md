@@ -8,13 +8,13 @@ related: [driver-selection-guide, sourcing-components, damping-materials, cables
 tags: [suppliers, sourcing, parts, appendix, reference]
 ---
 
-Where to source what, organized by what you're looking for. A word of warning before anything else: suppliers and prices change faster than any other information in this manual. Shops close, stock vanishes, models get discontinued: this very directory will date. So it leans on durable, established sources and on sourcing *strategies* that outlast any single shop, and the most reliable move is always to check the community for what people are actually buying right now.
+Where to source what, organized by what you're looking for. A word of warning before anything else: suppliers and prices change faster than any other information in this manual. Shops close, stock vanishes, models get discontinued. This very directory will go stale. So it leans on durable, established sources and on sourcing *strategies* that outlast any single shop, and the most reliable move is always to check the community for what people are actually buying right now.
 
 ## Drivers
 
 The driver is the heart of the build, and there are a few durable routes to one.
 
-Dedicated DIY-audio retailers are the backbone. In the US, Parts Express has supplied DIY audio for decades and carries raw drivers (its Dayton Audio line among them) along with components and tools. The broad marketplace, AliExpress and similar, offers raw dynamic and planar drivers in enormous variety at low prices, with the catch that quality varies wildly, so cross-check anything against community experience before committing. Some headphone makers sell replacement drivers as spares, which is another path to a known-good transducer. And for the truly from-scratch builder, micro-speaker and component suppliers exist, though they're aimed more at the electronics industry than at audio hobbyists.
+Dedicated DIY-audio retailers are the backbone. In the US, Parts Express has supplied DIY audio for decades and carries raw drivers (its Dayton Audio line among them) along with components and tools. The broad marketplace, AliExpress and similar, offers raw dynamic and planar drivers in enormous variety at low prices. The catch is that quality varies wildly, so cross-check anything against community experience before committing. Some headphone makers sell replacement drivers as spares, which is another path to a known-good transducer. And for the truly from-scratch builder, micro-speaker and component suppliers exist, though they're aimed more at the electronics industry than at audio hobbyists.
 
 Don't overlook salvage. An inexpensive or broken donor headphone is a perfectly good driver source, and plenty of excellent builds start with a salvaged or cheap driver. [Driver selection guide](/learn/driver-selection-guide) covers what to look for whichever route you take.
 
@@ -22,11 +22,11 @@ Don't overlook salvage. An inexpensive or broken donor headphone is a perfectly 
 
 If you'd rather learn by modifying than by building from a bare driver, there's a legendary on-ramp: the Fostex T50RP. Now in its fourth generation, it's a stock planar-magnetic headphone practically designed to be opened up, damped, and re-voiced, with a famously improvable stock sound and one of the deepest modding communities in the hobby. A whole ecosystem surrounds it, from community designs like ModHouse's Argon to ready-made mod kits and sanctioned pad-and-driver variants.
 
-Modding a T50RP is many builders' first serious project, and it teaches the same fundamentals as a ground-up build, chambers, damping, seal, measurement, with the structure and the driver already sorted. It's a genuinely good place to start.
+Modding a T50RP is many builders' first serious project, and it teaches the same fundamentals as a ground-up build (chambers, damping, seal, measurement) with the structure and the driver already sorted. It's a genuinely good place to start.
 
 ## Ear pads
 
-Pads are acoustic parts as much as comfort parts, so this is a real decision. Dekoni Audio, an established American maker, and Brainwavz are the well-known aftermarket pad sources, with options across sizes, shapes, and materials. Manufacturer OEM pads and generic marketplace pads round out the field. Remember that swapping pads re-voices a headphone, see [ear pads and comfort](/learn/ear-pads-and-comfort), so treat a pad change as a tuning decision, not just a comfort upgrade.
+Pads are acoustic parts as much as comfort parts, so this is a real decision. Dekoni Audio, an established American maker, and Brainwavz are the well-known aftermarket pad sources, with options across sizes, shapes, and materials. Manufacturer OEM pads and generic marketplace pads round out the field. Remember that swapping pads re-voices a headphone, see [ear pads and comfort](/learn/ear-pads-and-comfort), so treat a pad change as a tuning decision rather than a comfort upgrade.
 
 ## Damping materials
 
@@ -50,4 +50,4 @@ For Bluetooth and other powered builds, specialist audio-electronics retailers a
 
 ## A standing caution
 
-Everything above will age. Suppliers disappear, prices swing, and models get discontinued: it's the nature of a parts list. So treat named shops as durable starting points rather than permanent fixtures, lean on salvage and the broad marketplace when you need flexibility, and check the community for current recommendations before any significant purchase. The sourcing strategy outlasts the shop, every time.
+Treat named shops as durable starting points rather than permanent fixtures, lean on salvage and the broad marketplace when you need flexibility, and check the community for current recommendations before any significant purchase. The strategy lasts longer than any shop on this list.

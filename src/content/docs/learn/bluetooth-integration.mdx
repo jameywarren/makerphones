@@ -9,13 +9,13 @@ related: [cables-connectors-hardware, impedance-and-sensitivity, active-noise-ca
 read_time: 12
 tags: [bluetooth, wireless, codec, module, battery]
 description: "Adding wireless to your build: how Bluetooth audio works, the codec landscape, the receiver boards a DIY builder can integrate, and the battery-and-charging subsystem it all rides on."
-excerpt: "Wireless is one of the most-requested features, and unlike noise cancelling it's genuinely achievable in a DIY build. But it's a whole subsystem, not a small add-on: here's the map."
+excerpt: "Wireless is one of the most-requested features, and unlike noise cancelling it's genuinely achievable in a DIY build. But it's a whole subsystem, not a small add-on."
 ---
 
 import Figure from '../../../components/Figure.astro';
 import WirelessSignalChain from '../../../components/diagrams/WirelessSignalChain.astro';
 
-Wireless is near the top of every "can I add this?" list, and the good news is that, unlike active noise cancelling, it's genuinely achievable in a DIY build. The catch is that Bluetooth isn't a small add-on you bolt to a driver: it's a whole subsystem with a receiver board, a battery, a charging circuit, and an antenna. This chapter maps how Bluetooth audio actually works, the codec landscape everyone asks about, and the realistic path to integrating it without designing wireless electronics from scratch.
+Wireless is near the top of every "can I add this?" list, and the good news is that, unlike active noise cancelling, it's genuinely achievable in a DIY build. The catch is that Bluetooth is a whole subsystem — a receiver board, a battery, a charging circuit, and an antenna — not something you bolt onto a driver. This chapter maps how Bluetooth audio actually works, the codec landscape everyone asks about, and the realistic path to integrating it without designing wireless electronics from scratch.
 
 ## How Bluetooth audio works
 
@@ -31,7 +31,7 @@ Codecs are where most of the questions live, so here's the landscape as it stand
 
 **SBC** is the universal baseline. Every Bluetooth audio device supports it, it's the lowest quality of the bunch, and it's your guaranteed fallback when nothing better is shared. **AAC** is the standard on Apple devices and sounds good there. The **aptX family** from Qualcomm runs from plain aptX, through aptX HD for higher quality, to aptX Adaptive, which adjusts its bitrate to the connection and latency, up to aptX Lossless, which reaches CD quality. **LDAC**, Sony's codec, targets high-resolution audio at high bitrates, and **LHDC** is a comparable codec with narrower support. **LC3** is the newer codec built for Bluetooth LE Audio, more efficient than the old ones and the foundation for broadcast features like Auracast. LC3 is to LE Audio what SBC is to classic Bluetooth, and it's the direction the standard is heading.
 
-Here is the rule that matters more than any quality ranking: a codec only works if *both* ends support it. A board boasting LDAC or aptX does nothing if your phone doesn't speak that codec. The connection simply falls back to SBC. So the codecs on the box are a ceiling, not a promise, and SBC is the floor that always works.
+Here is the rule that matters more than any quality ranking: a codec only works if *both* ends support it. A board boasting LDAC or aptX does nothing if your phone doesn't speak that codec. The connection falls back to SBC. So the codecs on the box are a ceiling, not a promise, and SBC is the floor that always works.
 
 ## The DIY path: receiver boards
 
@@ -53,7 +53,7 @@ If the module doesn't have a built-in amp, the common DIY choice is the `PAM8403
 
 Then there's the charging port to place on the cup, the antenna to position where it isn't buried in metal or shielding that would kill its range, and the controls, power, pairing, play and pause, volume, to wire to the board. None of it is hard individually, but together it's a real subsystem that changes the weight, the complexity, and the maintenance story of your headphone, because a battery is a finite-life part that will eventually need replacing.
 
-Two more realities worth holding onto. Wireless audio is compressed, even "lossless" Bluetooth works within constraints a wire doesn't, so a cable still wins for ultimate fidelity, and many builders wire the board so the headphone also works passively through a cable, which is the best of both worlds. And Bluetooth has latency, which matters for video and gaming; low-latency modes and LE Audio help, but it's a consideration, not a solved problem.
+Two more realities worth holding onto. Wireless audio is compressed, even "lossless" Bluetooth works within constraints a wire doesn't, so a cable still wins for ultimate fidelity, and many builders wire the board so the headphone also works passively through a cable, giving you wireless convenience and a wired-fidelity option in the same set. And Bluetooth has latency, which matters for video and gaming; low-latency modes and LE Audio help, but they don't make it disappear.
 
 :::tip
 Choose your module by matching its codec support to the devices you actually use. An LDAC or aptX board buys you nothing if your phone doesn't speak that codec, because it'll just fall back to SBC anyway. Check what your phone and your other sources support first, then pick the board to match, not the other way around, which is how people end up paying for codecs they can never use.

@@ -10,7 +10,7 @@ related: [driver-selection-guide, sourcing-components, 3d-design-for-headphones,
 tags: [build-guide, first-build, beginner, project]
 ---
 
-You've read the manual, or skipped straight to the fun part, no judgment. This is where it becomes real: your first headphone build. We're keeping it deliberately simple, because the goal of a first build isn't a perfect headphone. It's to go through the whole process once, make the beginner mistakes where they're cheap, and come out understanding how all the pieces fit together. You'll build a better one next time. Everyone does. The first build is the hardest precisely because everything is new.
+You've read the manual, or skipped straight here, no judgment. Either way, it's time to build your first headphone. We're keeping it simple on purpose. A first build isn't about a perfect headphone; it's about going through the whole process once. Make the beginner mistakes where they're cheap, and come out understanding how all the pieces fit together. You'll build a better one next time. Everyone does. The first build is the hardest precisely because everything is new.
 
 We'll build the most approachable thing there is: a simple over-ear with a single dynamic driver in a 3D-printed cup. One driver, no crossover, a design you can print and tune by ear. It touches every fundamental without the hard-mode complications.
 
@@ -46,7 +46,7 @@ Pads aren't only about comfort: they set the front cavity and the seal, so they 
 
 ## Stage 6 — First listen, then tune by ear
 
-Plug in and listen. It probably won't sound finished, and that is completely normal, you've built a raw instrument, and now you voice it. Tune by ear, one change at a time: add a little felt to the rear chamber, listen, decide on the next move. [Damping strategy and application](/learn/damping-strategy-and-application) tells you where damping goes and what each placement fixes, and warns you, rightly, against the beginner's urge to stuff the cup full. This is the most satisfying part of the whole build: small changes, real and audible differences.
+Plug in and listen. It probably won't sound finished, and that is completely normal, you've built a raw instrument, and now you voice it. Tune by ear, one change at a time: add a little felt to the rear chamber, listen, decide on the next move. [Damping strategy and application](/learn/damping-strategy-and-application) tells you where damping goes and what each placement fixes, and warns you, rightly, against the beginner's urge to stuff the cup full. This is the part that hooks people: you move a scrap of felt and you can hear it. One change at a time, and the headphone starts sounding like yours.
 
 ## Stage 7 — (Optional) Measure
 

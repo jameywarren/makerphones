@@ -9,7 +9,7 @@ description: "A working framework for AI-assisted headphone design: where the cu
 excerpt: "A working framework: what the current AI tools are actually good for in headphone design, and what they aren't. The methodology behind the Daily Driver and future builds."
 ---
 
-AI tools became genuinely useful for headphone design work across 2025–2026, but in narrow,
+AI tools started saving real time on headphone design work across 2025–2026, but in narrow,
 specific ways, and most "design a headphone by talking to it" claims oversell what's real.
 This is a framework from actually doing the work: where AI saves real time, where it doesn't,
 and how to fold it in without getting lost building tooling instead of designing.
@@ -18,13 +18,12 @@ and how to fold it in without getting lost building tooling instead of designing
 
 ## The core insight
 
-**AI is an accelerator, not a creator.** Decades of audio domain knowledge, driver selection,
-acoustic intuition, tuning judgment, is the irreplaceable part. AI saves time on the
-mechanical work *around* the design: parametric CAD setup, concept rendering at scale, document
-generation, lookup and synthesis. It does not shortcut the hard parts of headphone design.
-
-The honest version: AI compresses the mechanical work surrounding the design, so more of your
-time goes to the judgment calls that actually matter.
+**AI saves you time on the work around the design. It doesn't do the design.** Decades of audio
+domain knowledge, driver selection, acoustic intuition, tuning judgment, is the irreplaceable
+part. What AI takes off your plate is the mechanical work *around* the design: parametric CAD
+setup, concept rendering at scale, document generation, lookup and synthesis. So more of your
+time goes to the judgment calls that decide how the headphone sounds: driver choice, target
+curve, voicing.
 
 ---
 
@@ -43,9 +42,9 @@ here are the AI-utility view of the same workflow the
 | 5. Prototype & tune | Build, measure, iterate | **Low**: physical and acoustic work; AI only at the documentation edges |
 | 6. Write-up | Public documentation | **High**: a writing partner; AI imagery for visuals |
 
-The pattern: AI is most useful at the edges, briefing and write-up, and in the
-visually-driven middle, industrial design. The audio-engineering core, acoustic design and
-prototype tuning, stays a domain-expertise game.
+The pattern: AI pulls its weight on briefing, write-up, and the visually-driven middle,
+industrial design. The audio-engineering core, acoustic design and prototype tuning, stays a
+domain-expertise game.
 
 ---
 
@@ -133,26 +132,27 @@ generation, image-to-3D conversion, documentation rendering.
 For a headphone project the working combination is: a **knowledge base** of your chapters,
 specs, and measurement data for grounding; **interactive tools** like Fusion during CAD work
 for action; **batch services** for image generation and image-to-3D when you need volume; and
-plain **file edits** for documentation. That's the whole system. It doesn't need a fancy name.
-It's just a working AI-augmented design pipeline.
+plain **file edits** for documentation. That's it: a knowledge base, the tools you're already
+in, and some batch scripts.
 
 ---
 
 ## Principles that keep you out of trouble
 
-**1. The pipeline grows with the project, not before it.** The most common trap is building
-elaborate AI infrastructure before doing any actual design work. Each tool earns its place when
-the phase that uses it begins; a parked backlog, evaluated at phase start, is the antidote.
+**1. Build the pipeline as the project needs it.** The most common trap is building elaborate
+AI infrastructure before doing any actual design work. Each tool earns its place when the phase
+that uses it begins; a parked backlog, evaluated at phase start, is the antidote.
 
 **2. Document everything as you go.** For open designs, the documentation *is* the product:
 every decision, every measurement, every iteration. Build the documentation habit into the
-workflow from day one. AI is genuinely useful for the documentation work itself.
+workflow from day one. AI is a real help with the documentation work itself: drafting,
+restructuring, keeping decision logs current.
 
 **3. Phase-gate tool adoption.** Don't evaluate a render tool in Phase 2. Don't set up Fusion
 MCP in Phase 1. Wait until the phase needs it. This protects focus more than any productivity
 hack.
 
-**4. AI helps with mechanics, not judgment.** Driver selection, acoustic intuition, tuning
+**4. Keep the judgment calls in your hands.** Driver selection, acoustic intuition, tuning
 preference, voicing decisions. These stay with the designer. AI that pretends otherwise is
 overselling.
 

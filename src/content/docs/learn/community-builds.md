@@ -8,7 +8,7 @@ related: [manufacturing-for-consistency, troubleshooting-guide, damping-strategy
 tags: [community, builds, showcase, appendix]
 ---
 
-The rest of this manual teaches the how. This section is for the what: builds from the community, yours included. It's where people show what they actually made, and over time it becomes the most useful part of the whole resource, because a real build that someone documented well teaches more than any chapter can.
+The rest of this manual is me telling you how to build a headphone. This section is for everybody else's builds, yours included. It's where people show what they actually made, and over time it becomes the most useful part of the whole resource, because a real build that someone documented well teaches more than any chapter can.
 
 ## Why builds are worth sharing
 
@@ -18,7 +18,7 @@ The failures and the iterations matter just as much as the finished result. The 
 
 ## What makes a build worth documenting
 
-A great shared build is one another person could actually replicate, and that comes down to documentation. The single most valuable thing you can include is the build spec, in the spirit of [manufacturing for consistency](/learn/manufacturing-for-consistency): the driver you used, the chamber design and dimensions, the damping recipe by weight and placement, the print profile, and the assembly steps. "Some felt in the back" inspires; "this much fill behind the driver, this lining on the walls" lets someone build it.
+A great shared build is one another person could actually replicate, and that comes down to documentation. The single most valuable thing you can include is the build spec, in the spirit of [manufacturing for consistency](/learn/manufacturing-for-consistency): the driver you used, the chamber design and dimensions, the damping recipe by weight and placement, the print profile, and the assembly steps. "Some felt in the back" tells the next person nothing. "This much fill behind the driver, this lining on the walls" lets them build it.
 
 Beyond the spec, a few things lift a write-up. Measurements, if you have them, so others can see what you achieved and aim at it. The process, including what went wrong and how you fixed it, because that's where the real teaching happens. And photos, because seeing the build is half of understanding it. None of this needs to be polished. An honest, well-documented build beats a beautiful one with no details every time.
 
@@ -46,19 +46,19 @@ The best first build is the one you actually finish. That means constrained scop
 
 **Plan for disassembly.** You will open the headphone at least five times during tuning, so design the closure to be reopened: screws rather than glue for driver mounting, a solid mechanical pad attachment, accessible wiring. Builds that are hard to take apart stop getting tuned, which is the same as stopping before they're good.
 
-**Measure at each step.** Without measurement you're guessing; with it you're iterating, and the difference shows in the final result. You don't need expensive gear. The budget measurement setup guide covers a rig that gets you there for not much money.
+**Measure at each step.** Without measurement you're guessing; with it you're iterating. You don't need expensive gear. The budget measurement setup guide covers a rig that gets you there for not much money.
 
 **Keep a dated build journal.** Note what you changed, when, and what it did. Acoustic tuning has enough variables that memory alone isn't reliable, and even a plain text file with dated notes means you can reproduce your successes and actually understand your failures.
 
 ## How to share yours
 
-Bring your build to the community. Post it where builders gather, document it the way you'd want to find it documented, and answer the questions it provokes. The most useful submissions aren't the most impressive headphones. They're the ones explained clearly enough that someone else can follow the path you took.
+Bring your build to the community. Post it where builders gather, document it the way you'd want to find it documented, and answer the questions it provokes. The submissions that help most are the ones explained clearly enough that someone else can follow the path you took. Doesn't matter how fancy the headphone is.
 
 If you're not sure your build is "good enough" to share, it is. A first build, honestly documented, helps the next first-time builder more than a tenth build presented as a finished product. Share the one you actually made, including the parts you'd do differently next time.
 
-## The point of all this
+## Add yours
 
-A resource like this grows from its builders. Every documented build makes the next one easier, every shared failure saves someone else the same evening of frustration, and every honest write-up makes the whole thing a little more real. The manual is the map; the builds are the territory. Add yours to it.
+A resource like this grows from its builders. Every shared failure saves the next person the same wasted evening. None of it works without builders putting their stuff up, so put yours up.
 
 ## Submit your build
 

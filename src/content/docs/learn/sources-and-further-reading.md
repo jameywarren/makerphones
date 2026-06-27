@@ -9,10 +9,10 @@ tags: [sources, research, literature, measurement, standards, appendix]
 ---
 
 Reliable information on headphone design is scattered, and it clusters at two ends: deep
-acoustic theory on one side, and a fast-moving world of measurement data on the other, with
-surprisingly little practical "how to actually build one" in between. That gap is much of why
-Makerphones exists. This page is the map we wish we'd had: the credible sources worth your
-time, sorted by what they're actually for, with an honest note on where to start.
+acoustic theory, and a fast-moving pile of measurement data, with surprisingly little practical
+"how to actually build one" in between. That gap is much of why Makerphones exists. This page is
+the shelf we wish we'd had: the credible sources worth your time, sorted by what they're actually
+for, with an honest note on where to start.
 
 ---
 
@@ -35,8 +35,7 @@ The rest of this page is the full shelf.
 
 ## Foundational theory — acoustics and transducers
 
-The bedrock. Rigorous, math-heavy, and not light reading, but this is where the physics
-actually lives.
+The bedrock. Rigorous, math-heavy, and not light reading, but the physics actually lives here.
 
 - **Beranek & Mellow, *Acoustics: Sound Fields and Transducers*** (and the second edition,
   *Acoustics: Sound Fields, Transducers and Vibration*). Tim Mellow's modern update of Leo

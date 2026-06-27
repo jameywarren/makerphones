@@ -22,7 +22,7 @@ Your slicer turns a model into printer instructions, and most printers ship with
 
 **Room EQ Wizard (REW)** is free and the de facto standard for acoustic measurement across the hobby: it handles the sweep, the calibration files, smoothing, decay plots, and overlays. Pair it with a calibrated measurement microphone or an IEC 711 clone coupler, as described in [budget measurement setup](/learn/budget-measurement-setup), and you have everything you need to measure and tune.
 
-Two free tools sit alongside REW once you have a measurement in hand. **AutoEQ** (github.com/jaakkopasanen/AutoEq) is an open-source project that generates target-based EQ profiles from measurement databases: it carries a large library of commercial headphone measurements, and it's useful both as a reference for understanding target-curve deviations and as a starting point for tuning your own builds toward an established target. **EqualizerAPO + Peace** is Windows-based system-wide EQ, primarily for listening, and it earns its place here because it lets you test EQ corrections derived from measurements by ear before committing them to hardware tuning: fast A/B comparison of different compensation curves, no soldering required.
+Two free tools sit alongside REW once you have a measurement in hand. **AutoEQ** (github.com/jaakkopasanen/AutoEq) is an open-source project that generates target-based EQ profiles from measurement databases: it carries a large library of commercial headphone measurements, and it's useful both as a reference for understanding target-curve deviations and as a starting point for tuning your own builds toward an established target. **EqualizerAPO + Peace** is Windows-based system-wide EQ, primarily for listening, but it's handy because it lets you test EQ corrections derived from measurements by ear before committing them to hardware tuning: fast A/B comparison of different compensation curves, no soldering required.
 
 ## Acoustic modeling and simulation
 
@@ -34,7 +34,7 @@ Public 3D-model repositories are full of headphone cups, measurement stands, and
 
 ## Measurement databases
 
-Community measurement databases let you browse and compare frequency-response graphs for a huge range of headphones and IEMs. They're a useful reference for what target you might aim at and how commercial designs measure, but remember that different contributors use different rigs, so the graphs aren't strictly comparable to each other or to your own. Read them for shape and intent, not absolute truth. The major databases, and the preference research and standards behind them, are mapped in [Sources & Further Reading](/learn/sources-and-further-reading).
+Community measurement databases let you browse and compare frequency-response graphs for a huge range of headphones and IEMs. They're a useful reference for what target you might aim at and how commercial designs measure, but remember that different contributors use different rigs, so the graphs aren't strictly comparable to each other or to your own. Treat them as a rough guide to target and overall shape, not numbers you can hold your own measurements against. The major databases, and the preference research and standards behind them, are mapped in [Sources & Further Reading](/learn/sources-and-further-reading).
 
 ## Communities
 
@@ -42,4 +42,4 @@ The DIY headphone and audio communities are where the real knowledge lives, and 
 
 ## A note on staying current
 
-Software versions, module availability, and prices move faster than a reference manual can. When a chapter names a specific tool or part, treat it as a pointer to a category as much as a recommendation, and check current options before you buy. The principles in the manual don't expire; the specific products around them always will.
+Software versions, module availability, and prices move faster than a reference manual can. When a chapter names a specific tool or part, treat it as a pointer to a category as much as a recommendation, and check current options before you buy. The principles hold; the products around them won't.

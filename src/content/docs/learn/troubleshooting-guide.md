@@ -16,7 +16,7 @@ Almost always one of two things. First, **reversed polarity**: if one channel is
 
 ## Boomy, one-note, or boxy bass
 
-The chamber, not the damping. A **rear chamber that's too small** is the classic cause: the trapped air stiffens and piles the bass onto one frequency. The fix is volume or venting, not foam: open a vent, or move to a larger rear volume. A small, pluggable vent opened one hole at a time is the cheapest way to dial it in. See [acoustic chamber design](/learn/acoustic-chamber-design).
+This one lives in the chamber. A **rear chamber that's too small** is the classic cause: the trapped air stiffens and piles the bass onto one frequency. The fix is volume or venting, not foam: open a vent, or move to a larger rear volume. A small, pluggable vent opened one hole at a time is the cheapest way to dial it in. See [acoustic chamber design](/learn/acoustic-chamber-design).
 
 ## One channel dead or quiet
 
@@ -32,15 +32,15 @@ Usually a **resonance** ringing somewhere. If it's a sharp peak, a thin ring of 
 
 ## Dead, lifeless, no air
 
-You've **over-damped it**. The beginner instinct is to stuff the cup full "to be safe," and it drains the life out of the sound. Pull material back out until the sparkle returns. The target is the smallest amount of damping that solves the actual problem, not the most you can fit.
+You've **over-damped it**. The beginner instinct is to stuff the cup full "to be safe," and it drains the life out of the sound. Pull material back out until the sparkle returns. You want the smallest amount of damping that solves the actual problem, and no more.
 
 ## A buzz or rattle
 
-A mechanical fault, not a tuning one. Something is loose: a **slack lead** touching the diaphragm, a part not seated, a bit of print debris in the cup, or the **driver being pushed past its limits**. With the cup open, play a sweep and listen for where it buzzes, then find and secure the loose element. On a measurement rig, a rattle shows up as a spike in the distortion plot. See [advanced measurement topics](/learn/advanced-measurement-topics).
+This is mechanical, so put the graph away. Something is loose: a **slack lead** touching the diaphragm, a part not seated, a bit of print debris in the cup, or the **driver being pushed past its limits**. With the cup open, play a sweep and listen for where it buzzes, then find and secure the loose element. On a measurement rig, a rattle shows up as a spike in the distortion plot. See [advanced measurement topics](/learn/advanced-measurement-topics).
 
 ## The plastic cup itself rings
 
-A **structural resonance**: thin printed walls ring like a drum, and no amount of felt fixes it, because the energy is in the plastic, not the air. Tap the empty cup: a sharp "ting" confirms it. The cure is stiffness, not absorption: thicker walls, internal ribs, more infill, or a less ringy material. See [resonance control](/learn/resonance-control).
+A **structural resonance**: thin printed walls ring like a drum, and no amount of felt fixes it, because the energy is in the plastic, not the air. Tap the empty cup: a sharp "ting" confirms it. You can't absorb your way out of this one; you have to stiffen the cup. Thicker walls, internal ribs, more infill, or a less ringy plastic. See [resonance control](/learn/resonance-control).
 
 ## It measures fine but sounds wrong
 

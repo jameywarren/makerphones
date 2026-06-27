@@ -68,8 +68,8 @@ touching the others.
 
 ## Acoustic approach (open-back)
 
-- **Open rear.** The back of the cup is an open vent pattern, not a sealed chamber. That's
-  what makes the design forgiving and gives the open, airy character.
+- **Open rear.** The back of the cup is an open vent pattern with no sealed chamber behind it.
+  That's what makes the design forgiving and gives the open, airy character.
 - **Front cavity = pad depth.** Driver-to-ear distance is set by pad thickness, see
   [ear pads and comfort](/learn/ear-pads-and-comfort/) for why. Deeper is more comfortable and
   slightly warmer; shallower is more present and brighter. This is the main tuning lever, and
@@ -134,8 +134,9 @@ touching the others.
 
 ### Driver (parametric)
 
-Design the baffle around named parameters, not a fixed part. Confirm the real numbers with
-calipers and print a baffle test piece (a ~20-minute print) before committing a full cup set.
+Design the baffle around named parameters so a specific driver can be locked late. Confirm the
+real numbers with calipers and print a baffle test piece (a ~20-minute print) before committing
+a full cup set.
 
 | Parameter | Starting value | Notes |
 |---|---|---|
@@ -173,7 +174,7 @@ another builder. Good options sit in the $12–18 range at Parts Express or Madi
 | Developed (flat) length | ~370 mm | ~100 mm radius × ~90° arc + 30 mm terminations each end |
 | Detent holes (optional) | 3 mm dia., 6 mm spacing | Punched at cut time for click-adjust |
 
-**Sourcing the steel, the clever part.** Draw the arc as a *flat developed profile* (imagine
+**Sourcing the steel.** Draw the arc as a *flat developed profile* (imagine
 the arc unrolled), export a DXF, and order it laser-cut in 1095 spring steel from a service
 like SendCutSend (~$10–15 delivered at low quantity). They ship flat precision blanks; you
 form the curve cold over a printed radius jig. No metal shop, no minimum orders. (Builders on

@@ -20,7 +20,7 @@ Everything in [damping strategy and application](/learn/damping-strategy-and-app
 
 Measure. Read the curve. Make one targeted change. Remeasure. Compare. Repeat.
 
-That's the whole method. The skill that makes it work is changing a single variable at a time, so that when the curve moves, you know exactly what moved it. Run it that way and tuning becomes a steady march toward your target. Run it sloppily, three changes between measurements, and it becomes the same guessing game you were trying to escape, just with a graph attached.
+That's the whole method. The skill that makes it work is changing a single variable at a time, so that when the curve moves, you know exactly what moved it. Change three things between measurements and you're back to the same guessing game you were trying to escape, only now there's a graph to make you feel productive.
 
 ## Measure honestly before you start
 
@@ -30,7 +30,7 @@ A measurement-driven loop is only as good as the measurement. Before you trust a
 
 **A peak.** A sharp bump usually means a resonance. Address it with damping behind the driver or on the wall nearest it, or with venting if it sits low. Add material in small amounts and watch the peak shrink. When it stops shrinking for the felt you're adding, you've found the limit of that placement.
 
-**Boomy or excessive bass.** Often a chamber resonance or simply too much low-end energy. Try opening or adding resistance to a vent, reducing rear fill, or adding targeted damping. The bass region responds strongly to small changes, so move in small steps and remeasure often.
+**Boomy or excessive bass.** Often a chamber resonance or just too much low-end energy. Try opening or adding resistance to a vent, reducing rear fill, or adding targeted damping. The bass region responds strongly to small changes, so move in small steps and remeasure often.
 
 **Ringing.** Energy that hangs on after the signal stops. You'd see it most clearly on a decay plot, which the advanced measurement chapter covers. Wall lining and rear fill are your tools, and the payoff is a cleaner, less hard sound even when the frequency response barely moves.
 
@@ -51,14 +51,14 @@ The advice above tells you *which way* to move; this table tells you *what to re
 | Narrow resonance spike (anywhere) | Find the source first. Tap the cup with the driver out and listen for a tonal ring. That's the mode. Treat it at the chamber, or in front of the driver if the break-up is in the driver itself. |
 
 :::caution
-A *dip* is usually not a damping problem. Damping removes energy; it can't add it, so no amount of foam will fill a hole in the response. A thin low end means the headphone isn't producing enough down there: check the seal, the chamber volume, and the pad depth, or change the driver. Fix the design, not the damping.
+A *dip* is usually not a damping problem. Damping removes energy; it can't add it, so no amount of foam will fill a hole in the response. A thin low end means the headphone isn't producing enough down there: check the seal, the chamber volume, and the pad depth, or change the driver. That's a design fix, and no amount of damping substitutes for it.
 :::
 
 ## What one pass actually looks like
 
 Say your build measures with a tall, narrow peak in the upper bass and an otherwise reasonable curve. You take it three times, re-seating between each, and the peak holds steady every time, so it's real, not an artifact. You add a small amount of fill behind the driver, nothing else, and remeasure with the same seating routine. The peak drops by a few decibels and widens slightly; the rest of the curve barely moves. Good. That's the placement working. You note the change in your log, listen to confirm the boom has eased without the bass going lifeless, and decide whether the remaining peak is worth another small pass or whether you've reached the point of diminishing returns.
 
-That's one clean iteration: a real feature identified, one variable changed, the result measured against the previous curve, and a decision made with both the graph and your ears. String a handful of those together and you've tuned a headphone deliberately instead of by luck. The temptation is always to skip the remeasure, or to add felt in two places at once "to save time," and both shortcuts cost you far more time than they save, because they take away your ability to know what worked.
+String a handful of those clean passes together and you've tuned a headphone deliberately instead of by luck. The temptation is always to skip the remeasure, or to add felt in two places at once "to save time," and both shortcuts cost you far more time than they save, because they take away your ability to know what worked.
 
 ## One change at a time
 
@@ -66,7 +66,7 @@ This is the rule that makes the whole method work, so it bears repeating: change
 
 ## Knowing when to stop
 
-Stop when the curve is close to your target *and* it sounds right to you. Both conditions have to be met together; either one alone will mislead you. Chasing the last decibel on the graph past the point where it sounds good is exactly how you over-damp a build into lifelessness: the graph improves while the music gets worse. The graph serves the sound, not the other way around.
+Stop when the curve is close to your target *and* it sounds right to you. Both conditions have to be met together; either one alone will mislead you. Chasing the last decibel on the graph past the point where it sounds good is exactly how you over-damp a build into lifelessness: the graph improves while the music gets worse.
 
 The first few changes do most of the work, and after that you hit diminishing returns fast. Obsessing over tiny wiggles isn't worth it, especially since many of those wiggles are your rig's artifacts rather than anything a listener would ever notice. Knowing when a build is *done* is as much a skill as knowing what to change, and it's mostly the discipline to stop when both your eyes and your ears agree.
 

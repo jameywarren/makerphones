@@ -14,17 +14,17 @@ excerpt: Your ears are the final judge, but they're a moving target. Here's what
 
 *Measurement means running test tones close to your ears. Keep [Listening Safely](/learn/listening-safely/) in mind before your first sweep.*
 
-You can build and tune a good headphone entirely by ear, and plenty of great builds happen exactly that way. But there's a point in every build where measurement stops being optional and starts saving you hours: the point where you need to know *what's* happening, not just whether you like it. Measurement turns a vague feeling into a visible fact, and that's the whole reason to pick up a microphone.
+You can build and tune a good headphone entirely by ear, and plenty of great builds happen exactly that way. But there's a point in every build where measurement stops being optional and starts saving you hours: the point where you need to know *what's* actually happening. Measurement turns a vague feeling into something you can see and point at. That's why you pick up a mic.
 
 This chapter is about why measuring is worth the trouble, what it can and can't tell you, and how to hold your own measurements at the right level of trust, because a rig you misread is worse than no rig at all.
 
 ## Two different questions
 
-Your ears and a measurement rig answer different questions, and a builder needs both. Your ears tell you whether you *like* the sound: that's the only verdict that ultimately matters, and no graph overrides it. A measurement tells you *what the headphone is actually doing*: where the energy sits, where the imbalances are, what changed when you added felt. One is preference; the other is diagnosis. Confusing them in either direction leads you astray: trusting only your ears leaves you guessing at causes, and trusting only the graph leaves you tuning toward a number that may not sound good.
+Your ears and a measurement rig don't answer the same question, and a builder needs both answers. Your ears tell you whether you *like* the sound: that's the only verdict that ultimately matters, and no graph overrides it. A measurement tells you *what the headphone is actually doing*: where the energy sits, where the imbalances are, what changed when you added felt. One's about taste; the other's about what's going on. Lean only on your ears and you'll guess wrong about why something sounds off. Lean only on the graph and you'll tune toward a number that sounds like hell.
 
 ## What measurement gives you
 
-**Channel matching.** Ears are surprisingly bad at catching small left-right imbalances. You adjust to them within seconds and stop noticing. A measurement shows a mismatch instantly and unambiguously. Matched channels are the difference between a stable, centered image and one that drifts or feels subtly lopsided, and matching is one of the things measurement does that listening simply can't do reliably.
+**Channel matching.** Ears are surprisingly bad at catching small left-right imbalances. You adjust to them within seconds and stop noticing. A measurement shows a mismatch instantly and unambiguously. Matched channels are the difference between a stable, centered image and one that drifts or feels subtly lopsided, and matching is one of the things measurement does that listening can't do reliably.
 
 **Seeing the problem.** "The bass sounds boomy" is a feeling. A measurement shows you the peak, which frequency, how tall, how wide, so you can target it directly instead of guessing at fixes. This is the single biggest day-to-day reason to measure while tuning, and it turns a frustrating evening of trial and error into a few deliberate moves.
 
@@ -34,7 +34,7 @@ Your ears and a measurement rig answer different questions, and a builder needs 
 
 ## What measurement can't do
 
-A measurement can't tell you whether you'll enjoy the headphone. A technically clean curve can sound wrong to you, and an unusual one can sound wonderful: preference is real and personal, and the graph has nothing to say about it. The curve is a tool for understanding what's happening, not a scorecard to maximize.
+A measurement can't tell you whether you'll enjoy the headphone. A technically clean curve can sound wrong to you, and an unusual one can sound wonderful: preference is real and personal, and the graph has nothing to say about it. The curve helps you understand what's happening. It's not a score to chase.
 
 And your rig is not an industry-standard measurement head. A hobby setup gives you useful, repeatable *relative* information, but its absolute numbers are off, and some regions are barely trustworthy at all. The high treble especially, roughly the top octave, is extremely sensitive to your specific coupler, the exact seating, and tiny positional changes, so wild wiggles up there are often artifacts of your setup rather than real features of the headphone. Read your measurements as a reliable guide to *changes* and *shapes*, lean on them hard for that, and always confirm the final result with your ears.
 

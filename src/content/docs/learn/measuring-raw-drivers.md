@@ -15,7 +15,7 @@ Before a driver ever goes into a cup, you can learn a surprising amount about it
 
 ## What a bench measurement actually tells you
 
-A raw driver measured in open air is a characterization, not a prediction. It won't tell you how the driver will sound on a head: that comes from the cup, the pads, the leak around your ears, and the small trapped volume at the eardrum, none of which exist on the bench. The bass especially is a product of that coupling, so don't read much into the low end of a free-air curve.
+A raw driver measured in open air characterizes the driver; it doesn't predict the sound. It won't tell you how the driver will sound on a head: that comes from the cup, the pads, the leak around your ears, and the small trapped volume at the eardrum, none of which exist on the bench. The bass especially is a product of that coupling, so don't read much into the low end of a free-air curve.
 
 What it does tell you is plenty: the general shape of the midrange and treble, where the main resonance sits, where the cone or dome starts to break up, how sensitive the driver is, and, maybe most useful, how consistent two samples are. That's your baseline. Everything you do later is measured relative to it.
 

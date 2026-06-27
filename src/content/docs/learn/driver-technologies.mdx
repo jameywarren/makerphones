@@ -15,7 +15,7 @@ excerpt: "There are four main driver technologies in headphones, but only one ma
 import Figure from '../../../components/Figure.astro';
 import DriverTechnologies from '../../../components/diagrams/DriverTechnologies.astro';
 
-If you've been following along from the beginning, you already know the basics of how dynamic drivers work. But there are actually several different driver technologies used in headphones, each with its own physics, sound characteristics, and practical considerations for builders. Let me walk you through what's out there, how they compare, and most importantly, which ones make sense for DIY projects.
+If you've been following along from the beginning, you already know the basics of how dynamic drivers work. But there are actually several different driver technologies used in headphones, each with its own physics, sound characteristics, and practical considerations for builders. There are four you'll run into, and only one is really worth your time as a builder.
 
 <Figure label="Fig. 1" caption="Four ways to move air: the moving element in orange.">
   <DriverTechnologies />
@@ -49,9 +49,9 @@ A dynamic driver uses a voice coil suspended in a magnetic gap, attached to a di
 
 ## Planar Magnetic Drivers: Interesting But Challenging
 
-Planar magnetic drivers work on a completely different principle. Instead of a voice coil attached to a diaphragm, a planar driver has a thin membrane with conductor traces (like circuit board traces) running across it. This membrane sits between two sets of magnets.
+A planar magnetic driver ditches the voice coil. Instead, a planar driver has a thin membrane with conductor traces (like circuit board traces) running across it. This membrane sits between two sets of magnets.
 
-When current flows through the conductor traces, the entire membrane moves as a unit, not just the center like a dynamic driver. This means the entire diaphragm surface is driven simultaneously, which proponents argue reduces distortion and improves transient response.
+When current flows through the conductor traces, the entire membrane moves at once, where a dynamic driver only drives the center. Proponents argue that driving the whole surface simultaneously reduces distortion and improves transient response.
 
 **The appeal:** Planar magnetic headphones (Audeze, HiFiMAN, Meze) are known for their low distortion, good transient response, and "effortless" sound character. Some of the world's most respected headphones are planar magnetic.
 
@@ -88,11 +88,11 @@ For IEM building, BA drivers are essential knowledge. For over-ear headphones, t
 
 ## Electrostatic Drivers: Audiophile Stratosphere
 
-Electrostatic headphones operate on completely different physics. An extremely thin membrane (just microns thick) is suspended between two perforated metal plates called stators. The membrane is given a static electrical charge (hence the name).
+Electrostatic headphones throw out magnets entirely and run on static charge. An extremely thin membrane (just microns thick) is suspended between two perforated metal plates called stators. The membrane is given a static electrical charge (hence the name).
 
 When audio signal is applied to the stators, it creates an alternating electrical field. The charged membrane is attracted to one stator and repelled by the other, moving back and forth to create sound.
 
-**Why electrostats are special:** The membrane is so light (often just a few micrograms) that it can respond to extremely fast transients. Many audiophiles consider top electrostatic headphones (Stax SR-009, HiFiMAN Shangri-La) to be the absolute pinnacle of headphone performance.
+**Why electrostats are special:** The membrane is so light (often just a few micrograms) that it can respond to extremely fast transients. Many audiophiles consider top electrostatic headphones (Stax SR-009, HiFiMAN Shangri-La) the best-sounding headphones ever made, full stop, and they're not entirely wrong.
 
 **Why they're not DIY-accessible:**
 
@@ -102,18 +102,11 @@ When audio signal is applied to the stators, it creates an alternating electrica
 - No practical component sourcing for DIY builds
 - Extremely expensive even for commercial products
 
-Electrostatics are fascinating technology worth understanding, but building one yourself is a serious engineering project, not a beginner or even intermediate DIY endeavor.
+Electrostatics are fascinating technology worth understanding, but building one yourself is a serious engineering project well past the beginner or intermediate range.
 
-## The Bottom Line for DIY Builders
+## So Which One Do You Build With
 
-For your first build, and likely your first several builds, the decision is simple: use dynamic drivers. Here's why:
-
-- Vast selection at multiple price points
-- Well-understood behavior and design patterns
-- Works with any amplifier
-- Affordable enough to experiment and iterate
-- Can produce excellent results in competent designs
-- Active DIY community with shared knowledge
+For your first build, and probably your next several, use a dynamic driver. Everything else here is worth knowing, but none of it belongs in a beginner's enclosure. Dynamic drivers are cheap enough to experiment with, work with any amp, and have an active DIY community that's already solved most of the problems you'll hit.
 
 The other technologies are interesting and worth learning about, but they're not practical starting points. Master dynamic drivers first. The principles you learn, acoustic design, damping, tuning, transfer to other technologies if you eventually explore them.
 
@@ -131,4 +124,4 @@ The other technologies are interesting and worth learning about, but they're not
 
 ## What's Next
 
-Now that you understand the driver technologies available, it's time to get practical. In [Driver Selection Guide](/learn/driver-selection-guide/), we'll walk through how to actually choose a dynamic driver for your specific project: size, impedance, material, supplier, and budget all considered.
+Knowing dynamic is the right call still leaves you staring at hundreds of them. In [Driver Selection Guide](/learn/driver-selection-guide/), we'll walk through how to actually choose one for your specific project: size, impedance, material, supplier, and budget all considered.

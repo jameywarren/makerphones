@@ -18,7 +18,7 @@ Damping is the finest tuning lever you have, and the easiest one to overdo. [Dam
 
 The mistake almost everyone makes is treating damping as a way to make a build "better" in some vague, undirected way: add a little foam, see if it improves, add a little more. That's the road to an over-damped, lifeless headphone, and you arrive there one reasonable-seeming step at a time.
 
-Instead, name the specific problem first. Is there a peak that makes one note boom or one region shout? Ringing that smears detail and makes the sound hard? Too much treble bite? A boxy, congested midrange? Each of those has a placement that addresses it. You damp the problem, not the headphone. And if you can't name the problem, you're not ready to add material yet.
+Instead, name the specific problem first. Is there a peak that makes one note boom or one region shout? Ringing that smears detail and makes the sound hard? Too much treble bite? A boxy, congested midrange? Each of those has a placement that addresses it. And if you can't name the problem, you're not ready to add material yet.
 
 ## How to tell what you're hearing
 
@@ -44,7 +44,7 @@ Over-damping gives you a dead, airless sound with no sparkle and no sense of spa
 
 ## Keep it reversible while you tune
 
-Use friction-fit felt and loose fill while you're dialing things in, so you can pull material back out as easily as you put it in. Cut pieces a little oversized so they hold by friction, and keep notes on what's in each cup. Don't glue anything down until you're confident the build is where you want it. Damping you can't remove is a decision you can't undo, and you'll make better decisions when undoing them is free.
+Use friction-fit felt and loose fill while you're dialing things in, so you can pull material back out as easily as you put it in. Cut pieces a little oversized so they hold by friction, and keep notes on what's in each cup. Don't glue anything down until you're confident the build is where you want it. Once it's glued, you've locked in a guess. Keep it removable and you can change your mind for free.
 
 :::tip
 Change one thing at a time. Add felt to the rear chamber, listen, then decide on the next move. If you change three things at once you'll never know which one mattered, and you'll almost always end up over-damped, because every individual change felt like "a little more couldn't hurt."
@@ -52,12 +52,12 @@ Change one thing at a time. Add felt to the rear chamber, listen, then decide on
 
 ## What damping can't do
 
-Damping refines a chamber; it can't rescue a fundamentally wrong one. If the rear volume is too small or the seal is broken, no amount of felt fixes it. Go back to [acoustic chamber design](/learn/acoustic-chamber-design) or check the seal first. Builders waste enormous effort trying to damp their way out of a geometry problem. Reach for damping once the geometry is right, as the final voicing step, not as a patch for a chamber that was never going to work.
+Damping refines a chamber; it can't rescue a badly wrong one. If the rear volume is too small or the seal is broken, no amount of felt fixes it. Go back to [acoustic chamber design](/learn/acoustic-chamber-design) or check the seal first. Builders waste enormous effort trying to damp their way out of a geometry problem. Reach for damping once the geometry is right, as the final voicing step, not as a patch for a chamber that was never going to work.
 
 ## Common Mistakes
 
 :::caution
-- **Stuffing the cup full "to be safe."** This kills bass and life. More damping is not safer: it's a different and usually worse problem.
+- **Stuffing the cup full "to be safe."** This kills bass and life. More damping isn't safer — it just trades one problem for a worse one (dead bass).
 - **Asymmetric damping between channels.** Different fill in left and right gives you an imbalance you'll hear but can't easily place. Match them exactly.
 - **Using damping to fix a wrong chamber.** It can't. Sort the volume and the seal first, then voice with damping.
 - **Gluing before tuning.** Commit only once you're sure. Keep everything removable while you work.

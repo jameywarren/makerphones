@@ -16,7 +16,7 @@ You know what drivers you want. You have a design in mind. Now comes the practic
 
 ## The Complete Parts List
 
-Before we dive into suppliers, let's break down everything you actually need for a complete headphone build:
+Here's everything you need for a complete headphone build:
 
 **Essential components:** Drivers (2), ear cups/housings (2), ear pads (1 pair), headband, cable, connectors (if detachable), damping materials (foam, felt, cotton), and hardware (screws, nuts, washers, heat-set inserts).
 
@@ -46,7 +46,7 @@ Ear pad sourcing depends on your design. If you're using an existing headphone c
 
 ## Headband Components
 
-This is where DIY gets interesting. For your first build, you have a few options:
+Headband components are where DIY gets interesting. For your first build, you have a few options:
 
 **Salvage from broken headphones:** The headband and adjustment mechanism are often the hardest parts to design from scratch. A broken headphone with good mechanical components (even if the drivers are blown) is a valuable resource. Thrift stores and eBay are excellent sources.
 
@@ -106,4 +106,4 @@ Budget separately for measurement equipment if you want it: [Budget Measurement 
 
 ## What's Next
 
-Now that you know where to source everything, it's time to understand how the acoustic chamber, the most critical physical design element, affects your headphones' sound. In [Acoustic Chambers and Enclosures](/learn/acoustic-chambers-and-enclosures/), we'll cover how chamber design affects sound, what materials work best, and how to design enclosures that actually sound good.
+The acoustic chamber is the most critical physical design element, and it's the next thing to get right. In [Acoustic Chambers and Enclosures](/learn/acoustic-chambers-and-enclosures/), we'll cover how chamber design affects sound, what materials work best, and how to design enclosures that actually sound good.

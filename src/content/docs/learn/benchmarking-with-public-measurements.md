@@ -12,7 +12,7 @@ description: "How to use public headphone measurement databases, oratory1990, Cr
 excerpt: "There's an enormous free library of rigorous headphone measurements out there. Here's how to use it to guide your build, and the one comparison trap that catches everyone."
 ---
 
-You don't have to design in the dark. Some of the most useful headphone data in the world is free and public, thousands of commercial headphones measured carefully on reference rigs, and you can use all of it to figure out what you're aiming for and how close you've gotten. The catch is knowing how to compare honestly, because the numbers off your bench won't line up with theirs, and that's not a mistake on your end. It's the whole thing nobody explains.
+You don't have to design in the dark. Some of the most useful headphone data in the world is free and public, thousands of commercial headphones measured carefully on reference rigs, and you can use all of it to figure out what you're aiming for and how close you've gotten. The catch is knowing how to compare honestly, because the numbers off your bench won't line up with theirs, and that's not a mistake on your end — it's just two different instruments measuring the same headphone.
 
 ## What's actually out there
 
@@ -27,7 +27,7 @@ What nearly all of them measure is frequency response, the same graph you've bee
 
 ## Why this is a gift for a builder
 
-Three things become possible that you simply can't do alone at a bench.
+A public library lets you do a few things you can't pull off alone at a bench.
 
 You can **learn what good looks like.** Scroll through measurements of headphones people love, then ones they don't, and the patterns start surfacing on their own: the gentle bass lift, the rise through the presence region, the way a harsh headphone shows a spike where your ears already told you it would be. You're training your eye against a few thousand data points instead of your own two or three builds.
 
@@ -39,13 +39,13 @@ And you can **set honest expectations.** Look at what real bass extension looks 
 
 Here's what trips up nearly everyone the first time. oratory1990's curves come off a GRAS rig with a calibrated ear simulator: a precision coupler built to an international standard, designed to mimic the acoustics of a real ear and canal. Your budget rig doesn't have that. It's a different cavity, a different mic, and no standardized ear. So your raw curve and their raw curve of the *exact same headphone* will look meaningfully different, especially up high, past a few kHz, where the ear-canal resonance that a proper simulator models just isn't present the same way on your setup.
 
-This isn't your rig being wrong. It's a different instrument measuring a related thing. (The measurement chapters go deep on why couplers matter; this is the practical consequence of all that.)
+Your rig isn't wrong — it's just a different instrument, measuring a slightly different thing. (The measurement chapters go deep on why couplers matter; this is the practical consequence of all that.)
 
 So do not lay your curve over an oratory1990 graph and try to match it decibel for decibel. You'll chase ghosts up in the treble for a week and learn nothing.
 
 What you *can* compare is **shape and relative balance**: how far the bass sits above the mids, where the big peaks and dips land, the overall tilt from low to high. Those survive the difference in rigs reasonably well. Better still, compare **deltas to a target**: their headphone's distance from the Harman curve, and your build's distance from that same curve measured on your own rig. Two error curves are far more comparable than two raw curves, because each one already has its own rig's signature partly subtracted out.
 
-## A workflow that actually works
+## The workflow I use
 
 1. **Pick a reference.** Find a headphone in the database with a voicing you're after, and match the form factor to your build, because an open-back and a sealed can won't share a bass shelf. Note its shape relative to the target.
 2. **Set your target.** Use that shape, or the Harman target itself, as your goal. The frequency-response chapter covers what the target means and where it came from.
@@ -53,14 +53,14 @@ What you *can* compare is **shape and relative balance**: how far the bass sits 
 4. **Compare shapes and distance-from-target, never raw level.** Where's your bass relative to your mids? Where are your problem peaks? How does that compare to the reference's relationship to the same target?
 5. **Tune toward the shape, re-measure, repeat.** Damping is how you move the curve once you know which direction it needs to go.
 
-The database is the map; your rig is the compass. They don't read in the same units, but used together they'll get you where you're going.
+The database tells you where good headphones land; your own rig tells you where yours lands. Keep both honest and the gap between them is the work.
 
 ## Common Mistakes
 
 :::caution
 - **Matching absolute decibels across rigs.** Your 8 kHz peak and theirs aren't measuring the same thing. Compare shape and distance-from-target. Never raw level. This is the single biggest mistake, and it sends people down rabbit holes that don't exist.
 - **Treating one measurement as gospel.** Even on a GRAS rig, a single seating shifts the result, and unit-to-unit variation between two copies of the same headphone is real. The good public measurers average several seatings; your numbers deserve the same respect before you trust them.
-- **Chasing an exact copy of a database curve.** It was measured on different hardware, on a different physical unit, maybe with different pads than yours. Aim for the shape, not the squiggle.
+- **Chasing an exact copy of a database curve.** It was measured on different hardware, on a different physical unit, maybe with different pads than yours. Aim for the overall shape, not an exact match to their line.
 - **Forgetting it's data, not preference.** A target tells you what most listeners prefer on average. It doesn't tell you what *you* prefer. Use the databases as a starting line, then trust your own ears to make the last calls.
 :::
 

@@ -12,7 +12,7 @@ description: "Learn how to choose the right drivers for your DIY headphone build
 excerpt: "Hundreds of drivers are available, but which one is right for your build? Here's a practical guide to driver selection based on 25+ years of experience."
 ---
 
-You've learned the theory, you understand the different driver technologies, and you're ready to actually choose drivers for your build. But standing in front of Parts Express's website or scrolling through AliExpress listings, you realize there are hundreds of options. How do you choose? What actually matters? Let me walk you through the decision process I use when selecting drivers, based on 25+ years of working with headphones.
+Standing in front of Parts Express's website or scrolling through AliExpress listings, you hit the same wall everyone does: there are hundreds of options. How do you choose? What actually matters? Here's the decision process I use when selecting drivers, based on 25+ years of working with headphones.
 
 ## Start with Your Use Case
 
@@ -46,7 +46,7 @@ For portable use, you need at least 95 dB/mW, ideally 100+ dB/mW. For desktop us
 
 Look for measurements if available (Parts Express usually provides them). You want: smooth response without major peaks or dips, reasonable bass extension (usable down to 30–40Hz), no obvious treble problems.
 
-Remember, you'll be tuning the final response with your enclosure and damping. The driver's raw response is just the starting point. Don't obsess over perfection here.
+Remember, you'll be tuning the final response with your enclosure and damping. The driver's raw response is just the starting point. No need to chase a perfectly flat raw curve.
 
 ### THD (Total Harmonic Distortion)
 
@@ -111,4 +111,4 @@ If you're using drivers salvaged from commercial headphones:
 
 ## What's Next
 
-Now that you know how to choose drivers, you need to know where to actually buy them, and all the other components you'll need. In [Sourcing Components](/learn/sourcing-components/), we'll cover suppliers, what to buy, and how to build a complete parts list for your project.
+Picking the driver is only half the shopping trip. You still need cups, pads, foam, wire, and a screw count, and the difference between one cart and three is knowing which supplier carries what. In [Sourcing Components](/learn/sourcing-components/), we'll cover suppliers, what to buy, and how to build a complete parts list for your project.

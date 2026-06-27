@@ -12,13 +12,13 @@ description: "How to model headphone parts in CAD and prepare them to 3D-print: 
 excerpt: CAD is where your headphone stops being an idea and becomes parts you can hold. Here's how to model the pieces nobody sells you, and design them so they actually print and fit.
 ---
 
-The parts that make a headphone *yours*, the cups, the baffle, the headband slider, are exactly the parts nobody sells. A CAD model and a 3D printer are how you make them. This is where the design process stops being a plan and turns into something you can hold, seat a driver into, and put on your head.
+The parts that make a headphone *yours*, the cups, the baffle, the headband slider, are exactly the parts nobody sells. A CAD model and a 3D printer are how you make them. CAD is where the design process stops being a plan and turns into something you can hold, seat a driver into, and put on your head.
 
 ## Why model it yourself
 
 You can buy drivers, pads, cable, and hardware. You can't buy the one cup that fits *your* driver, seals against *your* pad, and holds the air volume *your* design needs. That part is yours to make.
 
-The good news: 3D printing makes it cheap to be wrong. A failed print costs an hour and a few cents of filament, so there's no reason to agonize over getting the first one perfect. Print it, find out what's off, change a number, print again. That loop is the whole game.
+The good news: 3D printing makes it cheap to be wrong. A failed print costs an hour and a few cents of filament, so there's no reason to agonize over getting the first one perfect. Print it, find out what's off, change a number, print again. That loop is most of what designing a cup actually is.
 
 ## Pick a tool you'll actually finish a part in
 
@@ -26,7 +26,7 @@ CAD tools split into two camps. *Parametric* tools (FreeCAD, Onshape, Fusion 360
 
 Several cost nothing to start: FreeCAD is free and open source; Onshape and Fusion 360 have free or hobbyist tiers (check their current terms, which change). If you've never touched CAD, Tinkercad is the gentlest on-ramp: learn the basics there, then move to something parametric when you outgrow it. The tool matters less than committing to one long enough to get fluent.
 
-## Design parametric, not pretty
+## Build it from named dimensions
 
 Here's the habit that makes everything else faster: define the dimensions you care about as named parameters first: driver diameter, cup depth, wall thickness, pad inner diameter, then build geometry that references those parameters instead of typing raw numbers into the model.
 
@@ -48,7 +48,7 @@ A headphone isn't one part; it's an assembly: cup, baffle, pad mount, yoke, head
 
 This also lets you iterate one piece at a time: if the chamber's wrong, you reprint the cup, not the whole headphone. And it lets you mix made and bought parts: print the cup and baffle, salvage a headband from a broken pair (as [the sourcing guide](/learn/sourcing-components) suggests), and bridge the two with a printed bracket.
 
-## Design for the printer, not just the screen
+## Design for the printer
 
 A model that looks right on screen can be impossible to print or impossible to fit together. Build these in from the start:
 

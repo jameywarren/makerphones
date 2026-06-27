@@ -4,13 +4,13 @@ handle: simple-open-back-build
 type: build-guide
 difficulty: Beginner
 time_estimate: A weekend
-description: "A clean, intentional open-back build, leaning into the spacious, natural sound open-back does best. The forgiving design, done with enough care to actually sound open."
+description: "A clean, intentional open-back build, leaning into the airy, out-of-your-head sound open-back does best. The forgiving design, done with enough care to actually sound open."
 excerpt: "Open-back is where a lot of builders fall for this hobby: spacious, natural, out-of-your-head sound, and a forgiving build. If your first one taught you the process, this one is about doing it with intent."
 related: [driver-selection-guide, open-vs-closed-back-design, 3d-design-for-headphones, damping-strategy-and-application, ear-pads-and-comfort, why-measure-headphones]
 tags: [build-guide, open-back, project, intermediate]
 ---
 
-Open-back is where a lot of builders fall in love with this hobby. It's the more forgiving design, the rear wave escapes into the room instead of fighting you inside a sealed cup, and it rewards you with the spacious, open, out-of-your-head sound that open-backs are known for. If your first build was about learning the process end to end, this one is about doing it with intent: building a clean open-back that actually sounds open.
+Open-back is where a lot of builders fall in love with this hobby. It's the more forgiving design, the rear wave escapes into the room instead of fighting you inside a sealed cup, and it rewards you with the out-of-your-head sound that open-backs are known for. If your first build was about learning the process end to end, this one is about doing it with intent: building a clean open-back that actually sounds open.
 
 The trade-off, stated plainly up front: open-back leaks both ways. It won't isolate you from the room or the room from anyone near you, and it gives up some deep-bass slam compared to a sealed design. In exchange you get soundstage, naturalness, and an easier build. For listening at home in a quiet space, it's a wonderful place to live.
 
@@ -46,7 +46,7 @@ Here's the open-back lesson: you need *less* damping than a closed design, becau
 
 ## Stage 7 — Listen, and verify if you like
 
-You're chasing that open, spacious, natural presentation, and an open-back done well is genuinely lovely. If you want to check your channel matching or see what your light tuning did, [why measure headphones](/learn/why-measure-headphones) makes the case for a quick measurement.
+You're chasing that open, spacious presentation, and an open-back done well throws a soundstage a sealed cup just can't. If you want to check your channel matching or see what your light tuning did, [why measure headphones](/learn/why-measure-headphones) makes the case for a quick measurement.
 
 ## Assembly, step by step
 
@@ -57,7 +57,7 @@ The stages above are the map; this is the turn-by-turn. None of it is hard, but 
 If your baffle uses heat-set inserts for the driver or baffle screws, set them with your soldering iron at `200–220°C`. Sit each insert on its hole, bring the iron tip down onto the insert itself, and let it sink under gravity plus gentle pressure, don't force it. Stop when the insert is flush or about `0.2mm` below the surface, then let it cool fully before you touch it.
 
 :::tip
-No proper heat-set tip? A small bolt with the head cut off works fine: the goal is to carry heat evenly through the whole insert, not just nip the top edge. A crooked insert means a crooked screw, and a crooked screw means an acoustic leak, so take your time and keep each one square.
+No proper heat-set tip? A small bolt with the head cut off works fine: the goal is to carry heat evenly through the whole insert, not nip the top edge. A crooked insert means a crooked screw, and a crooked screw means an acoustic leak, so take your time and keep each one square.
 :::
 
 ### Mount the driver
@@ -84,9 +84,9 @@ Then flex-test it: hold the assembled cup and press lightly around the baffle ed
 
 ### Damp it — lightly, on purpose
 
-This is where the open-back discipline from the tuning stage above becomes physical. Start with a single layer of felt on the rear wall of the cup, cut to fit without blocking the vents, plus about a golf ball's worth of loose fiberfill in the chamber, loosely placed, not packed. That's the whole starting recipe.
+The open-back discipline from the tuning stage above becomes physical here. Start with a single layer of felt on the rear wall of the cup, cut to fit without blocking the vents, plus about a golf ball's worth of loose fiberfill in the chamber, loosely placed, not packed. That's the whole starting recipe.
 
-Deliberately under-damp this first listen. You'll hear something a touch bass-heavy and a little resonant, and that's correct: it's where you start, not where you finish. You add damping a bit at a time and listen again; you can't take it back out once it's changed the sound. [Damping strategy and application](/learn/damping-strategy-and-application) walks the full iteration.
+Deliberately under-damp this first listen. You'll hear something a touch bass-heavy and a little resonant, and that's correct: it's a starting point. You add damping a bit at a time and listen again; you can't take it back out once it's changed the sound. [Damping strategy and application](/learn/damping-strategy-and-application) walks the full iteration.
 
 ### Route the cable
 
@@ -106,11 +106,11 @@ Then, before you start analyzing anything: enjoy them for a minute. You built th
 ## Common mistakes
 
 - **Over-damping**: open-backs need very little. Stuffing the cup kills the openness you built it for.
-- **Expecting closed-back bass**: open-back trades deep slam for spaciousness. That's the deal, not a flaw.
+- **Expecting closed-back bass**: open-back trades deep slam for spaciousness. You knew that going in.
 - **Choking the rear opening**: too small a grille or vent makes an open-back behave half-closed and boxy. Keep it open.
 - **Mismatched open area between cups**: asymmetry skews the stereo image. Build both rears identically.
 - **Ignoring the front seal**: open at the back, sealed at the baffle. Don't get sloppy at the driver.
 
 ## Where to go next
 
-The natural next challenge is a closed-back build, for isolation and bass, the harder sibling to this one, where everything that makes open-back forgiving starts working against you. Or refine this open-back with measurement and small tuning passes until it's exactly where you want it. Either way, you've now built the design most people find easiest to love.
+The natural next challenge is a closed-back build, for isolation and bass, the harder sibling to this one, where everything that makes open-back forgiving starts working against you. Or refine this open-back with measurement and small tuning passes until it's exactly where you want it.

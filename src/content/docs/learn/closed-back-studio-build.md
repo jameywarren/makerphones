@@ -18,7 +18,7 @@ This is a real step up, so it's worth doing after you've got a build or two behi
 
 **Materials:** a driver that handles a sealed load well, controlled bass rather than already-boomy; filament, with PETG worth considering here for its extra mass and damping in the shell; a sealed cup design, possibly with a small tuned vent; good isolating pads that seal well, leatherette or protein leather seal better than velour; cable and a connector; more damping material than an open-back build needs: felt, foam, fiber fill, and modeling clay for the baffle; a headband; and hardware with gaskets for a proper seal.
 
-**Tools:** a 3D printer; a soldering iron and solder; hand tools; a multimeter is genuinely useful here; and a measurement rig is strongly recommended: closed-back is the build where measurement earns its keep.
+**Tools:** a 3D printer; a soldering iron and solder; hand tools; a multimeter is worth having; and a measurement rig is strongly recommended, because closed-back hides its problems and a rig is what lets you find them.
 
 ## Stage 1 — Pick a driver that suits a sealed design
 
@@ -42,11 +42,11 @@ Sealing pads with firm, even contact do double duty here: the pad seal is half y
 
 ## Stage 6 — Tune with damping
 
-Closed-back is where damping really earns its keep, because now you're fighting trapped-air resonances and internal reflections inside a sealed cup. Line the walls to kill reflections, add fill to tame the rear-chamber resonance and the bass hump, and use a thin layer to smooth the driver's peaks, but balance it carefully, because too little leaves boom and ring while too much deadens the life out of it. This is iterative work, one change at a time, and it's exactly where a measurement rig turns guesswork into seeing the problem. [Damping strategy and application](/learn/damping-strategy-and-application) and [tuning with damping](/learn/tuning-with-damping) walk through it.
+Closed-back is where damping does the heavy lifting, because now you're fighting trapped-air resonances and internal reflections inside a sealed cup. Line the walls to kill reflections, add fill to tame the rear-chamber resonance and the bass hump, and use a thin layer to smooth the driver's peaks, but balance it carefully, because too little leaves boom and ring while too much deadens the life out of it. This is iterative work, one change at a time, and it's exactly where a measurement rig turns guesswork into seeing the problem. [Damping strategy and application](/learn/damping-strategy-and-application) and [tuning with damping](/learn/tuning-with-damping) walk through it.
 
 ## Stage 7 — Measure
 
-This is the build where measurement pays off most. The sealed bass hump, the chamber resonance, the channel matching, and your isolation are all hard to judge by ear alone, and easy to see on a graph. If you've been building by ear so far, the closed-back studio project is the one that makes a measurement rig worth it. [Why measure headphones](/learn/why-measure-headphones) makes the case, and [budget measurement setup](/learn/budget-measurement-setup) shows how to put one together affordably.
+This is the build where measurement matters most. The sealed bass hump, the chamber resonance, the channel matching, and your isolation are all hard to judge by ear alone, and easy to see on a graph. If you've been building by ear so far, the closed-back studio project is the one that makes a measurement rig worth it. [Why measure headphones](/learn/why-measure-headphones) makes the case, and [budget measurement setup](/learn/budget-measurement-setup) shows how to put one together affordably.
 
 ## Common mistakes
 
@@ -59,4 +59,4 @@ This is the build where measurement pays off most. The sealed bass hump, the cha
 
 ## Where to go next
 
-This is the most demanding of the approachable builds, so finishing one well is a real milestone. From here it's refinement: measurement-driven tuning passes, dialing the vent and damping until the bass is even and the isolation holds, and then your own designs. A closed-back studio headphone is a genuinely useful tool to have built with your own hands, and it's the category where the hardest lessons in this manual finally come together.
+This is the most demanding of the approachable builds, so finishing one well is a real milestone. From here it's refinement: measurement-driven tuning passes, dialing the vent and damping until the bass is even and the isolation holds, and then your own designs. A closed-back studio headphone is a tool you can actually work in, built with your own hands.

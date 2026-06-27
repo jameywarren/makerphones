@@ -15,7 +15,7 @@ excerpt: Frequency response is a snapshot that throws away time and ignores dist
 import Figure from '../../../components/Figure.astro';
 import DecayWaterfall from '../../../components/diagrams/DecayWaterfall.astro';
 
-Frequency response is the headline measurement, and for good reason: it tells you most of what you need while you're tuning. But it's a snapshot. It tells you how loud each frequency is and nothing about how long each one rings, and it says nothing about distortion at all. That's why two headphones with nearly identical curves can still sound clearly different from each other. The measurements in this chapter fill in those gaps. You won't need all of them, but a couple are genuinely useful, and it's worth knowing what the rest are for so you can read them when you see them.
+Frequency response is the headline measurement: it tells you most of what you need while you're tuning. But it's a snapshot. It tells you how loud each frequency is and nothing about how long each one rings, and it says nothing about distortion at all. That's why two headphones with nearly identical curves can still sound clearly different from each other. The measurements in this chapter fill in those gaps. You won't need all of them, but a couple are genuinely useful, and it's worth knowing what the rest are for so you can read them when you see them.
 
 ## The time dimension: decay plots
 
@@ -40,17 +40,17 @@ For day-to-day tuning you'll act on these rarely, the decay plot presents the sa
 
 A real driver isn't perfectly linear: it adds harmonics that weren't in the original signal, and a distortion plot shows how much, across frequency, usually as a percentage. For a decent driver at normal listening levels, distortion is low and inaudible. It tends to climb in the deep bass, where the diaphragm moves the most and works hardest, and at high volume, where the driver is being pushed near its limits. Seeing it rise in those two places is normal and expected.
 
-For a builder, though, the most valuable use of a distortion plot isn't grading the driver: it's catching faults. Different faults leave different signatures. A buzz from a loose part or a slack wire tends to throw up sharp distortion spikes at specific frequencies. A rubbing or bottoming driver smears distortion across a broad range. An air leak can show up as noise or a whistle riding on top. The common thread: when distortion jumps somewhere it has no business jumping, or turns rough where it should be smooth, stop tuning and go look for a physical cause. A distortion plot is the best lie-detector you have for "is this a tuning problem or did something come loose."
+For a builder, though, a distortion plot earns its keep less as a way to grade the driver and more as a way to catch faults. Different faults leave different signatures. A buzz from a loose part or a slack wire tends to throw up sharp distortion spikes at specific frequencies. A rubbing or bottoming driver smears distortion across a broad range. An air leak can show up as noise or a whistle riding on top. The common thread: when distortion jumps somewhere it has no business jumping, or turns rough where it should be smooth, stop tuning and go look for a physical cause. A distortion plot is the best lie-detector you have for "is this a tuning problem or did something come loose."
 
 ## Spectrograms and the rest
 
-A spectrogram gives you a fuller time-and-frequency picture, frequency on one axis, time on another, intensity as color or brightness, and it's a nice way to see resonances and reflections laid out at once. It's genuinely informative and genuinely optional. Treat it, and the other exotic plots your measurement software can produce, as things worth understanding so you're not lost when you see them, not as part of your regular workflow.
+A spectrogram gives you a fuller time-and-frequency picture, frequency on one axis, time on another, intensity as color or brightness, and it's a nice way to see resonances and reflections laid out at once. It's informative and entirely optional. Treat it, and the other exotic plots your measurement software can produce, as things worth understanding so you're not lost when you see them. They're not part of your regular workflow.
 
 ## What actually matters for DIY
 
-For the vast majority of builds, frequency response plus a decay plot covers nearly everything you can act on, and an occasional distortion sweep catches gross faults. The rest are worth knowing about and rarely worth running. Don't let collecting impressive-looking graphs replace acting on the two that matter: a wall of plots you don't change anything based on is just decoration.
+For the vast majority of builds, frequency response plus a decay plot covers nearly everything you can act on, and an occasional distortion sweep catches gross faults. The rest are worth knowing about and rarely worth running. Don't let collecting impressive-looking graphs replace acting on the two that matter. If you're not changing anything based on a plot, you're just collecting graphs.
 
-## Read them as relative, not absolute
+## Read them comparatively
 
 The same honesty from earlier applies, doubly. A hobby rig measures the driver and the rig together, so absolute decay and distortion numbers aren't trustworthy, and the high treble is especially noisy across all of these plots. Use them comparatively, before versus after a change, left versus right, this build versus that one, and never as an absolute score. And remember that decay and distortion both shift with seating, so re-seat and re-run before you believe a small feature is real.
 

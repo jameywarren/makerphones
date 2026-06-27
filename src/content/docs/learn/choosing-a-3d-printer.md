@@ -26,13 +26,13 @@ That's the baseline. The interesting question is what stepping up actually buys 
 
 ## What a better printer genuinely buys you
 
-Three things, and they map cleanly onto what builders care about.
+There are three real gains, and they map cleanly onto what builders care about.
 
 **Dimensional repeatability.** This is the big one. Headphone parts have to *mate*: a baffle press-fits a driver, a slider rides in a track, two cups need to come out identical. A rigid, enclosed CoreXY machine holds its dimensions run to run far better than a flexing, open bed-slinger whose moving bed introduces tiny inconsistencies. If you've ever printed the same part twice and had one fit and one not, this is why. Consistency is the single strongest reason to step up. It's also the foundation of everything in [manufacturing for consistency](/learn/manufacturing-for-consistency).
 
 **Surface finish at speed.** A rigid frame, input shaping, and good part cooling let a printer run fast *and* clean. You get fewer ringing artifacts, crisper overhangs, and fewer support scars on the cosmetic faces of a cup. On an open-bed machine you can get there too, but you'll be printing slower and fighting more.
 
-**Material headroom.** An enclosed, heated chamber unlocks reliable ABS, ASA, and even PC: tougher, more heat-tolerant materials with a more premium hand-feel, and an easier time with heat-set inserts. An open-bed machine mostly keeps you in PLA and PETG, which, to be clear, is genuinely enough for the build. The chamber is an *unlock*, not a requirement. The material tradeoffs themselves are covered in [acoustic chambers and enclosures](/learn/acoustic-chambers-and-enclosures).
+**Material headroom.** An enclosed, heated chamber lets you reliably run ABS, ASA, and even PC: tougher, more heat-tolerant materials with a more premium hand-feel, and an easier time with heat-set inserts. An open-bed machine mostly keeps you in PLA and PETG, which, to be clear, is genuinely enough for the build. The chamber is a nice-to-have, not a requirement. The material tradeoffs themselves are covered in [acoustic chambers and enclosures](/learn/acoustic-chambers-and-enclosures).
 
 ## What a better printer does *not* fix
 
@@ -54,7 +54,7 @@ Prices are approximate and move constantly, especially on sale, so confirm befor
 
 **Bambu Lab P1S — the least-fuss pick (~$500).** An enclosed CoreXY that is, by reputation, the most dialed-in and lowest-hassle machine in this range, with the best out-of-box surface finish. The tradeoff is real and worth naming: the software leans on the cloud and the ecosystem is fairly walled-garden. For an open-source project, that's a genuine values tension. If you mostly want parts to just *work* and that tension doesn't bother you, it's hard to beat.
 
-**Prusa Core One — the open-ethos pick (~$1,099 kit / ~$1,599 assembled).** An *actively heated* chamber, the quietest of the bunch, a load-cell first layer, and the openness that matters to a project like this: published CAD, open firmware, any slicer, fully offline, lifetime support. If hardware openness is a value you hold, this is the match. Honest caveat, and reviewers say the same: it's overkill if you'll only ever print PLA and PETG. It earns its premium when you genuinely want reliable engineering materials and care about owning an open machine.
+**Prusa Core One — the open-ethos pick (~$1,099 kit / ~$1,599 assembled).** An *actively heated* chamber, the quietest of the bunch, a load-cell first layer, and the openness that matters to a project like this: published CAD, open firmware, any slicer, fully offline, lifetime support. If hardware openness is a value you hold, this is the match. Honest caveat, and reviewers say the same: it's overkill if you'll only ever print PLA and PETG. It's worth the premium only if you want real engineering materials and an open machine.
 
 **Advanced / optional — a hybrid FDM + resin (SLA) workflow.** Resin gives the best surface and the most precise, isotropic parts, which makes it tempting for the cosmetic show-surface of a cup. The cost is brittleness and a real cleanup-and-post-cure tax (gloves, alcohol, UV curing, messy consumables). Treat this as a "once you're comfortable" second machine, not a first printer.
 

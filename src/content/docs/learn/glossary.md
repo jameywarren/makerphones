@@ -49,7 +49,7 @@ The manual uses a fair amount of vocabulary, and it's all defined where it first
 
 **Dynamat**: Brand name for constrained layer damping material (butyl rubber plus aluminum foil), applied to cup interiors to damp structural vibrations. It is not acoustic absorption.
 
-**Dynamic driver**: The most common driver type: a voice coil attached to a diaphragm, moving in a magnetic gap. Simple, robust, good bass.
+**Dynamic driver**: The most common driver type: a voice coil attached to a diaphragm, moving in a magnetic gap. Simple, hard to break, good bass.
 
 **Electrostatic**: A driver type using a charged film between electrodes; very low distortion, but requiring special high-voltage amplification.
 

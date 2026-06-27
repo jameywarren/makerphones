@@ -1,6 +1,6 @@
 # MakerPhones — Content & Style Guide
 
-**Version 1.3 · June 26, 2026**
+**Version 1.4 · June 26, 2026** *(1.4: added "Avoiding AI tells" — the pre-ship checklist and the `scripts/voice-lint.mjs` gate, after the June 2026 de-AI editorial pass.)*
 
 *The working "how to write a chapter" guide. Positioning, the canonical author bio, and the voice north star live in **Project-Compass.md** — read that first; this expands the mechanics. Full historical/planning docs live in the repo, which is the source of truth.*
 
@@ -99,6 +99,47 @@ excerpt: "..."                        # chapter excerpt (also the parked Shopify
 - [ ] Has a real Common Mistakes section and a What's Next.
 - [ ] Footer: difficulty, prerequisites, related.
 - [ ] Every sentence earns its place.
+
+---
+
+## Avoiding AI tells
+
+Re-writes drift. The danger isn't one bad sentence — it's a handful of stamped patterns repeating
+across chapters until the whole manual reads machine-smoothed. Run `node scripts/voice-lint.mjs`
+before a chapter ships (`--ci` fails on the hard ones), then read the draft against this list. The
+fix is almost always to **thin, not kill** — break the repetition, keep the device that lands.
+
+- **Antithesis.** Search "not X, it's Y" / "isn't just X" / "not just." Keep at most one deliberate
+  beat per chapter, and keep any "X, not Y" where *not Y* names a real mistake a builder would make
+  ("the energy is in the plastic, not the air"). Rewrite the structural ones — bolded headers,
+  section openers/closers, anything chained across consecutive sections — to plain declaratives.
+- **Closers.** No mic-drop zingers or recurring metaphors (map/territory, floor/ceiling) to end a
+  section. Hand off with a concrete next step or a real workshop aside.
+- **Transitions.** Never "Now that you understand X, you're ready to learn Y," and never re-state what
+  the chapter just taught. Lead the What's Next with the forward hook plus one concrete reason.
+- **Recurring tics.** A phrase that's fine once is a fingerprint across many chapters: "earns its
+  keep / pays off," "best of both worlds," "the fun part," "Let me walk you through," "dive deeper,"
+  "here's the thing," "trust your ears." Each survives in at most one chapter; vary or cut the rest.
+- **Banned words.** simply, fundamentally, robust, revolutionary, game-changing, seamless, leverage,
+  unlock, elevate (the marketing sense — "elevated bass" is fine), delve, cutting-edge. Cut on sight.
+- **Intensifiers.** actually, genuinely, incredibly, dramatically, significantly — delete, or replace
+  with a real number or magnitude.
+- **Hollow enthusiasm.** "where the magic is," "the clever part" — name the concrete thing that's good.
+- **Signposts.** Cut "Let's dive into," "Let's break it down," "Let me show you." Start with the claim.
+- **Run-ons.** A comma or colon joining two full clauses gets a period or an em-dash. Read it aloud —
+  if you run out of breath, break it. (Legitimate colons that introduce a list or definition stay.)
+- **Rule of three.** Don't pre-announce "three things." Let the list run; vary the count when it's not
+  really three.
+- **Voice check.** Contractions present? First-person experience? At least one real tradeoff or "what
+  I'd do differently"? If it reads like a polished encyclopedia entry, it's drifted.
+- **Credibility check.** Delete every superlative — does the claim still stand on the engineering? It
+  should. The credibility is the engineering, not the adjectives.
+
+**Don't over-correct.** The brand-sanctioned phrases above ("here's what I learned the hard way,"
+"this is where it gets interesting," etc.) are fine on a single use — only the *repetition* across
+chapters is the tell. Never strip real anecdotes, named parts/specs/prices, honest hedging, or
+contractions and mild profanity to chase a clean lint. Flattening the voice is as bad as the AI
+cadence it replaces.
 
 ---
 

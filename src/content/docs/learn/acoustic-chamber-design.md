@@ -14,7 +14,7 @@ excerpt: The air around the driver does as much to the sound as the driver itsel
 
 The driver gets all the attention, but the two pockets of air around it, one in front of the diaphragm, one behind, shape as much of the final sound as the driver does. [Acoustic chambers and enclosures](/learn/acoustic-chambers-and-enclosures) covered what those chambers are and why they exist. This chapter is about making the actual design calls for your build: what to set, what each setting changes, and how to leave yourself room to fix it when the first version isn't right.
 
-Get the chambers wrong and no amount of damping rescues the build. You'll be sanding the edges off a problem that lives in the geometry. Get them right and the headphone is most of the way there before you tune a single thing.
+Get the chambers wrong and no amount of damping rescues the build. You'll be sanding the edges off a problem that lives in the geometry. Get them right and most of the work's done before you tune anything.
 
 ## The two chambers, and why the driver cares
 
@@ -26,9 +26,9 @@ The most useful mental model is a spring. The air trapped behind the diaphragm p
 
 A larger sealed rear chamber is a softer spring. It lets the diaphragm move more freely at low frequencies, which gives you deeper, more extended bass. A small sealed rear chamber is a stiff spring that fights the diaphragm on every excursion, producing bass that's tighter but shallower, and that, past a point, turns boxy and one-notey because the trapped air dominates the driver's natural behavior.
 
-This is why the most common complaint about a first closed-back build, thin, boxy, bass-light, is so often a rear chamber that's simply too small. The instinct is to reach for foam, but foam won't conjure bass extension that the geometry never allowed. The fix is volume.
+This is why the most common complaint about a first closed-back build, thin, boxy, bass-light, is so often a rear chamber that's just too small. The instinct is to reach for foam, but foam won't conjure bass extension that the geometry never allowed. The fix is volume.
 
-How much volume? There's no single number, because it depends on the driver. As a working principle: a driver with a lower free-air resonance and more excursion generally wants a larger rear volume to breathe into, while a small, stiff driver can live in a smaller space. Start from any reference build using a similar driver, then treat that as a beginning rather than an answer: your driver and your cup are not theirs.
+How much volume? There's no single number, because it depends on the driver. As a working principle: a driver with a lower free-air resonance and more excursion generally wants a larger rear volume to breathe into, while a small, stiff driver can live in a smaller space. Start from any reference build using a similar driver, then tune from there: your driver and your cup are not theirs.
 
 ## Putting numbers on it
 
@@ -57,7 +57,7 @@ Here's the one that ties volume and driver together. For a chamber in that `80�
 So a driver with `Fs` of `60Hz` in a `100cc` chamber rolls off around `75–90Hz`, deep enough for satisfying bass. Drop in a stiffer `120Hz` driver and that same chamber pushes roll-off up toward `150–180Hz`, which is noticeably light in the low end. It's one more reason to weigh `Fs` when you pick the driver, not after.
 
 :::tip
-These figures are ballparks, not promises. They get you a sensible first print and keep you from guessing in the dark, but the raw measurement off the assembled cup is the final word. If bass rolls off much higher than the rule of thumb predicts, suspect a chamber that's too small or a seal that's leaking.
+These figures are ballparks. They get you a sensible first print and keep you from guessing in the dark, but the raw measurement off the assembled cup is the final word. If bass rolls off much higher than the rule of thumb predicts, suspect a chamber that's too small or a seal that's leaking.
 :::
 
 ## Sealed or vented
@@ -66,13 +66,13 @@ A fully sealed rear chamber gives you the most isolation, but trapping the air a
 
 A vent is just a deliberate, controlled leak. Opening a small hole relieves the trapped pressure, lowers and tames that resonance peak, and can smooth the bass into something more even. This is the same sealed-versus-open trade-off from [open vs closed back design](/learn/open-vs-closed-back-design), except here you're not choosing one or the other: you're dialing in exactly how much leak you want, by the millimeter. An open-back design is really just the far end of this same slider: a rear chamber so open it barely resists the driver at all.
 
-The catch is that venting trades isolation and bass quantity for evenness. A small vent smooths things; a large one bleeds away low-end punch and lets the outside world in. Finding the balance is the work.
+The catch is that venting trades isolation and bass quantity for evenness. A small vent smooths things; a large one bleeds away low-end punch and lets the outside world in. Where exactly to land that vent is the part you'll fiddle with most.
 
 ## The front cavity shapes the top end
 
 The front chamber, diaphragm to ear, is set by how deep your cup is and how thick your pad is. It does less for the bass and more for the upper midrange and treble, and for the sense of how close or distant the sound feels. A deeper front cavity tends to move treble peaks downward and push the presentation back, making it feel more spacious or more distant; a shallow cavity brings the sound forward and brighter. This region is also where the resonance that gives headphones their characteristic presence lives, so small changes here are audible.
 
-Because the pad sets so much of this distance, treat pad depth as part of the acoustic design and not just a comfort decision: see [ear pads and comfort](/learn/ear-pads-and-comfort). Swapping to a thicker pad doesn't just change how the headphone feels on your head; it re-voices the top end.
+Because the pad sets so much of this distance, treat pad depth as part of the acoustic design, a sound decision as much as a comfort one: see [ear pads and comfort](/learn/ear-pads-and-comfort). Swapping to a thicker pad doesn't just change how the headphone feels on your head; it re-voices the top end.
 
 ## Design for room to tune
 
