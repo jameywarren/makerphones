@@ -35,6 +35,18 @@ Unused ISBNs still in the block (for future editions/formats — e.g. hardcover,
   - [ ] **Apple Books** — ebook (via Apple Books Connect or through IngramSpark)
   - [ ] **IngramSpark** — extended print (bookstores/libraries) + wide ebook (Apple/Kobo/B&N)
 
+## Press files (generated locally — `dist/` is gitignored, so they stay on the author's machine)
+
+| File | What | Command |
+|---|---|---|
+| `dist/book-press-cmyk.pdf` | Interior, **282 pp**, CMYK — KDP paperback | `npm run book:press:pdf` |
+| `dist/book-press-pdfx1a.pdf` | Interior, PDF/X-1a — IngramSpark (slow ~40 min) | `npm run book:press:pdfx` |
+| `dist/cover-kdp.pdf` / `-cmyk.pdf` | Full-wrap cover, 14.885 × 10.25 in, spine 0.635 in | `npm run book:cover` |
+
+Spine = page count × 0.002252 (KDP white). If the page count moves off 282,
+recompute and update `--spine` in `project/book/cover/cover-print.html`.
+**Still to build:** reflowable EPUB (`to-epub`) for Kindle + Apple/wide — see `EBOOK.md`.
+
 ## Companion docs
 - `RUNBOOK.md` — step-by-step KDP + IngramSpark setup, file specs, decision gates.
 - `METADATA.md` — BISAC codes, keywords, categories, description, comp titles.
