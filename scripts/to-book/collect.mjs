@@ -39,8 +39,13 @@ const OUT = path.join(DIST, PRESS ? 'book-press.html' : 'book.html');
 const BOOK_TITLE = 'The Art and Science of Headphone Design';
 const BOOK_SUBTITLE =
   'Designing and building your own headphones — the real engineering, explained plainly.';
-const AUTHOR = 'Jamey Warren';
+const AUTHOR = 'Jamey Warren';             // pen name — byline on the cover + title page
+const COPYRIGHT_HOLDER = 'James A. Warren'; // legal name — copyright line + ISBN registrant of record
 const IMPRINT = 'Warren Labs';
+// Warren Labs ISBN block 979-8-9968299-x (Bowker order #2531268). Each edition
+// gets its own ISBN; both are listed on the copyright page.
+const ISBN_PAPERBACK = '979-8-9968299-0-3';
+const ISBN_EBOOK = '979-8-9968299-1-0';
 
 /** The spine — mirrors the astro.config.mjs sidebar verbatim. */
 const SPINE = [
@@ -453,9 +458,10 @@ ${pressCss}
 <section class="book-copyright">
   <p class="cr-title">${BOOK_TITLE}</p>
   <p>First edition · 2026</p>
-  <p>© ${AUTHOR}. Manual text licensed Creative Commons BY-NC 4.0; design
+  <p>© ${COPYRIGHT_HOLDER}. Manual text licensed Creative Commons BY-NC 4.0; design
   files MIT. Full terms in the license appendix and at makerphones.com.</p>
-  <p>Published by ${IMPRINT}. ISBN <span class="cr-fill">[ISBN]</span>.</p>
+  <p>Published by ${IMPRINT}.</p>
+  <p class="cr-isbn">ISBN ${ISBN_PAPERBACK} (paperback)<br>ISBN ${ISBN_EBOOK} (ebook)</p>
   <p>Set in Schibsted Grotesk, Source Serif 4, and JetBrains Mono.</p>
   <p>This edition is generated from the live manual at makerphones.com via
   the project's <code>to-book</code> pipeline. For interactive figures and
