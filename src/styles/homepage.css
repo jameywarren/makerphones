@@ -471,7 +471,9 @@
   font-family: var(--mp-mono);
   font-size: 0.7rem;
   letter-spacing: 0.14em;
-  color: var(--mp-accent);
+  /* reading-surface orange (5.18:1 on white, WCAG AA) — not --mp-accent
+   * (#ea580c, 3.56:1), which the design system reserves for chrome marks */
+  color: var(--mp-link);
   margin-bottom: 0.6rem;
 }
 .mp-edition h2 {
