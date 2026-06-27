@@ -21,6 +21,14 @@ import PartsViewer from '../../../components/PartsViewer.astro';
 **Status:** Design phase, CAD in progress. This document is the functional spec the CAD is
 built against, and the reference behind the build guide, the parts list, and the measurements.
 
+:::note[Reconciliation in progress (2026-06-27)]
+The **live 3D model above** and the repo's `DESIGN-LOG.md`, `BOM.md`, and `PARTS.md` are the
+authoritative current state. Some prose below predates recent decisions — the headband is now a
+sprung **Beyerdynamic metal bow**, the cup↔yoke joint a **shoulder-screw pivot**, the earcup a
+**one-piece** shell, and the driver a **Kingstate 40 mm** — a full spec refresh follows the
+current readiness pass (acoustics + headband).
+:::
+
 **Source:** The CAD, STLs, headband DXF, and this spec are developed in the open at
 [github.com/makerphones/daily-driver](https://github.com/makerphones/daily-driver), the canonical
 home for the design files.
@@ -83,11 +91,13 @@ touching the others.
 
 ### Cup shell
 - **Symmetric**: identical left and right; L/R marked in the surface only.
-- **~90 cc internal acoustic volume**: starting point, parameterized for easy adjustment
+- **~143 cc internal acoustic volume** (cup interior ⌀78 mm × 30 mm deep ≈ π·39²·30; the earlier
+  "~90 cc" was an arithmetic slip): a starting point, parameterized for easy adjustment
   (the reasoning lives in [acoustic chambers and enclosures](/learn/acoustic-chambers-and-enclosures/)).
 - **Open-back vent**: ring of 6–8 oval slots on the rear face, ~40% open area.
-- **Pad attachment**: tension-ring lip, 61–62 mm OD to accept Brainwavz HM5 and compatible
-  pads.
+- **Pad attachment**: a DT770-style retaining lip on the cup's outer rim; the earpad's elastic
+  mount-ring stretches over it. **Default pads: Beyerdynamic DT 770/880/990 family** (Dekoni and
+  Brainwavz pads are interchangeable premium/tuning swaps).
 - **Walls**: 3 mm minimum shell, 4 mm at structural points (baffle flange, yoke boss).
 - **Print orientation**: open face down, no supports.
 - **Material**: PLA+ for prototyping, PETG for durable/kit parts.
