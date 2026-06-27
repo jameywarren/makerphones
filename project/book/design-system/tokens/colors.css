@@ -1,0 +1,62 @@
+/* ─────────────────────────────────────────────────────────────────────────
+ * Makerphones — Color tokens
+ * Mirrors the light-theme --mp-* palette from the production web system
+ * (theme.css) 1:1. Warm field-manual identity: confident orange on a
+ * barely-warm off-white. Light theme IS the print colorway.
+ * ──────────────────────────────────────────────────────────────────────── */
+
+:root {
+  /* ---- base ink + structure ---- */
+  --mp-ink: #111827;        /* body text — dark slate, not pure black */
+  --mp-charcoal: #2d3748;   /* nav, headings, structural lines */
+
+  /* ---- accent (load-bearing orange) ---- */
+  --mp-accent: #ea580c;        /* links, CTAs, part numbers, diagram marks */
+  --mp-accent-hover: #c2410c;  /* darker — text-bearing orange (5.2:1 on white) */
+  --mp-accent-active: #9a3412; /* pressed */
+  --mp-accent-tint: #fff4ec;   /* warm wash — hero, "from the bench" callout */
+
+  /* ---- grounds + surfaces ---- */
+  --mp-bg: #faf8f5;        /* barely-warm off-white fills */
+  --mp-surface: #ffffff;   /* cards, panels */
+  --mp-ground: var(--mp-bg);
+
+  /* ---- lines + neutrals ---- */
+  --mp-line: #e7e5e0;   /* warm hairline (cards, dividers) */
+  --mp-hair: #d1d5db;   /* cooler technical-chrome hairline */
+  --mp-meta: #6b7280;   /* captions, eyebrows, secondary text */
+  --mp-faint: #9ca3af;  /* diagram leader lines */
+
+  /* ---- rich-black band (the one dark moment — "Daily Driver") ---- */
+  --mp-band-bg: #243140;
+  --mp-band-surface: #2d3748;
+  --mp-band-line: #46546a;
+  --mp-band-ink: #d6dbe3;
+  --mp-band-accent: #fb923c;   /* lifted orange for dark ground */
+
+  /* ─────────────────────────────────────────────────────────────────────
+   * Semantic aliases — consume these in components, not the raw values.
+   * The contrast split is the rule: text-bearing orange = --mp-link
+   * (darker, 5.2:1); raw --mp-accent is for non-text chrome marks only.
+   * ──────────────────────────────────────────────────────────────────── */
+  --text-body: var(--mp-ink);
+  --text-heading: var(--mp-charcoal);
+  --text-meta: var(--mp-meta);
+  --text-faint: var(--mp-faint);
+
+  --mp-link: var(--mp-accent-hover);
+  --mp-link-hover: var(--mp-accent-active);
+  --mp-mark: var(--mp-accent);          /* non-text accent marks */
+
+  --surface-page: var(--mp-bg);
+  --surface-card: var(--mp-surface);
+  --surface-wash: var(--mp-accent-tint);
+
+  --border-hair: var(--mp-line);
+  --border-tech: var(--mp-hair);
+  --border-strong: var(--mp-charcoal);
+
+  --mp-btn-bg: var(--mp-accent-hover);
+  --mp-btn-bg-hover: var(--mp-accent-active);
+  --mp-btn-text: #ffffff;
+}

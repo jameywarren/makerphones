@@ -1,0 +1,51 @@
+/* ─────────────────────────────────────────────────────────────────────────
+ * Makerphones — Print token layer
+ * The paged-print sibling of the web tokens. Names mirror --mp-* 1:1 so the
+ * book and site never drift. CMYK builds are expressed as comments (the
+ * authoritative numeric source is print-tokens.json, inlined to :root at
+ * book-build time); the custom properties below are the geometry the
+ * Paged.js stylesheet (book.css) consumes.
+ *
+ * Trim 7×10in · mirrored margins · 14pt baseline · 3mm bleed · PDF/X-1a.
+ * ──────────────────────────────────────────────────────────────────────── */
+
+:root {
+  /* ---- trim + bleed ---- */
+  --print-trim-w: 7in; /* @kind other */
+  --print-trim-h: 10in; /* @kind other */
+  --print-bleed: 3mm; /* @kind other */
+
+  /* ---- mirrored margins (inside/gutter > outside for binding) ---- */
+  --print-margin-inside: 22mm;  /* gutter / binding edge */
+  --print-margin-outside: 16mm;
+  --print-margin-top: 18mm;
+  --print-margin-bottom: 20mm;
+
+  /* ---- baseline grid — Source Serif 4 ≈ 10.5/14pt ---- */
+  --print-body-size: 10.5pt;
+  --print-baseline: 14pt; /* @kind other */
+  --print-widows: 2; /* @kind other */
+  --print-orphans: 2; /* @kind other */
+
+  /* ---- CMYK builds (numbers are authoritative in print-tokens.json) ----
+   * ink          #111827 → C20 M14 Y12 K100   (crisp near-black slate for serif body)
+   * paper white  #faf8f5 → C0  M0  Y0  K0      (carried by warm paper stock — DO NOT print as tint)
+   * accent       #ea580c → C0  M68 Y95 K0      (OUT OF GAMUT in RGB→CMYK; optional spot: Pantone 165 C)
+   *                        non-text marks only — traces, part numbers, dots, ticks
+   * accent text  #c2410c → C8  M78 Y100 K8     (text-bearing orange, the 5.2:1 build)
+   * rich black   (bands) → C60 M40 Y40 K100    (the dark "Daily Driver" band — never flat 100% K)
+   * hairline     #e7e5e0 → C4  M4  Y6  K6      (warm hairline, prints as a light warm gray)
+   * meta         #6b7280 → C56 M44 Y38 K6      (captions / folios)
+   * max total ink coverage: 240%
+   * ------------------------------------------------------------------------ */
+  --print-ink: #111827;
+  --print-accent: #ea580c;       /* mark only */
+  --print-accent-text: #c2410c;  /* text-bearing */
+  --print-rich-black: #1a232f;   /* screen proxy for the C60/M40/Y40/K100 band */
+  --print-meta: #6b7280;
+  --print-line: #e7e5e0;
+
+  /* ---- running heads + folios (JetBrains Mono small-caps) ---- */
+  --print-runhead-size: 8pt;
+  --print-folio-size: 9pt;
+}

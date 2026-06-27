@@ -1,0 +1,55 @@
+/* ─────────────────────────────────────────────────────────────────────────
+ * Makerphones — Typography tokens
+ * Three families, three jobs. The role split is load-bearing — keep it:
+ *   sans  (Schibsted Grotesk) → display, headings, part + chapter titles
+ *   body  (Source Serif 4)    → running body text
+ *   mono  (JetBrains Mono)    → technical chrome: eyebrows, captions,
+ *                               spec blocks, folios, diagram labels
+ * ──────────────────────────────────────────────────────────────────────── */
+
+:root {
+  /* ---- families ---- */
+  --mp-sans: 'Schibsted Grotesk', -apple-system, BlinkMacSystemFont, sans-serif; /* @kind font */
+  --mp-body: 'Source Serif 4', Georgia, 'Times New Roman', serif; /* @kind font */
+  --mp-mono: 'JetBrains Mono', ui-monospace, 'SF Mono', Menlo, monospace; /* @kind font */
+
+  /* role aliases */
+  --font-display: var(--mp-sans);
+  --font-body: var(--mp-body);
+  --font-mono: var(--mp-mono);
+
+  /* ---- weights ---- */
+  --weight-regular: 400;
+  --weight-medium: 500;
+  --weight-semibold: 600;
+  --weight-bold: 700;
+
+  /* ---- display / heading scale (Schibsted Grotesk) ---- */
+  --text-hero: 3.875rem;     /* homepage hero — clamps down on small screens */
+  --text-h1: 2.5rem;         /* page title */
+  --text-h2: 1.625rem;       /* section */
+  --text-h3: 1.25rem;        /* subsection */
+  --text-title: 1.1875rem;   /* card / part title, wordmark */
+
+  /* ---- body scale (Source Serif 4) ---- */
+  --text-lede: 1.1875rem;    /* chapter lede */
+  --text-prose: 1.0625rem;   /* running body */
+  --text-body-sm: 0.9375rem; /* dense body, captions in serif */
+
+  /* ---- mono / technical-chrome scale (JetBrains Mono) ---- */
+  --text-eyebrow: 0.75rem;   /* uppercase label, 0.14em tracking */
+  --text-spec: 0.84rem;      /* spec-block rows */
+  --text-label: 0.6875rem;   /* tiny tags, folios, table heads */
+
+  /* ---- line-heights ---- */
+  --leading-tight: 1.12;   /* hero / h1 */
+  --leading-heading: 1.25; /* h2 / h3 */
+  --leading-body: 1.65;    /* running serif */
+  --leading-mono: 1.6;     /* mono chrome */
+
+  /* ---- letter-spacing ---- */
+  --tracking-hero: -0.02em;   /* large display */
+  --tracking-heading: -0.01em;/* h1–h3 */
+  --tracking-eyebrow: 0.14em; /* uppercase mono labels */
+  --tracking-tag: 0.12em;     /* tiny uppercase tags */
+}

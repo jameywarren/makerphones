@@ -21,5 +21,9 @@
     "book:pdf": "npm run book && node scripts/to-book/render.mjs",
     "book:press:pdf": "npm run book:press && node scripts/to-book/render.mjs --press --cmyk",
     "astro": "astro"
+  },
+  "devDependencies": {
+    "pagedjs": "^0.4.3",
+    "puppeteer-core": "^25.2.1"
   }
 }

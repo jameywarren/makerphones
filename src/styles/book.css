@@ -1,139 +1,403 @@
 /**
- * book.css — print-only layer for the PDF/book build.
+ * book.css — Makerphones print/book design system (Paged.js / CSS Paged Media).
  *
- * Loaded ONLY by scripts/to-book/collect.mjs (inlined into dist/book.html),
- * never by the website. It sits on top of the site's real CSS bundle, so it
- * inherits every --mp-* token and figure style; it adds only what print
- * needs: page geometry, running heads, page breaks, and front-matter.
+ * "The Art and Science of Headphone Design" by Jamey Warren.
  *
- * v0.1 target: Letter, generous margins, "ugly but complete". The polished
- * design system (7x10 trim, mirrored margins, part-opener spreads, real
- * figure numbering) replaces the @page + opener rules here — see
- * project/book/PLAN.md and project/book/design-kit/BRIEF.md.
+ * SOURCE: this is the delivered stylesheet from the "Makerphones Design System"
+ * Claude Design project (6a763286), file book.css — see
+ * project/book/design-system/ for the pristine copy and the rest of the system.
+ * The only changes from the delivered file are: (1) the --mp-* font stacks are
+ * mapped to the self-hosted @fontsource "* Variable" names so they resolve
+ * against the site's bundled fonts; (2) a clearly-marked "project glue" section
+ * at the end adds the front/back-matter the seven masters don't cover
+ * (List of Figures entries, preface, colophon, build-guide + appendix openers,
+ * web-only stand-in). Consumed by scripts/to-book/collect.mjs.
  *
- * Engine: Paged.js (CSS Paged Media). Features used: @page margin boxes,
- * string-set / string(), counter(page), named pages, break-* controls.
+ * Trim 7×10in · mirrored margins (inside 22mm / outside 16mm) · 14pt baseline ·
+ * 3mm bleed on full-bleed masters · PDF/X-1a export.
+ *
+ * Seven page masters:
+ *   1 part-opener   2 chapter-opener   3 body (default)   4 figure-bleed
+ *   5 figure-inline 6 appendix         7 index
  */
 
-/* ---- force the print colorway -------------------------------------- */
-/* The default :root in theme.css is already the light theme; pin it so the
- * built page (which ships data-theme="dark") can't override us in print. */
-:root { color-scheme: light; }
-
-/* ---- page geometry (v0.1: Letter) ---------------------------------- */
-@page {
-  size: 8.5in 11in;           /* Track 2 -> 7in 10in + 3mm bleed + marks */
-  margin: 22mm 20mm 20mm 20mm;
-  /* running head: book title (left) / chapter title (right) */
-  @top-left  { content: string(booktitle); color: #6b7280; font: 400 8pt var(--mp-mono); }
-  @top-right { content: string(chaptertitle); color: #6b7280; font: 400 8pt var(--mp-mono); }
-  @bottom-center { content: counter(page); color: #6b7280; font: 400 9pt var(--mp-mono); }
+/* ── token bridge fallbacks (real values inlined from print-tokens.json) ── */
+:root {
+  color-scheme: light;
+  --mp-ink: #111827;
+  --mp-charcoal: #2d3748;
+  --mp-accent: #ea580c;        /* non-text marks only */
+  --mp-accent-text: #c2410c;   /* text-bearing orange (5.2:1) */
+  --mp-accent-tint: #fff4ec;
+  --mp-bg: #faf8f5;
+  --mp-surface: #ffffff;
+  --mp-line: #e7e5e0;
+  --mp-hair: #d1d5db;
+  --mp-meta: #6b7280;
+  --mp-rich-black: #1a232f;    /* screen proxy for C60/M40/Y40/K100 */
+  /* font stacks mapped to the self-hosted @fontsource Variable faces */
+  --mp-sans: 'Schibsted Grotesk Variable', 'Schibsted Grotesk', sans-serif;
+  --mp-body: 'Source Serif 4 Variable', 'Source Serif 4', Georgia, serif;
+  --mp-mono: 'JetBrains Mono Variable', 'JetBrains Mono', monospace;
+  --print-baseline: 14pt;
 }
 
-/* front matter + part openers: no running head, no folio */
-@page plain    { @top-left{content:none} @top-right{content:none} @bottom-center{content:none} }
-@page opener   { @top-left{content:none} @top-right{content:none} }
+/* ════════════════════════════════════════════════════════════════════════
+ * 3. BODY / RUNNING PAGE  — the default master
+ * Mirrored margins via :left / :right; running heads + folios in mono.
+ * ════════════════════════════════════════════════════════════════════════ */
+@page {
+  size: 7in 10in;
+  margin: 18mm 16mm 20mm 22mm;          /* top right bottom left (recto default) */
+  @bottom-center {
+    content: counter(page);
+    font: 400 9pt var(--mp-mono);
+    color: var(--mp-meta);
+    margin-top: 6mm;
+  }
+}
 
-/* the book title string, set once on the title page */
+/* verso (left) — book title runs head-left; gutter is on the RIGHT */
+@page :left {
+  margin: 18mm 22mm 20mm 16mm;
+  @top-left {
+    content: string(booktitle);
+    font: 400 8pt var(--mp-mono);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--mp-meta);
+  }
+}
+
+/* recto (right) — chapter title runs head-right; gutter is on the LEFT */
+@page :right {
+  margin: 18mm 16mm 20mm 22mm;
+  @top-right {
+    content: string(chaptertitle);
+    font: 400 8pt var(--mp-mono);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--mp-meta);
+  }
+}
+
+@page :first { @top-left { content: none; } @top-right { content: none; } }
+
+/* the running-head strings */
 .book-title-page { string-set: booktitle "The Art and Science of Headphone Design"; }
+.book-chapter h1 { string-set: chaptertitle content(text); }
 
-/* ---- document reset for print -------------------------------------- */
+/* ── document reset for print ── */
 html, body { background: #fff !important; }
-body { font-family: var(--mp-body); color: var(--mp-ink); }
-
-/* hide every web-only affordance that survived the <main> extraction */
+body {
+  font: 400 var(--print-baseline) / 1 var(--mp-body);
+  color: var(--mp-ink);
+}
 .mp-foot, .pagination-links, .page-feedback, starlight-toc, .right-sidebar,
-.sl-flex.pagination, nav.pagination-links, [data-parts-viewer] canvas,
-.parts-viewer canvas, canvas, .mp-feedback, .sl-hidden { display: none !important; }
+nav.pagination-links, canvas, .mp-feedback, .sl-hidden { display: none !important; }
 
-/* ---- front matter --------------------------------------------------- */
-.book-title-page, .book-copyright, .book-toc, .part-opener { page: plain; }
-.part-opener { page: opener; }
+/* ── baseline-gridded body type (10.5/14pt) ── */
+.sl-markdown-content,
+.book-chapter .sl-markdown-content {
+  font: 400 10.5pt/14pt var(--mp-body);
+  color: var(--mp-ink);
+  max-width: none;
+  hyphens: auto;
+  hyphenate-limit-chars: 6 3 2;
+}
+.sl-markdown-content p { margin: 0 0 14pt; orphans: 2; widows: 2; }
+/* NOTE: expanded from the delivered `:is(h2, h3, h4)` — Paged.js 0.4.3's
+ * break processor splits selector lists on commas and chokes on :is()
+ * (' h4)' is not a valid selector), which aborts pagination. Same intent. */
+.sl-markdown-content h2,
+.sl-markdown-content h3,
+.sl-markdown-content h4 {
+  font-family: var(--mp-sans);
+  color: var(--mp-charcoal);
+  letter-spacing: -0.01em;
+  break-after: avoid;
+}
+.sl-markdown-content h2 { font-size: 16pt; line-height: 28pt; font-weight: 600; margin: 14pt 0 0; }
+.sl-markdown-content h3 { font-size: 12.5pt; line-height: 14pt; font-weight: 600; margin: 14pt 0 0; }
+.sl-markdown-content strong { font-weight: 600; }
+.sl-markdown-content a {
+  color: var(--mp-ink);
+  text-decoration: none;
+  border-bottom: 0.5pt solid var(--mp-line);
+}
+
+/* spec / parameter block (mono) */
+.mp-spec {
+  font: 400 8.5pt/14pt var(--mp-mono);
+  background: var(--mp-bg);
+  border: 0.5pt solid var(--mp-line);
+  border-radius: 3pt;
+  padding: 10pt 12pt;
+  break-inside: avoid;
+}
+
+/* caution / tip callouts — ported from .starlight-aside */
+.starlight-aside { break-inside: avoid; border-radius: 4pt; margin: 14pt 0; overflow: hidden; }
+.starlight-aside__title {
+  font: 500 7.5pt var(--mp-mono);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+.starlight-aside--tip { background: var(--mp-accent-tint); border: 0.5pt solid #f3d9c4; }
+.starlight-aside--tip .starlight-aside__title { color: var(--mp-accent-text); padding: 10pt 12pt 0; }
+.starlight-aside--caution { border: 0.5pt solid var(--mp-charcoal); }
+.starlight-aside--caution .starlight-aside__title { background: var(--mp-charcoal); color: #fff; padding: 6pt 12pt; }
+.starlight-aside__content { font: 400 9.5pt/13pt var(--mp-body); padding: 8pt 12pt 10pt; }
+
+/* ════════════════════════════════════════════════════════════════════════
+ * Figure numbering — chapter-scoped (Fig. 4.2), drives the List of Figures
+ * ════════════════════════════════════════════════════════════════════════ */
+/* Chapter-scoped numbers (Fig. 4.2) are INJECTED into the caption by
+ * collect.mjs and mirrored in the List of Figures. The delivered book.css did
+ * this with CSS counters (counter(chapter).counter(figure)), but Paged.js
+ * drops per-chapter counter state across page-break fragments — a figure on a
+ * continuation page rendered "Fig. 0.2" — so the number is written into the
+ * caption instead. Same result, fragment-proof. */
+figure.mp-figure .mp-figcaption .fig-num { color: var(--mp-charcoal); font-weight: 500; }
+
+/* ════════════════════════════════════════════════════════════════════════
+ * 5. FIGURE — INLINE  (plate frame + corner ticks, mono caption)
+ * ════════════════════════════════════════════════════════════════════════ */
+figure, .mp-figure, .sl-markdown-content svg, table { break-inside: avoid; }
+.mp-figure {
+  position: relative;
+  border: 0.75pt solid var(--mp-line);
+  border-radius: 4pt;
+  padding: 16pt 16pt 10pt;
+  margin: 14pt 0;
+  background: var(--mp-surface);
+}
+.mp-figure::before, .mp-figure::after,
+.mp-figure > .tick-bl, .mp-figure > .tick-br {
+  content: "";
+  position: absolute;
+  width: 7pt; height: 7pt;
+  border: 1pt solid var(--mp-accent);
+}
+.mp-figure::before { top: 4pt; left: 4pt; border-width: 1pt 0 0 1pt; }
+.mp-figure::after { top: 4pt; right: 4pt; border-width: 1pt 1pt 0 0; }
+.mp-figcaption {
+  font: 400 8pt/12pt var(--mp-mono);
+  color: var(--mp-meta);
+  border-top: 0.5pt solid var(--mp-line);
+  margin-top: 12pt;
+  padding-top: 7pt;
+}
+
+/* ════════════════════════════════════════════════════════════════════════
+ * 4. FIGURE — FULL-BLEED  (3mm bleed, mono FIG number + caption)
+ * Apply class .figure-bleed to a figure that should run to the trim edge.
+ * ════════════════════════════════════════════════════════════════════════ */
+@page figure-bleed {
+  margin: 0;
+  @top-left { content: none; } @top-right { content: none; } @bottom-center { content: none; }
+}
+.figure-bleed {
+  page: figure-bleed;
+  break-before: page; break-after: page;
+  margin: 0; padding: 0; border: 0; border-radius: 0;
+  width: calc(7in + 6mm);   /* trim + 3mm bleed each side */
+  height: calc(10in + 6mm);
+  position: relative;
+}
+.figure-bleed::before, .figure-bleed::after { display: none; }
+.figure-bleed img, .figure-bleed svg { width: 100%; height: 100%; object-fit: cover; display: block; }
+.figure-bleed .mp-figcaption {
+  position: absolute;
+  left: 22mm; bottom: 20mm;
+  border: 0; margin: 0; padding: 6pt 9pt;
+  background: rgba(17, 24, 39, 0.72);
+  color: #fff; border-radius: 3pt;
+}
+
+/* ════════════════════════════════════════════════════════════════════════
+ * 1. PART OPENER  — recto, blueprint wash, large accent part number
+ * ════════════════════════════════════════════════════════════════════════ */
+@page part-opener {
+  margin: 0;
+  @top-left { content: none; } @top-right { content: none; } @bottom-center { content: none; }
+}
+.part-opener {
+  page: part-opener;
+  break-before: right;          /* parts open on a recto */
+  break-after: page;
+  width: 7in; height: 10in;
+  box-sizing: border-box;
+  padding: 40mm 16mm 20mm 22mm;
+  display: flex; flex-direction: column; justify-content: center;
+  background-color: var(--mp-accent-tint);
+  background-image:
+    linear-gradient(to right, rgba(45,55,72,0.05) 0.5pt, transparent 0.5pt),
+    linear-gradient(to bottom, rgba(45,55,72,0.05) 0.5pt, transparent 0.5pt);
+  background-size: 7mm 7mm;
+}
+.part-opener .po-num {
+  font: 600 64pt/1 var(--mp-sans);
+  letter-spacing: -0.02em;
+  color: var(--mp-accent);
+  margin: 0 0 6mm;
+}
+.part-opener .po-kicker {
+  font: 500 9pt var(--mp-mono); letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--mp-meta); margin: 0 0 4mm;
+}
+.part-opener .po-title { font: 700 30pt/1.1 var(--mp-sans); color: var(--mp-charcoal); margin: 0; max-width: 24ch; }
+.part-opener .po-rule { width: 56px; height: 3px; background: var(--mp-accent); border: 0; margin: 6mm 0 0; }
+
+/* ════════════════════════════════════════════════════════════════════════
+ * 2. CHAPTER OPENER  — recto, drop folio, sans title, serif lede, mono meta
+ * ════════════════════════════════════════════════════════════════════════ */
+.book-chapter { break-before: right; page: chapter-opener; }
+@page chapter-opener {
+  @top-left { content: none; } @top-right { content: none; }
+  @bottom-center { content: counter(page); font: 400 9pt var(--mp-mono); color: var(--mp-meta); }
+}
+.book-chapter h1 {
+  font: 700 26pt/1.12 var(--mp-sans);
+  letter-spacing: -0.015em;
+  color: var(--mp-charcoal);
+  margin: 0 0 6pt;
+  break-after: avoid;
+  padding-top: 14mm;
+}
+.book-chapter .ch-eyebrow {
+  font: 500 9pt var(--mp-mono); letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--mp-accent); margin: 0 0 8pt;
+}
+.book-chapter .ch-lede {
+  font: 400 13pt/18pt var(--mp-body); color: var(--mp-meta);
+  max-width: 56ch; margin: 6pt 0 0;
+}
+.book-chapter .ch-meta {
+  font: 400 8pt var(--mp-mono); color: var(--mp-meta);
+  border-top: 0.5pt solid var(--mp-line); border-bottom: 0.5pt solid var(--mp-line);
+  padding: 6pt 0; margin: 14pt 0 0;
+  display: flex; gap: 16pt;
+}
+/* ruler divider after the chapter head */
+.book-chapter .ch-rule {
+  height: 8pt; margin: 14pt 0 18pt; position: relative;
+  background-image: repeating-linear-gradient(to right, var(--mp-line) 0 0.5pt, transparent 0.5pt 10pt);
+  border-bottom: 0.5pt solid var(--mp-line);
+}
+.book-chapter .ch-rule::after {
+  content: ""; position: absolute; left: 0; bottom: -0.5pt; width: 40pt;
+  border-bottom: 1.5pt solid var(--mp-accent);
+}
+
+/* ════════════════════════════════════════════════════════════════════════
+ * Front matter — title page, copyright, TOC, List of Figures
+ * ════════════════════════════════════════════════════════════════════════ */
+.book-title-page, .book-copyright, .book-toc, .book-lof { page: plain; }
+@page plain { @top-left{content:none} @top-right{content:none} @bottom-center{content:none} }
 
 .book-title-page {
   break-after: page;
   display: flex; flex-direction: column; justify-content: center;
-  min-height: 82vh; text-align: left;
+  min-height: 80vh;
 }
-.book-title-page .bt-kicker { font: 500 11pt var(--mp-mono); letter-spacing: .12em;
-  text-transform: uppercase; color: var(--mp-accent); margin: 0 0 1.2rem; }
-.book-title-page .bt-title { font: 600 34pt/1.08 var(--mp-sans); color: var(--mp-charcoal);
-  margin: 0 0 1rem; max-width: 22ch; }
-.book-title-page .bt-sub { font: 400 14pt/1.5 var(--mp-body); color: var(--mp-meta);
-  max-width: 40ch; margin: 0 0 2.5rem; }
-.book-title-page .bt-author { font: 500 13pt var(--mp-sans); color: var(--mp-ink); }
-.book-title-page .bt-rule { width: 56px; height: 3px; background: var(--mp-accent);
-  border: 0; margin: 0 0 2rem; }
+.book-title-page .bt-kicker { font: 500 11pt var(--mp-mono); letter-spacing: 0.12em; text-transform: uppercase; color: var(--mp-accent); margin: 0 0 1.2rem; }
+.book-title-page .bt-rule { width: 56px; height: 3px; background: var(--mp-accent); border: 0; margin: 0 0 2rem; }
+.book-title-page .bt-title { font: 700 34pt/1.08 var(--mp-sans); color: var(--mp-charcoal); margin: 0 0 1rem; max-width: 22ch; letter-spacing: -0.02em; }
+.book-title-page .bt-sub { font: 400 14pt/1.5 var(--mp-body); color: var(--mp-meta); max-width: 40ch; margin: 0 0 2.5rem; }
+.book-title-page .bt-author { font: 600 13pt var(--mp-sans); color: var(--mp-ink); }
 
-.book-copyright { break-after: page; font: 400 10pt/1.6 var(--mp-mono); color: var(--mp-meta);
-  display: flex; flex-direction: column; justify-content: flex-end; min-height: 80vh; }
-.book-copyright p { margin: 0 0 .6rem; }
-.book-copyright .cr-title { color: var(--mp-charcoal); font-weight: 500; }
-.book-copyright .cr-fill { color: var(--mp-accent); }      /* [imprint] / [ISBN] placeholders */
-.book-copyright code { font-family: var(--mp-mono); }
-
+.book-copyright { break-after: page; font: 400 9pt/1.7 var(--mp-mono); color: var(--mp-meta); }
 .book-toc { break-after: page; }
-.book-toc h2 { font: 600 20pt var(--mp-sans); color: var(--mp-charcoal); margin: 0 0 1.4rem; }
-.book-toc .toc-part { font: 500 12pt var(--mp-mono); letter-spacing: .06em;
-  text-transform: uppercase; color: var(--mp-accent); margin: 1.4rem 0 .5rem; }
+.book-toc h2 { font: 700 20pt var(--mp-sans); color: var(--mp-charcoal); margin: 0 0 1.4rem; }
+.book-toc .toc-part { font: 500 11pt var(--mp-mono); letter-spacing: 0.06em; text-transform: uppercase; color: var(--mp-accent); margin: 1.4rem 0 0.5rem; }
 .book-toc ol { list-style: none; padding: 0; margin: 0; }
-.book-toc li { font: 400 11pt/1.7 var(--mp-body); color: var(--mp-ink);
-  border-bottom: 1px solid var(--mp-line); padding: .25rem 0; }
+.book-toc li { font: 400 10.5pt/1.8 var(--mp-body); color: var(--mp-ink); border-bottom: 0.5pt solid var(--mp-line); padding: 0.25rem 0; display: flex; justify-content: space-between; }
+.book-toc li .toc-folio { font-family: var(--mp-mono); color: var(--mp-meta); }
 
-/* ---- list of figures ----------------------------------------------- */
-.book-lof { break-before: page; break-after: page; page: plain; }
-.book-lof h2 { font: 600 20pt var(--mp-sans); color: var(--mp-charcoal); margin: 0 0 1.4rem; }
-.book-lof ol { list-style: none; padding: 0; margin: 0; }
-.book-lof li { font: 400 10.5pt/1.6 var(--mp-body); color: var(--mp-ink); padding: .15rem 0; }
-.book-lof .lof-n { font: 400 9pt var(--mp-mono); color: var(--mp-accent);
-  display: inline-block; min-width: 4.5em; }
-
-/* ---- preface / colophon -------------------------------------------- */
-.book-preface, .book-colophon { break-before: page; page: plain; }
-.book-preface h2, .book-colophon h2 { font: 600 22pt var(--mp-sans);
-  color: var(--mp-charcoal); margin: 0 0 1.2rem; }
-.book-preface p, .book-colophon p { font: 400 10.5pt/1.55 var(--mp-body);
-  color: var(--mp-ink); max-width: 34em; margin: 0 0 .9rem; }
-.book-preface .pf-draft { font-family: var(--mp-mono); font-size: 9pt; color: var(--mp-accent); }
-.book-colophon { color: var(--mp-meta); }
-
-/* ---- part openers --------------------------------------------------- */
-.part-opener {
-  break-before: right;        /* parts open on a recto */
-  display: flex; flex-direction: column; justify-content: center; min-height: 70vh;
+/* ════════════════════════════════════════════════════════════════════════
+ * 6. APPENDIX / REFERENCE  — denser grid + comparison-table master
+ * ════════════════════════════════════════════════════════════════════════ */
+.book-appendix { page: appendix; break-before: right; }
+@page appendix { @top-right { content: "APPENDIX"; font: 400 8pt var(--mp-mono); letter-spacing: 0.12em; color: var(--mp-meta); } }
+.book-appendix .sl-markdown-content { font-size: 9.5pt; line-height: 13pt; }
+.sl-markdown-content table { width: 100%; border-collapse: collapse; border: 0.5pt solid var(--mp-line); margin: 14pt 0; break-inside: auto; }
+.sl-markdown-content thead { display: table-header-group; }   /* repeat heads across page breaks */
+.sl-markdown-content tr { break-inside: avoid; }
+.sl-markdown-content th {
+  font: 500 7pt var(--mp-mono); letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--mp-meta); text-align: left; padding: 6pt 8pt;
+  background: var(--mp-bg); border-bottom: 0.5pt solid var(--mp-line);
 }
-.part-opener .po-num { font: 500 12pt var(--mp-mono); letter-spacing: .14em;
-  text-transform: uppercase; color: var(--mp-accent); margin: 0 0 .8rem; }
-.part-opener .po-title { font: 600 30pt/1.1 var(--mp-sans); color: var(--mp-charcoal); margin: 0; }
-.part-opener .po-rule { width: 56px; height: 3px; background: var(--mp-accent);
-  border: 0; margin: 1.4rem 0 0; }
+.sl-markdown-content td {
+  font: 400 8.5pt/12pt var(--mp-sans); color: var(--mp-ink);
+  padding: 6pt 8pt; border-bottom: 0.5pt solid var(--mp-line); vertical-align: top;
+}
+.sl-markdown-content td:first-child { font-weight: 600; color: var(--mp-charcoal); }
 
-/* ---- chapters ------------------------------------------------------- */
-.book-chapter { break-before: page; }
-/* feed the running head: each chapter's h1 sets the recto string */
-.book-chapter h1 { string-set: chaptertitle content(text); }
-.book-chapter h1 { font: 600 22pt/1.15 var(--mp-sans); color: var(--mp-charcoal);
-  margin: 0 0 1.2rem; break-after: avoid; }
-.book-chapter h2 { break-after: avoid; }
-.book-chapter h3 { break-after: avoid; }
+/* ════════════════════════════════════════════════════════════════════════
+ * 7. INDEX  — multi-column, mono entry numbers, hairline letter-group heads
+ * ════════════════════════════════════════════════════════════════════════ */
+.book-index { page: index; break-before: right; columns: 2; column-gap: 10mm; column-rule: 0.5pt solid var(--mp-line); }
+@page index { @top-right { content: "INDEX"; font: 400 8pt var(--mp-mono); letter-spacing: 0.12em; color: var(--mp-meta); } }
+.book-index h2 { columns: 1; column-span: all; font: 700 20pt var(--mp-sans); color: var(--mp-charcoal); margin: 0 0 1rem; }
+.book-index .ix-group {
+  font: 500 9pt var(--mp-mono); letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--mp-accent); border-bottom: 0.5pt solid var(--mp-line);
+  padding-bottom: 3pt; margin: 10pt 0 5pt; break-after: avoid;
+}
+.book-index .ix-entry {
+  font: 400 9pt/13pt var(--mp-body); color: var(--mp-ink);
+  display: flex; justify-content: space-between; gap: 8pt; break-inside: avoid;
+}
+.book-index .ix-entry .ix-folios { font-family: var(--mp-mono); font-size: 8pt; color: var(--mp-meta); }
 
-/* readable body measure + print type sizing */
-.sl-markdown-content { font: 400 10.5pt/1.5 var(--mp-body); color: var(--mp-ink); max-width: none; }
-.sl-markdown-content p { orphans: 2; widows: 2; }
+/* the one dark moment — Daily Driver band, as a rich-black full-width block */
+.mp-band {
+  background: var(--mp-rich-black);
+  color: #d6dbe3;
+  padding: 18pt 16pt;
+  break-inside: avoid;
+  margin: 14pt 0;
+  border-radius: 4pt;
+}
+.mp-band h2 { color: #f3f4f6; font-family: var(--mp-sans); }
+.mp-band .mp-accent, .mp-band a { color: #fb923c; }
 
-/* keep figures and their captions together; never split a diagram */
-figure, .mp-figure, .sl-markdown-content svg, table { break-inside: avoid; }
-figure { margin: 1.4rem 0; }
-figcaption { font: 400 9pt var(--mp-mono); color: var(--mp-meta); }
+/* ════════════════════════════════════════════════════════════════════════
+ * ── project glue ──  not part of the delivered book.css.
+ * Front/back-matter and section openers the seven masters don't cover, plus
+ * counter init. Kept visually consistent with the design system above.
+ * ════════════════════════════════════════════════════════════════════════ */
+/* List of Figures — entries carry pre-computed chapter-scoped numbers
+ * (the in-flow figures get theirs from the CSS counter above; both agree). */
+.book-lof h2 { font: 700 20pt var(--mp-sans); color: var(--mp-charcoal); margin: 0 0 1.4rem; }
+.book-lof ol { list-style: none; padding: 0; margin: 0; }
+.book-lof li { font: 400 10.5pt/1.7 var(--mp-body); color: var(--mp-ink); display: flex; gap: 10pt; padding: 0.12rem 0; }
+.book-lof .lof-n { font: 400 8.5pt var(--mp-mono); color: var(--mp-accent-text); min-width: 4.5em; flex: none; }
 
-/* a printed stand-in for web-only blocks (injected by collect.mjs) */
+/* preface + colophon */
+.book-preface, .book-colophon { page: plain; break-before: page; }
+.book-preface h2, .book-colophon h2 { font: 700 20pt var(--mp-sans); color: var(--mp-charcoal); margin: 0 0 1.2rem; }
+.book-preface p, .book-colophon p { font: 400 10.5pt/14pt var(--mp-body); color: var(--mp-ink); max-width: 34em; margin: 0 0 12pt; }
+.book-preface .pf-draft { font: 400 8.5pt var(--mp-mono); color: var(--mp-accent-text); }
+.book-colophon { color: var(--mp-meta); }
+.book-colophon strong { color: var(--mp-charcoal); }
+
+/* appendix opener (the appendix master is otherwise sparse) */
+.book-appendix h1 { font: 700 22pt/1.12 var(--mp-sans); color: var(--mp-charcoal); margin: 14mm 0 8pt; break-after: avoid; }
+.book-appendix .ch-eyebrow { font: 500 9pt var(--mp-mono); letter-spacing: 0.14em; text-transform: uppercase; color: var(--mp-accent); margin: 0 0 8pt; }
+.book-appendix .ch-rule {
+  height: 8pt; margin: 12pt 0 16pt; position: relative;
+  background-image: repeating-linear-gradient(to right, var(--mp-line) 0 0.5pt, transparent 0.5pt 10pt);
+  border-bottom: 0.5pt solid var(--mp-line);
+}
+.book-appendix .ch-rule::after { content: ""; position: absolute; left: 0; bottom: -0.5pt; width: 40pt; border-bottom: 1.5pt solid var(--mp-accent); }
+
+/* printed stand-in for web-only blocks (injected by collect.mjs) */
 .book-web-note {
-  border: 1px solid var(--mp-accent); border-left-width: 3px; border-radius: 6px;
-  padding: .8rem 1rem; margin: 1.4rem 0; font: 400 10pt/1.5 var(--mp-body);
-  color: var(--mp-ink); background: var(--mp-accent-tint);
+  border: 0.75pt solid var(--mp-accent-text); border-left-width: 2.5pt; border-radius: 4pt;
+  padding: 10pt 12pt; margin: 14pt 0; font: 400 10pt/14pt var(--mp-body);
+  color: var(--mp-ink); background: var(--mp-accent-tint); break-inside: avoid;
 }
 .book-web-note strong { font-family: var(--mp-mono); }
-
-/* links print as ink (no blue/underline noise); keep accent for emphasis */
-.sl-markdown-content a { color: var(--mp-ink); text-decoration: none;
-  border-bottom: 1px solid var(--mp-line); }

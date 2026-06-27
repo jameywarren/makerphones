@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 560 230" role="img" aria-label="Frequency response chart: measured trace vs target" font-family="'JetBrains Mono', ui-monospace, monospace">
+
+  <line x1="40" y1="16" x2="40" y2="186" stroke="#e7e5e0" stroke-width="1"></line>
+  <line x1="130" y1="16" x2="130" y2="186" stroke="#e7e5e0" stroke-width="1"></line>
+  <line x1="220" y1="16" x2="220" y2="186" stroke="#e7e5e0" stroke-width="1"></line>
+  <line x1="310" y1="16" x2="310" y2="186" stroke="#e7e5e0" stroke-width="1"></line>
+  <line x1="400" y1="16" x2="400" y2="186" stroke="#e7e5e0" stroke-width="1"></line>
+  <line x1="490" y1="16" x2="490" y2="186" stroke="#e7e5e0" stroke-width="1"></line>
+
+  <line x1="40" y1="16" x2="520" y2="16" stroke="#e7e5e0" stroke-width="1"></line>
+  <line x1="40" y1="50" x2="520" y2="50" stroke="#e7e5e0" stroke-width="1"></line>
+  <line x1="40" y1="84" x2="520" y2="84" stroke="#e7e5e0" stroke-width="1"></line>
+  <line x1="40" y1="118" x2="520" y2="118" stroke="#e7e5e0" stroke-width="1"></line>
+  <line x1="40" y1="152" x2="520" y2="152" stroke="#e7e5e0" stroke-width="1"></line>
+  <line x1="40" y1="186" x2="520" y2="186" stroke="#e7e5e0" stroke-width="1"></line>
+
+  <text x="36" y="206" font-size="11" letter-spacing="0.08em" fill="#6b7280">20</text>
+  <text x="122" y="206" font-size="11" letter-spacing="0.08em" fill="#6b7280">100</text>
+  <text x="212" y="206" font-size="11" letter-spacing="0.08em" fill="#6b7280">500</text>
+  <text x="304" y="206" font-size="11" letter-spacing="0.08em" fill="#6b7280">2k</text>
+  <text x="392" y="206" font-size="11" letter-spacing="0.08em" fill="#6b7280">8k</text>
+  <text x="482" y="206" font-size="11" letter-spacing="0.08em" fill="#6b7280">20k</text>
+
+  <text x="8" y="54" font-size="11" letter-spacing="0.08em" fill="#6b7280">+10</text>
+  <text x="16" y="122" font-size="11" letter-spacing="0.08em" fill="#6b7280">0</text>
+  <text x="8" y="190" font-size="11" letter-spacing="0.08em" fill="#6b7280">-10</text>
+
+  <path d="M 40 96 C 110 96 150 112 210 118 C 280 124 320 118 370 110 C 420 104 460 116 520 134" fill="none" stroke="#2d3748" stroke-width="1.5" stroke-dasharray="5 5" opacity="0.65"></path>
+
+  <path d="M 40 86 C 90 86 120 108 180 120 C 240 132 290 126 330 104 C 358 90 380 92 404 112 C 430 134 460 124 490 148 L 520 158" fill="none" stroke="#ea580c" stroke-width="2.2"></path>
+
+  <line x1="404" y1="30" x2="428" y2="30" stroke="#ea580c" stroke-width="2.2"></line>
+  <text x="434" y="33" font-size="11" letter-spacing="0.08em" fill="#6b7280">MEASURED</text>
+  <line x1="404" y1="46" x2="428" y2="46" stroke="#2d3748" stroke-width="1.5" stroke-dasharray="5 5" opacity="0.65"></line>
+  <text x="434" y="49" font-size="11" letter-spacing="0.08em" fill="#6b7280">TARGET</text>
+</svg>

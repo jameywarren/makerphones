@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<!-- @template name="Chapter page" description="Makerphones field-manual chapter: opener, lede, meta rule, figure, spec block & bench callouts" -->
+<helmet>
+  <script src="./ds-base.js"></script>
+</helmet>
+<div style="min-height:100%; background:var(--mp-surface); font-family:var(--mp-body); color:var(--mp-ink);">
+  <article style="max-width:720px; margin:0 auto; padding:3rem clamp(1.25rem,4vw,2rem) 4rem;">
+
+    <!-- breadcrumb -->
+    <div style="font-family:var(--mp-mono); font-size:0.75rem; color:var(--mp-meta); display:flex; align-items:center; gap:8px; flex-wrap:wrap; margin-bottom:1.25rem;">
+      <span>Part 01</span>
+      <span style="color:var(--mp-line);">/</span>
+      <span style="color:var(--mp-charcoal);">Frequency response</span>
+    </div>
+
+    <!-- chapter opener -->
+    <x-import component-from-global-scope="MakerphonesDesignSystem_6a7632.Eyebrow" accent="true" hint-size="200px,18px">Chapter 1.2</x-import>
+    <h1 style="font-family:var(--mp-sans); font-weight:700; font-size:clamp(1.875rem,1.2rem + 2.2vw,2.5rem); line-height:1.12; letter-spacing:-0.015em; color:var(--mp-charcoal); margin:12px 0 0;">Understanding frequency response</h1>
+    <p style="font-family:var(--mp-body); font-size:1.1875rem; line-height:1.6; color:var(--mp-meta); max-width:58ch; margin-top:1rem;">The single most useful — and most misread — measurement in headphone design.</p>
+
+    <!-- meta rule -->
+    <div style="display:flex; align-items:center; gap:10px 22px; flex-wrap:wrap; border-top:1px solid var(--mp-line); border-bottom:1px solid var(--mp-line); padding:12px 0; margin:1.25rem 0 2rem;">
+      <x-import component-from-global-scope="MakerphonesDesignSystem_6a7632.DifficultyDots" level="2" hint-size="160px,16px"></x-import>
+      <span style="font-family:var(--mp-mono); font-size:0.75rem; color:var(--mp-meta);">12 min read</span>
+      <span style="font-family:var(--mp-mono); font-size:0.75rem; color:var(--mp-meta);">Updated Jun 2026</span>
+    </div>
+
+    <!-- prose -->
+    <div style="font-family:var(--mp-body); font-size:1.0625rem; line-height:1.65; color:var(--mp-ink);">
+      <p style="margin-top:0;">A frequency-response curve answers one question: for a steady tone at each pitch, how loud is the headphone? Plot loudness in decibels against frequency on a log scale and you get the line every reviewer reaches for — and most read wrong.</p>
+
+      <h2 style="font-family:var(--mp-sans); font-weight:600; font-size:1.625rem; line-height:1.25; letter-spacing:-0.01em; color:var(--mp-charcoal); margin-top:2.5rem;">Reading the plot</h2>
+      <p>The orange trace is what the headphone actually does; the dashed charcoal line is the target you tuned toward. The gap between them is the whole job.</p>
+
+      <x-import component-from-global-scope="MakerphonesDesignSystem_6a7632.Figure" label="Fig. 4.2" caption="Measured response (orange) against the target curve (charcoal, dashed)." hint-size="100%,260px">
+        <img src="../../assets/fr-curve.svg" alt="Frequency response curve" style="width:100%; display:block;" />
+      </x-import>
+
+      <p>Three regions matter most. Below 100&nbsp;Hz is the bass shelf the pad seal controls. The 1–4&nbsp;kHz presence region is where the ear is most sensitive. Above 8&nbsp;kHz, individual ear canals make measurements diverge — treat that range as a suggestion.</p>
+
+      <x-import component-from-global-scope="MakerphonesDesignSystem_6a7632.SpecBlock" title="Daily Driver — target band" rows="{{ specRows }}" hint-size="100%,180px"></x-import>
+
+      <x-import component-from-global-scope="MakerphonesDesignSystem_6a7632.Callout" variant="tip" hint-size="100%,90px">Seat the pad fully and re-seat it twice before you trust a bass reading — a 1&nbsp;mm gap will move the shelf more than any driver swap.</x-import>
+
+      <x-import component-from-global-scope="MakerphonesDesignSystem_6a7632.Callout" variant="caution" hint-size="100%,90px">A flat line is not a goal. The target is tilted on purpose; tuning a headphone ruler-flat makes it sound thin and bright.</x-import>
+    </div>
+  </article>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  renderVals() {
+    return {
+      specRows: [
+        ['Bass shelf', '+4 dB @ 60 Hz'],
+        ['Presence', '+3 dB @ 3 kHz'],
+        ['Tolerance', '±1.5 dB'],
+        ['Reference', 'Diffuse-field + 4 dB tilt'],
+      ],
+    };
+  }
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,64 @@
+{
+  "$comment": "Print token source of truth for 'The Art and Science of Headphone Design' by Jamey Warren. The `web` block mirrors the light-theme --mp-* tokens 1:1 (the bridge to the website — do NOT redesign). The `print` block is the filled-in paged layer: trim, mirrored margins, baseline grid, bleed, and CMYK builds. Web and print names stay in lockstep so the book and site never drift. Inline this file's values to :root as --mp-* / --print-* custom properties at book-build time.",
+
+  "fonts": {
+    "sans": { "stack": "Schibsted Grotesk, sans-serif", "role": "display / headings / part + chapter titles", "license": "SIL OFL 1.1 — cleared for print embedding" },
+    "body": { "stack": "Source Serif 4, Georgia, serif", "role": "running body text", "license": "SIL OFL 1.1" },
+    "mono": { "stack": "JetBrains Mono, monospace", "role": "technical chrome — eyebrows, captions, spec blocks, folios, diagram labels", "license": "SIL OFL 1.1" }
+  },
+
+  "web": {
+    "ink": "#111827",
+    "charcoal": "#2d3748",
+    "accent": "#ea580c",
+    "accent-hover": "#c2410c",
+    "accent-active": "#9a3412",
+    "accent-tint": "#fff4ec",
+    "bg": "#faf8f5",
+    "surface": "#ffffff",
+    "line": "#e7e5e0",
+    "meta": "#6b7280",
+    "faint": "#9ca3af",
+    "hair": "#d1d5db"
+  },
+
+  "print": {
+    "$note": "CMYK builds as {c,m,y,k} 0-100. Values verified against US Web Coated (SWOP) v2 intent.",
+    "trim": { "width": "7in", "height": "10in" },
+    "bleed": "3mm",
+    "margins": { "inside_gutter": "22mm", "outside": "16mm", "top": "18mm", "bottom": "20mm", "$note": "mirrored — inside > outside for binding; verso/recto swap inside/outside" },
+    "baseline": { "body_size_pt": 10.5, "leading_pt": 14, "$note": "all leading a multiple of the 14pt baseline; headings snap to grid" },
+
+    "ink_cmyk": { "c": 20, "m": 14, "y": 12, "k": 100, "$note": "#111827 body ink — a near-black slate; single-channel-dominant so small serif text stays crisp and in register" },
+    "paper_white_cmyk": { "c": 0, "m": 0, "y": 0, "k": 0, "$note": "#faf8f5 — carried by a warm uncoated paper stock; DO NOT print as a flat tint" },
+
+    "accent_cmyk": { "c": 0, "m": 68, "y": 95, "k": 0, "$note": "#ea580c — OUT OF GAMUT in RGB->CMYK (dulls toward brick). Non-text marks only: measured traces, part numbers, difficulty dots, corner ticks, rules." },
+    "accent_text_cmyk": { "c": 8, "m": 78, "y": 100, "k": 8, "$note": "#c2410c — the darker text-bearing build (5.2:1). Use for any orange that carries type: links, run-in accents, the accent underline under a heading." },
+    "accent_pantone_spot": { "spot": "PANTONE 165 C", "$note": "OPTIONAL second-unit spot to recover the on-screen vividness of #ea580c that 4-color cannot hit. If the press run is CMYK-only, fall back to accent_cmyk." },
+
+    "rich_black_cmyk": { "c": 60, "m": 40, "y": 40, "k": 100, "$note": "the large dark 'Daily Driver' band — a cool rich black so it reads deep, not muddy. Never a flat 100% K on a full bleed." },
+    "hairline_cmyk": { "c": 4, "m": 4, "y": 6, "k": 6, "$note": "#e7e5e0 warm hairline — figure borders, table rules, dividers" },
+    "meta_cmyk": { "c": 56, "m": 44, "y": 38, "k": 6, "$note": "#6b7280 — captions, folios, running heads" },
+
+    "max_total_ink_pct": 240,
+    "widows": 2,
+    "orphans": 2
+  },
+
+  "figure_numbering": {
+    "scheme": "chapter-scoped",
+    "format": "Fig. {chapter}.{n}",
+    "example": "Fig. 4.2",
+    "drives": "List of Figures",
+    "$note": "Replaces the ~22 duplicate page-local 'Fig. 1' labels; CSS counters reset per chapter (see book.css)."
+  },
+
+  "export_profile": {
+    "standard": "PDF/X-1a:2001",
+    "color": "CMYK only — no RGB or spot beyond the optional PANTONE 165 C; flatten all transparency",
+    "fonts": "embed + subset all three families (cleared under SIL OFL 1.1)",
+    "bleed": "3mm on full-bleed masters; include crop + registration marks",
+    "black": "body/text ink as the ink_cmyk build; large darks as rich_black_cmyk; overprint thin black rules",
+    "$note": "Total area coverage must not exceed 240%. No ICC-tagged RGB images may survive to the press file."
+  }
+}

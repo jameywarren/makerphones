@@ -1,0 +1,16 @@
+/* ═══════════════════════════════════════════════════════════════════════════
+ * Makerphones Design System — global entry point.
+ *
+ * "The Art and Science of Headphone Design" by Jamey Warren.
+ * Warm field-manual identity: confident orange on barely-warm off-white,
+ * three typefaces, engineering-diagram motifs. Light theme = print colorway.
+ *
+ * Consumers link THIS file. It is an @import manifest only — no rules live
+ * here. Everything reachable from these imports ships to consumers.
+ * ═══════════════════════════════════════════════════════════════════════════ */
+
+@import url('./tokens/fonts.css');
+@import url('./tokens/colors.css');
+@import url('./tokens/typography.css');
+@import url('./tokens/spacing.css');
+@import url('./tokens/print.css');

@@ -179,7 +179,7 @@ build for `#ea580c`.
 | 0 | Reconcile stale numbers (`WORKING_TITLES`, "32"→33, Compass) | ½ day | ✅ done |
 | 1 | PDF v0.1 — `scripts/to-book/` + `book.css` + `npm run book` | 1 weekend | ✅ done |
 | 2 | Editorial prep — figure numbering ✅, front/back matter ✅, **index** ☐ | 1–2 wk | ◑ index left |
-| 3 | Design system — hand `design-kit/` to Claude Design, wire `book.css` | parallel | ☐ todo |
+| 3 | Design system — imported from Claude Design, `book.css` + tokens wired in, renders | parallel | ✅ done |
 | 4 | Print colorways + parts stills — press geometry ✅, interim CMYK accent ✅, stills ☐ | 3–5 d | ◑ stills left |
 | 5 | Press file + POD — `render.mjs --cmyk` + cover scaffold ✅; gs+ICC, accounts, ISBN ☐ | 1 wk | ◑ accounts left |
 | 6 | Proof, correct, publish | 1–2 wk | ☐ todo |
@@ -204,6 +204,18 @@ CMYK figure proofing, and proof shipping — not platform setup.
 - 2026-06-26 — Plan documented; Track 1 scaffold created
   (`scripts/to-book/collect.mjs`, `src/styles/book.css`, `npm run book`);
   design-kit brief drafted.
+- 2026-06-26 — Integrated the **Makerphones Design System** (Claude Design
+  project `6a763286`): `src/styles/book.css` is now the delivered Paged.js
+  stylesheet (seven page masters), `collect.mjs` emits the design's markup
+  (part openers with the big accent numeral; chapter openers with
+  `Chapter N` eyebrow + lede + meta rule + ruler divider; appendix/guide
+  masters); **book-only derived chapter numbers (1–33)** and chapter-scoped
+  figures (`Fig. N.m`) per the locked decision. Headless render works
+  end-to-end → **240-page PDF** (puppeteer-core + system Chrome,
+  `protocolTimeout: 0`, stability wait). Fixes: strip `:is()`/`:where()` from
+  inlined CSS (Paged.js 0.4.3 can't parse them); inject figure numbers
+  (Paged.js drops CSS-counter state across page fragments). Design system
+  mirrored to `project/book/design-system/`.
 - 2026-06-26 — Pushed both tracks: Phase 0 count reconciliation (dead
   `WORKING_TITLES` removed; "32"→33 in `contents.mdx` / `about.md` /
   Compass v1.5); document-wide figure numbering (Fig. 1–23) + List of

@@ -1,0 +1,76 @@
+/* ─────────────────────────────────────────────────────────────────────────
+ * Makerphones — Spacing, radii, shadow & motif tokens
+ * The engineering-bench feel: tight radii, one warm shadow, hairline borders,
+ * and the recurring blueprint / ruler motifs expressed as reusable values.
+ * ──────────────────────────────────────────────────────────────────────── */
+
+:root {
+  /* ---- spacing scale (4px base) ---- */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 22px;   /* spec/figure inner padding */
+  --space-6: 28px;   /* figure plate padding */
+  --space-7: 40px;
+  --space-8: 64px;   /* section rhythm */
+
+  /* ---- radii (restrained — engineering, not consumer-soft) ---- */
+  --mp-radius: 6px;       /* buttons, inputs, code, spec blocks */
+  --mp-radius-lg: 8px;    /* cards, figures, callouts */
+  --radius-pill: 4px;     /* tiny tags */
+
+  /* ---- borders ---- */
+  --border-width: 1px;
+  --rule-accent: 2px;     /* the orange underline / left rule */
+
+  /* ---- shadow — exactly one, warm-tinted (burnt-umber, never gray) ---- */
+  --mp-shadow-warm:
+    0 1px 2px rgba(124, 45, 18, 0.04),
+    0 6px 20px rgba(124, 45, 18, 0.06);
+
+  /* ---- motif: blueprint graph-paper grid ---- */
+  --mp-grid-size: 28px;
+  --mp-grid-line: rgba(45, 55, 72, 0.05);
+
+  /* ---- motif: ruler divider tick spacing ---- */
+  --mp-ruler-tick: 14px;
+  --mp-ruler-underline: 56px; /* width of the accent underline */
+
+  /* ---- reading measures ---- */
+  --measure-prose: 68ch;  /* long-form body */
+  --measure-lede: 58ch;   /* ledes / spec blocks */
+  --measure-tight: 48ch;  /* hero copy */
+
+  /* ---- layout ---- */
+  --splash-max: 80rem;
+  --splash-pad: max(clamp(1.25rem, 4vw, 4rem), calc((100% - var(--splash-max)) / 2));
+}
+
+/* ---- recurring motif utilities (consume tokens above) ------------------ */
+
+/* blueprint texture — faint graph paper over the warm wash */
+.mp-blueprint {
+  background-color: var(--mp-accent-tint);
+  background-image:
+    linear-gradient(to right, var(--mp-grid-line) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--mp-grid-line) 1px, transparent 1px);
+  background-size: var(--mp-grid-size) var(--mp-grid-size);
+}
+
+/* ruler divider — recurring engineering motif, accent underline at the left */
+.mp-ruler {
+  height: 12px;
+  background-image: repeating-linear-gradient(
+    to right, var(--mp-line) 0 1px, transparent 1px var(--mp-ruler-tick));
+  border-bottom: 1px solid var(--mp-line);
+  position: relative;
+}
+.mp-ruler::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -1px;
+  width: var(--mp-ruler-underline);
+  border-bottom: var(--rule-accent) solid var(--mp-accent);
+}
