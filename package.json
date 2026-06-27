@@ -20,6 +20,8 @@
     "book:press": "astro build && node scripts/to-book/collect.mjs --press",
     "book:pdf": "npm run book && node scripts/to-book/render.mjs",
     "book:press:pdf": "npm run book:press && node scripts/to-book/render.mjs --press --cmyk",
+    "book:press:pdfx": "npm run book:press && node scripts/to-book/render.mjs --press --pdfx",
+    "book:parts": "node scripts/to-book/render-parts.mjs",
     "astro": "astro"
   },
   "devDependencies": {

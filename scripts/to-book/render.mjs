@@ -29,7 +29,7 @@
 
 import http from 'node:http';
 import { createReadStream, existsSync } from 'node:fs';
-import { stat } from 'node:fs/promises';
+import { stat, writeFile, mkdir } from 'node:fs/promises';
 import { spawn } from 'node:child_process';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -40,10 +40,34 @@ const ROOT = path.resolve(HERE, '..', '..');
 const DIST = path.join(ROOT, 'dist');
 
 const PRESS = process.argv.includes('--press');
-const CMYK = process.argv.includes('--cmyk');
+const CMYK = process.argv.includes('--cmyk');   // fast CMYK convert (KDP-ready)
+const PDFX = process.argv.includes('--pdfx');   // PDF/X-1a (IngramSpark; SLOW)
 const htmlFile = PRESS ? 'book-press.html' : 'book.html';
 const rgbPdf = path.join(DIST, PRESS ? 'book-press.pdf' : 'book.pdf');
 const cmykPdf = path.join(DIST, 'book-press-cmyk.pdf');
+const x1aPdf = path.join(DIST, 'book-press-pdfx1a.pdf');
+const ICC = path.join(ROOT, 'scripts', 'to-book', 'pdfx', 'cmyk.icc');
+
+/** Ghostscript PDF/X-1a output-intent definition (embeds the CMYK ICC). */
+function pdfxDef(iccPath, title) {
+  return [
+    '%!',
+    `[ /Title (${title}) /DOCINFO pdfmark`,
+    '[/_objdef {icc_PDFX} /type /stream /OBJ pdfmark',
+    '[{icc_PDFX} <</N 4 /Alternate /DeviceCMYK>> /PUT pdfmark',
+    `[{icc_PDFX} (${iccPath}) (r) file /PUT pdfmark`,
+    '[/_objdef {OutputIntent_PDFX} /type /dict /OBJ pdfmark',
+    '[{OutputIntent_PDFX} <<',
+    '  /Type /OutputIntent /S /GTS_PDFX',
+    '  /OutputCondition (Coated CMYK)',
+    '  /OutputConditionIdentifier (Custom)',
+    '  /Info (Generic coated CMYK output intent)',
+    '  /DestOutputProfile {icc_PDFX}',
+    '>> /PUT pdfmark',
+    '[{Catalog} <</OutputIntents [ {OutputIntent_PDFX} ]>> /PUT pdfmark',
+    '',
+  ].join('\n');
+}
 
 const MIME = {
   '.html': 'text/html', '.css': 'text/css', '.js': 'text/javascript',
@@ -141,19 +165,37 @@ async function main() {
     const pages = await renderPdf(chrome, url);
     console.log(`  ✓ ${path.relative(ROOT, rgbPdf)}  (${pages} pages)`);
 
-    if (CMYK) {
+    if (CMYK || PDFX) {
       if (!(await hasGhostscript())) {
-        console.log('\n  --cmyk skipped: Ghostscript not found. Install with `brew install ghostscript`.');
+        console.log('\n  CMYK/PDF-X skipped: Ghostscript not found (brew install ghostscript).');
+      } else if (!existsSync(ICC)) {
+        console.log(`\n  CMYK/PDF-X skipped: ICC not found at ${path.relative(ROOT, ICC)}.`);
       } else {
-        console.log(`  converting to CMYK -> ${path.relative(ROOT, cmykPdf)}…`);
-        await run('gs', [
-          '-dBATCH', '-dNOPAUSE', '-dSAFER', '-sDEVICE=pdfwrite',
-          '-dProcessColorModel=/DeviceCMYK', '-sColorConversionStrategy=CMYK',
-          '-dOverrideICC=true', '-dRenderIntent=1',
-          `-sOutputFile=${cmykPdf}`, rgbPdf,
-        ]);
-        console.log(`  ✓ ${path.relative(ROOT, cmykPdf)}`);
-        console.log('  NOTE: CMYK conversion, not a validated PDF/X-1a (PLAN.md Phase 5).');
+        if (CMYK) {
+          console.log(`  CMYK -> ${path.relative(ROOT, cmykPdf)}…`);
+          await run('gs', [
+            '-dBATCH', '-dNOPAUSE', '-dSAFER', '-sDEVICE=pdfwrite',
+            '-dProcessColorModel=/DeviceCMYK', '-sColorConversionStrategy=CMYK',
+            '-dOverrideICC=true', '-dRenderIntent=1',
+            `-sOutputFile=${cmykPdf}`, rgbPdf,
+          ]);
+          console.log(`  ✓ ${path.relative(ROOT, cmykPdf)}  (CMYK — KDP-ready)`);
+        }
+        if (PDFX) {
+          const defPath = path.join(DIST, '_book', 'PDFX_def.ps');
+          await mkdir(path.dirname(defPath), { recursive: true });
+          await writeFile(defPath, pdfxDef(ICC, 'The Art and Science of Headphone Design'));
+          console.log(`  PDF/X-1a -> ${path.relative(ROOT, x1aPdf)} …`);
+          console.log('  (SLOW: -dPDFX flattens all transparency to PDF 1.3 — ~40+ min on this');
+          console.log('   282-pp book. Run it only when you actually need the IngramSpark file.)');
+          await run('gs', [
+            '-dPDFX', '-dBATCH', '-dNOPAUSE', '-dNOSAFER',
+            '-sDEVICE=pdfwrite', '-dProcessColorModel=/DeviceCMYK',
+            '-sColorConversionStrategy=CMYK', `-sOutputICCProfile=${ICC}`,
+            `-sOutputFile=${x1aPdf}`, defPath, rgbPdf,
+          ]);
+          console.log(`  ✓ ${path.relative(ROOT, x1aPdf)}  (PDF/X-1a:2001, CMYK, output intent)`);
+        }
       }
     }
   } finally {

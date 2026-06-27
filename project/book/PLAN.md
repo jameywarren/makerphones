@@ -201,6 +201,18 @@ CMYK figure proofing, and proof shipping — not platform setup.
 **Cost to first proof:** ~$30 (proof only) to ~$325 (with the Bowker block).
 
 ### Changelog
+- 2026-06-26 — Cover + press + parts. **Cover brief** pushed into the
+  Makerphones Design System Claude project (`cover/BRIEF.md`) — design the
+  cover there, no folder upload. **CMYK press** is the default press file
+  (`book:press:pdf` → `book-press-cmyk.pdf`, KDP-ready, ~2 min); **PDF/X-1a**
+  wired as a separate slow flag (`book:press:pdfx` → `book-press-pdfx1a.pdf`,
+  embeds a coated-CMYK output intent via `scripts/to-book/pdfx/`; ~40 min as
+  it flattens transparency to PDF 1.3 — run only when uploading to
+  IngramSpark). **Parts-stills harness** (`book:parts`, render-parts.mjs):
+  headless three.js renders the daily-driver GLB → `public/book/parts/`;
+  collect.mjs embeds the assembled still automatically (the exploded view is
+  `--explode`, off until the groups-manifest node names are reconciled with
+  the GLB). Stills are baseline — hand-replace with nicer renders.
 - 2026-06-26 — Editorial pass: TOC + List of Figures now carry real **page
   numbers** (Paged.js target-counter); in-prose **cross-references** resolve
   to "(Chapter N)" (186 of them); a glossary-seeded **index** (53 terms,

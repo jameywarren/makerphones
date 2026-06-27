@@ -97,6 +97,23 @@ const WEB_NOTE = {
 
 const exists = (p) => access(p).then(() => true, () => false);
 
+/** The daily-driver-parts intro: rendered stills if scripts/to-book/render-parts.mjs
+ *  has produced them (public/book/parts/*.png), else a web-only note. */
+async function partsBlock() {
+  const dir = path.join(ROOT, 'public', 'book', 'parts');
+  if (!(await exists(path.join(dir, 'daily-driver.png')))) return WEB_NOTE['daily-driver-parts'];
+  const fig = (src, cap) =>
+    `<figure class="mp-figure"><img src="${src}" alt="${cap}" style="width:100%;display:block">` +
+    `<figcaption class="mp-figcaption">${cap}</figcaption></figure>`;
+  let out = fig('/book/parts/daily-driver.png', 'The Daily Driver, assembled.');
+  if (await exists(path.join(dir, 'daily-driver-exploded.png'))) {
+    out += fig('/book/parts/daily-driver-exploded.png', 'The Daily Driver, exploded into its part groups.');
+  }
+  return out + '<aside class="book-web-note"><strong>On the web:</strong> rotate, explode, and ' +
+    'isolate every part in the interactive viewer at ' +
+    '<strong>makerphones.com/learn/daily-driver-parts</strong>.</aside>';
+}
+
 function headOf(html) {
   const a = html.indexOf('<head'); const b = html.indexOf('</head>');
   return a === -1 || b === -1 ? '' : html.slice(a, b);
@@ -327,6 +344,7 @@ async function main() {
   }
 
   // ── body: part/section openers + articles (each section id'd for the TOC) ──
+  const notes = { ...WEB_NOTE, 'daily-driver-parts': await partsBlock() };
   let body = '';
   let lastGroup = null;
   let partArabic = 0;
@@ -343,7 +361,7 @@ async function main() {
           `<h2 class="po-title">${e.group.title}</h2><hr class="po-rule"></section>`;
       }
     }
-    const note = WEB_NOTE[e.handle] ?? '';
+    const note = notes[e.handle] ?? '';
     const id = `sec-${e.handle}`;
     if (e.kind === 'part') {
       const meta = [e.minutes ? `${e.minutes} min read` : null, `makerphones.com/learn/${e.handle}`]
