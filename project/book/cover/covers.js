@@ -38,6 +38,17 @@
       '</figure>';
   }
 
+  /* Exploded "blowout" hero — the line-mode HeroExploded SVG (from
+   * project/book/cover/hero-svgs.js), framed like the FR plate. */
+  function explodedPlate(figId) {
+    return '<figure class="fr-plate hx-plate">' +
+      '<span class="tick tl"></span><span class="tick tr"></span>' +
+      '<span class="tick bl"></span><span class="tick br"></span>' +
+      '<div class="hx-holder">' + (window.HERO_EXPLODED_SVG || '') + '</div>' +
+      '<figcaption class="fr-cap"><b>' + figId + '</b> &mdash; the Daily Driver, exploded: yoke, cup, damping, driver, baffle, pad</figcaption>' +
+      '</figure>';
+  }
+
   /* ── front cover ────────────────────────────────────────────────────── */
   function front() {
     return '<div class="cf cf-a">' +
@@ -48,7 +59,7 @@
           '<h1 class="cf-title">' + titleHTML() + '</h1>' +
           '<p class="cf-tag">A bench guide to how headphones are designed, measured &amp; built</p>' +
         '</div>' +
-        plate('FIG. 1') +
+        explodedPlate('FIG. 1') +
         '<div class="cf-foot">' +
           '<div class="byline"><span class="by-label mono">BY</span><span class="author">Jamey Warren</span></div>' +
           '<div class="foot-r">' + wlLogo() + '<span class="kicker-foot mono">' + EDITION + '</span></div>' +
