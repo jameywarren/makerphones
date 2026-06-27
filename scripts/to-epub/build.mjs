@@ -80,12 +80,29 @@ function toXhtml(html) {
   return h;
 }
 
+/** Expressive Code (Starlight's highlighter) renders each code line as
+ *  <div class="ec-line"><div class="code">…</div></div> INSIDE <pre><code> — but
+ *  <pre>/<code> are phrasing-content only, so EPUBCheck rejects every div (RSC-005).
+ *  Rebuild each block as a clean <pre><code> of the plain (already-escaped) text. */
+function flattenCodeBlocks(html) {
+  return html.replace(/<pre\b[^>]*>[\s\S]*?<\/pre>/gi, (block) => {
+    const lines = [];
+    const re = /<div class="code">([\s\S]*?)<\/div>/gi;
+    let m;
+    while ((m = re.exec(block)) !== null) lines.push(m[1].replace(/<[^>]+>/g, ''));
+    if (!lines.length) return block;                   // plain <pre>, no EC lines — leave as-is
+    return `<pre><code>${lines.join('\n')}</code></pre>`;
+  });
+}
+
 /** Strip web-only chrome that has no place in an ebook. */
 function epubClean(html) {
   let h = sanitizeBody(html);                          // scripts, canvas, model-viewer, viewers
   h = h.replace(/<form\b[\s\S]*?<\/form>/gi, '');       // feedback form
   h = h.replace(/<button\b[\s\S]*?<\/button>/gi, '');   // copy-code / UI buttons
   h = h.replace(/<dialog\b[\s\S]*?<\/dialog>/gi, '');
+  h = h.replace(/<link\b[^>]*>/gi, '');                 // Expressive Code injects <link ec.css> into the body (RSC-007)
+  h = flattenCodeBlocks(h);                             // ec-line divs inside <pre><code> (RSC-005)
   // Starlight wraps each <starlight-*> web component; unwrap unknown custom elements'
   // is risky — leave them (valid as well-formed elements). Drop empty <a> anchor icons:
   h = h.replace(/<a\b[^>]*class="[^"]*sl-anchor-link[^"]*"[^>]*>[\s\S]*?<\/a>/gi, '');
@@ -94,12 +111,16 @@ function epubClean(html) {
 
 /** Rewrite internal /learn/<handle> links to their chapter file; keep #frags. */
 function rewriteInternalLinks(html, fileOf) {
-  return html.replace(/href="([^"]*\/learn\/([a-z0-9-]+)\/?([^"]*))"/gi, (m, _full, handle, rest) => {
+  let h = html.replace(/href="([^"]*\/learn\/([a-z0-9-]+)\/?([^"]*))"/gi, (m, _full, handle, rest) => {
     const file = fileOf.get(handle);
-    if (!file) return m;                                // external / unknown — leave
+    if (!file) return m;                                // not an in-EPUB chapter — handled below
     const frag = rest && rest.startsWith('#') ? rest : '';
     return `href="${file}${frag}"`;
   });
+  // Any remaining site-absolute link (/learn/<not-in-epub>, /license/, …) "leaks
+  // outside the OCF container" per EPUBCheck (RSC-026) — point it at the live site.
+  h = h.replace(/href="\/(?!\/)([^"]*)"/gi, 'href="https://makerphones.com/$1"');
+  return h;
 }
 
 function xhtmlDoc(title, bodyHtml, { svg = false } = {}) {
@@ -405,7 +426,9 @@ async function main() {
     const props = d.props ? ` properties="${d.props}"` : '';
     manifest.push(`<item id="${d.id}" href="${d.file}" media-type="application/xhtml+xml"${props} />`);
   }
-  const spine = docs.map((d) => `<itemref idref="${d.id}" />`).join('\n');
+  // nav doc is referenced by the toc landmark, so it must be a spine item (linear="no"
+  // keeps it out of the linear reading order) — otherwise EPUBCheck raises RSC-011.
+  const spine = [...docs.map((d) => `<itemref idref="${d.id}" />`), '<itemref idref="nav" linear="no" />'].join('\n');
   const opf = `<?xml version="1.0" encoding="utf-8"?>
 <package xmlns="http://www.idpf.org/2007/opf" version="3.0" unique-identifier="pub-id" xml:lang="en"
   prefix="schema: http://schema.org/">
