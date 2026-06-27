@@ -44,6 +44,5 @@ story and its measurements will follow here as the build progresses.
 ## The manual
 
 Six parts, 33 chapters, published openly as they're finished: [browse the contents](/contents/).
-The manual is the product: there's nothing to buy here, and the chapters stay free to read.
-Prefer it as a book? [Download the whole manual as a PDF](/book.pdf) — the same
-content, typeset, regenerated whenever a chapter changes.
+The manual is the product, and the chapters stay free to read forever.
+Prefer it as a book? An ebook and print edition are [on the way](/book/).

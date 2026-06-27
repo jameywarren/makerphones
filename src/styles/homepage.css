@@ -453,6 +453,9 @@
   gap: 1.25rem;
   margin: 2.5rem auto 0;
   max-width: 62rem;
+  /* in-page scroll target for the hero "Get the book ↓" button — clear the
+   * sticky site header so the row isn't tucked beneath it on the jump */
+  scroll-margin-top: calc(var(--sl-nav-height, 4rem) + 1.5rem);
 }
 .mp-edition {
   border: 1px solid var(--mp-line);
@@ -462,6 +465,10 @@
 }
 .mp-edition-tag {
   display: inline-block;
+  /* set the mono face directly: the `.mono` utility is scoped to .mp-home /
+   * .mp-bench, so it doesn't reach the editions grid on the .mp-contents-page
+   * book landing — without this the tags fall back to the serif body font */
+  font-family: var(--mp-mono);
   font-size: 0.7rem;
   letter-spacing: 0.14em;
   color: var(--mp-accent);
@@ -483,3 +490,17 @@
   margin: 0;
 }
 .mp-edition a { font-weight: 500; white-space: nowrap; }
+/* not-yet-purchasable status — a quiet, non-interactive badge for editions
+ * still in review (deliberately not styled like the orange edition links) */
+.mp-edition-status {
+  display: inline-block;
+  margin-top: 0.95rem;
+  font-family: var(--mp-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--mp-meta);
+  border: 1px solid var(--mp-line);
+  border-radius: 999px;
+  padding: 3px 10px;
+}
