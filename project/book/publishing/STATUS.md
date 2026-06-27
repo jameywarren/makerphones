@@ -56,9 +56,10 @@ recompute and update `--spine` in `project/book/cover/cover-print.html`.
 - Engine: `../cover/covers.js`. Warren Labs W-sine-wave logo is inline SVG; recolored
   to warm charcoal. Spine = author (top) · title (center) · Warren Labs + mark (foot),
   evenly-spaced orange-dot separators.
-- **Hero = the exploded "blowout" headphone** (line-mode `HeroExploded`, static SVG in
-  `hero-svgs.js`), framed as FIG. 1. Renders to both the KDP (0.635in spine) and Ingram
-  (0.705in spine) wraps via `npm run book:cover` / `book:cover:ingram`.
+- **Hero = the FR field plate** (FIG. 1, measured vs target; `fr-svgs.js`). Renders to
+  both the KDP (0.635in spine) and Ingram (0.705in spine) wraps via `npm run book:cover`
+  / `book:cover:ingram`. (A blowout-headphone hero was tried and reverted — see git
+  history if revisiting.)
 
 ## KDP paperback — draft in progress (title id P7ACH508QJK)
 Filled + saved: all Details (3 categories, 7 keywords), Content (own ISBN, Warren Labs,
