@@ -1,0 +1,42 @@
+---
+title: "Daily Driver — Parts (Beta · live)"
+handle: daily-driver-parts-beta
+type: build-guide
+read_time: 4
+related: [daily-driver-parts, daily-driver-design-spec, designing-headphones-with-ai]
+tags: [build-guide, daily-driver, parts, 3d-print, exploded-view, beta]
+description: "The live work-in-progress Daily Driver — every part in 3D, updated on every commit. This is the bleeding edge; the promoted current build lives on the main parts page."
+excerpt: "The bleeding-edge Daily Driver: this view updates on every commit as the design is worked on. For the stable promoted version, see the current build."
+---
+
+import PartsViewer from '../../../components/PartsViewer.astro';
+import PartsGallery from '../../../components/PartsGallery.astro';
+
+:::caution[Live work in progress]
+This is the **beta** view — the design exactly as it stands right now, rebuilt and
+republished on **every commit**. Parts may be mid-change, half-finished, or briefly
+broken. For the stable, promoted version, see the
+**[current build](/learn/daily-driver-parts/)**.
+:::
+
+This is the Daily Driver as it's being worked on **right now**. Drag the slider to **pull
+the assembly apart and back together**, toggle the **sub-assemblies** (earcup, gimbal,
+headband), or **click any part to isolate it**. It's the same model developed in the open
+at [github.com/makerphones/daily-driver](https://github.com/makerphones/daily-driver), so
+this page changes as the design does — sometimes several times a day.
+
+<PartsViewer />
+
+When a build here is good enough to be the version everyone sees, it gets **promoted** to
+the [current build](/learn/daily-driver-parts/), which stays put until the next promotion.
+
+## Parts to print (live)
+
+These are the live part renders and models — they track the beta above, so treat any print
+metadata as provisional until promoted.
+
+<PartsGallery />
+
+For sourcing the bought hardware and rough costs, see the build's bill of materials in the
+[design spec](/learn/daily-driver-design-spec/). The model is fully parametric, so changing
+a driver, a pad, or the head size regenerates the parts to match.

@@ -5,9 +5,20 @@
  * a Google <model-viewer> loading the per-part GLB (both published by the daily-driver
  * repo's GitHub Pages — single source, nothing copied here). Print metadata is
  * editorial (from the design spec / build log).
+ *
+ * `renders` / `models` base URLs default to the live (beta) channel; the "current
+ * build" page passes the promoted `-stable` paths instead.
  */
-const R = 'https://makerphones.github.io/daily-driver/renders';
-const M = 'https://makerphones.github.io/daily-driver/models';
+interface Props {
+  renders?: string;
+  models?: string;
+}
+const {
+  renders = 'https://makerphones.github.io/daily-driver/renders',
+  models = 'https://makerphones.github.io/daily-driver/models',
+} = Astro.props;
+const R = renders;
+const M = models;
 
 const PARTS = [
   // --- Earcup (one piece) ---

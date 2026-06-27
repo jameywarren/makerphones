@@ -89,6 +89,7 @@ const sidebar = [
       'learn/closed-back-studio-build',
       'learn/daily-driver-design-spec',
       'learn/daily-driver-parts',
+      'learn/daily-driver-parts-beta',
       'learn/designing-headphones-with-ai',
     ],
   },

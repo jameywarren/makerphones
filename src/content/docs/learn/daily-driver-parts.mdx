@@ -14,12 +14,17 @@ import PartsGallery from '../../../components/PartsGallery.astro';
 
 This is the Daily Driver as an interactive model. Drag the slider to **pull the
 assembly apart and back together**, toggle the **sub-assemblies** (earcup, gimbal,
-headband), or **click any part to isolate it** and inspect it on its own. It's the
-live design, the same model that's developed in the open at
-[github.com/makerphones/daily-driver](https://github.com/makerphones/daily-driver),
-so it updates as the design does.
+headband), or **click any part to isolate it** and inspect it on its own.
 
-<PartsViewer />
+This page shows the **current build** — the latest version promoted as stable. To watch
+the design change in real time as it's worked on, see the **[live beta
+view](/learn/daily-driver-parts-beta/)**. It's all developed in the open at
+[github.com/makerphones/daily-driver](https://github.com/makerphones/daily-driver).
+
+<PartsViewer
+  glb="https://makerphones.github.io/daily-driver/models-stable/daily-driver.glb"
+  groups="https://makerphones.github.io/daily-driver/models-stable/daily-driver.groups.json"
+/>
 
 The headphone is built from a small set of 3D-printed parts plus one bought metal
 headband bow. Everything below is exactly what you print to make one pair: the
@@ -27,7 +32,10 @@ quantities are per complete headphone (two ears).
 
 ## Parts to print
 
-<PartsGallery />
+<PartsGallery
+  renders="https://makerphones.github.io/daily-driver/renders-stable"
+  models="https://makerphones.github.io/daily-driver/models-stable"
+/>
 
 For sourcing the bought hardware (the bow, M3 shoulder screws, and heat-set
 inserts) and rough costs, see the build's bill of materials in the
@@ -35,8 +43,9 @@ inserts) and rough costs, see the build's bill of materials in the
 point you can modify. The model is fully parametric, so changing a driver, a pad,
 or the head size regenerates the parts to match.
 
-:::note[It's a work in progress]
-The Daily Driver is in active design. Nothing has been print-verified yet. Some
-parts (the headband pad, the head fit/kinematics) are deliberately rough drafts.
-Follow along, and fork freely.
+:::note[Current build vs. live beta]
+This is the **current build** — the latest version promoted as stable. The
+[live beta view](/learn/daily-driver-parts-beta/) tracks the work-in-progress and updates
+on every commit. Nothing is print-verified yet; some parts (the headband pad, the head
+fit/kinematics) are deliberately rough drafts. Follow along, and fork freely.
 :::
