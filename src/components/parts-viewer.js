@@ -165,13 +165,18 @@ export function initPartsViewer(root) {
     // past the other ear). Part names: cup_R, driver_clamp_L, insert_p_R, bow_ref, …
     const typeOf = (n) => n.replace(/_(R|L)$/, '').replace(/_(p|m)$/, '').replace(/_ref$/, '');
     const HW = new Set(['insert', 'screw']);
-    const typeKey = (n) => { const t = typeOf(n); return HW.has(t) ? 'hardware' : t; };
+    const typeKey = (n) => {
+      const h = /^head_ref_(s|m|l)$/.exec(n);   // S/M/L reference heads → three separate toggles
+      if (h) return 'head_' + h[1];
+      const t = typeOf(n); return HW.has(t) ? 'hardware' : t;
+    };
     const sideOf = (n) => (/_R$/.test(n) ? 'R' : /_L$/.test(n) ? 'L' : 'both');
     const TYPE_LABEL = {
       cup: 'Cup', baffle: 'Baffle', driver: 'Driver', driver_clamp: 'Driver clamp',
       yoke: 'Yoke', slider: 'Slider', bow: 'Bow', headband_pad: 'Headband pad', hardware: 'Hardware',
       slider_shoe: 'Pressure shoe', yoke_rod: 'Adjustment rod', thumbscrew: 'Thumbscrew',
-      headband_clamp: 'Band clamp', head: 'Reference head', earpad: 'Ear pads',
+      headband_clamp: 'Band clamp', earpad: 'Ear pads',
+      head_s: 'Head · S (140)', head_m: 'Head · M (147)', head_l: 'Head · L (155)',
     };
     const types = [];
     for (const p of parts) { const k = typeKey(p.name); if (!types.includes(k)) types.push(k); }
