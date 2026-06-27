@@ -94,7 +94,8 @@ body {
   color: var(--mp-ink);
 }
 .mp-foot, .pagination-links, .page-feedback, starlight-toc, .right-sidebar,
-nav.pagination-links, canvas, .mp-feedback, .sl-hidden { display: none !important; }
+nav.pagination-links, canvas, model-viewer, .parts-viewer, .parts-gallery,
+.mp-feedback, .sl-hidden { display: none !important; }
 
 /* ── baseline-gridded body type (10.5/14pt) ── */
 .sl-markdown-content,
@@ -413,3 +414,32 @@ figure, .mp-figure, .sl-markdown-content svg, table { break-inside: avoid; }
   color: var(--mp-ink); background: var(--mp-accent-tint); break-inside: avoid;
 }
 .book-web-note strong { font-family: var(--mp-mono); }
+
+/* TOC + LoF page-number leaders (Paged.js target-counter, resolved at render) */
+.book-toc .toc-link, .book-lof .lof-link {
+  display: flex; align-items: baseline; gap: 0.6em; width: 100%;
+  text-decoration: none; color: var(--mp-ink);
+}
+.book-toc .toc-link::after, .book-lof .lof-link::after {
+  content: target-counter(attr(href), page);
+  margin-left: auto; padding-left: 0.8em;
+  font: 400 9pt var(--mp-mono); color: var(--mp-meta);
+}
+.book-lof .lof-cap { flex: 1; }
+.book-lof .lof-n { flex: none; }
+
+/* in-prose cross-reference tag — "(Chapter 7)" after a chapter link */
+.xref { font-family: var(--mp-mono); font-size: 0.82em; color: var(--mp-meta); white-space: nowrap; }
+
+/* index — letter groups + chapter references (page-accurate is a later upgrade).
+ * Single column: Paged.js 0.4.3's CSS multi-column support is unreliable and
+ * dropped the whole section when the delivered book.css used columns: 2. */
+.book-index { columns: 1; column-gap: 0; column-rule: 0; }
+.book-index .ix-note { font: 400 8.5pt var(--mp-mono); color: var(--mp-meta); margin: 0 0 10pt; }
+.book-index .ix-term { flex: 1; padding-right: 6pt; }
+
+/* about the author — back matter */
+.book-about-author { page: plain; break-before: page; }
+.book-about-author h2 { font: 700 20pt var(--mp-sans); color: var(--mp-charcoal); margin: 0 0 1.2rem; }
+.book-about-author p { font: 400 11pt/1.6 var(--mp-body); color: var(--mp-ink); max-width: 34em; margin: 0 0 12pt; }
+.book-about-author strong { color: var(--mp-charcoal); font-weight: 600; }

@@ -4,28 +4,24 @@
  *
  * The book is a third output target alongside the website and the (stubbed)
  * Shopify export: same content, new projection. This reuses the REAL
- * Astro-built HTML in dist/ (every chapter's hand-built SVG figures, fonts,
- * and --mp-* tokens come along for free) and rebuilds each page into the
- * Makerphones Design System's print markup, then concatenates everything, in
- * spine order, into one HTML book. Paged.js (vendored locally) paginates it.
+ * Astro-built HTML in dist/ and rebuilds each page into the Makerphones Design
+ * System's print markup (src/styles/book.css), then concatenates everything,
+ * in spine order, into one HTML book. Paged.js (vendored locally) paginates it.
  *
  *   node scripts/to-book/collect.mjs            -> dist/book.html        (screen)
  *   node scripts/to-book/collect.mjs --press    -> dist/book-press.html  (+ bleed + marks)
  *
- * The print design system lives in src/styles/book.css (delivered) and is
- * documented in project/book/design-system/. This script emits the markup
- * that stylesheet expects:
- *   - part openers      .part-opener  (po-kicker / po-num / po-title)
- *   - numbered chapters .book-chapter (ch-eyebrow "Chapter N" / h1 / ch-lede /
- *                       ch-meta / ch-rule), figures numbered by CSS counter
- *   - build guides      .book-chapter.book-guide  (unnumbered)
- *   - appendices        .book-appendix
- * Chapter numbers (1..33) and chapter-scoped figure numbers (Fig. N.m) are
- * DERIVED from spine position — reorder a chapter and everything renumbers.
- *
- * Known TODOs (see project/book/PLAN.md): the spine mirrors the
- * astro.config.mjs sidebar by hand; the parts viewer is replaced by a note;
- * TOC/LoF have no page-number folios yet (Paged.js target-counter).
+ * What it builds:
+ *   - front matter: title, copyright, dedication, contents (with page numbers),
+ *     list of figures (with page numbers), preface
+ *   - body: part openers + numbered chapters (Chapter N), build guides,
+ *     appendices — figures numbered Fig. N.m, cross-references resolved to
+ *     "(Chapter N)"
+ *   - back matter: index (glossary-seeded), about the author, colophon
+ * Chapter numbers (1..33) and figure numbers (Fig. N.m) are DERIVED from spine
+ * position. TOC/LoF page numbers use Paged.js target-counter (resolved at
+ * render). The index references chapters (page-accurate index is a later
+ * upgrade). See project/book/PLAN.md.
  */
 
 import { readFile, writeFile, access, mkdir, copyFile } from 'node:fs/promises';
@@ -44,6 +40,7 @@ const BOOK_TITLE = 'The Art and Science of Headphone Design';
 const BOOK_SUBTITLE =
   'Designing and building your own headphones — the real engineering, explained plainly.';
 const AUTHOR = 'Jamey Warren';
+const IMPRINT = 'Warren Labs';
 
 /** The spine — mirrors the astro.config.mjs sidebar verbatim. */
 const SPINE = [
@@ -92,6 +89,10 @@ const WEB_NOTE = {
     '<aside class="book-web-note"><strong>Web-only:</strong> this chapter centers on an ' +
     'interactive 3D parts viewer that can\'t print. Explore the exploded, isolated, and ' +
     'assembled views at <strong>makerphones.com/learn/daily-driver-parts</strong>.</aside>',
+  'daily-driver-design-spec':
+    '<aside class="book-web-note"><strong>Web-only:</strong> the rotatable 3D part previews in ' +
+    'this spec can\'t print. View and spin every part at ' +
+    '<strong>makerphones.com/learn/daily-driver-design-spec</strong>.</aside>',
 };
 
 const exists = (p) => access(p).then(() => true, () => false);
@@ -111,12 +112,10 @@ function styleInners(head, into) {
   for (const m of head.matchAll(/<style>([\s\S]*?)<\/style>/g)) into.add(m[1]);
 }
 
-/* Paged.js 0.4.3 can't parse :is()/:where() in the selectors it scans (it
- * splits selector lists on commas and chokes on the inner commas), which
- * aborts pagination. Drop any style rule whose selector uses them — these are
- * website-chrome rules the print layer (book.css) replaces anyway. Brace-aware:
- * keeps @font-face / @keyframes / @page, recurses into @media / @supports, and
- * preserves :root tokens and the diagram CSS the figures need. */
+/* Paged.js 0.4.3 can't parse :is()/:where() in the selectors it scans, which
+ * aborts pagination. Drop any style rule whose selector uses them (website
+ * chrome the print layer replaces). Brace-aware; keeps @font-face / @keyframes
+ * / @page, recurses @media / @supports, preserves :root tokens + diagram CSS. */
 function stripModernSelectors(css) {
   let out = '', i = 0;
   while (i < css.length) {
@@ -142,7 +141,7 @@ function stripModernSelectors(css) {
       if (['media', 'supports', 'layer', 'container'].includes(name)) {
         out += prelude + '{' + stripModernSelectors(block) + '}';
       } else {
-        out += prelude + '{' + block + '}';   // @font-face, @keyframes, @page, …
+        out += prelude + '{' + block + '}';
       }
     } else if (!/:is\(|:where\(/i.test(prelude)) {
       out += prelude + '{' + block + '}';
@@ -151,6 +150,7 @@ function stripModernSelectors(css) {
   }
   return out;
 }
+
 function firstH1(html) {
   const m = html.match(/<h1\b[^>]*>([\s\S]*?)<\/h1>/);
   return m ? m[1].replace(/<[^>]+>/g, '').trim() : null;
@@ -176,8 +176,50 @@ function divInner(html, marker) {
   }
   return html.slice(i);
 }
-/** Strip the author's baked-in "Fig. N — " label (CSS counters add the real one);
- *  for numbered chapters, record the caption for the List of Figures. */
+/** Plain lowercased text of an HTML fragment (for index term search). */
+function plain(html) {
+  return html.replace(/<[^>]+>/g, ' ').replace(/&[a-z]+;/gi, ' ').replace(/\s+/g, ' ').toLowerCase();
+}
+
+/** Remove web-only / interactive markup that has no place in print and that
+ *  stalls Paged.js: inline scripts, the three.js <canvas>, and <model-viewer>
+ *  3D widgets (tall, empty, and re-executed during pagination). The static
+ *  prose around them stays; a "see the website" note is added separately. */
+function sanitizeBody(html) {
+  let h = html
+    .replace(/<script\b[\s\S]*?<\/script>/gi, '')
+    .replace(/<canvas\b[\s\S]*?<\/canvas>/gi, '')
+    .replace(/<model-viewer\b[\s\S]*?<\/model-viewer>/gi, '')
+    .replace(/<model-viewer\b[^>]*\/?>/gi, '');
+  // drop the whole interactive-viewer containers (their innards stall Paged.js)
+  for (const cls of ['parts-viewer', 'parts-gallery']) h = stripDivByClass(h, cls);
+  return h;
+}
+
+/** Remove every <div class="…cls…">…</div> (depth-aware) from the HTML. */
+function stripDivByClass(html, cls) {
+  const re = new RegExp(`<div\\b[^>]*class="[^"]*\\b${cls}\\b[^"]*"`);
+  let out = html, guard = 0;
+  while (guard++ < 50) {
+    const m = out.match(re);
+    if (!m) break;
+    const open = m.index;
+    let depth = 1;
+    const dre = /<\/?div\b[^>]*>/g; dre.lastIndex = out.indexOf('>', open) + 1;
+    let mm, end = -1;
+    while ((mm = dre.exec(out))) {
+      if (mm[0].charAt(1) === '/') { depth -= 1; if (depth === 0) { end = dre.lastIndex; break; } }
+      else depth += 1;
+    }
+    if (end === -1) break;
+    out = out.slice(0, open) + out.slice(end);
+  }
+  return out;
+}
+
+/** Strip the author's baked-in "Fig. N — " label and inject the derived
+ *  chapter-scoped number; record the caption for the List of Figures, and id
+ *  the caption so target-counter can page-number it. */
 function processFigures(inner, chapterNum, lof) {
   let fig = 0;
   return inner.replace(/<figcaption class="mp-figcaption">([\s\S]*?)<\/figcaption>/g, (_m, cap) => {
@@ -186,10 +228,57 @@ function processFigures(inner, chapterNum, lof) {
     if (chapterNum != null) {
       const num = `${chapterNum}.${fig}`;
       lof.push({ num, text: stripped.replace(/<[^>]+>/g, '').trim() });
-      return `<figcaption class="mp-figcaption"><b class="fig-num">Fig. ${num}</b> — ${stripped}</figcaption>`;
+      return `<figcaption class="mp-figcaption" id="fig-${num.replace('.', '-')}">` +
+        `<b class="fig-num">Fig. ${num}</b> — ${stripped}</figcaption>`;
     }
     return `<figcaption class="mp-figcaption">${stripped}</figcaption>`;
   });
+}
+
+/** Resolve in-prose cross-references: a link to /learn/<handle> for a numbered
+ *  chapter gets a "(Chapter N)" tag appended (print isn't clickable). */
+function linkChapterRefs(html, handleNum) {
+  return html.replace(
+    /<a\b[^>]*href="[^"]*\/learn\/([a-z0-9-]+)\/?[^"]*"[^>]*>[\s\S]*?<\/a>/g,
+    (m, handle) => {
+      const n = handleNum.get(handle);
+      return n ? `${m}<span class="xref"> (Chapter ${n})</span>` : m;
+    },
+  );
+}
+
+/** Glossary-seeded, chapter-referenced index. */
+async function buildIndex(entries) {
+  const gPath = path.join(DIST, 'learn', 'glossary', 'index.html');
+  if (!(await exists(gPath))) return '';
+  const gInner = divInner(await readFile(gPath, 'utf8'), '<div class="sl-markdown-content"') ?? '';
+  const terms = [...new Set(
+    [...gInner.matchAll(/<strong>([^<]{2,40})<\/strong>/g)].map((m) => m[1].trim()),
+  )].filter((t) => /[a-z]/i.test(t));
+
+  const chapters = entries.filter((e) => e.chapterNum).map((e) => ({ num: e.chapterNum, text: plain(e.bodyInner) }));
+  const rows = [];
+  for (const term of terms) {
+    const key = term.replace(/\s*\([^)]*\)\s*/g, ' ').trim().toLowerCase();
+    if (key.length < 2) continue;
+    const re = new RegExp(`(^|[^a-z0-9])${key.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}([^a-z0-9]|$)`);
+    const chs = [...new Set(chapters.filter((c) => re.test(c.text)).map((c) => c.num))].sort((a, b) => a - b);
+    if (chs.length) rows.push({ term, chs });
+  }
+  if (!rows.length) return '';
+  rows.sort((a, b) => a.term.toLowerCase().localeCompare(b.term.toLowerCase()));
+
+  let html = '<section class="book-index"><h2>Index</h2>' +
+    '<p class="ix-note">Numbers refer to chapters.</p>';
+  let letter = '';
+  for (const r of rows) {
+    const L = r.term[0].toUpperCase();
+    if (L !== letter) { letter = L; html += `<div class="ix-group">${L}</div>`; }
+    html += `<div class="ix-entry"><span class="ix-term">${r.term}</span>` +
+      `<span class="ix-folios">${r.chs.join(', ')}</span></div>`;
+  }
+  html += '</section>';
+  return html;
 }
 
 async function main() {
@@ -222,16 +311,22 @@ async function main() {
     }
   }
 
-  // assign derived chapter numbers + process figures
-  const lof = [];
+  // pass 1: derive chapter numbers + handle→number map
   let chapterNum = 0;
+  const handleNum = new Map();
   for (const e of entries) {
-    const cn = e.kind === 'part' ? (chapterNum += 1) : null;
-    e.chapterNum = cn;
-    e.body = `<div class="sl-markdown-content">${processFigures(e.bodyInner, cn, lof)}</div>`;
+    e.chapterNum = e.kind === 'part' ? (chapterNum += 1) : null;
+    if (e.chapterNum) handleNum.set(e.handle, e.chapterNum);
+  }
+  // pass 2: number figures + resolve cross-references
+  const lof = [];
+  for (const e of entries) {
+    const clean = sanitizeBody(e.bodyInner);
+    const withFigs = processFigures(clean, e.chapterNum, lof);
+    e.body = `<div class="sl-markdown-content">${linkChapterRefs(withFigs, handleNum)}</div>`;
   }
 
-  // ── body: part/section openers + articles ──
+  // ── body: part/section openers + articles (each section id'd for the TOC) ──
   let body = '';
   let lastGroup = null;
   let partArabic = 0;
@@ -249,23 +344,24 @@ async function main() {
       }
     }
     const note = WEB_NOTE[e.handle] ?? '';
+    const id = `sec-${e.handle}`;
     if (e.kind === 'part') {
       const meta = [e.minutes ? `${e.minutes} min read` : null, `makerphones.com/learn/${e.handle}`]
         .filter(Boolean).map((b) => `<span>${b}</span>`).join('');
-      body += `<article class="book-chapter"><div class="ch-eyebrow">Chapter ${e.chapterNum}</div>` +
+      body += `<article class="book-chapter" id="${id}"><div class="ch-eyebrow">Chapter ${e.chapterNum}</div>` +
         `<h1>${e.title}</h1>${e.desc ? `<p class="ch-lede">${e.desc}</p>` : ''}` +
         `<div class="ch-meta">${meta}</div><div class="ch-rule"></div>${note}${e.body}</article>`;
     } else if (e.kind === 'guides') {
-      body += `<article class="book-chapter book-guide"><div class="ch-eyebrow">Build Guide</div>` +
+      body += `<article class="book-chapter book-guide" id="${id}"><div class="ch-eyebrow">Build Guide</div>` +
         `<h1>${e.title}</h1>${e.desc ? `<p class="ch-lede">${e.desc}</p>` : ''}` +
         `<div class="ch-rule"></div>${note}${e.body}</article>`;
     } else {
-      body += `<section class="book-appendix"><div class="ch-eyebrow">Appendix</div>` +
+      body += `<section class="book-appendix" id="${id}"><div class="ch-eyebrow">Appendix</div>` +
         `<h1>${e.title}</h1><div class="ch-rule"></div>${note}${e.body}</section>`;
     }
   }
 
-  // ── table of contents ──
+  // ── table of contents (links carry page numbers via target-counter) ──
   let toc = '<section class="book-toc"><h2>Contents</h2>';
   let tnum = 0;
   for (const group of SPINE) {
@@ -275,22 +371,27 @@ async function main() {
     toc += `<div class="toc-part">${label}</div><ol>`;
     for (const e of inGroup) {
       const left = group.kind === 'part' ? `${(tnum += 1)}. ${e.title}` : e.title;
-      toc += `<li><span>${left}</span><span class="toc-folio"></span></li>`;
+      toc += `<li><a class="toc-link" href="#sec-${e.handle}">${left}</a></li>`;
     }
     toc += '</ol>';
   }
   toc += '</section>';
 
-  // ── list of figures ──
+  // ── list of figures (page numbers via target-counter) ──
   let lofHtml = '';
   if (lof.length) {
     lofHtml = '<section class="book-lof"><h2>Figures</h2><ol>';
-    for (const f of lof) lofHtml += `<li><span class="lof-n">Fig. ${f.num}</span><span>${f.text}</span></li>`;
+    for (const f of lof) {
+      lofHtml += `<li><a class="lof-link" href="#fig-${f.num.replace('.', '-')}">` +
+        `<span class="lof-n">Fig. ${f.num}</span><span class="lof-cap">${f.text}</span></a></li>`;
+    }
     lofHtml += '</ol></section>';
   }
 
-  // ── styles: inline the site CSS (minus :is()/:where(), which Paged.js can't
-  //    parse) + the scoped component styles + the print design system ──
+  // ── index (glossary-seeded, chapter-referenced) ──
+  const indexHtml = await buildIndex(entries);
+
+  // ── styles: inline the site CSS (minus :is()/:where()) + scoped + design ──
   let bundled = '';
   for (const href of cssHrefs) {
     const p = path.join(DIST, href.replace(/^\//, ''));
@@ -299,6 +400,8 @@ async function main() {
   for (const b of cssBlocks) bundled += stripModernSelectors(b) + '\n';
   const bookCss = await readFile(path.join(STYLES, 'book.css'), 'utf8');
   const pressCss = PRESS ? await readFile(path.join(STYLES, 'book-press.css'), 'utf8') : '';
+
+  // vendor the Paged.js polyfill into dist (no CDN at render/print time)
   let pagedSrc = 'https://unpkg.com/pagedjs/dist/paged.polyfill.js';
   const polyfill = path.join(ROOT, 'node_modules', 'pagedjs', 'dist', 'paged.polyfill.js');
   if (await exists(polyfill)) {
@@ -334,8 +437,7 @@ ${pressCss}
   <p>First edition · 2026</p>
   <p>© ${AUTHOR}. Manual text licensed Creative Commons BY-NC 4.0; design
   files MIT. Full terms in the license appendix and at makerphones.com.</p>
-  <p>Published by <span class="cr-fill">[imprint]</span>. ISBN
-  <span class="cr-fill">[ISBN]</span>.</p>
+  <p>Published by ${IMPRINT}. ISBN <span class="cr-fill">[ISBN]</span>.</p>
   <p>Set in Schibsted Grotesk, Source Serif 4, and JetBrains Mono.</p>
   <p>This edition is generated from the live manual at makerphones.com via
   the project's <code>to-book</code> pipeline. For interactive figures and
@@ -354,18 +456,23 @@ ${lofHtml}
 
 <section class="book-preface">
   <h2>How to use this book</h2>
-  <p class="pf-draft">[Draft — preface to be written by the author.]</p>
   <p>This is a reference manual you can read two ways. Read it front to back
-  and it builds an argument: how headphones make sound, what the parts do,
-  how to design and build an enclosure, how to measure what you made, and how
-  to tune it. Or treat it as a reference — each chapter states its
-  prerequisites, so you can find your way in from any direction.</p>
-  <p>The six numbered parts move from beginner to advanced. After them, the
+  and it builds an argument: how headphones make sound, what the parts do, how
+  to design and build an enclosure, how to measure what you made, and how to
+  tune it. Or treat it as a reference — each chapter names what you should have
+  read first, so you can come in from any direction and find your footing.</p>
+  <p>The six numbered parts climb from beginner to advanced. After them, the
   build guides walk through real headphones end to end, and the appendices
-  collect the glossary, suppliers, resources, sources, troubleshooting, and a
-  standing note on listening safely.</p>
-  <p>Some things on the website can't fit on a page — most of all the
-  interactive 3D parts viewer. Where that happens, the book points you to
+  collect a glossary, suppliers, resources, sources, troubleshooting, and a
+  standing note on listening safely. Figures are numbered by chapter — Fig. 4.2
+  is the second figure in Chapter 4 — and gathered in the list of figures up
+  front.</p>
+  <p>Nothing here is theory for its own sake. Every claim that can be measured
+  is, and the curve is shown. Where a value is a judgment call, it says so. The
+  aim is a book you can trust at the bench: specific, unit-bearing, and honest
+  about what's still uncertain.</p>
+  <p>A few things live only on the website — most of all the interactive 3D
+  parts viewer. Where the page can't carry them, the book points you to
   makerphones.com.</p>
 </section>
 
@@ -386,6 +493,22 @@ ${lofHtml}
 
 ${body}
 
+${indexHtml}
+
+<section class="book-about-author">
+  <h2>About the author</h2>
+  <p><strong>Jamey Warren</strong> has spent more than twenty-five years in
+  professional audio and the headphone industry. He was employee #1 at Grace
+  Design (1997–2001) and consulted for the company through 2003 — seven years
+  he calls his University of Rock &amp; Roll. From 2003 to 2017 he was VP of
+  Operations and then President &amp; CEO of HeadRoom, where he relaunched the
+  entire headphone-amplifier line and oversaw the testing of thousands of
+  headphones.</p>
+  <p>He is now designing his own open-back headphone, the Daily Driver, in the
+  open — with AI as a design partner — using the same methods this book
+  teaches. The work, and its measurements, are published at makerphones.com.</p>
+</section>
+
 <section class="book-colophon">
   <h2>Colophon</h2>
   <p>${BOOK_TITLE} was generated from the Makerphones reference manual, an
@@ -396,7 +519,7 @@ ${body}
   <strong>Schibsted Grotesk</strong>; technical labels, captions, and folios
   in <strong>JetBrains Mono</strong>. Every figure is a hand-built vector
   diagram, drawn for this manual.</p>
-  <p>makerphones.com</p>
+  <p>${IMPRINT} · makerphones.com</p>
 </section>
 
 <!-- Paged.js paginates this document in the browser and under the headless renderer. -->
@@ -408,12 +531,14 @@ ${body}
   await writeFile(OUT, doc, 'utf8');
 
   const parts = SPINE.filter((g) => g.kind === 'part').length;
+  const idxTerms = (indexHtml.match(/ix-entry/g) || []).length;
   console.log(`\n  to-book (${PRESS ? 'PRESS 7x10+bleed' : 'screen 7x10'}): wrote ${path.relative(ROOT, OUT)}`);
   console.log(`  chapters: ${chapterNum} numbered (${parts} parts) + ` +
     `${entries.filter((e) => e.kind === 'guides').length} guides + ` +
     `${entries.filter((e) => e.kind === 'appendix').length} appendices`);
-  console.log(`  figures: ${lof.length} numbered Fig. N.m (chapter-scoped) + List of Figures`);
-  console.log(`  inlined css: ${cssHrefs.size} bundle(s) + ${cssBlocks.size} scoped block(s) (:is()/:where() stripped)`);
+  console.log(`  figures: ${lof.length} (Fig. N.m) · index entries: ${idxTerms} · ` +
+    `TOC + LoF page numbers via target-counter`);
+  console.log(`  inlined css: ${cssHrefs.size} bundle(s) + ${cssBlocks.size} scoped block(s)`);
   if (missing) console.log(`  WARNING: ${missing} entr${missing === 1 ? 'y' : 'ies'} missing from dist/`);
   console.log('');
 }

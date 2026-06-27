@@ -178,7 +178,7 @@ build for `#ea580c`.
 |-------|------|--------|-------|
 | 0 | Reconcile stale numbers (`WORKING_TITLES`, "32"→33, Compass) | ½ day | ✅ done |
 | 1 | PDF v0.1 — `scripts/to-book/` + `book.css` + `npm run book` | 1 weekend | ✅ done |
-| 2 | Editorial prep — figure numbering ✅, front/back matter ✅, **index** ☐ | 1–2 wk | ◑ index left |
+| 2 | Editorial prep — figure numbering ✅, front/back matter ✅, **index** ✅, page numbers ✅, cross-refs ✅ | 1–2 wk | ✅ done |
 | 3 | Design system — imported from Claude Design, `book.css` + tokens wired in, renders | parallel | ✅ done |
 | 4 | Print colorways + parts stills — press geometry ✅, interim CMYK accent ✅, stills ☐ | 3–5 d | ◑ stills left |
 | 5 | Press file + POD — `render.mjs --cmyk` + cover scaffold ✅; gs+ICC, accounts, ISBN ☐ | 1 wk | ◑ accounts left |
@@ -201,6 +201,15 @@ CMYK figure proofing, and proof shipping — not platform setup.
 **Cost to first proof:** ~$30 (proof only) to ~$325 (with the Bowker block).
 
 ### Changelog
+- 2026-06-26 — Editorial pass: TOC + List of Figures now carry real **page
+  numbers** (Paged.js target-counter); in-prose **cross-references** resolve
+  to "(Chapter N)" (186 of them); a glossary-seeded **index** (53 terms,
+  chapter-referenced); rewritten **preface**, **about-the-author** page, and
+  **Warren Labs** imprint on the copyright/colophon. Fixed a pagination stall:
+  the daily-driver parts-viewer / parts-gallery (3D widgets + inline scripts)
+  were silently truncating the book at ~241 pp — now stripped from the print
+  HTML; the full book renders to **282 pp**. Cover brief drafted
+  (`project/book/design-kit/COVER-BRIEF.md`).
 - 2026-06-26 — Plan documented; Track 1 scaffold created
   (`scripts/to-book/collect.mjs`, `src/styles/book.css`, `npm run book`);
   design-kit brief drafted.
