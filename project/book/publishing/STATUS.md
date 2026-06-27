@@ -7,7 +7,7 @@ Source of truth for ISBNs, pricing, and publishing progress. No credentials here
 
 | Edition | ISBN | Format | Price | Bowker |
 |---|---|---|---|---|
-| **Paperback** | 979-8-9968299-0-3 | Print / Paperback | $39.99 | ✅ assigned + complete |
+| **Paperback** | 979-8-9968299-0-3 | Print / Paperback | $49.99 | ✅ assigned + complete |
 | **Ebook** | 979-8-9968299-1-0 | EPUB (Electronic book text) | $9.99 | ✅ assigned + complete |
 
 Unused ISBNs still in the block (for future editions/formats — e.g. hardcover, 2nd ed):
@@ -30,10 +30,10 @@ Unused ISBNs still in the block (for future editions/formats — e.g. hardcover,
 
 ## Where it's sold
 - **Free online** — makerphones.com (text CC BY-NC). The funnel, not a conflict.
-- **Paid editions** — not yet live; see `RUNBOOK.md`:
-  - [ ] **Amazon KDP** — paperback + Kindle ebook (biggest reach + margin)
-  - [ ] **Apple Books** — ebook (via Apple Books Connect or through IngramSpark)
-  - [ ] **IngramSpark** — extended print (bookstores/libraries) + wide ebook (Apple/Kobo/B&N)
+- **Paid editions** — see `RUNBOOK.md`:
+  - [x] **Amazon KDP** — paperback + Kindle ebook **PUBLISHED 2026-06-27** ($49.99 / $9.99)
+  - [x] **IngramSpark** — print + ebook **set up 2026-06-27; eProof review pending** → Confirmation → Complete
+  - [ ] **Apple Books / Kobo / Nook** — via IngramSpark ebook distribution (or Draft2Digital)
 
 ## Press files (generated locally — `dist/` is gitignored, so they stay on the author's machine)
 
@@ -47,31 +47,50 @@ Unused ISBNs still in the block (for future editions/formats — e.g. hardcover,
 Spine = page count × 0.002252 (KDP white). If the page count moves off 282,
 recompute and update `--spine` in `project/book/cover/cover-print.html`.
 
-**EPUB v0.1 — BUILT.** `npm run epub` → `dist/book.epub`: reflowable EPUB 3, 47 chapters,
+> ⚠️ **`astro build` wipes `dist/`.** Astro clears the whole `dist/` on every build
+> (`npm run dev` / `build` / `preview` all trigger it), deleting these gitignored
+> artifacts — a concurrent session did this twice on 2026-06-27. Regenerate with the
+> `book:*` / `epub` commands (covers + epub in seconds; `book:press:pdfx` Ingram interior
+> ~25 min). Don't run a website build in parallel with a book render. **Durable fix TODO:**
+> write the book outputs to a directory outside `dist/` so Astro can't delete them.
+
+**EPUB v0.2 — BUILT + Ingram-validated.** `npm run epub` → `dist/book.epub`: reflowable EPUB 3, 47 chapters,
 inline-SVG figures, 3 embedded fonts, front/back matter, navigable TOC + landmarks, the
 ebook ISBN in the OPF, and the FR-graph cover as the raster cover image. Built by
 `scripts/to-epub/build.mjs`, which reuses the to-book spine + chapter assembly (one
-source). Every XHTML/OPF/NCX is validated **XML-well-formed** at build time; the Java
-**EPUBCheck** isn't available locally, so run it before wide distribution. Not yet wired
-into CI. See `EBOOK.md`.
+source). Every XHTML/OPF/NCX is validated **XML-well-formed** at build time (Java EPUBCheck
+isn't available locally). **IngramSpark's strict EPUBCheck initially rejected v0.1; fixed in
+commit 49beb94** — flatten Expressive Code blocks (they nest `<div>` in `<pre><code>`),
+strip body `<link>`, externalize off-EPUB links, add nav to spine — now **validates clean on
+Ingram**. See `EBOOK.md`.
 
 ## Companion docs
 - `RUNBOOK.md` — step-by-step KDP + IngramSpark setup, file specs, decision gates.
 - `METADATA.md` — BISAC codes, keywords, categories, description, comp titles.
 - `EBOOK.md` — reflowable-EPUB strategy + `to-epub` build plan.
 
-## Cover
-- Engine: `../cover/covers.js`. Warren Labs W-sine-wave logo is inline SVG; recolored
-  to warm charcoal. Spine = author (top) · title (center) · Warren Labs + mark (foot),
-  evenly-spaced orange-dot separators.
-- **Hero = the FR field plate** (FIG. 1, measured vs target; `fr-svgs.js`). Renders to
-  both the KDP (0.635in spine) and Ingram (0.705in spine) wraps via `npm run book:cover`
-  / `book:cover:ingram`. (A blowout-headphone hero was tried and reverted — see git
-  history if revisiting.)
+## Cover — redesigned + hardened to pure-vector 2026-06-27 (commit 7dfef66)
+- Engine: `../cover/covers.js` + `cover-print.html` + `fr-svgs.js`. Warren Labs
+  W-sine-wave logo inline SVG (warm charcoal). Spine = author (top) · title (center) ·
+  Warren Labs + mark (foot), evenly-spaced orange dots.
+- **Hero = the FR field plate** (FIG. 1, measured vs target), now elevated: plate bleeds
+  past the text column, bolder orange curve (2.6→3.4) + subtle tinted response fill,
+  shadow-free crisp plate.
+- **100% vector** — grid + ruler are explicit SVG `<line>`s / solid rules, NOT CSS
+  gradients or SVG `<pattern>`s (Chrome rasterizes both in print-to-PDF). The CMYK wrap
+  now has **0 raster images + no transfer curves**, clearing both IngramSpark cover
+  warnings. `render-cover.mjs` gs step gained `-dTransferFunctionInfo=/Remove`.
+- KDP (0.635in spine) + Ingram (0.705in spine) via `npm run book:cover` /
+  `book:cover:ingram`. KDP's live covers still show the pre-redesign art (optional update).
 
-## KDP paperback — draft in progress (title id P7ACH508QJK)
-Filled + saved: all Details (3 categories, 7 keywords), Content (own ISBN, Warren Labs,
-premium color, 7×10, bleed, matte cover). **Author-only remaining:** upload the two KDP
-files, answer the AI-content question, run the previewer, set price ($39.99 / all
-territories / Expanded Distribution OFF — Pricing page is gated until the uploads land),
-order proof / publish.
+## KDP — PUBLISHED 2026-06-27
+- **Paperback** (title id P7ACH508QJK): published, $49.99, premium color, 7×10, matte.
+- **Kindle eBook** (id A3ULIJX13WJU86): published, $9.99, 70%, all territories, NOT in
+  KDP Select. Both carry the pre-redesign cover (optional to update → triggers re-review).
+
+## IngramSpark — eProof pending 2026-06-27 (acct #9945866)
+Title fully set up (7×10 premium-color perfect-bound matte, 282 pp; $49.99 print / $9.99
+ebook; wholesale 40%; returns yes-destroy; Sharjah skipped for negative comp; Amazon OFF —
+KDP owns Amazon). New vector cover + EPUBCheck-clean EPUB uploaded; user proceeded past
+the benign interior "high-res images" warning (Ingram auto-downsamples). **Next: review +
+approve the eProof, then Confirmation → Complete.**
