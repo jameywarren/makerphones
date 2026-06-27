@@ -1,0 +1,48 @@
+# Publishing status — *The Art and Science of Headphone Design*
+
+Source of truth for ISBNs, pricing, and publishing progress. No credentials here
+(Bowker/KDP logins live only in the author's password manager). Last updated 2026-06-27.
+
+## ISBNs — Warren Labs block `979-8-9968299-x` (Bowker order #2531268)
+
+| Edition | ISBN | Format | Price | Bowker |
+|---|---|---|---|---|
+| **Paperback** | 979-8-9968299-0-3 | Print / Paperback | $39.99 | ✅ assigned + complete |
+| **Ebook** | 979-8-9968299-1-0 | EPUB (Electronic book text) | $9.99 | ✅ assigned + complete |
+
+Unused ISBNs still in the block (for future editions/formats — e.g. hardcover, 2nd ed):
+`-2-7`, `-3-4`, `-4-1`, `-5-8`, `-6-5`, `-7-2`, `-8-9`, `-9-6`.
+
+## Bowker title records — both officially assigned 2026-06-27
+- **Title:** The Art and Science of Headphone Design
+- **Subtitle:** A bench guide to how headphones are designed, measured & built
+- **Contributor:** Jamey Warren — Author
+- **Publisher / imprint:** Warren Labs
+- **Pub date:** June 26 2026 · **Status:** Active · **Audience:** Trade
+- **Subjects:** Technology (primary) + Music (secondary)
+- **Description:** ~180-word retail blurb (see `METADATA.md` §5)
+- Everything stays editable on Bowker; only the ISBN↔format binding is locked.
+
+## Names
+- **Legal:** James A. (Arthur) Warren — copyright holder + Bowker registrant of record.
+- **Pen name / byline:** Jamey Warren — on the cover and title page.
+- In `scripts/to-book/collect.mjs`: `AUTHOR`, `COPYRIGHT_HOLDER`, `ISBN_PAPERBACK`, `ISBN_EBOOK`.
+
+## Where it's sold
+- **Free online** — makerphones.com (text CC BY-NC). The funnel, not a conflict.
+- **Paid editions** — not yet live; see `RUNBOOK.md`:
+  - [ ] **Amazon KDP** — paperback + Kindle ebook (biggest reach + margin)
+  - [ ] **Apple Books** — ebook (via Apple Books Connect or through IngramSpark)
+  - [ ] **IngramSpark** — extended print (bookstores/libraries) + wide ebook (Apple/Kobo/B&N)
+
+## Companion docs
+- `RUNBOOK.md` — step-by-step KDP + IngramSpark setup, file specs, decision gates.
+- `METADATA.md` — BISAC codes, keywords, categories, description, comp titles.
+- `EBOOK.md` — reflowable-EPUB strategy + `to-epub` build plan.
+
+## Cover
+- Engine: `../cover/covers.js`. Warren Labs W-sine-wave logo is inline SVG; recolored
+  to warm charcoal. Spine = author (top) · title (center) · Warren Labs + mark (foot),
+  evenly-spaced orange-dot separators.
+- Open option: swap the FR field-plate hero for a **line-art exploded headphone**
+  (reuse `src/components/illustration/HeroExploded.astro` in `weight="line"`).

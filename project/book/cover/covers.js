@@ -87,18 +87,26 @@
 
   /* ── spine ──────────────────────────────────────────────────────────── */
   function spineEl() {
-    // Reads down the spine: author (top) · title (centre) · Warren Labs + mark
-    // (foot), distributed full-height with orange-dot separators. The mark is
-    // rotated +90° so it carries the same orientation as the imprint text.
-    const vt = 'writing-mode:vertical-rl;transform:rotate(180deg);white-space:nowrap;';
-    const dot = '<span style="' + vt + 'color:var(--cover-accent);font-weight:700;font-size:13px">&bull;</span>';
-    return '<div class="sp-inner" style="position:absolute;inset:0;display:flex;flex-direction:column;' +
-      'align-items:center;justify-content:space-between;padding:0.42in 0">' +
-      '<span class="sp-author mono" style="' + vt + 'font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--mp-meta)">Jamey Warren</span>' +
-      dot +
-      '<span class="sp-title" style="' + vt + 'font-family:var(--sans);font-weight:700;font-size:15px;letter-spacing:-.01em;color:var(--mp-charcoal)">The Art and Science of Headphone Design</span>' +
-      dot +
-      '<span class="sp-imprint mono" style="' + vt + 'display:flex;align-items:center;gap:8px;font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:var(--mp-meta)">' +
+    // Exact spine geometry: author pinned at the head, title locked to the true
+    // centre, Warren Labs + mark at the foot, orange dots at the 1/4 & 3/4 marks
+    // so they sit evenly between the three elements. Each run is rotated to read
+    // top→bottom down the spine.
+    var vt = 'writing-mode:vertical-rl;white-space:nowrap;';
+    var ctr = 'position:absolute;left:50%;';
+    var dot = function (top) {
+      return '<span style="' + ctr + 'top:' + top + ';transform:translate(-50%,-50%) rotate(180deg);' +
+        'color:var(--cover-accent);font-weight:700;font-size:13px;line-height:1">&bull;</span>';
+    };
+    return '<div class="sp-inner" style="position:absolute;inset:0">' +
+      '<span class="sp-author mono" style="' + ctr + 'top:0.4in;transform:translateX(-50%) rotate(180deg);' + vt +
+        'font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--mp-meta)">Jamey Warren</span>' +
+      dot('25%') +
+      '<span class="sp-title" style="' + ctr + 'top:50%;transform:translate(-50%,-50%) rotate(180deg);' + vt +
+        'font-family:var(--sans);font-weight:700;font-size:15px;letter-spacing:-.01em;color:var(--mp-charcoal)">' +
+        'The Art and Science of Headphone Design</span>' +
+      dot('75%') +
+      '<span class="sp-imprint mono" style="' + ctr + 'bottom:0.4in;transform:translateX(-50%) rotate(180deg);' + vt +
+        'display:flex;align-items:center;gap:8px;font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:var(--mp-meta)">' +
         wlMark(20, 90) + 'Warren Labs</span>' +
     '</div>';
   }
