@@ -146,6 +146,20 @@ export function initPartsViewer(root) {
       p.userData.off = isContext(p) ? new THREE.Vector3() : off;   // the reference head stays put
     }
 
+    // AUTO-FIT: when a single reference head is toggled on, shift the HEADBAND group along the
+    // model's vertical so the band lands on THAT head (cups stay → the width/clamp still reads).
+    // Offsets (mm, model +z) come from the manifest; the up-axis is derived from the bow so it
+    // survives the glTF Y-up import. Defensive: absent data → no-op.
+    const headFit = groupsData.head_fit || null;
+    const bandSet = new Set((headFit && headFit.band_nodes) || []);
+    const fitUp = (() => {
+      const bow = byName.get('bow_ref');
+      if (!bow) return new THREE.Vector3(0, 1, 0);
+      const v = worldBox(bow).getCenter(new THREE.Vector3()).sub(center);
+      return v.lengthSq() > 1e-6 ? v.normalize() : new THREE.Vector3(0, 1, 0);
+    })();
+    for (const p of parts) if (bandSet.has(p.name)) p.userData.rest0 = p.userData.rest.clone();
+
     // Frame the camera (on the real parts — not the big context head).
     const sph = fitBox().getBoundingSphere(new THREE.Sphere());
     const dist = (sph.radius / Math.sin((camera.fov * Math.PI) / 180 / 2)) * 1.2;
@@ -185,6 +199,21 @@ export function initPartsViewer(root) {
     let sideFilter = 'both';
     let isolated = null;
 
+    // Re-pose the headband for the toggled head. Active only when EXACTLY ONE head is on (so a
+    // single-head view fits that head; none / multiple → the neutral M pose).
+    let fitDz = 0;
+    function applyHeadFit() {
+      if (!headFit || !headFit.dz) return;
+      const on = ['s', 'm', 'l'].filter((k) => typeOn.get('head_' + k));
+      const dz = on.length === 1 ? (headFit.dz[on[0]] || 0) : 0;
+      if (dz === fitDz) return;
+      fitDz = dz;
+      for (const p of parts) if (bandSet.has(p.name) && p.userData.rest0) {
+        p.userData.rest.copy(p.userData.rest0).addScaledVector(fitUp, dz);
+      }
+      applyExplode(parseFloat(explodeEl?.value) || 0);   // recompose with the current explode
+    }
+
     function applyVisibility() {
       isolated = null;
       for (const p of parts) {
@@ -218,7 +247,7 @@ export function initPartsViewer(root) {
         label.className = 'pv-toggle';
         const cb = document.createElement('input');
         cb.type = 'checkbox'; cb.checked = typeOn.get(t) !== false;
-        cb.addEventListener('change', () => { typeOn.set(t, cb.checked); applyVisibility(); });
+        cb.addEventListener('change', () => { typeOn.set(t, cb.checked); applyVisibility(); applyHeadFit(); });
         label.append(cb, document.createTextNode(' ' + (TYPE_LABEL[t] || t)));
         groupsEl.appendChild(label);
       }
@@ -264,6 +293,7 @@ export function initPartsViewer(root) {
       groupsEl?.querySelectorAll('input').forEach((cb, i) => { cb.checked = typeOn.get(types[i]) !== false; });
       if (explodeEl) { explodeEl.value = '0'; }
       applyVisibility();
+      applyHeadFit();
       applyExplode(0);
       frameVisible();
       setStatus('');
@@ -280,6 +310,7 @@ export function initPartsViewer(root) {
 
     // Reference head (and any context types) start OFF.
     applyVisibility();
+    applyHeadFit();
 
     // Soft CONTACT SHADOW (a radial-gradient blob under the model) so it sits on a surface
     // instead of floating — the main thing that made the plain model-viewer read richer.
