@@ -445,3 +445,41 @@
 :root[data-theme='light'] .mp-grid-bg .mono {
   color: #5b6371;
 }
+
+/* ---- /book editions grid (the book landing page) --------------------- */
+.mp-editions {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1.25rem;
+  margin: 2.5rem auto 0;
+  max-width: 62rem;
+}
+.mp-edition {
+  border: 1px solid var(--mp-line);
+  border-radius: var(--mp-radius-lg);
+  background: var(--mp-surface);
+  padding: 1.25rem 1.25rem 1.4rem;
+}
+.mp-edition-tag {
+  display: inline-block;
+  font-size: 0.7rem;
+  letter-spacing: 0.14em;
+  color: var(--mp-accent);
+  margin-bottom: 0.6rem;
+}
+.mp-edition h2 {
+  font-family: var(--mp-sans);
+  font-size: 1.15rem;
+  font-weight: 600;
+  color: var(--mp-charcoal);
+  margin: 0 0 0.4rem;
+  border: 0;
+  padding: 0;
+}
+.mp-edition p {
+  font-size: 0.95rem;
+  line-height: 1.55;
+  color: var(--mp-meta);
+  margin: 0;
+}
+.mp-edition a { font-weight: 500; white-space: nowrap; }

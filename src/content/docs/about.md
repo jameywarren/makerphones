@@ -12,7 +12,7 @@ written and maintained by one person, and it's free to read.
 
 **Jamey Warren** has spent 25+ years in professional audio and the headphone industry:
 
-- **Grace Design**: employee #1 (1997–2001)
+- **Grace Design**: employee #1 (1997–2001), then consulting through 2003
 - **HeadRoom**: VP of Operations, then President & CEO (2003–2017); relaunched the entire
   headphone-amplifier line
 - Now designing his own open-back headphone, the **Daily Driver**, in the open, with AI as a design partner
