@@ -31,14 +31,10 @@ jobs:
         run: npm run build
       - name: Quality gate — no visible chapter/part numbers
         run: node scripts/check-no-chapter-numbers.mjs
-      # Build the downloadable book from the freshly built site, so the PDF on
-      # makerphones.com regenerates on every content change. Uses the runner's
-      # preinstalled google-chrome (render.mjs auto-detects it; no Chromium
-      # download). Runs AFTER the quality gate so book.html isn't scanned.
-      - name: Assemble the book (HTML)
-        run: node scripts/to-book/collect.mjs
-      - name: Render the book PDF
-        run: node scripts/to-book/render.mjs
+      # CI builds and publishes ONLY the free web manual. The book/ebook/print
+      # editions are paid products, built locally (`npm run book:pdf` / `npm run
+      # epub`) into artifacts/ — outside dist/. The free full-book PDF was
+      # retired, so dist/ no longer carries book.pdf/book.html to Pages.
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v5
         with:

@@ -8,8 +8,8 @@
  * sheet size (14.885 × 10.25 in, spine 0.635 in @ 282 pp), then — with
  * Ghostscript — converts to CMYK.
  *
- *   node scripts/to-book/render-cover.mjs            -> dist/cover-kdp.pdf
- *   node scripts/to-book/render-cover.mjs --cmyk     ...then dist/cover-kdp-cmyk.pdf
+ *   node scripts/to-book/render-cover.mjs            -> artifacts/cover-kdp.pdf
+ *   node scripts/to-book/render-cover.mjs --cmyk     ...then artifacts/cover-kdp-cmyk.pdf
  *
  * The preview/edit surface stays the Claude Design Cover.html; this is the
  * headless print target driven off the same engine. Re-run after a cover or
@@ -21,20 +21,17 @@ import { createReadStream, existsSync } from 'node:fs';
 import { stat, mkdir, readFile } from 'node:fs/promises';
 import { spawn } from 'node:child_process';
 import path from 'node:path';
-import { fileURLToPath } from 'node:url';
 import puppeteer from 'puppeteer-core';
+import { ROOT, ARTIFACTS } from '../lib/paths.mjs';
 
-const HERE = path.dirname(fileURLToPath(import.meta.url));
-const ROOT = path.resolve(HERE, '..', '..');
 const COVER_DIR = path.join(ROOT, 'project', 'book', 'cover');
-const DIST = path.join(ROOT, 'dist');
 const CMYK = process.argv.includes('--cmyk');
 const FRONT_PNG = process.argv.includes('--front-png'); // front-cover raster for the EPUB
 // Ingram's white paper is thicker: spine = 282 x 0.0025 = 0.705in (wrap 14.955in),
 // vs KDP's 282 x 0.002252 = 0.635in (wrap 14.885in). --ingram rewrites both on the fly.
 const INGRAM = process.argv.includes('--ingram');
-const rgbPdf = path.join(DIST, INGRAM ? 'cover-ingram.pdf' : 'cover-kdp.pdf');
-const cmykPdf = path.join(DIST, INGRAM ? 'cover-ingram-cmyk.pdf' : 'cover-kdp-cmyk.pdf');
+const rgbPdf = path.join(ARTIFACTS, INGRAM ? 'cover-ingram.pdf' : 'cover-kdp.pdf');
+const cmykPdf = path.join(ARTIFACTS, INGRAM ? 'cover-ingram-cmyk.pdf' : 'cover-kdp-cmyk.pdf');
 const ICC = path.join(ROOT, 'scripts', 'to-book', 'pdfx', 'cmyk.icc');
 
 const MIME = {
@@ -84,7 +81,7 @@ async function hasGhostscript() { try { await run('gs', ['--version']); return t
 async function main() {
   const chrome = findChrome();
   if (!chrome) { console.error('  No Chrome found (set CHROME_PATH).'); process.exit(1); }
-  await mkdir(DIST, { recursive: true });
+  await mkdir(ARTIFACTS, { recursive: true });
   const server = await serve();
   const port = server.address().port;
   const browser = await puppeteer.launch({
@@ -103,7 +100,7 @@ async function main() {
     await page.evaluate(() => document.fonts && document.fonts.ready);
     await new Promise((r) => setTimeout(r, 600));
     if (FRONT_PNG) {
-      const out = path.join(DIST, 'epub-cover.png');
+      const out = path.join(ARTIFACTS, 'epub-cover.png');
       await (await page.$('.panel.front')).screenshot({ path: out });
       console.log(`  ✓ ${path.relative(ROOT, out)}  (front cover, EPUB)`);
     } else {

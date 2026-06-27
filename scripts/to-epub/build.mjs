@@ -9,7 +9,7 @@
  * diagrams carried over, the three self-hosted fonts embedded, a navigable
  * TOC, and the ebook ISBN in the metadata.
  *
- *   astro build && node scripts/to-epub/build.mjs   -> dist/book.epub
+ *   astro build && node scripts/to-epub/build.mjs   -> artifacts/book.epub
  *
  * Why a separate pipeline from to-book: print is fixed-layout (Paged.js, @page,
  * folios); an ebook is reflowable (no pages). This drops the page geometry and
@@ -30,10 +30,11 @@ import {
   BOOK_TITLE, BOOK_SUBTITLE, AUTHOR, COPYRIGHT_HOLDER, IMPRINT,
   ISBN_EBOOK, DIST, ROOT,
 } from '../to-book/collect.mjs';
+import { ARTIFACTS } from '../lib/paths.mjs';
 
-const STAGE = path.join(DIST, '_epub');
+const STAGE = path.join(ARTIFACTS, '_epub');
 const OEBPS = path.join(STAGE, 'OEBPS');
-const OUT = path.join(DIST, 'book.epub');
+const OUT = path.join(ARTIFACTS, 'book.epub');
 const ASTRO = path.join(DIST, '_astro');
 const EPUB_ISBN = ISBN_EBOOK.replace(/[^0-9]/g, '');   // 979-8-…-1-0 -> 13 digits
 const NOW = new Date().toISOString().replace(/\.\d+Z$/, 'Z');
@@ -369,10 +370,10 @@ async function main() {
   }
 
   // ── cover image (rendered by render-cover.mjs --front-png) ──
-  const coverSrc = path.join(DIST, 'epub-cover.png');
+  const coverSrc = path.join(ARTIFACTS, 'epub-cover.png');
   let hasCover = false;
   if (await exists(coverSrc)) { await copyFile(coverSrc, path.join(OEBPS, 'cover.png')); hasCover = true; }
-  else console.warn('  ! dist/epub-cover.png missing — run `npm run book:cover:epub` first (cover will be a text page)');
+  else console.warn('  ! artifacts/epub-cover.png missing — run `npm run book:cover:epub` first (cover will be a text page)');
 
   // ── nav.xhtml (EPUB 3 TOC + landmarks) ──
   let toc = '';

@@ -26,11 +26,9 @@
 
 import { readFile, writeFile, access, mkdir, copyFile } from 'node:fs/promises';
 import path from 'node:path';
-import { fileURLToPath, pathToFileURL } from 'node:url';
+import { pathToFileURL } from 'node:url';
+import { ROOT, DIST } from '../lib/paths.mjs';
 
-const HERE = path.dirname(fileURLToPath(import.meta.url));
-const ROOT = path.resolve(HERE, '..', '..');
-const DIST = path.join(ROOT, 'dist');
 const STYLES = path.join(ROOT, 'src', 'styles');
 
 const PRESS = process.argv.includes('--press');

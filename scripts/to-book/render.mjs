@@ -7,9 +7,9 @@
  * Paged.js polyfill paginate it, prints to PDF, and — optionally — converts
  * to CMYK with Ghostscript.
  *
- *   node scripts/to-book/render.mjs             screen -> dist/book.pdf
- *   node scripts/to-book/render.mjs --press     7x10+bleed -> dist/book-press.pdf
- *   node scripts/to-book/render.mjs --press --cmyk   ...then -> dist/book-press-cmyk.pdf
+ *   node scripts/to-book/render.mjs             screen -> artifacts/book.pdf
+ *   node scripts/to-book/render.mjs --press     7x10+bleed -> artifacts/book-press.pdf
+ *   node scripts/to-book/render.mjs --press --cmyk   ...then -> artifacts/book-press-cmyk.pdf
  *
  * Why drive Puppeteer directly instead of pagedjs-cli: a 200+ page book
  * paginates in one long CDP call, which trips puppeteer's default
@@ -32,20 +32,16 @@ import { createReadStream, existsSync } from 'node:fs';
 import { stat, writeFile, mkdir } from 'node:fs/promises';
 import { spawn } from 'node:child_process';
 import path from 'node:path';
-import { fileURLToPath } from 'node:url';
 import puppeteer from 'puppeteer-core';
-
-const HERE = path.dirname(fileURLToPath(import.meta.url));
-const ROOT = path.resolve(HERE, '..', '..');
-const DIST = path.join(ROOT, 'dist');
+import { ROOT, DIST, ARTIFACTS } from '../lib/paths.mjs';
 
 const PRESS = process.argv.includes('--press');
 const CMYK = process.argv.includes('--cmyk');   // fast CMYK convert (KDP-ready)
 const PDFX = process.argv.includes('--pdfx');   // PDF/X-1a (IngramSpark; SLOW)
 const htmlFile = PRESS ? 'book-press.html' : 'book.html';
-const rgbPdf = path.join(DIST, PRESS ? 'book-press.pdf' : 'book.pdf');
-const cmykPdf = path.join(DIST, 'book-press-cmyk.pdf');
-const x1aPdf = path.join(DIST, 'book-press-pdfx1a.pdf');
+const rgbPdf = path.join(ARTIFACTS, PRESS ? 'book-press.pdf' : 'book.pdf');
+const cmykPdf = path.join(ARTIFACTS, 'book-press-cmyk.pdf');
+const x1aPdf = path.join(ARTIFACTS, 'book-press-pdfx1a.pdf');
 const ICC = path.join(ROOT, 'scripts', 'to-book', 'pdfx', 'cmyk.icc');
 
 /** Ghostscript PDF/X-1a output-intent definition (embeds the CMYK ICC). */
@@ -155,6 +151,7 @@ async function main() {
     process.exit(1);
   }
 
+  await mkdir(ARTIFACTS, { recursive: true });
   const server = await serve();
   const port = server.address().port;
   const url = `http://localhost:${port}/${htmlFile}`;
@@ -182,7 +179,7 @@ async function main() {
           console.log(`  ✓ ${path.relative(ROOT, cmykPdf)}  (CMYK — KDP-ready)`);
         }
         if (PDFX) {
-          const defPath = path.join(DIST, '_book', 'PDFX_def.ps');
+          const defPath = path.join(ARTIFACTS, '_book', 'PDFX_def.ps');
           await mkdir(path.dirname(defPath), { recursive: true });
           await writeFile(defPath, pdfxDef(ICC, 'The Art and Science of Headphone Design'));
           console.log(`  PDF/X-1a -> ${path.relative(ROOT, x1aPdf)} …`);

@@ -1,5 +1,8 @@
 # build output
 dist/
+# book / ebook / cover products — paid editions, generated locally into
+# artifacts/ (outside the dist/ publish root); never committed, never published
+artifacts/
 # generated types
 .astro/
 

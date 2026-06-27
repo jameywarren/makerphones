@@ -16,6 +16,13 @@ contents. It reuses the site's real CSS bundle and fonts, forces the light
 for page geometry. [Paged.js](https://pagedjs.org) (loaded in the page)
 paginates it.
 
+`render.mjs` then serves `dist/` headlessly and prints the paginated book to
+**`artifacts/`** (e.g. `artifacts/book.pdf`, `artifacts/book-press-cmyk.pdf`) —
+a gitignored directory *outside* the `dist/` publish root. Keeping products out
+of `dist/` means they're never served on makerphones.com and `astro build`
+never wipes them. The book/ebook/print editions are paid; CI publishes only the
+free web manual.
+
 ## Generate a PDF
 
 **Option 1 — no new installs (recommended for v0.1):**
