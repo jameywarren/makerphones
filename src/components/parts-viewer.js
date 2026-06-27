@@ -105,9 +105,29 @@ export function initPartsViewer(root) {
     const nodeGroup = new Map();
     for (const g of groupsData.groups || []) for (const n of g.nodes) nodeGroup.set(n, g.id);
 
-    // Centers: whole model + per sub-assembly (world space).
+    // Reference-context parts (the translucent worn-fit HEAD): shown OFF by default, held OUT of the
+    // explode, made translucent, and excluded from the fit so the giant head never blows up framing.
+    const refContext = new Set(groupsData.reference_context || []);
+    const isContext = (p) => refContext.has(p.name);
+    for (const p of parts) if (isContext(p)) {
+      p.traverse((o) => {
+        if (o.isMesh && o.material) {
+          o.material = o.material.clone();
+          o.material.transparent = true; o.material.opacity = 0.14;
+          o.material.depthWrite = false; o.material.side = THREE.DoubleSide;
+        }
+      });
+    }
+    // Box of just the REAL parts (no context head, only visible) — drives centring + framing.
     const worldBox = (o) => new THREE.Box3().setFromObject(o);
-    const center = worldBox(scene).getCenter(new THREE.Vector3());
+    const fitBox = () => {
+      const b = new THREE.Box3();
+      for (const p of parts) if (!isContext(p) && p.visible) b.expandByObject(p);
+      return b;
+    };
+
+    // Centers: whole model + per sub-assembly (world space).
+    const center = fitBox().getCenter(new THREE.Vector3());
     const gBox = new Map();
     for (const p of parts) {
       const gid = nodeGroup.get(p.name) || '_';
@@ -123,11 +143,11 @@ export function initPartsViewer(root) {
       const off = pc.clone().sub(gc).multiplyScalar(K_LOCAL)
         .add(gc.clone().sub(center).multiplyScalar(K_GROUP));
       p.userData.rest = p.position.clone();
-      p.userData.off = off;
+      p.userData.off = isContext(p) ? new THREE.Vector3() : off;   // the reference head stays put
     }
 
-    // Frame the camera.
-    const sph = worldBox(scene).getBoundingSphere(new THREE.Sphere());
+    // Frame the camera (on the real parts — not the big context head).
+    const sph = fitBox().getBoundingSphere(new THREE.Sphere());
     const dist = (sph.radius / Math.sin((camera.fov * Math.PI) / 180 / 2)) * 1.2;
     camera.position.copy(sph.center).add(new THREE.Vector3(0.85, 0.5, 1).normalize().multiplyScalar(dist));
     camera.near = dist / 100; camera.far = dist * 10; camera.updateProjectionMatrix();
@@ -150,10 +170,13 @@ export function initPartsViewer(root) {
     const TYPE_LABEL = {
       cup: 'Cup', baffle: 'Baffle', driver: 'Driver', driver_clamp: 'Driver clamp',
       yoke: 'Yoke', slider: 'Slider', bow: 'Bow', headband_pad: 'Headband pad', hardware: 'Hardware',
+      slider_shoe: 'Pressure shoe', yoke_rod: 'Adjustment rod', thumbscrew: 'Thumbscrew',
+      headband_clamp: 'Band clamp', head: 'Reference head', earpad: 'Ear pads',
     };
     const types = [];
     for (const p of parts) { const k = typeKey(p.name); if (!types.includes(k)) types.push(k); }
-    const typeOn = new Map(types.map((t) => [t, true]));
+    const contextTypes = new Set([...refContext].map((n) => typeKey(n)));  // reference-only types (the head)
+    const typeOn = new Map(types.map((t) => [t, !contextTypes.has(t)]));    // context types start OFF
     let sideFilter = 'both';
     let isolated = null;
 
@@ -189,7 +212,7 @@ export function initPartsViewer(root) {
         const label = document.createElement('label');
         label.className = 'pv-toggle';
         const cb = document.createElement('input');
-        cb.type = 'checkbox'; cb.checked = true;
+        cb.type = 'checkbox'; cb.checked = typeOn.get(t) !== false;
         cb.addEventListener('change', () => { typeOn.set(t, cb.checked); applyVisibility(); });
         label.append(cb, document.createTextNode(' ' + (TYPE_LABEL[t] || t)));
         groupsEl.appendChild(label);
@@ -232,8 +255,8 @@ export function initPartsViewer(root) {
 
     resetEl?.addEventListener('click', () => {
       sideFilter = 'both'; if (sideEl) sideEl.value = 'both';
-      for (const t of types) typeOn.set(t, true);
-      groupsEl?.querySelectorAll('input').forEach((cb) => { cb.checked = true; });
+      for (const t of types) typeOn.set(t, !contextTypes.has(t));   // restore defaults (head stays off)
+      groupsEl?.querySelectorAll('input').forEach((cb, i) => { cb.checked = typeOn.get(types[i]) !== false; });
       if (explodeEl) { explodeEl.value = '0'; }
       applyVisibility();
       applyExplode(0);
@@ -249,6 +272,48 @@ export function initPartsViewer(root) {
     }
     new ResizeObserver(resize).observe(canvas);
     resize();
+
+    // Reference head (and any context types) start OFF.
+    applyVisibility();
+
+    // Soft CONTACT SHADOW (a radial-gradient blob under the model) so it sits on a surface
+    // instead of floating — the main thing that made the plain model-viewer read richer.
+    {
+      const box = fitBox();
+      if (!box.isEmpty()) {
+        const c = box.getCenter(new THREE.Vector3());
+        const size = box.getSize(new THREE.Vector3());
+        const cv = document.createElement('canvas'); cv.width = cv.height = 256;
+        const g2 = cv.getContext('2d');
+        const grad = g2.createRadialGradient(128, 128, 12, 128, 128, 128);
+        grad.addColorStop(0, 'rgba(22,26,32,0.40)');
+        grad.addColorStop(0.55, 'rgba(22,26,32,0.14)');
+        grad.addColorStop(1, 'rgba(22,26,32,0)');
+        g2.fillStyle = grad; g2.fillRect(0, 0, 256, 256);
+        const span = Math.max(size.x, size.z) * 2.4;
+        const shadow = new THREE.Mesh(
+          new THREE.PlaneGeometry(span, span),
+          new THREE.MeshBasicMaterial({ map: new THREE.CanvasTexture(cv), transparent: true, depthWrite: false }));
+        shadow.rotation.x = -Math.PI / 2;                       // horizontal (XZ); model is Y-up
+        shadow.position.set(c.x, box.min.y - size.y * 0.015, c.z);
+        shadow.renderOrder = -1;
+        scene.add(shadow);
+      }
+    }
+
+    // Premium AUTO-ROTATE on load; stops the instant the user grabs or explodes it (then the
+    // viewer goes back to 0%-idle on-demand rendering).
+    controls.autoRotate = true; controls.autoRotateSpeed = 1.1;
+    let spinning = true;
+    const stopSpin = () => { if (!spinning) return; spinning = false; controls.autoRotate = false; };
+    canvas.addEventListener('pointerdown', stopSpin);
+    explodeEl?.addEventListener('input', stopSpin);
+    (function spin() {
+      if (!spinning) return;
+      controls.update();
+      renderer.render(scene, camera);
+      requestAnimationFrame(spin);
+    })();
 
     canvas.setAttribute('tabindex', '0');
     canvas.setAttribute('aria-label', 'Daily Driver 3D parts viewer — drag to orbit, use the slider to explode, click a part to isolate it');

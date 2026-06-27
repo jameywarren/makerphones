@@ -53,7 +53,9 @@ const {
      parts always read, in light or dark site themes. */
   .pv-stage {
     position: relative; width: 100%; height: 520px;
-    background: #f7f7f5; border: 1px solid #e4e4df; border-left: 4px solid #ea580c;
+    /* Soft top-lit studio sweep (was a flat fill) so the model gets depth + a subtle vignette. */
+    background: radial-gradient(125% 100% at 50% 0%, #fbfbfa 0%, #f1f1ee 58%, #e7e7e2 100%);
+    border: 1px solid #e4e4df; border-left: 4px solid #ea580c;
     border-radius: 10px; overflow: hidden;
   }
   .pv-stage canvas { width: 100%; height: 100%; display: block; touch-action: none; cursor: grab; }
