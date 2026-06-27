@@ -26,7 +26,7 @@
 
 import { readFile, writeFile, access, mkdir, copyFile } from 'node:fs/promises';
 import path from 'node:path';
-import { fileURLToPath } from 'node:url';
+import { fileURLToPath, pathToFileURL } from 'node:url';
 
 const HERE = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.resolve(HERE, '..', '..');
@@ -567,4 +567,17 @@ ${indexHtml}
   console.log('');
 }
 
-main().catch((err) => { console.error(err); process.exit(1); });
+/* Shared with scripts/to-epub (the EPUB build reuses the spine + the same
+ * chapter assembly so web, print, and ebook stay one source). */
+export {
+  SPINE, WEB_NOTE, partsBlock, divInner, plain, exists,
+  firstH1, metaDesc, readMinutes, sanitizeBody, stripDivByClass,
+  processFigures, linkChapterRefs, buildIndex, stripModernSelectors,
+  BOOK_TITLE, BOOK_SUBTITLE, AUTHOR, COPYRIGHT_HOLDER, IMPRINT,
+  ISBN_PAPERBACK, ISBN_EBOOK, DIST, ROOT, STYLES,
+};
+
+// Run the assembler only when invoked directly — not when imported by to-epub.
+if (process.argv[1] && pathToFileURL(process.argv[1]).href === import.meta.url) {
+  main().catch((err) => { console.error(err); process.exit(1); });
+}

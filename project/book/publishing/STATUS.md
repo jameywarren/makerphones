@@ -42,10 +42,18 @@ Unused ISBNs still in the block (for future editions/formats — e.g. hardcover,
 | `dist/book-press-cmyk.pdf` | Interior, **282 pp**, CMYK — KDP paperback | `npm run book:press:pdf` |
 | `dist/book-press-pdfx1a.pdf` | Interior, PDF/X-1a — IngramSpark (slow ~40 min) | `npm run book:press:pdfx` |
 | `dist/cover-kdp.pdf` / `-cmyk.pdf` | Full-wrap cover, 14.885 × 10.25 in, spine 0.635 in | `npm run book:cover` |
+| `dist/book.epub` | Reflowable **EPUB 3** — Kindle + Apple/Kobo (via Ingram) | `npm run epub` |
 
 Spine = page count × 0.002252 (KDP white). If the page count moves off 282,
 recompute and update `--spine` in `project/book/cover/cover-print.html`.
-**Still to build:** reflowable EPUB (`to-epub`) for Kindle + Apple/wide — see `EBOOK.md`.
+
+**EPUB v0.1 — BUILT.** `npm run epub` → `dist/book.epub`: reflowable EPUB 3, 47 chapters,
+inline-SVG figures, 3 embedded fonts, front/back matter, navigable TOC + landmarks, the
+ebook ISBN in the OPF, and the FR-graph cover as the raster cover image. Built by
+`scripts/to-epub/build.mjs`, which reuses the to-book spine + chapter assembly (one
+source). Every XHTML/OPF/NCX is validated **XML-well-formed** at build time; the Java
+**EPUBCheck** isn't available locally, so run it before wide distribution. Not yet wired
+into CI. See `EBOOK.md`.
 
 ## Companion docs
 - `RUNBOOK.md` — step-by-step KDP + IngramSpark setup, file specs, decision gates.

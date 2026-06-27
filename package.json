@@ -24,9 +24,12 @@
     "book:parts": "node scripts/to-book/render-parts.mjs",
     "book:cover": "node scripts/to-book/render-cover.mjs --cmyk",
     "book:cover:ingram": "node scripts/to-book/render-cover.mjs --ingram --cmyk",
+    "book:cover:epub": "node scripts/to-book/render-cover.mjs --front-png",
+    "epub": "astro build && node scripts/to-book/render-cover.mjs --front-png && node scripts/to-epub/build.mjs",
     "astro": "astro"
   },
   "devDependencies": {
+    "@xmldom/xmldom": "^0.9.10",
     "pagedjs": "^0.4.3",
     "puppeteer-core": "^25.2.1"
   }

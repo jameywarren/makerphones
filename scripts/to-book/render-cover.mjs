@@ -29,6 +29,7 @@ const ROOT = path.resolve(HERE, '..', '..');
 const COVER_DIR = path.join(ROOT, 'project', 'book', 'cover');
 const DIST = path.join(ROOT, 'dist');
 const CMYK = process.argv.includes('--cmyk');
+const FRONT_PNG = process.argv.includes('--front-png'); // front-cover raster for the EPUB
 // Ingram's white paper is thicker: spine = 282 x 0.0025 = 0.705in (wrap 14.955in),
 // vs KDP's 282 x 0.002252 = 0.635in (wrap 14.885in). --ingram rewrites both on the fly.
 const INGRAM = process.argv.includes('--ingram');
@@ -93,6 +94,7 @@ async function main() {
   });
   try {
     const page = await browser.newPage();
+    if (FRONT_PNG) await page.setViewport({ width: 1600, height: 1120, deviceScaleFactor: 2.6 });
     await page.goto(`http://localhost:${port}/cover-print.html`, { waitUntil: 'networkidle0', timeout: 60000 });
     // wait for the cover engine to fill the panels, then for webfonts to load
     await page.waitForFunction(
@@ -100,8 +102,14 @@ async function main() {
       { timeout: 20000, polling: 200 });
     await page.evaluate(() => document.fonts && document.fonts.ready);
     await new Promise((r) => setTimeout(r, 600));
-    await page.pdf({ path: rgbPdf, printBackground: true, preferCSSPageSize: true, timeout: 0 });
-    console.log(`  ✓ ${path.relative(ROOT, rgbPdf)}`);
+    if (FRONT_PNG) {
+      const out = path.join(DIST, 'epub-cover.png');
+      await (await page.$('.panel.front')).screenshot({ path: out });
+      console.log(`  ✓ ${path.relative(ROOT, out)}  (front cover, EPUB)`);
+    } else {
+      await page.pdf({ path: rgbPdf, printBackground: true, preferCSSPageSize: true, timeout: 0 });
+      console.log(`  ✓ ${path.relative(ROOT, rgbPdf)}`);
+    }
   } finally {
     await browser.close(); server.close();
   }
