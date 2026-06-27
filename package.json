@@ -23,6 +23,7 @@
     "book:press:pdfx": "npm run book:press && node scripts/to-book/render.mjs --press --pdfx",
     "book:parts": "node scripts/to-book/render-parts.mjs",
     "book:cover": "node scripts/to-book/render-cover.mjs --cmyk",
+    "book:cover:ingram": "node scripts/to-book/render-cover.mjs --ingram --cmyk",
     "astro": "astro"
   },
   "devDependencies": {

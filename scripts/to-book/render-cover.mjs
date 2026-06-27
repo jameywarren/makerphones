@@ -18,7 +18,7 @@
 
 import http from 'node:http';
 import { createReadStream, existsSync } from 'node:fs';
-import { stat, mkdir } from 'node:fs/promises';
+import { stat, mkdir, readFile } from 'node:fs/promises';
 import { spawn } from 'node:child_process';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -29,8 +29,11 @@ const ROOT = path.resolve(HERE, '..', '..');
 const COVER_DIR = path.join(ROOT, 'project', 'book', 'cover');
 const DIST = path.join(ROOT, 'dist');
 const CMYK = process.argv.includes('--cmyk');
-const rgbPdf = path.join(DIST, 'cover-kdp.pdf');
-const cmykPdf = path.join(DIST, 'cover-kdp-cmyk.pdf');
+// Ingram's white paper is thicker: spine = 282 x 0.0025 = 0.705in (wrap 14.955in),
+// vs KDP's 282 x 0.002252 = 0.635in (wrap 14.885in). --ingram rewrites both on the fly.
+const INGRAM = process.argv.includes('--ingram');
+const rgbPdf = path.join(DIST, INGRAM ? 'cover-ingram.pdf' : 'cover-kdp.pdf');
+const cmykPdf = path.join(DIST, INGRAM ? 'cover-ingram-cmyk.pdf' : 'cover-kdp-cmyk.pdf');
 const ICC = path.join(ROOT, 'scripts', 'to-book', 'pdfx', 'cmyk.icc');
 
 const MIME = {
@@ -55,6 +58,13 @@ function serve() {
       const fp = path.join(COVER_DIR, rel);
       await stat(fp);
       res.writeHead(200, { 'content-type': MIME[path.extname(fp)] ?? 'application/octet-stream' });
+      if (INGRAM && fp.endsWith('cover-print.html')) {
+        const html = (await readFile(fp, 'utf8'))
+          .replace('--spine:0.635in', '--spine:0.705in')
+          .replace('size:14.885in 10.25in', 'size:14.955in 10.25in');
+        res.end(html);
+        return;
+      }
       createReadStream(fp).pipe(res);
     } catch { res.writeHead(404); res.end('nf'); }
   });
