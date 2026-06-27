@@ -99,12 +99,8 @@ html,body{ margin:0; padding:0; background:#fff; }
 .cb-url{ font-size:11px; letter-spacing:.04em; color:var(--mp-accent-text); }
 .cb-copy{ font-size:9.5px; letter-spacing:.1em; text-transform:uppercase; color:var(--mp-meta); }
 .isbn{ width:2in; }
-.isbn-bars{ height:1in; border:1px solid var(--mp-line); border-radius:3px; background:#fff;
-  background-image:repeating-linear-gradient(to right,
-    var(--mp-charcoal) 0 1.5px, transparent 1.5px 3px, var(--mp-charcoal) 3px 4px, transparent 4px 7px,
-    var(--mp-charcoal) 7px 9px, transparent 9px 11px, var(--mp-charcoal) 11px 12px, transparent 12px 16px);
-  background-position:10px 0; background-repeat:no-repeat; background-size:calc(100% - 20px) 64%; }
-.isbn-cap{ display:block; font-size:8px; letter-spacing:.1em; text-transform:uppercase; color:var(--mp-meta); margin-top:6px; text-align:center; }
+/* Clean reserved white space — KDP/Ingram place the real ISBN barcode here. */
+.isbn-zone{ height:1.15in; background:#fff; border:1px solid var(--mp-line); border-radius:2px; }
 </style>
 </head>
 <body>

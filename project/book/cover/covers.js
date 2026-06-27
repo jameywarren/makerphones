@@ -77,8 +77,7 @@
             '<span class="cb-copy mono">© 2026 Jamey Warren</span>' +
           '</div>' +
           '<div class="isbn">' +
-            '<div class="isbn-bars" aria-hidden="true"></div>' +
-            '<span class="isbn-cap mono">ISBN / BARCODE · placed by printer</span>' +
+            '<div class="isbn-zone" aria-hidden="true"></div>' +
           '</div>' +
         '</div>' +
       '</div></div>';
