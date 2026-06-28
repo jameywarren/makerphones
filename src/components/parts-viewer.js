@@ -312,63 +312,6 @@ export function initPartsViewer(root) {
     applyVisibility();
     applyHeadFit();
 
-    // ---- "Fit on head" SELECTOR — show the headphone fitted to a head SIZE (band flexed + cups
-    // spread + pads flush for that head), or OFF = the default explode/parts view. The default GLB
-    // carries the M pose + M head; S/L load the COARSE per-head pose GLBs on demand. Additive: the
-    // M parts/explode/toggles are untouched — this hides them and shows a fitted pose group. ----
-    function frameOn(box) {
-      if (box.isEmpty()) return;
-      const sph = box.getBoundingSphere(new THREE.Sphere());
-      const dir = camera.position.clone().sub(controls.target).normalize();
-      const d = (sph.radius / Math.sin((camera.fov * Math.PI) / 180 / 2)) * 1.25;
-      camera.position.copy(sph.center).add(dir.multiplyScalar(d));
-      camera.near = Math.max(d / 100, 0.05); camera.far = d * 10; camera.updateProjectionMatrix();
-      controls.target.copy(sph.center); controls.update(); requestRender();
-    }
-    const fitCache = {};
-    let fitGroup = null;
-    async function showFit(size) {
-      if (fitGroup) { scene.remove(fitGroup); fitGroup = null; }
-      if (explodeEl) explodeEl.value = '0';
-      if (size === 'off' || size === 'm') {            // default M parts; head OFF (off) or ON (m)
-        typeOn.set('head', size === 'm');
-        if (groupsEl) groupsEl.querySelectorAll('input').forEach((cb, i) => { if (types[i] === 'head') cb.checked = size === 'm'; });
-        applyVisibility(); applyExplode(0); frameVisible();
-        setStatus(size === 'm' ? 'Worn fit · M (147 mm head)' : '');
-        return;
-      }
-      // s / l: hide the M parts, show the coarse fitted pose with a translucent head
-      for (const p of parts) p.visible = false;
-      requestRender();
-      setStatus('Loading worn fit…');
-      if (!fitCache[size]) {
-        try {
-          fitCache[size] = (await new GLTFLoader().loadAsync(glbUrl.replace(/\.glb$/, `-${size}.glb`))).scene;
-        } catch (e) {
-          console.error('[parts-viewer] fit load', e);
-          setStatus('Could not load that fit.'); for (const p of parts) p.visible = true; applyVisibility(); return;
-        }
-        fitCache[size].traverse((o) => {
-          if (o.name && o.name.startsWith('head_ref')) o.traverse((m) => {
-            if (m.isMesh && m.material) {
-              m.material = m.material.clone();
-              m.material.transparent = true; m.material.opacity = 0.18; m.material.depthWrite = false; m.material.side = THREE.DoubleSide;
-            }
-          });
-        });
-      }
-      fitGroup = fitCache[size];
-      scene.add(fitGroup); fitGroup.updateWorldMatrix(true, true);
-      frameOn(new THREE.Box3().setFromObject(fitGroup));
-      setStatus(`Worn fit · ${size.toUpperCase()} (${size === 's' ? '140' : '155'} mm head)`);
-    }
-    root.querySelectorAll('[data-pv-fit]').forEach((btn) => {
-      btn.addEventListener('click', () => {
-        root.querySelectorAll('[data-pv-fit]').forEach((b) => b.classList.toggle('pv-fit-on', b === btn));
-        showFit(btn.dataset.pvFit);
-      });
-    });
-
     // Soft CONTACT SHADOW (a radial-gradient blob under the model) so it sits on a surface
     // instead of floating — the main thing that made the plain model-viewer read richer.
     {
