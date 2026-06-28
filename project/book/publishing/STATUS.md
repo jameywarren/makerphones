@@ -1,7 +1,7 @@
 # Publishing status — *The Art and Science of Headphone Design*
 
 Source of truth for ISBNs, pricing, and publishing progress. No credentials here
-(Bowker/KDP logins live only in the author's password manager). Last updated 2026-06-27.
+(Bowker/KDP logins live only in the author's password manager). Last updated 2026-06-28.
 
 ## ISBNs — Warren Labs block `979-8-9968299-x` (Bowker order #2531268)
 
@@ -31,7 +31,7 @@ Unused ISBNs still in the block (for future editions/formats — e.g. hardcover,
 ## Where it's sold
 - **Free online** — makerphones.com (text CC BY-NC). The funnel, not a conflict.
 - **Paid editions** — see `RUNBOOK.md`:
-  - [x] **Amazon KDP** — paperback + Kindle ebook **PUBLISHED 2026-06-27** ($49.99 / $9.99)
+  - [~] **Amazon KDP** — Kindle ebook **PUBLISHED 2026-06-27** ($9.99); **paperback REJECTED in review 2026-06-28** (interior: crop marks + margins) → **fixed, awaiting re-upload** ($49.99)
   - [x] **IngramSpark** — print + ebook **set up 2026-06-27; eProof review pending** → Confirmation → Complete
   - [ ] **Apple Books / Kobo / Nook** — via IngramSpark ebook distribution (or Draft2Digital)
 
@@ -39,10 +39,14 @@ Unused ISBNs still in the block (for future editions/formats — e.g. hardcover,
 
 | File | What | Command |
 |---|---|---|
-| `dist/book-press-cmyk.pdf` | Interior, **282 pp**, CMYK — KDP paperback | `npm run book:press:pdf` |
-| `dist/book-press-pdfx1a.pdf` | Interior, PDF/X-1a — IngramSpark (slow ~40 min) | `npm run book:press:pdfx` |
-| `dist/cover-kdp.pdf` / `-cmyk.pdf` | Full-wrap cover, 14.885 × 10.25 in, spine 0.635 in | `npm run book:cover` |
-| `dist/book.epub` | Reflowable **EPUB 3** — Kindle + Apple/Kobo (via Ingram) | `npm run epub` |
+| `artifacts/book-press-cmyk.pdf` | Interior, **282 pp**, CMYK, **7×10 no-bleed, no marks** — KDP paperback | `npm run book:press:pdf` |
+| `artifacts/book-press-pdfx1a.pdf` | Interior, PDF/X-1a — IngramSpark (slow ~40 min) | `npm run book:press:pdfx` |
+| `artifacts/cover-kdp.pdf` / `-cmyk.pdf` | Full-wrap cover, 14.885 × 10.25 in, spine 0.635 in | `npm run book:cover` |
+| `artifacts/book.epub` | Reflowable **EPUB 3** — Kindle + Apple/Kobo (via Ingram) | `npm run epub` |
+
+> Book products now render to `artifacts/` (gitignored), not `dist/` — `astro build`
+> no longer wipes them. Older builds may still sit in `dist/`; the **current** KDP
+> interior to upload is `artifacts/book-press-cmyk.pdf` (rendered 2026-06-28).
 
 Spine = page count × 0.002252 (KDP white). If the page count moves off 282,
 recompute and update `--spine` in `project/book/cover/cover-print.html`.
@@ -83,10 +87,22 @@ Ingram**. See `EBOOK.md`.
 - KDP (0.635in spine) + Ingram (0.705in spine) via `npm run book:cover` /
   `book:cover:ingram`. KDP's live covers still show the pre-redesign art (optional update).
 
-## KDP — PUBLISHED 2026-06-27
-- **Paperback** (title id P7ACH508QJK): published, $49.99, premium color, 7×10, matte.
-- **Kindle eBook** (id A3ULIJX13WJU86): published, $9.99, 70%, all territories, NOT in
-  KDP Select. Both carry the pre-redesign cover (optional to update → triggers re-review).
+## KDP — Kindle live; paperback rejected → fixed (2026-06-28)
+- **Kindle eBook** (id A3ULIJX13WJU86): **PUBLISHED** 2026-06-27, $9.99, 70%, all
+  territories, NOT in KDP Select. Carries the pre-redesign cover (optional to update).
+- **Paperback** (title id P7ACH508QJK): **REJECTED in review** — KDP flagged the interior
+  for (1) crop marks / color bars (example pp. 1–9) and (2) outside/top/bottom margins too
+  small (example pp. 272–280). **Root cause = one thing:** `book-press.css` added
+  `@page { bleed: 3mm; marks: crop cross }`. The marks drew corner crop ticks **and**
+  edge-midpoint registration targets into the bleed strip — KDP's crop-mark check caught the
+  marks, and its margin check read those same edge-midpoint marks as content in the margin.
+  The text block was never the problem (≥16mm / 0.63" off the trim everywhere).
+  **Fix (commit on 2026-06-28):** dropped bleed + marks → **no-bleed 7×10 interior**
+  (MediaBox exactly 504×720 pt = the selected trim; nothing in the book actually bleeds —
+  `.figure-bleed` is unused and the 8 part-openers carry only a near-white #fbeee6 wash).
+  No-bleed also drops the margin minimum to 0.25", which the 16mm margins clear by 2.5×.
+  Re-rendered + verified (no marks, correct geometry). **Next: re-upload
+  `artifacts/book-press-cmyk.pdf` to the KDP paperback; KDP re-reviews (~72h).**
 
 ## IngramSpark — eProof pending 2026-06-27 (acct #9945866)
 Title fully set up (7×10 premium-color perfect-bound matte, 282 pp; $49.99 print / $9.99

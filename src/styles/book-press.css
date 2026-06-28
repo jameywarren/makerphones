@@ -2,10 +2,31 @@
  * book-press.css — Track 2 press overrides, layered AFTER book.css.
  *
  * Inlined by scripts/to-book/collect.mjs only in --press mode
- * (dist/book-press.html). The trim (7×10in) and mirrored margins now come
- * from the design system's book.css; this file adds only what a press file
- * needs on top: 3mm bleed, crop/registration marks, and a CMYK-tamed accent
- * so the orange survives RGB→CMYK.
+ * (dist/book-press.html). The trim (7×10in) and mirrored margins come from the
+ * design system's book.css; this file adds only what a press file needs on top:
+ * a CMYK-tamed accent so the orange survives RGB→CMYK.
+ *
+ * NO BLEED, NO PRINTER MARKS — deliberate (see below). The page box stays at
+ * the 7×10 trim, so the rendered MediaBox is exactly 7×10in (504×720pt) — the
+ * trim size selected in KDP / IngramSpark. This is what print-on-demand expects
+ * for an interior with no edge-to-edge content.
+ *
+ * Why this used to add `bleed: 3mm; marks: crop cross;` and why it no longer
+ * does: KDP rejected the first upload for (a) crop marks / color bars and
+ * (b) "outside/top/bottom margins too small" on back-matter pages. Both traced
+ * to ONE cause — the printer marks. `marks: crop cross` draws corner crop ticks
+ * AND edge-midpoint registration targets into the 3mm bleed strip; KDP's
+ * crop-mark check flagged the marks, and its margin check saw those same
+ * edge-midpoint marks sitting in the outside/top/bottom margin and reported the
+ * margins as too small. The actual text block is ≥16mm (0.63") off the trim on
+ * every page — comfortably inside KDP's 0.25" no-bleed minimum. Nothing in the
+ * interior bleeds (no element ever gets the .figure-bleed class; the 8 part
+ * openers carry only a near-white #fbeee6 wash and are sized to the trim, not
+ * past it), so dropping bleed costs nothing visible and removes the whole class
+ * of bleed-geometry problems (it also fixed that 3mm = 0.118" was under KDP's
+ * 0.125" bleed minimum). If a future edition adds real edge-to-edge art, switch
+ * back to a CORRECT bleed: `@page { bleed: 0.125in }` WITHOUT `marks`, and size
+ * the bleeding masters to trim + bleed.
  *
  * Produces a press-GEOMETRY RGB PDF. The actual CMYK / PDF-X conversion is a
  * separate Ghostscript step — see scripts/to-book/render.mjs --cmyk and
@@ -13,12 +34,6 @@
  * project/book/design-system/print-tokens.json (accent_cmyk / accent_text_cmyk,
  * optional PANTONE 165 C); the value below is an interim screen approximation.
  */
-
-/* add bleed + printer marks to every master (merges with book.css @page rules) */
-@page {
-  bleed: 3mm;
-  marks: crop cross;
-}
 
 /* CMYK-tamed accent — #ea580c is out of gamut (dulls toward brick). Pin a
  * predictable orange so the Ghostscript CMYK pass is stable. Keeps the
