@@ -190,8 +190,7 @@ export function initPartsViewer(root) {
       yoke: 'Yoke', slider: 'Slider', bow: 'Bow', headband_pad: 'Headband pad', hardware: 'Hardware',
       slider_shoe: 'Pressure shoe', yoke_rod: 'Adjustment rod', thumbscrew: 'Thumbscrew',
       headband_clamp: 'Band clamp', earpad: 'Ear pads',
-      damping: 'Damping felt', gasket: 'Front gasket',
-      head_s: 'Head · S (140)', head_m: 'Head · M (147)', head_l: 'Head · L (155)',
+      damping: 'Damping felt', gasket: 'Front gasket', head: 'Reference head',
     };
     const types = [];
     for (const p of parts) { const k = typeKey(p.name); if (!types.includes(k)) types.push(k); }
