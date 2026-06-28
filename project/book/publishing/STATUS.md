@@ -91,18 +91,26 @@ Ingram**. See `EBOOK.md`.
 - **Kindle eBook** (id A3ULIJX13WJU86): **PUBLISHED** 2026-06-27, $9.99, 70%, all
   territories, NOT in KDP Select. Carries the pre-redesign cover (optional to update).
 - **Paperback** (title id P7ACH508QJK): **REJECTED in review** — KDP flagged the interior
-  for (1) crop marks / color bars (example pp. 1–9) and (2) outside/top/bottom margins too
-  small (example pp. 272–280). **Root cause = one thing:** `book-press.css` added
-  `@page { bleed: 3mm; marks: crop cross }`. The marks drew corner crop ticks **and**
-  edge-midpoint registration targets into the bleed strip — KDP's crop-mark check caught the
-  marks, and its margin check read those same edge-midpoint marks as content in the margin.
-  The text block was never the problem (≥16mm / 0.63" off the trim everywhere).
-  **Fix (commit on 2026-06-28):** dropped bleed + marks → **no-bleed 7×10 interior**
-  (MediaBox exactly 504×720 pt = the selected trim; nothing in the book actually bleeds —
-  `.figure-bleed` is unused and the 8 part-openers carry only a near-white #fbeee6 wash).
-  No-bleed also drops the margin minimum to 0.25", which the 16mm margins clear by 2.5×.
-  Re-rendered + verified (no marks, correct geometry). **Next: re-upload
-  `artifacts/book-press-cmyk.pdf` to the KDP paperback; KDP re-reviews (~72h).**
+  for (1) crop marks / color bars (pp. 1–9) and (2) outside/top/bottom margins too small
+  (pp. 272–280). **TWO real causes** (verified by rendering + a full 282-page pixel sweep):
+  1. **Marks.** `book-press.css` added `@page { bleed: 3mm; marks: crop cross }`. The marks
+     drew corner crop ticks **and** edge-midpoint registration targets into the bleed strip —
+     KDP's crop-mark check caught them, and its margin check read those same edge marks as
+     content in the margin. **Fix:** dropped bleed + marks → **no-bleed 7×10 interior**
+     (MediaBox now exactly 504×720 pt = the selected trim; nothing actually bleeds —
+     `.figure-bleed` is unused, the 8 part-openers carry only a near-white #fbeee6 wash).
+  2. **Folio + running head too close to the trim.** Independently real: the bottom page
+     number sat **0.22"** off the trim (under the 0.25" no-bleed min) and the running head
+     **0.31"**. The body *text* was always fine (≥0.63"). `book.css`'s default
+     `@bottom-center` had `margin-top: 6mm`, which pushed the folio *toward* the bottom edge.
+     **Fix:** margin-box offsets only — folio `margin-bottom: 5mm`, running heads
+     `margin-top: 4mm` (in the default, `:left`/`:right`, `chapter-opener`, `appendix`,
+     `index` masters). These touch margin boxes, NOT the `@page` margin, so **pagination
+     stays 282 pp and the cover spine is unaffected** (verified).
+  - **Verified:** full 282-page sweep — no marks anywhere; the closest ink to any trim edge
+    on *any* page is now **0.40"**, clearing both the 0.25" (no-bleed) and 0.375" (bleed)
+    minimums. **Next: re-upload `artifacts/book-press-cmyk.pdf` (rendered 2026-06-28) to the
+    KDP paperback; KDP re-reviews (~72h).**
 
 ## IngramSpark — eProof pending 2026-06-27 (acct #9945866)
 Title fully set up (7×10 premium-color perfect-bound matte, 282 pp; $49.99 print / $9.99

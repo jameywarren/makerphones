@@ -53,7 +53,12 @@
     content: counter(page);
     font: 400 9pt var(--mp-mono);
     color: var(--mp-meta);
-    margin-top: 6mm;
+    /* POD safe margin: the folio must clear 0.375" (9.52mm) from the trim.
+     * margin-top here pushes the folio DOWN toward the bottom trim (it sat at
+     * only 0.22" — under KDP's 0.25" minimum — and got flagged); margin-bottom
+     * lifts it up off the edge instead. Margin-box only — does NOT change the
+     * @page margin, so pagination (282 pp) and the cover spine are unaffected. */
+    margin-bottom: 5mm;
   }
 }
 
@@ -66,6 +71,7 @@
     letter-spacing: 0.08em;
     text-transform: uppercase;
     color: var(--mp-meta);
+    margin-top: 4mm;   /* POD safe margin: push the running head down off the top trim */
   }
 }
 
@@ -78,6 +84,7 @@
     letter-spacing: 0.08em;
     text-transform: uppercase;
     color: var(--mp-meta);
+    margin-top: 4mm;   /* POD safe margin: push the running head down off the top trim */
   }
 }
 
@@ -256,7 +263,7 @@ figure, .mp-figure, .sl-markdown-content svg, table { break-inside: avoid; }
 .book-chapter { break-before: right; page: chapter-opener; }
 @page chapter-opener {
   @top-left { content: none; } @top-right { content: none; }
-  @bottom-center { content: counter(page); font: 400 9pt var(--mp-mono); color: var(--mp-meta); }
+  @bottom-center { content: counter(page); font: 400 9pt var(--mp-mono); color: var(--mp-meta); margin-bottom: 5mm; }
 }
 .book-chapter h1 {
   font: 700 26pt/1.12 var(--mp-sans);
@@ -320,7 +327,7 @@ figure, .mp-figure, .sl-markdown-content svg, table { break-inside: avoid; }
  * 6. APPENDIX / REFERENCE  — denser grid + comparison-table master
  * ════════════════════════════════════════════════════════════════════════ */
 .book-appendix { page: appendix; break-before: right; }
-@page appendix { @top-right { content: "APPENDIX"; font: 400 8pt var(--mp-mono); letter-spacing: 0.12em; color: var(--mp-meta); } }
+@page appendix { @top-right { content: "APPENDIX"; font: 400 8pt var(--mp-mono); letter-spacing: 0.12em; color: var(--mp-meta); margin-top: 4mm; } }
 .book-appendix .sl-markdown-content { font-size: 9.5pt; line-height: 13pt; }
 .sl-markdown-content table { width: 100%; border-collapse: collapse; border: 0.5pt solid var(--mp-line); margin: 14pt 0; break-inside: auto; }
 .sl-markdown-content thead { display: table-header-group; }   /* repeat heads across page breaks */
@@ -340,7 +347,7 @@ figure, .mp-figure, .sl-markdown-content svg, table { break-inside: avoid; }
  * 7. INDEX  — multi-column, mono entry numbers, hairline letter-group heads
  * ════════════════════════════════════════════════════════════════════════ */
 .book-index { page: index; break-before: right; columns: 2; column-gap: 10mm; column-rule: 0.5pt solid var(--mp-line); }
-@page index { @top-right { content: "INDEX"; font: 400 8pt var(--mp-mono); letter-spacing: 0.12em; color: var(--mp-meta); } }
+@page index { @top-right { content: "INDEX"; font: 400 8pt var(--mp-mono); letter-spacing: 0.12em; color: var(--mp-meta); margin-top: 4mm; } }
 .book-index h2 { columns: 1; column-span: all; font: 700 20pt var(--mp-sans); color: var(--mp-charcoal); margin: 0 0 1rem; }
 .book-index .ix-group {
   font: 500 9pt var(--mp-mono); letter-spacing: 0.14em; text-transform: uppercase;
