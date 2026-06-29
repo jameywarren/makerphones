@@ -113,7 +113,7 @@ export function initPartsViewer(root) {
       p.traverse((o) => {
         if (o.isMesh && o.material) {
           o.material = o.material.clone();
-          o.material.transparent = true; o.material.opacity = 0.14;
+          o.material.transparent = true; o.material.opacity = 0.25;
           o.material.depthWrite = false; o.material.side = THREE.DoubleSide;
         }
       });
