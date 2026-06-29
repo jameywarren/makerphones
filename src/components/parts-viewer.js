@@ -198,6 +198,7 @@ export function initPartsViewer(root) {
     const typeOn = new Map(types.map((t) => [t, !contextTypes.has(t)]));    // context types start OFF
     let sideFilter = 'both';
     let isolated = null;
+    let shadow = null;   // contact-shadow plane; follows the VISIBLE bottom (see placeShadow)
 
     // Re-pose the headband for the toggled head. Active only when EXACTLY ONE head is on (so a
     // single-head view fits that head; none / multiple → the neutral M pose).
@@ -222,7 +223,22 @@ export function initPartsViewer(root) {
         const okSide = sideFilter === 'both' ? true : s === sideFilter;  // one earcup hides the other side + the shared headband
         p.visible = okType && okSide;
       }
+      placeShadow();
       requestRender();
+    }
+
+    // Park the contact shadow at the bottom of the VISIBLE model: at the earcups with the head off,
+    // and at the head's neck-bottom (just below the chin) when the reference head is toggled on — so
+    // the ground never chops through the head.
+    function placeShadow() {
+      if (!shadow) return;
+      const b = new THREE.Box3();
+      let any = false;
+      for (const p of parts) if (p.visible) { b.expandByObject(p); any = true; }
+      if (!any) return;
+      const c = b.getCenter(new THREE.Vector3());
+      const sz = b.getSize(new THREE.Vector3());
+      shadow.position.set(c.x, b.min.y - sz.y * 0.015, c.z);
     }
 
     function frameVisible() {
@@ -327,13 +343,13 @@ export function initPartsViewer(root) {
         grad.addColorStop(1, 'rgba(22,26,32,0)');
         g2.fillStyle = grad; g2.fillRect(0, 0, 256, 256);
         const span = Math.max(size.x, size.z) * 2.4;
-        const shadow = new THREE.Mesh(
+        shadow = new THREE.Mesh(
           new THREE.PlaneGeometry(span, span),
           new THREE.MeshBasicMaterial({ map: new THREE.CanvasTexture(cv), transparent: true, depthWrite: false }));
         shadow.rotation.x = -Math.PI / 2;                       // horizontal (XZ); model is Y-up
-        shadow.position.set(c.x, box.min.y - size.y * 0.015, c.z);
         shadow.renderOrder = -1;
         scene.add(shadow);
+        placeShadow();                                          // park it under the visible model (head-aware)
       }
     }
 
