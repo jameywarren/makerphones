@@ -18,7 +18,7 @@
 
 import http from 'node:http';
 import { createReadStream, existsSync } from 'node:fs';
-import { stat, mkdir, readFile } from 'node:fs/promises';
+import { stat, mkdir, readFile, rename, rm } from 'node:fs/promises';
 import { spawn } from 'node:child_process';
 import path from 'node:path';
 import puppeteer from 'puppeteer-core';
@@ -89,6 +89,12 @@ async function main() {
     args: ['--no-sandbox', '--disable-setuid-sandbox', '--disable-dev-shm-usage'],
     protocolTimeout: 0,
   });
+  // Chrome embeds subsetted CID/TrueType web fonts in page.pdf() output.
+  // IngramSpark's RIP mishandles those subsets and drops glyphs in the cover
+  // preview (title vanishes, WARREN LABS -> "ARN ABS", etc). So we render to a
+  // raw intermediate, then flatten ALL text to vector outlines with
+  // Ghostscript's -dNoOutputFonts: no fonts left to choke on, art unchanged.
+  let rawPdf = null;
   try {
     const page = await browser.newPage();
     if (FRONT_PNG) await page.setViewport({ width: 1600, height: 1120, deviceScaleFactor: 2.6 });
@@ -104,25 +110,47 @@ async function main() {
       await (await page.$('.panel.front')).screenshot({ path: out });
       console.log(`  ✓ ${path.relative(ROOT, out)}  (front cover, EPUB)`);
     } else {
-      await page.pdf({ path: rgbPdf, printBackground: true, preferCSSPageSize: true, timeout: 0 });
-      console.log(`  ✓ ${path.relative(ROOT, rgbPdf)}`);
+      rawPdf = rgbPdf.replace(/\.pdf$/, '.raw.pdf');
+      await page.pdf({ path: rawPdf, printBackground: true, preferCSSPageSize: true, timeout: 0 });
     }
   } finally {
     await browser.close(); server.close();
   }
+  if (!rawPdf) return; // FRONT_PNG path is complete
 
-  if (CMYK) {
-    if (!(await hasGhostscript())) { console.log('  CMYK skipped: no Ghostscript.'); return; }
-    if (!existsSync(ICC)) { console.log(`  CMYK skipped: ICC missing at ${path.relative(ROOT, ICC)}.`); return; }
+  const gsOK = await hasGhostscript();
+
+  // RGB deliverable — text flattened to outlines (no embedded fonts).
+  if (gsOK) {
     await run('gs', [
-      '-dBATCH', '-dNOPAUSE', '-dSAFER', '-sDEVICE=pdfwrite',
-      '-dProcessColorModel=/DeviceCMYK', '-sColorConversionStrategy=CMYK',
-      '-dOverrideICC=true', '-dRenderIntent=1',
-      '-dTransferFunctionInfo=/Remove',          // strip transfer curves (IngramSpark preflight warning)
-      `-sOutputFile=${cmykPdf}`, rgbPdf,
+      '-dBATCH', '-dNOPAUSE', '-dSAFER', '-sDEVICE=pdfwrite', '-dCompatibilityLevel=1.4',
+      '-dNoOutputFonts',                         // convert all text to vector paths
+      `-sOutputFile=${rgbPdf}`, rawPdf,
     ]);
-    console.log(`  ✓ ${path.relative(ROOT, cmykPdf)}  (CMYK — KDP-ready)`);
+    console.log(`  ✓ ${path.relative(ROOT, rgbPdf)}  (text outlined)`);
+  } else {
+    await rename(rawPdf, rgbPdf);
+    console.log(`  ⚠ ${path.relative(ROOT, rgbPdf)} — Ghostscript missing: text NOT outlined (fonts embedded)`);
   }
+
+  // CMYK deliverable — outline + CMYK conversion in one pass.
+  if (CMYK) {
+    if (!gsOK) console.log('  CMYK skipped: no Ghostscript.');
+    else if (!existsSync(ICC)) console.log(`  CMYK skipped: ICC missing at ${path.relative(ROOT, ICC)}.`);
+    else {
+      await run('gs', [
+        '-dBATCH', '-dNOPAUSE', '-dSAFER', '-sDEVICE=pdfwrite', '-dCompatibilityLevel=1.4',
+        '-dNoOutputFonts',                         // convert all text to vector paths
+        '-dProcessColorModel=/DeviceCMYK', '-sColorConversionStrategy=CMYK',
+        '-dOverrideICC=true', '-dRenderIntent=1',
+        '-dTransferFunctionInfo=/Remove',          // strip transfer curves (IngramSpark preflight warning)
+        `-sOutputFile=${cmykPdf}`, rawPdf,
+      ]);
+      console.log(`  ✓ ${path.relative(ROOT, cmykPdf)}  (CMYK, text outlined — print-ready)`);
+    }
+  }
+
+  if (existsSync(rawPdf)) await rm(rawPdf, { force: true });
 }
 
 main().catch((err) => { console.error('\n  render-cover failed:', err.message); process.exit(1); });
