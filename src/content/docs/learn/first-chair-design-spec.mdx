@@ -22,11 +22,19 @@ import PartsViewer from '../../../components/PartsViewer.astro';
 the locked 54 mm profile on 2026-08-06; the baffle has not been yet. This document is the
 functional spec the CAD is built against.
 
-:::caution[Live design, not a finished product]
+:::caution[The dimensions are settled. The form is not.]
 This is the **beta** view — the design as it stands right now, republished on every commit.
-Parts may be mid-change. Two things are known-unfinished as of 2026-08-06: the **baffle** is
-still on the Daily Driver's Ø91 plate diameter, and the **closed-back variant doesn't fit**
-at this scale. Both are tracked in the repo's design log.
+
+**The shape in the viewer is a placeholder, and an inherited one.** First Chair was forked
+from the over-ear Daily Driver. The dimensions below were reset to the on-ear numbers and
+are real; the *form* was not redesigned, so the model still carries a DT880-family domed cup
+and a circumaural stance on a 54 mm rim. It reads as a shrunken over-ear because that's
+exactly what it is. An industrial-design pass is open to resolve the form properly — a
+supra-aural is a different object, not a small version of another one.
+
+Everything under **the locked geometry** and **the decisions** below is real and settled.
+Two other things are known-unfinished: the **baffle** is still on the Ø91 plate diameter, and
+the **closed-back variant doesn't fit** at this scale. All tracked in the repo's design log.
 :::
 
 ---
@@ -211,6 +219,11 @@ This repo ships CAD publicly under MIT.
 
 ## What's still open
 
+- **The form itself.** The dimensions above are locked; the *shape* is not. The build was
+  forked from an over-ear and the industrial-design brief was renamed rather than rewritten,
+  so the CAD faithfully built a shrunken DT880. A form pass is open to resolve what a
+  supra-aural in this family should actually look like — Grado is the right *architectural*
+  reference (small cup, minimal band, everything visible) and the wrong styling target.
 - **The printed friction slider** is the mechanism's real unknown, and the part with the
   least precedent — printed detents that still hold after a few hundred adjustments are not
   a solved problem in the maker literature. A physical test coupon (one rail, five sleeves at
