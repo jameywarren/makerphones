@@ -392,39 +392,39 @@ everything, and this gets re-taken before the first load-bearing part.
 Flag as `ESTIMATE` in `params.py`, and note that the concept mesh's 54 mm (§4a) was a lucky guess
 rather than a derived number — do not let the agreement read as corroboration.
 
-### What that number does to the driver — the annulus, third time of asking
+### The profile, resolved (maker, 2026-08-06)
 
-§4a found the driver-seat annulus marginal from a modelled concept. §4d #3 predicted the commodity
-pad would tighten it. Now it is measured, and it is tighter than either:
+The step is **radial**, and the geometry is simpler than the ambiguity suggested:
 
-    rim OD                53.98
-    − 2 × wall (2.0)      → cup bore            49.98
-    driver seat (40 + 0.6 clearance)            40.60
-    radial ledge available = (49.98 − 40.60)/2 =  4.69 mm
+    baffle / front plate    Ø 53.98  (2⅛ in), 3.18 thick — this is the face that was measured
+    steps in 3.18 per side
+    cup body                Ø 47.625 (1⅞ in)
 
-**4.69 mm of radial ledge for a 40 mm driver.** That is workable for a printed clamp ring that
-presses on the driver flange (§4d #7) and it is *not* workable for an M3 boss with a heat-set insert,
-which wants ~6 mm before the wall around the insert gets too thin to hold. **Three independent routes
-— a modelled concept, a pad decision, and now a real measurement — have arrived at the same answer:
-nothing fastened lives in that wall.** Treat it as settled.
+**The "lip" is not a feature on the cup — it is the baffle overhanging the body.** That single
+reading explains the whole profile, and it explains pad retention for free: the foam stretches over
+the Ø53.98 plate rim and grips the Ø47.625 body behind it. Confirmed against a section drawing.
 
-### The open question this raises, and it is not small
+**Driver: 40 mm, confirmed — it is the standard and we are not designing around a non-standard part.**
 
-The lip geometry is ambiguous in the reading, and the two interpretations differ by enough to change
-whether a 40 mm driver fits at all:
+    baffle OD                                    53.98
+    driver seat (40 + 0.6 clearance)             40.60
+    radial ledge = (53.98 − 40.60)/2           =  6.69 mm
 
-- **(a) The step is on the diameter.** Cup body = 53.98 − 3.18 = **50.8 mm**, bore 46.8, ledge
-  **3.1 mm**. A 40 mm driver is then very tight — the clamp ring has almost nothing to bear on.
-- **(b) The step is on the radius.** Cup body = 53.98 − 6.35 = **47.6 mm**, bore 43.6, ledge
-  **1.5 mm**. A 40 mm driver does **not** fit the body at all; it would have to sit forward, in the
-  lip section.
+### Correction — the "nothing fastened in that wall" claim was wrong
 
-Which also opens the question we have been assuming past: **is 40 mm right for a Grado-sized cup?**
-The working assumption came from Daily Driver, which is circumaural and has room. If the answer is
-(a) or (b), the driver may need to be 36–38 mm, and that is a supplier conversation, not a CAD one.
+The previous revision of this section computed the driver ledge against the *cup body* and got
+4.69 mm, then declared it "settled" that no fastener could live there, citing three independent
+routes agreeing. **That was an over-claim built on a misread profile.** The driver mounts in the
+*baffle*, which is the Ø53.98 plate, not in the body bore — so the real figure is **6.69 mm**, which
+is comfortably enough for an M3 boss and heat-set insert.
 
-**Fastest resolution: measure the Grado's own driver aperture.** Whatever Grado fits in this cup is
-the empirical answer to what fits in this cup.
+What actually happened: the concept mesh (§4a) also assumed a ~54 mm cup and also found the ledge
+marginal, and the agreement felt like corroboration. It was not — the concept had no baffle
+overhang modelled at all, so both of us were making the same mistake about the same part.
+
+**The clamp ring (§4d #7) still stands, but it stands as a design *choice* — serviceability for a
+tweaker — not as something geometry forced.** That distinction matters: if a later revision needs
+fasteners there, geometry does not forbid it, and this section should not be quoted as if it does.
 
 ### The measurement worth inventing: turn the clamp target into a number
 
