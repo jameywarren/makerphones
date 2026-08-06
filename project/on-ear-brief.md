@@ -153,6 +153,81 @@ Three supporting decisions:
 - **Pivot without shoulder screws:** a printed snap-fit trunnion or a separately printed pin. Grado's
   own gimbal is a rod in a block — that is a two-part snap, not a fastener.
 
+## 4a. Concept input — the Claude Design mesh (2026-08-06)
+
+First outside concept for this build: `printable-headphone.glb`, produced by Claude Design from a
+one-paragraph prompt with no dimensions supplied. Inspected with `scripts/inspect_glb.py`.
+
+**69 named meshes, 75 nodes, 34k triangles, 6 named materials, clean L/R symmetry.** The naming is
+real and usable — `cup_housing`, `driver_baffle`, `rod_block`, `pivot_pin`, `slider_rod`,
+`rod_detent_0..4`, `grille_spoke_0..11`. This is a categorically better artifact than an image: it
+carries hierarchy, so it can be *read* rather than merely looked at.
+
+| Part | Measured | Read |
+|---|---|---|
+| `cup_housing` | 54.0 ⌀ × 20.0 deep | Sane for a 40 mm driver — Grado's are ~50 mm |
+| `ear_pad` | 60.0 ⌀ × 17.6 thick | 60 mm OD is right; 17.6 mm is **bowl-thickness, not flat** (Grado flats ~8–10 mm). That is a bass decision made by accident |
+| `driver_baffle` | 50.4 ⌀ × 2.2 thick | 2.2 mm is a plausible printed wall |
+| `driver_dome` | 27.0 ⌀ | **Placeholder, not a 40 mm driver.** The baffle is not derived from a real driver |
+| `headband_arch` | 172.5 span | Relaxed span; needs to be *narrower* than head breadth (~145–160 mm) to clamp. Unverified guess |
+| `pivot_pin` | 5.2 ⌀ × 33, brass | **Reintroduces a metal part.** One 5 mm pin is a far better BOM than Daily Driver's eight suppliers, but it is not zero |
+| assembly | 175.6 × 199.6 × 54.0 | Plausible overall envelope |
+
+**Scale gotcha, recorded so it does not bite later:** the file is in glTF's standard **metres**
+(0.054 = 54 mm). The claim of "real millimeters" is true in intent and the file is correctly
+authored — but most slicers assume millimetres and will import it at 1/1000 scale. Multiply by 1000
+on import.
+
+**Verdict: good enough to be the form reference, and it correctly stays on its side of the line.**
+Claude Design described it itself as "industrial-design intent, not a print-ready CAD part," which
+is exactly the boundary `builds/daily-driver/docs/design-pipeline.md` already draws between
+generated references and engineered CAD. Both sides agreeing on that boundary unprompted is the
+reason this is safe to adopt.
+
+### Pipeline change: this replaces FAL
+
+The FAL pipeline was Stage 1 text→concept image, Stage 2 image→reference mesh — a two-stage lossy
+path whose output was images we did not want to build (maker's assessment, and the reason it was
+abandoned rather than finished). Claude Design does both stages in one, and returns **named,
+hierarchical, correctly-scaled geometry instead of a picture**. That is not an incremental
+improvement; an image has to be re-interpreted by a human before it can become parameters, and a
+named part list can be read straight into `params.py`.
+
+Recommend retiring `pipeline/` for this build and routing concept work through Claude Design, with
+`design-pipeline.md`'s taste-vs-convention boundary carried over unchanged.
+
+## 4b. Architecture decision — spring steel, and delete the slider
+
+Maker's call (2026-08-06): **spring steel is the default clamp element across all Warren Labs
+headphones.** It solves the creep problem in §4 outright rather than working around it, and the
+Beyerdynamic bow is a proven, purchasable default. §4's elastic-element proposal is withdrawn as the
+primary and kept only as a fallback if sourcing ever becomes the constraint.
+
+**But the suspension-strap idea attached to that decision is worth more than the spring question,
+and it is a different mechanism.** In the AKG K240/K7xx pattern the sprung outer arch still supplies
+*all* the clamp; the strap supplies **comfort, weight distribution, and self-adjustment**. So a
+strap does not replace the spring — it replaces the **slider**.
+
+That is the big part-count win available to this design:
+
+> A self-adjusting suspension strap deletes `slider_rod`, `rod_detent_0..4`, the friction mechanism,
+> the thumbscrew, and the head-size adjustment problem **entirely**. Head size is absorbed by the
+> strap stretching, not by a mechanism the builder has to print to tolerance and that has to keep
+> working after a hundred cycles.
+
+Compare with the concept mesh in §4a, which models a rod block, a slider rod and five detents *per
+side* — the very subsystem this deletes.
+
+Costs, honestly: a suspension strap has a narrower fit range than a slider and sits poorly at the
+extremes of head size; and the strap is a fabric/elastic consumable. The second is acceptable on the
+same logic §4 already accepted for the spring ("a consumable you can replace is a feature for a
+build-it-yourself product"). The first is a real limit and needs the head-size range in §5 #3
+settled before committing.
+
+**Proposed architecture:** sprung steel arch (clamp) + self-adjusting suspension strap (fit,
+comfort) + printed cups, baffle, grille, gimbal. No slider, no detents, no thumbscrew, no inserts in
+the mechanism.
+
 ## 5. Tier 1 — what blocks the first print
 
 Following the discipline in `builds/daily-driver/docs/measurement-priorities.md`: if a part
@@ -161,6 +236,7 @@ Following the discipline in `builds/daily-driver/docs/measurement-priorities.md`
 | # | Measurement | Sets | Risk if wrong |
 |---|---|---|---|
 | 1 | **Driver OD + frame depth** (from the drivers actually on hand) | `driver_od` → aperture, recess, ring | Driver will not seat; everything downstream regenerates wrong |
+| 1b | *Working assumption 2026-08-06: **40 mm**, pending current supplier quotes. Every dimension derived from it carries an `ESTIMATE` flag until a real driver is in hand.* | | |
 | 2 | **Pad mounting geometry** — but see below, this may be ours to define | `pad_*`, ring OD | Pad will not mount, or bass target unreachable |
 | 3 | **Target clamp force**, and the head-width range it must hold across | the elastic element's spec, `bow_*` equivalents | Too tight = unwearable; too loose = no bass and it falls off |
 
@@ -183,7 +259,9 @@ its own.
 3. **Printed pad, or foam?** §2 argues printed, because it makes bass tuning a reprint. But a
    printed pad has to be *comfortable* on the ear, which is a much harder ask than sitting around it.
    Possibly: printed pad carrier + a cut foam disc the builder supplies.
-4. **Elastic element or spring steel** (§4). Recommend elastic; wants a bench test before committing.
+4. ~~Elastic element or spring steel~~ — **settled 2026-08-06: spring steel, line-wide. See §4b.**
+   The live question is now the *suspension strap*, which deletes the slider subsystem: what
+   head-size range must it cover, and is that range reachable without a slider?
 5. **What "pause Daily Driver" means concretely** — see §7.
 
 ## 7. What pausing Daily Driver actually touches
