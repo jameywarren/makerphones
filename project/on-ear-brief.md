@@ -178,6 +178,35 @@ carries hierarchy, so it can be *read* rather than merely looked at.
 authored — but most slicers assume millimetres and will import it at 1/1000 scale. Multiply by 1000
 on import.
 
+### Capability map (probe run 2026-08-06, with the 3D design skill selected)
+
+Answers below are from Claude Design directly, verified against its test part (`earcup_housing_40.glb`
+— 1 unit = 1 mm as claimed, names `cup_R` / `cup_shell_R` / `boss_m3_1..4_R` matching the
+`SUBASSEMBLIES` contract exactly, 5 meshes / 3,392 triangles).
+
+| Capability | Verdict |
+|---|---|
+| Parametric persistence | **No kernel.** Regenerates from source each turn; the *script* is the state. "A person editing a script, not a solver" — nothing propagates unless it edits it |
+| Binding parameters | **Yes** — conforms or says a number does not close |
+| Naming schema | **Yes, exactly.** Its output lands against `SUBASSEMBLIES` unchanged |
+| Boolean cuts / CSG | **None. This is the hard ceiling** — a hole in an arbitrary place on a curved wall is impossible |
+| Fillets | **No operator.** Roundness only if built into a lathe profile |
+| Revolves, extrusions, draft, wall thickness as solid | Yes — real modeled material, not shading |
+| Threads, snap-fit undercuts | Cosmetic / approximate (both want booleans) |
+| Tolerance semantics, GD&T, fit checking | **None.** `gate.py` does work it cannot |
+| Round-trip (import GLB/STEP and modify) | **No.** Round-trip is through *source*, not geometry |
+| Export | OBJ+MTL / GLB only, always tessellated. No STEP, no B-rep, no feature tree |
+| Units | Author-controlled. **Convention set: 1 unit = 1 mm** (matches CadQuery and every slicer; `inspect_glb.py` warns on either failure) |
+| Documentation figures | **Its strongest mode**, and it argued for the right workflow unprompted — we export views from CadQuery/OCP, it composes/annotates/typesets, rather than re-modelling at lower fidelity to draw a picture of geometry we already hold |
+
+**The handoff line is now settled and needs no per-part judgement: no CSG means nothing printable can
+originate there. Form and figures upstream, engineering in CadQuery.** Which is exactly where
+`design-pipeline.md` already drew it — now confirmed from the other side rather than assumed.
+
+**Transport: GLB only, not OBJ.** OBJ has no scene graph — it carries groups, not parent/child
+nodes — so it structurally cannot express the `SUBASSEMBLIES` hierarchy that makes the output
+valuable. GLB carries geometry, materials and hierarchy in one file.
+
 **Verdict: good enough to be the form reference, and it correctly stays on its side of the line.**
 Claude Design described it itself as "industrial-design intent, not a print-ready CAD part," which
 is exactly the boundary `builds/daily-driver/docs/design-pipeline.md` already draws between
@@ -227,6 +256,54 @@ settled before committing.
 **Proposed architecture:** sprung steel arch (clamp) + self-adjusting suspension strap (fit,
 comfort) + printed cups, baffle, grille, gimbal. No slider, no detents, no thumbscrew, no inserts in
 the mechanism.
+
+## 4c. The parts list, and the seven interfaces
+
+Deleting the slider (§4b) changes the entire upper assembly, and nothing has drawn what replaces it.
+This is the gap: not dimensions, **parts and interfaces**. Both the next concept pass and the first
+line of CadQuery need it, and neither can produce it.
+
+### Parts
+
+| Part | Per | Made | Notes |
+|---|---|---|---|
+| `bow` | 1 | **purchased** | Sprung steel arch — the one metal structural part (§4b). Beyer bow as default |
+| `bow_cap_L/R` | 2 | printed | **The new part with no Daily Driver analogue.** See below |
+| `strap` | 1 | **consumable** | Suspension strap — fabric/elastic. Absorbs head size |
+| `yoke_L/R` | 2 | printed | Cup to bow_cap |
+| `cup_shell_L/R` | 2 | printed | Open back, integral grille |
+| `baffle_L/R` | 2 | printed | Driver seat — or merged into the shell, see interface 5 |
+| `pad_L/R` | 2 | printed + foam? | Open question (§6 Q3) |
+| `driver_L/R` | 2 | **purchased** | Reference geometry only |
+
+**`bow_cap` does three jobs at once** — captures the steel bow, anchors the strap, and carries the
+yoke swivel. That concentration is the whole benefit of deleting the slider (one printed part
+replaces a rod, a shoe, five detents, a thumbscrew and an insert) and it is also the single part
+most likely to be under-designed. It is where the effort goes.
+
+### The seven interfaces — this is the actual design work
+
+| # | Interface | The question | Fastener-free? |
+|---|---|---|---|
+| 1 | `bow` ↔ `bow_cap` | How is a steel strip captured in a printed part under sustained load? Slot + interference, slot + crimp, or slot + one screw | **Hardest.** Sustained load into plastic — the §4 creep problem relocated, not removed |
+| 2 | `bow_cap` ↔ `strap` | Anchor geometry; strap must be replaceable without tools | Probably — a slot and a bar-tack |
+| 3 | `bow_cap` ↔ `yoke` | Swivel (rotation about the vertical axis) | Printed snap / captured post |
+| 4 | `yoke` ↔ `cup` | Tilt pivot | Printed trunnion or pin |
+| 5 | `cup` ↔ `baffle` | Driver retention. **Merging the baffle into the shell deletes this interface entirely** — worth considering, since an on-ear has almost no rear cavity to service | n/a if merged |
+| 6 | `cup` ↔ `pad` | Pad mount, and it must locate the driver relative to the canal repeatably (§3) | Yes — lip/groove |
+| 7 | cable entry | Fixed or detachable; strain relief | Yes |
+
+**Interface 1 is the one to solve first.** It inherits the creep problem: a sprung steel strip
+pulling on a printed pocket is exactly sustained load into plastic. Spring steel solved creep in the
+*band*; it did not solve creep at the *joint*. If this cannot be made to hold, the architecture is
+wrong and we would rather know before any geometry exists.
+
+### One open architecture question
+
+Grado uses rod-block rotation **plus** gimbal tilt — two degrees of freedom. With a suspension strap
+carrying fit, one of those may be unnecessary: the strap accommodates head height, so the cup may
+only need tilt. **Dropping a DoF deletes a whole interface.** Worth deciding deliberately rather
+than inheriting Grado's answer.
 
 ## 5. Tier 1 — what blocks the first print
 
