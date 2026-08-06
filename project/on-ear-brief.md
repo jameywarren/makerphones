@@ -106,6 +106,42 @@ Two consequences:
   (§6 Q3), it has to locate the driver relative to the canal repeatably. That is a positioning
   requirement and it should be designed for on purpose, not left to whatever is comfortable.
 
+### AMENDED — our own measurements contradict the argument above (2026-08-06)
+
+The section above was reasoned, not measured. We already had the measurement and had not looked:
+`attune/docs/next-session.md` records six headphones captured on the EARS Pro on **2026-08-03**,
+SR60x and RS1x among them. Placement SD, in dB:
+
+| | 20–200 Hz | 2–8 kHz | 8–20 kHz |
+|---|---|---|---|
+| **SR60x** — on-ear, small pads | 0.56 / 0.21 | **0.85** | **2.72** |
+| HD 650 — over-ear | 0.40 / 0.59 | 1.41 / 2.45 | 3.48 / 5.13 |
+| RS1x — on-ear, larger pads | 0.71 / 0.53 | 2.15 / 2.00 | 4.37 / 5.91 |
+
+**The on-ear is the most repeatable of the three in exactly the bands the argument above predicted
+it would be worst.** The capture note says as much in passing — "on-ear, better than predicted."
+
+Those numbers are trustworthy as *placement* variation specifically: the same session established
+the rig's noise floor at ~0.1 dB and, critically, **constant** — a no-reseat control repeated at
+9 placements across two headphones came in between 0.02 and 0.53 dB regardless of seating quality,
+including above 8 kHz. So seat-to-seat spread here is physical, not instrument.
+
+**The more useful comparison is SR60x vs RS1x**, because it holds form factor constant and varies
+pad size. The smaller-padded one is ~2.5× more repeatable through 2–8 kHz. That points at pad size,
+not supra- vs circumaural, as the dominant variable — and it is a direct design input:
+
+> **Prefer the smaller pad.** On the evidence we have, it buys repeatability, which is the property
+> §3 says we should be competing on.
+
+What survives from the original argument: the *mechanism* is still right — a supra-aural's
+sensitivity does move from bass seal to mid/treble alignment, and that is why the pad's alignment
+job (above) still matters. What does not survive is the conclusion that this makes an on-ear a worse
+bet. It measured better.
+
+Confounds, stated so nobody over-reads a three-row table: three different headphones, one unit each,
+one operator. This is directional evidence from the right rig, not a controlled experiment. The
+honest use of it is to stop worrying about the form factor and start caring about pad size.
+
 ### The fixture caveat, up front
 
 The EARS Pro controls the on-ear's dominant variables **poorly**. A supra-aural's response is
