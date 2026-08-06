@@ -232,30 +232,87 @@ headphones.** It solves the creep problem in §4 outright rather than working ar
 Beyerdynamic bow is a proven, purchasable default. §4's elastic-element proposal is withdrawn as the
 primary and kept only as a fallback if sourcing ever becomes the constraint.
 
-**But the suspension-strap idea attached to that decision is worth more than the spring question,
-and it is a different mechanism.** In the AKG K240/K7xx pattern the sprung outer arch still supplies
-*all* the clamp; the strap supplies **comfort, weight distribution, and self-adjustment**. So a
-strap does not replace the spring — it replaces the **slider**.
+### The suspension strap is OUT — reversed 2026-08-06
 
-That is the big part-count win available to this design:
+An earlier draft of this section claimed a self-adjusting strap could replace the slider outright
+and called it the largest part-count win available. **Maker's call, from having handled the
+category: no.** A suspension strap is a *comfort addition*, not a fit mechanism; the headphones that
+delete the slider this way "aren't a great solution."
 
-> A self-adjusting suspension strap deletes `slider_rod`, `rod_detent_0..4`, the friction mechanism,
-> the thumbscrew, and the head-size adjustment problem **entirely**. Head size is absorbed by the
-> strap stretching, not by a mechanism the builder has to print to tolerance and that has to keep
-> working after a hundred cycles.
+Recording the reversal rather than quietly deleting it, because the argument was superficially
+strong and will be re-proposed by anyone who reads about the K240 and reasons from first principles.
+The counter-evidence is wear experience across the category, which is not reachable from a datasheet.
 
-Compare with the concept mesh in §4a, which models a rod block, a slider rod and five detents *per
-side* — the very subsystem this deletes.
+**Consequence: the slider is back, and with it the whole subsystem.** The printable friction slider
+from §4 matters again — a printed cantilever leaf with a detent bump riding a notch ladder, which
+prints support-free and tunes by leaf thickness. That is now load-bearing work rather than a
+nice-to-have, and it is the part of the mechanism with the least prior art in printed form.
 
-Costs, honestly: a suspension strap has a narrower fit range than a slider and sits poorly at the
-extremes of head size; and the strap is a fabric/elastic consumable. The second is acceptable on the
-same logic §4 already accepted for the spring ("a consumable you can replace is a feature for a
-build-it-yourself product"). The first is a real limit and needs the head-size range in §5 #3
-settled before committing.
+Honest accounting of what simplification actually survives: **the Grado pad interface (§4d #3) is
+now the big win, not the mechanism.** The mechanism is roughly Grado's, and roughly Daily Driver's.
 
-**Proposed architecture:** sprung steel arch (clamp) + self-adjusting suspension strap (fit,
-comfort) + printed cups, baffle, grille, gimbal. No slider, no detents, no thumbscrew, no inserts in
-the mechanism.
+### Forming our own bow is ruled out — by experiment, not by analysis
+
+**Maker has already tried this and it failed**, using 3D-printed forming jigs. Spring steel does not
+cooperate: it springs back, the jig deflects before the stock does, and printed tooling is nowhere
+near stiff enough. Recorded here permanently so it is not re-attempted from an armchair — the DIY
+route listed in Daily Driver's BOM (1095 blue-tempered strip, or laser-cut and formed) is a
+*sourcing* suggestion, not a shop-floor one.
+
+**Direction instead: an off-the-shelf bow, or a stocked custom part made to our spec and used
+line-wide across every Warren Labs headphone.** The second is the better long-term answer — it
+decouples us from one manufacturer's spare-parts channel and lets the arc be designed for *our*
+geometry rather than inherited from a DT770 — and it is a sourcing conversation, not a design task.
+Until then the Beyer bow is the default and **we are knowingly inheriting a circumaural's arc.**
+
+**Proposed architecture:** sprung steel bow (purchased) + printed slider + printed yoke + printed
+cup and baffle + commodity Grado-pattern pads. Screws are allowed at the bow joint (§4d #1).
+
+## 4d. Settled by the maker, 2026-08-06
+
+Seven decisions from the design conversation. Each closes a question the rest of the brief was
+holding open.
+
+**1. Screws are allowed at the bow joint.** The fastener-free through-post sandwich is dropped. The
+Beyer bow has end-tab holes and is designed to be screwed; we use them. This keeps a small number of
+M3s in the BOM at the *one* joint that carries sustained spring load — which is the right place to
+spend them, and it retires interface 1 as a research problem.
+
+**2. Clamp target: the HD 600 / DT 770 class.** Explicitly *not* Grado — a Grado's light clamp is
+not the goal.
+
+> **Watch item, not a challenge to the call.** HD 600 and DT 770 are both circumaural, so their
+> clamp force spreads around the ear onto the skull. The same *force* on a supra-aural concentrates
+> on the ear itself, so the **pressure** is much higher. Expect the first wear test to be the
+> arbiter, and expect pad compliance (§4d #3) to be the mitigation rather than backing the force off.
+
+**3. Grado-pattern pads — commodity, not designed.** Multiple aftermarket manufacturers exist and end
+users can buy Grado pads directly. We design a rim the foam stretches over and ship no pad at all.
+
+> **This is now the single largest constraint in the build, and it points inward.** The cup rim OD is
+> fixed *from outside* by the pad's relaxed ID — it is no longer ours to choose. And it likely runs
+> **smaller than the 54 mm** the concept assumed, which tightens the annulus between the driver seat
+> and the outer wall. §4a's boss-clearance finding was already marginal at 54 mm with a 40 mm driver;
+> at a Grado-sized rim it gets worse. Independent confirmation that fasteners do not belong in that
+> wall — see #7.
+
+**4. Suspension strap: dropped.** See §4b.
+
+**5. Separate baffle — confirmed**, and for a better reason than the print-flatness argument that
+prompted the question: **manufacturing, tweaking and repair.** A separate baffle is the part a
+builder iterates on.
+
+**6. Two degrees of freedom at the cup — confirmed.** "The pads need to swivel a little bit as well
+as go up and down, it does matter." *(One clarification outstanding — see §6 Q6.)*
+
+**7. Clamp ring for driver retention**, and the framing that comes with it is a design principle
+worth generalising:
+
+> *"Not ideal for a manufactured model, but for a tweaker/DIY it's great."*
+
+**Adopt that as the tie-breaker for this whole build: when serviceability and manufacturability
+conflict, serviceability wins, because the user is a tweaker.** It resolves #5 and #7 the same way
+and it will resolve future trade-offs without re-litigating them.
 
 ## 4c. The parts list, and the seven interfaces
 
@@ -263,68 +320,75 @@ Deleting the slider (§4b) changes the entire upper assembly, and nothing has dr
 This is the gap: not dimensions, **parts and interfaces**. Both the next concept pass and the first
 line of CadQuery need it, and neither can produce it.
 
+*Revised after §4d — the strap is out, the slider is back, and the pad is no longer ours to design.*
+
 ### Parts
 
 | Part | Per | Made | Notes |
 |---|---|---|---|
-| `bow` | 1 | **purchased** | Sprung steel arch — the one metal structural part (§4b). Beyer bow as default |
-| `bow_cap_L/R` | 2 | printed | **The new part with no Daily Driver analogue.** See below |
-| `strap` | 1 | **consumable** | Suspension strap — fabric/elastic. Absorbs head size |
-| `yoke_L/R` | 2 | printed | Cup to bow_cap |
-| `cup_shell_L/R` | 2 | printed | Open back, integral grille |
-| `baffle_L/R` | 2 | printed | Driver seat — or merged into the shell, see interface 5 |
-| `pad_L/R` | 2 | printed + foam? | Open question (§6 Q3) |
+| `bow` | 1 | **purchased** | Sprung steel arch. Beyer default; stocked-custom is the goal (§4b) |
+| `slider_L/R` | 2 | printed | Screws to the bow, carries height adjustment + the yoke swivel |
+| `yoke_L/R` | 2 | printed | Slider to cup |
+| `cup_shell_L/R` | 2 | printed | Open back, integral grille, **rim OD set by the pad** |
+| `baffle_L/R` | 2 | printed | Driver seat. Separate, per §4d #5 |
+| `clamp_ring_L/R` | 2 | printed | Driver retention, per §4d #7 |
 | `driver_L/R` | 2 | **purchased** | Reference geometry only |
+| pads | — | **commodity** | Grado-pattern. **Not designed, not shipped, not in the repo** |
 
-**`bow_cap` does three jobs at once** — captures the steel bow, anchors the strap, and carries the
-yoke swivel. That concentration is the whole benefit of deleting the slider (one printed part
-replaces a rod, a shoe, five detents, a thumbscrew and an insert) and it is also the single part
-most likely to be under-designed. It is where the effort goes.
+### The interfaces — this is the actual design work
 
-### The seven interfaces — this is the actual design work
-
-| # | Interface | The question | Fastener-free? |
+| # | Interface | Status | The question |
 |---|---|---|---|
-| 1 | `bow` ↔ `bow_cap` | How is a steel strip captured in a printed part under sustained load? Slot + interference, slot + crimp, or slot + one screw | **Hardest.** Sustained load into plastic — the §4 creep problem relocated, not removed |
-| 2 | `bow_cap` ↔ `strap` | Anchor geometry; strap must be replaceable without tools | Probably — a slot and a bar-tack |
-| 3 | `bow_cap` ↔ `yoke` | Swivel (rotation about the vertical axis) | Printed snap / captured post |
-| 4 | `yoke` ↔ `cup` | Tilt pivot | Printed trunnion or pin |
-| 5 | `cup` ↔ `baffle` | Driver retention. **Merging the baffle into the shell deletes this interface entirely** — worth considering, since an on-ear has almost no rear cavity to service | n/a if merged |
-| 6 | `cup` ↔ `pad` | Pad mount, and it must locate the driver relative to the canal repeatably (§3) | Yes — lip/groove |
-| 7 | cable entry | Fixed or detachable; strain relief | Yes |
+| 1 | `bow` ↔ `slider` | **settled** | Screws through the bow's end-tab holes (§4d #1). Hole Ø + pitch is now Tier 1 |
+| 2 | `slider` height adjustment | **the hard one now** | Printed cantilever leaf + detent ladder. Prints support-free, tunes by leaf thickness. Least prior art in printed form; has to survive hundreds of cycles |
+| 3 | `slider` ↔ `yoke` | open | Swivel. Printed snap or captured post |
+| 4 | `yoke` ↔ `cup` | open | Tilt. Printed trunnion or pin |
+| 5 | `cup` ↔ `baffle` | exists by decision | Serviceable joint — the builder iterates on the baffle |
+| 6 | `baffle` ↔ `driver` ↔ `clamp_ring` | settled in principle | Recess + printed clamp ring, no adhesive |
+| 7 | `cup` rim ↔ pad | **externally constrained** | Rim OD set by the commodity pad's relaxed ID. Also has to locate the driver relative to the canal repeatably (§3) |
+| 8 | cable entry | open | Fixed or detachable; strain relief |
 
-**Interface 1 is the one to solve first.** It inherits the creep problem: a sprung steel strip
-pulling on a printed pocket is exactly sustained load into plastic. Spring steel solved creep in the
-*band*; it did not solve creep at the *joint*. If this cannot be made to hold, the architecture is
-wrong and we would rather know before any geometry exists.
+**Interface 2 replaced interface 1 as the one to solve first.** Screws retired the bow joint as a
+research problem; the printed friction slider is now the mechanism's real unknown, and it is the
+part with the least precedent — printed detents that still hold after a few hundred adjustments are
+not a solved problem in the maker literature.
 
-### One open architecture question
-
-Grado uses rod-block rotation **plus** gimbal tilt — two degrees of freedom. With a suspension strap
-carrying fit, one of those may be unnecessary: the strap accommodates head height, so the cup may
-only need tilt. **Dropping a DoF deletes a whole interface.** Worth deciding deliberately rather
-than inheriting Grado's answer.
+**Interface 7 is the tightest constraint in the build** and it propagates inward, not outward: the
+pad fixes the rim OD, the rim OD fixes the annulus available between the driver seat and the outer
+wall, and that annulus is what §4a already showed to be marginal for anything living in the cup
+wall. Measure it first (§5).
 
 ## 5. Tier 1 — what blocks the first print
 
 Following the discipline in `builds/daily-driver/docs/measurement-priorities.md`: if a part
 *regenerates from* the number it is Tier 1; if the number only *tunes* a part it is Tier 2.
 
-| # | Measurement | Sets | Risk if wrong |
-|---|---|---|---|
-| 1 | **Driver OD + frame depth** (from the drivers actually on hand) | `driver_od` → aperture, recess, ring | Driver will not seat; everything downstream regenerates wrong |
-| 1b | *Working assumption 2026-08-06: **40 mm**, pending current supplier quotes. Every dimension derived from it carries an `ESTIMATE` flag until a real driver is in hand.* | | |
-| 2 | **Pad mounting geometry** — but see below, this may be ours to define | `pad_*`, ring OD | Pad will not mount, or bass target unreachable |
-| 3 | **Target clamp force**, and the head-width range it must hold across | the elastic element's spec, `bow_*` equivalents | Too tight = unwearable; too loose = no bass and it falls off |
+**All of Tier 1 is now measurable on the bench — the Grado and the Beyer bow are both in hand
+(2026-08-06). Nothing here waits on a supplier.**
 
-**#3 is new and has no Daily Driver equivalent** — Daily Driver inherits clamp from a purchased
-Beyerdynamic bow, so it never had to choose a number. We do. This is the Tier-1 item most likely to
-be skipped and most likely to sink the build.
+| # | Measurement | From | Sets | Risk if wrong |
+|---|---|---|---|---|
+| **1** | **Grado cup rim OD** — the diameter the pad's relaxed ID stretches over. Plus the rim profile: plain cylinder, lip, or groove, and what actually retains the pad | Grado on bench | `cup_outer_diameter` → cascades to the whole cup, the annulus, and every feature in the wall | The pad does not stay on, or the cup is the wrong size and everything downstream regenerates wrong |
+| **2** | **Pad relaxed ID + stretched ID + thickness** (flat and bowl if both are to hand) | Grado pads | the fit envelope, and the bass-tuning range we can promise | Over- or under-stretched pad; wrong bass expectation set in the docs |
+| **3** | **Bow end-tab hole Ø + centre pitch**, and bow width + thickness | Beyer bow | the `slider` screw pattern and the bow pocket | Bow will not mount — and this is now a *screwed* joint (§4d #1), so it is Tier 1, not Tier 2 |
+| **4** | **Bow relaxed radius + developed length** | Beyer bow | ear spacing, slider travel, worn arc | Wrong ear spacing; on an on-ear this lands the pad off the ear |
+| **5** | **Driver OD + frame depth** | drivers on hand | `driver_od` → aperture, recess, clamp ring | Driver will not seat |
+| 5b | *Working assumption: **40 mm**, pending current supplier specs. Everything derived carries `ESTIMATE` until a real driver is chosen.* | | | |
 
-**#2 may not be a measurement at all.** If the pad is printed (§2), we are not measuring someone
-else's pad, we are choosing a geometry. That converts a Tier-1 measurement into a design decision —
-which is better, but it means the bass target has to be settled earlier than Daily Driver settled
-its own.
+### The measurement worth inventing: turn the clamp target into a number
+
+§4d #2 sets the target as "HD 600 / DT 770 class," which is a *feel*, not a spec — and Daily Driver
+never had to convert it because it inherited clamp from the purchased bow. We now need it as a
+number, and it is cheap to get:
+
+> Spread the headphone across two blocks at a known separation (a head-width proxy), rest one arm on
+> a kitchen scale, and read the force. Repeat at the ends of the head-size range. Do the same with
+> the HD 600 and the DT 770 as references.
+
+That converts a subjective target into `bow_*` spec and gives us the number to hand a stocked-part
+supplier later (§4b). It also produces the reference data for the §4d #2 watch item — the same force
+on a supra-aural is a much higher *pressure*, and we will want the before/after when the first wear
+test disagrees.
 
 ## 6. Open questions — Jamey
 
@@ -333,12 +397,22 @@ its own.
    whichever is chosen, so this is the gate on everything else. Candidates measured on the same
    fixture in one session (FR + distortion + impedance + Fs) is a day's work and the highest-leverage
    day in the project.
-3. **Printed pad, or foam?** §2 argues printed, because it makes bass tuning a reprint. But a
-   printed pad has to be *comfortable* on the ear, which is a much harder ask than sitting around it.
-   Possibly: printed pad carrier + a cut foam disc the builder supplies.
-4. ~~Elastic element or spring steel~~ — **settled 2026-08-06: spring steel, line-wide. See §4b.**
-   The live question is now the *suspension strap*, which deletes the slider subsystem: what
-   head-size range must it cover, and is that range reachable without a slider?
+3. ~~Printed pad, or foam?~~ — **settled: commodity Grado-pattern, §4d #3.** Note this reverses §2's
+   "the pad is a printed part, so bass tuning is a reprint" argument: bass tuning is now a $10
+   aftermarket purchase instead, which is *better* for the builder and removes the lever from our
+   parametric model. §2's framing should be read as superseded.
+4. ~~Elastic element or spring steel~~ — **settled: spring steel, line-wide (§4b).** Forming our own
+   is ruled out by experiment. Live follow-on, and it is *sourcing* not design: find an off-the-shelf
+   bow we are happy to standardise on, or a supplier who will make and stock a bow to our spec for
+   every Warren Labs headphone.
+6. **Two DoF — which two?** §4d #6 says "swivel a little bit as well as go up and down," and that is
+   ambiguous in a way that changes the yoke. Two readings:
+   - **(a)** two *rotational* axes at the cup — Grado's rod-block swivel plus gimbal tilt — with
+     height coming from the slider. Three adjustments total.
+   - **(b)** one rotational axis (swivel), with "up and down" meaning the slider's height travel.
+     Two adjustments total, and interface 4 changes shape.
+
+   Needs one sentence from the maker before the yoke is drawn.
 5. **What "pause Daily Driver" means concretely** — see §7.
 
 ## 7. What pausing Daily Driver actually touches
