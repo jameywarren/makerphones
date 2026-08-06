@@ -83,6 +83,29 @@ This is measurable with the house method (`warren-labs/MEASUREMENT-PIPELINE.md` 
 we know, nobody publishes it as a *design* goal. It is also the honest way to compete given §2: we
 are not going to win on bass extension, and we can win on consistency.
 
+### An on-ear is not less position-sensitive. It is sensitive somewhere else.
+
+§2's "no seal to achieve" is true and it is also the easiest thing in this brief to oversell, so
+correct it here before it becomes an assumption.
+
+A sealed circumaural loses a lot of bass when the seal breaks, so its sensitivity concentrates
+**below ~200 Hz**. A supra-aural is already leak-dominated down there, so moving it changes less —
+but the driver now sits close to the ear and roughly on-axis with the canal, so **small changes in
+where the pad lands move the mids and treble instead**. Grado's flat/bowl/L-cush behaviour is that
+sensitivity being exercised deliberately: those pads change far more than bass.
+
+So the trade is not "less fussy," it is **bass-seal sensitivity traded for mid/treble alignment
+sensitivity** — and the second one is arguably the worse deal, because treble error reads as timbre
+rather than as level and listeners do not adapt to it the way they adapt to a bass shelf.
+
+Two consequences:
+
+- The design brief in this section is *harder* to hit on an on-ear, not easier. Winning it is
+  therefore worth more.
+- **The pad's job is alignment, not just cushioning.** Whatever the pad geometry ends up being
+  (§6 Q3), it has to locate the driver relative to the canal repeatably. That is a positioning
+  requirement and it should be designed for on purpose, not left to whatever is comfortable.
+
 ### The fixture caveat, up front
 
 The EARS Pro controls the on-ear's dominant variables **poorly**. A supra-aural's response is
