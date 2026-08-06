@@ -375,6 +375,57 @@ Following the discipline in `builds/daily-driver/docs/measurement-priorities.md`
 | **5** | **Driver OD + frame depth** | drivers on hand | `driver_od` → aperture, recess, clamp ring | Driver will not seat |
 | 5b | *Working assumption: **40 mm**, pending current supplier specs. Everything derived carries `ESTIMATE` until a real driver is chosen.* | | | |
 
+### First bench numbers — Grado rim, 2026-08-06 (TAPE MEASURE, provisional)
+
+| Feature | As read | Metric |
+|---|---|---|
+| Rim / lip outer diameter | 2 ⅛ in | **53.98 mm** |
+| Lip depth | ~⅛ in | ~3.18 mm |
+| Cup steps inward behind the lip by | ~⅛ in | ~3.18 mm |
+
+**Precision, stated because this number regenerates the entire model.** A tape measure on a curved
+cup, read to the nearest ⅛ in, is ±1/16 in at best — **53.98 ± 1.6 mm**. That is a 3 mm span on the
+one dimension everything else derives from. Good enough to build the parametric skeleton against;
+**not good enough to print.** `measurement-priorities.md`'s rule stands: caliper readings beat
+everything, and this gets re-taken before the first load-bearing part.
+
+Flag as `ESTIMATE` in `params.py`, and note that the concept mesh's 54 mm (§4a) was a lucky guess
+rather than a derived number — do not let the agreement read as corroboration.
+
+### What that number does to the driver — the annulus, third time of asking
+
+§4a found the driver-seat annulus marginal from a modelled concept. §4d #3 predicted the commodity
+pad would tighten it. Now it is measured, and it is tighter than either:
+
+    rim OD                53.98
+    − 2 × wall (2.0)      → cup bore            49.98
+    driver seat (40 + 0.6 clearance)            40.60
+    radial ledge available = (49.98 − 40.60)/2 =  4.69 mm
+
+**4.69 mm of radial ledge for a 40 mm driver.** That is workable for a printed clamp ring that
+presses on the driver flange (§4d #7) and it is *not* workable for an M3 boss with a heat-set insert,
+which wants ~6 mm before the wall around the insert gets too thin to hold. **Three independent routes
+— a modelled concept, a pad decision, and now a real measurement — have arrived at the same answer:
+nothing fastened lives in that wall.** Treat it as settled.
+
+### The open question this raises, and it is not small
+
+The lip geometry is ambiguous in the reading, and the two interpretations differ by enough to change
+whether a 40 mm driver fits at all:
+
+- **(a) The step is on the diameter.** Cup body = 53.98 − 3.18 = **50.8 mm**, bore 46.8, ledge
+  **3.1 mm**. A 40 mm driver is then very tight — the clamp ring has almost nothing to bear on.
+- **(b) The step is on the radius.** Cup body = 53.98 − 6.35 = **47.6 mm**, bore 43.6, ledge
+  **1.5 mm**. A 40 mm driver does **not** fit the body at all; it would have to sit forward, in the
+  lip section.
+
+Which also opens the question we have been assuming past: **is 40 mm right for a Grado-sized cup?**
+The working assumption came from Daily Driver, which is circumaural and has room. If the answer is
+(a) or (b), the driver may need to be 36–38 mm, and that is a supplier conversation, not a CAD one.
+
+**Fastest resolution: measure the Grado's own driver aperture.** Whatever Grado fits in this cup is
+the empirical answer to what fits in this cup.
+
 ### The measurement worth inventing: turn the clamp target into a number
 
 §4d #2 sets the target as "HD 600 / DT 770 class," which is a *feel*, not a spec — and Daily Driver
