@@ -426,6 +426,93 @@ overhang modelled at all, so both of us were making the same mistake about the s
 tweaker — not as something geometry forced.** That distinction matters: if a later revision needs
 fasteners there, geometry does not forbid it, and this section should not be quoted as if it does.
 
+### Third-party Grado CAD — what it says, and the boundary on using it (2026-08-06)
+
+Four reference sources arrived: a dimensioned drawing, an RS1 wood-cup drawing, two hand sketches,
+and `cup.stp` / `grid.stp` (Creo, dated 2017, author "karl", from a Head-Fi 3D-printed-cup thread).
+The STEP files are real B-rep, so they were measured rather than read off the drawings.
+
+**`cup.stp` profile, extracted from the solid** (axis = Y, front face at 0):
+
+| y (mm) | Ø | What it is |
+|---|---|---|
+| 0.00 | 54.00 | **front face** |
+| 0 → 2.00 | 45.00 | grid / screen recess, 2 mm deep |
+| 2.00 | 48.27 | ledge behind the grid |
+| 5.62 → 12.00 | **64.00** | the barrel — widest point |
+| 13.50 → 27.60 | 55.25 | rear barrel, outer |
+| 13.50 → 18.85 | 48.00 | inner bore |
+| 18.85 → 27.60 | 50.50 | inner bore, deeper |
+| 19 → 22.75 | 3.00 / 4.50 | cable entry |
+| 27.60 | — | back face — **total depth 27.6** |
+
+`grid.stp` is exactly Ø45 × 2 mm, which seats in the 0→2 recess. The two files are consistent.
+
+**Jamey's tape measure was right.** 2⅛ in = 53.98 against a modelled **Ø54.00 front face** — a 0.02 mm
+agreement that is luck rather than precision, but it confirms *which feature* was measured. The
+earlier ±1.6 mm error bar can come down, though only for this diameter.
+
+**Three different parts are in play and they must not be blended:**
+
+1. **`cup.stp` + the RS1 drawing** — the **wood outer cup**. Ø64 barrel, Ø54 front face, 27.6 deep.
+2. **The hand sketches** — Ø56.70 (2 7⁄32 in) outer, stepping to 50.17 (1 31⁄32) and 48.58 (1 29⁄32),
+   27.74 deep, with a screen. This is a *different* part — an SR-family plastic cup or driver
+   housing, externally stepped where the wood cup is barrelled.
+3. **The RS1 drawing's Ø39.2 ±0.1** — a tolerance that tight is a *fit*, not a cosmetic opening.
+   That is the driver register.
+
+Numbers worth keeping, because they are hard to get any other way:
+
+- **Ø39.2 ±0.1 driver register** — and note it is *smaller* than a 40 mm driver, so the driver seats
+  behind the aperture rather than dropping into it. That changes how our baffle works.
+- **Ø45 × 2 mm grid seat** — a commodity-sized screen recess.
+- **27.6 mm cup depth** — answers the open question from the last round.
+- **Ø3 cable entry.**
+
+### Provenance — the boundary, stated before anyone writes CAD
+
+These are **third-party files from a forum thread**, not ours. `starting-a-new-product.md` already
+requires confirming the prior-art boundary — "credit adopted ideas; never copy non-permissive
+files/geometry" — and this is exactly the case it was written for.
+
+- **Off-limits:** importing, tracing, scaling or re-deriving this geometry into our parts. The cup
+  shape is someone else's work and our repo ships CAD publicly under MIT.
+- **Legitimate:** the **pad-mounting diameter**, as an interoperability dimension. Matching it is the
+  same class of act as matching a screw thread or a battery size — the whole point of §4d #3 is that
+  the pad is a commodity we must fit, and a fit dimension is not an expressive choice.
+- **Also legitimate:** reading these to *understand the architecture* — that Grado registers the
+  driver behind a smaller aperture, that the screen is a separate 2 mm disc — and then designing our
+  own solution to the same problem.
+
+Anything from this section that reaches `params.py` needs a comment saying which of those three
+categories it falls in.
+
+**Maker's direction (2026-08-06): these are starting points, not a target.** Copying a Grado is not
+the goal and would be the least interesting version of this project. Where we should diverge on
+purpose:
+
+| Grado does | We should | Why |
+|---|---|---|
+| Ø39.2 register, **smaller** than the driver — driver seats behind a restricted aperture | Treat aperture as a **free acoustic variable**, decoupled from the mount | With a clamp ring (§4d #7) the aperture no longer has to double as the register. Grado's is one answer to a constraint we do not have |
+| Screen as a separate Ø45 × 2 mm disc | Integral printed grille | One fewer part, one fewer thing to source. The concept mesh already showed this reads well |
+| Barrel profile from wood turning | Whatever prints well | The barrel is a *lathe* form. An FDM part has different freedoms and different constraints (overhang, layer direction) — inheriting a turned profile would be copying a manufacturing process we do not use |
+| Fixed cable, Ø3 entry | Open — detachable is on the table | §4c interface 8, still undecided |
+| Glued / pressed assembly | Clamp ring, serviceable | Already settled, and it is the build's stated tie-breaker |
+
+The one place we deliberately **do not** innovate is the pad interface, because that is the
+interoperability dimension and divergence there costs the builder the entire aftermarket.
+
+### The reframe: measure the pad, not the cup
+
+Four sources give cup diameters between Ø54 and Ø56.7 depending on model, and **none of them is the
+number we actually need.** The cup is ours to design. The *pad* is the fixed, commodity part, and the
+dimension that governs is its **relaxed inner diameter and how far it will stretch** — which is a
+property of the pad, not of any Grado cup.
+
+That makes Tier-1 #2 the important measurement and Tier-1 #1 merely a sanity check. A rim anywhere in
+the Ø54–56.7 band is probably fine; what we cannot guess is how much stretch the foam tolerates
+before it either will not go on or will not stay on.
+
 ### The measurement worth inventing: turn the clamp target into a number
 
 §4d #2 sets the target as "HD 600 / DT 770 class," which is a *feel*, not a spec — and Daily Driver
