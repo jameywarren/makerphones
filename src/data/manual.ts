@@ -130,6 +130,8 @@ export const APPENDIX_HANDLES = [
 export const BUILD_GUIDE_HANDLES = [
   'choosing-a-3d-printer',
   'your-first-build',
+  'first-chair-design-spec',
+  'first-chair-parts',
   'simple-open-back-build',
   'closed-back-studio-build',
   'daily-driver-design-spec',

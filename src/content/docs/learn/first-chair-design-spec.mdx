@@ -1,0 +1,232 @@
+---
+title: "First Chair — Design Spec"
+handle: first-chair-design-spec
+type: build-guide
+read_time: 11
+related: [first-chair-parts, headphone-form-factors, open-vs-closed-back-design, ear-pads-and-comfort, driver-selection-guide, daily-driver-design-spec]
+tags: [build-guide, spec, first-chair, on-ear, supra-aural, open-back, design, parametric]
+description: "The functional design specification for First Chair, Makerphones' flagship first build: a 40 mm open-back on-ear with a printed mechanism, commodity pads, and one bought spring steel bow."
+excerpt: "Design Specification · v0.1 · 2026-08-06 — the on-ear open-back that replaces the Daily Driver as the build to start with, and the reasoning behind every part of it."
+---
+
+import PartsViewer from '../../../components/PartsViewer.astro';
+
+<PartsViewer
+  glb="https://makerphones.github.io/first-chair/models/first-chair.glb"
+  groups="https://makerphones.github.io/first-chair/models/first-chair.groups.json"
+/>
+
+🧊 **Spin it in 3D** — drag to orbit, scroll to zoom, slide to **explode**, and click a part to **isolate** it. This is the live model, developed in the open at [github.com/makerphones/first-chair](https://github.com/makerphones/first-chair). **Want every part to print?** [See the full parts list →](/learn/first-chair-parts/)
+
+**Status:** Design phase, CAD in progress, nothing print-verified. The cup was rebuilt to
+the locked 54 mm profile on 2026-08-06; the baffle has not been yet. This document is the
+functional spec the CAD is built against.
+
+:::caution[Live design, not a finished product]
+This is the **beta** view — the design as it stands right now, republished on every commit.
+Parts may be mid-change. Two things are known-unfinished as of 2026-08-06: the **baffle** is
+still on the Daily Driver's Ø91 plate diameter, and the **closed-back variant doesn't fit**
+at this scale. Both are tracked in the repo's design log.
+:::
+
+---
+
+## Why this is the build to start with
+
+First Chair replaces the [Daily Driver](/learn/daily-driver-design-spec/) as the flagship —
+not because the Daily Driver is wrong, but because it's the wrong *first* build. Makerphones
+is a learning path, so the flagship should be the first rung, not the last.
+
+**The barrier was never the printing. It was the hardware.** The Daily Driver's bill of
+materials runs roughly $60–70 across eight suppliers, several of them specialty fastener
+houses, plus heat-set-insert technique before anything can be assembled. Its own BOM notes
+that one pivot screw sits below the official ISO size sheet, so every supplier brands it
+"similar to" — which asks a first-timer to judge fastener equivalence on a part that has to
+fit a printed bore.
+
+That's a fine BOM for the person the manual *creates*. It's a wall for the person the manual
+is trying to *reach*.
+
+The target here, stated as a target rather than an absolute: **printer, filament, drivers,
+and one elastic element.** Every fastener that survives to the final BOM has to justify
+itself individually.
+
+---
+
+## Why on-ear, and what it costs
+
+Three real reasons, not just "smaller":
+
+- **No seal to achieve.** Circumaural bass depends on a pad seal, which depends on pad
+  compliance and clamp force — the two hardest properties to hit with printed parts. A
+  supra-aural leaks by design, so its bass is set by geometry you control instead of a seal
+  you can't.
+- **Far less bending load on the yoke.** Smaller, lighter cups mean less leverage, which is
+  what makes a printed mechanism plausible at all.
+- **The architecture is genuinely simple.** Driver on a ring, pad, open rear, almost no
+  cavity to resonate. Fewer variables to get wrong on a first build.
+
+**The cost is bass, and it isn't small.** Grado is the reference here, and Grados are
+famously bass-light and famously not fussy about placement — those are *the same fact*. This
+design leans into that rather than chasing extension the hardware can't make.
+
+### The thing we expected to be worse, and measured better
+
+The obvious worry with a supra-aural is that you trade bass-seal sensitivity for **mid and
+treble alignment** sensitivity — the driver sits close to the ear and roughly on-axis with
+the canal, so small changes in where the pad lands move the tonality. That's the worse trade,
+because treble error reads as timbre and listeners don't adapt to it the way they adapt to a
+bass shelf.
+
+We had the measurement and hadn't looked. Six headphones captured on the same rig,
+2026-08-03, placement standard deviation in dB:
+
+| | 20–200 Hz | 2–8 kHz | 8–20 kHz |
+|---|---|---|---|
+| **SR60x** — on-ear, small pads | 0.56 / 0.21 | **0.85** | **2.72** |
+| HD 650 — over-ear | 0.40 / 0.59 | 1.41 / 2.45 | 3.48 / 5.13 |
+| RS1x — on-ear, larger pads | 0.71 / 0.53 | 2.15 / 2.00 | 4.37 / 5.91 |
+
+**The on-ear was the most repeatable of the three, in exactly the bands the argument
+predicted it would be worst.** The rig's noise floor was ~0.1 dB and constant, so that spread
+is physical, not instrument.
+
+The more useful comparison is SR60x vs RS1x, because it holds form factor constant and varies
+pad size: the smaller-padded one is ~2.5× more repeatable through 2–8 kHz. That points at
+**pad size**, not supra- vs circumaural, as the dominant variable — and it's a direct design
+input: **prefer the smaller pad.**
+
+Stated honestly: three different headphones, one unit each, one operator. Directional
+evidence from the right rig, not a controlled experiment.
+
+### The design goal, stated correctly
+
+Not "minimise position sensitivity" — that optimises toward the wrong thing, because
+sensitivity can be low for two opposite reasons. It can be low because the acoustic design is
+robust. Or it can be low because the response is already at its floor: a leaky on-ear is
+insensitive in the bass because there's no bass left to lose.
+
+So: **hold a response you'd actually choose, and be insensitive to placement at that
+response.** As far as we know nobody publishes that as a *design* goal, and it's the honest
+way to compete given the bass trade.
+
+---
+
+## System architecture
+
+```
+SPRUNG STEEL BOW  (bought — screwed at its end tabs)
+        |
+SLIDER × 2  (printed) — height adjustment + the yoke swivel
+        |
+YOKE × 2  (printed) — slider to cup, carries the tilt axis
+        |
+CUP × 2  (printed) — Ø48 body, Ø54 front lip, integral rear grille
+        |
+BAFFLE × 2  (printed, separate) + CLAMP RING × 2 (printed)
+        |
+EARPADS  (commodity Grado-pattern — not designed, not shipped)
+```
+
+**Three degrees of freedom:** swivel and tilt at the cup, plus the slider's vertical travel.
+
+---
+
+## The decisions, and why
+
+**Spring steel, not a printed spring.** Printed plastics creep under sustained strain and a
+headband is a sustained-strain application. PLA is worst and will visibly lose clamp force in
+weeks; PETG is better, nylon better still, but no FDM plastic is a good spring. A printed
+headband that works on day one and is loose by month three is the single most likely way this
+build disappoints someone. Forming our own bow was tried with printed jigs and failed — the
+steel springs back and the jig deflects before the stock does.
+
+**Screws at the bow joint.** The fastener-free through-post sandwich is dropped. The bow has
+end-tab holes and is designed to be screwed; we use them. That spends a small number of M3s
+at the *one* joint carrying sustained spring load, which is the right place to spend them.
+
+**Commodity Grado-pattern pads.** We design a rim the foam stretches over and ship no pad at
+all. This is the one interface where we deliberately don't innovate, because diverging costs
+the builder the entire aftermarket. It also means **bass tuning is a $10 purchase rather than
+a reprint** — swapping flats for bowls is the main tonal lever you have.
+
+**Clamp ring for driver retention**, and the framing that comes with it is the build's
+standing tie-breaker: *not ideal for a manufactured model, but for a tweaker it's great.*
+**When serviceability and manufacturability conflict, serviceability wins, because the user
+is a tweaker.**
+
+**Separate baffle** — and for a better reason than print flatness: manufacturing, tweaking
+and repair. The baffle is the part a builder iterates on.
+
+**Clamp target: the HD 600 / DT 770 class.** Explicitly *not* Grado — a Grado's light clamp
+isn't the goal. Watch item: both references are circumaural, so their clamp spreads around
+the ear onto the skull. The same *force* on a supra-aural concentrates on the ear itself, so
+the **pressure** is much higher. Expect the first wear test to be the arbiter.
+
+---
+
+## The locked geometry
+
+The cup profile came off a Grado on the bench, then off a dimensioned reference solid. The
+key insight is that the "lip" is not a feature on the cup — **it's the front plate overhanging
+the body**, and that single reading explains pad retention for free:
+
+```
+front plate / pad rim    Ø 54.0    LOCKED
+steps in 3.0 per side
+cup body                 Ø 48.0    LOCKED
+interior                 Ø 42.0    → 3.0 mm wall
+overall depth            27.6      LOCKED
+```
+
+The foam stretches over the Ø54 rim and grips the Ø48 body behind it. Retention is **axial**
+— the lip stops it climbing forward — and only lightly radial: it rotates freely on the cup,
+so the grip is *locating*, not clamping. That means **lip depth matters more than rim-diameter
+precision**, and the interface is forgiving: the same pads fit cups across a Ø54–56.7 family.
+
+Driver: **40 mm**, confirmed. It's the standard and the design doesn't chase a non-standard
+part.
+
+### Where we diverge from Grado on purpose
+
+Copying a Grado would be the least interesting version of this project.
+
+| Grado does | We do | Why |
+|---|---|---|
+| Ø39.2 register *smaller* than the driver, so it seats behind a restricted aperture | Treat the aperture as a **free acoustic variable**, decoupled from the mount | With a clamp ring the aperture doesn't have to double as the register |
+| Screen as a separate Ø45 × 2 mm disc | Integral printed grille | One fewer part, one fewer thing to source |
+| Barrel profile from wood turning | Whatever prints well | A barrel is a *lathe* form; inheriting it would be copying a manufacturing process we don't use |
+| Glued / pressed assembly | Clamp ring, serviceable | The tie-breaker above |
+
+The one place we don't diverge is the pad interface, for the reason given above.
+
+:::note[Prior-art boundary]
+Reference CAD from a forum thread was used to *understand the architecture* and to take the
+**pad-mounting diameter** as an interoperability dimension — the same class of act as matching
+a screw thread. No third-party geometry is imported, traced, or re-derived into our parts.
+This repo ships CAD publicly under MIT.
+:::
+
+---
+
+## What's still open
+
+- **The printed friction slider** is the mechanism's real unknown, and the part with the
+  least precedent — printed detents that still hold after a few hundred adjustments are not
+  a solved problem in the maker literature. A physical test coupon (one rail, five sleeves at
+  graduated leaf thickness) settles it by feel rather than by analysis.
+- **The baffle** is still on the Daily Driver's Ø91 numbers and needs the same 54 mm rebuild
+  the cup just had.
+- **The closed-back variant doesn't fit.** At 54 mm the tuning ports and the damping ring
+  compete for the same floor inside the baffle-boss circle. Parked pending a decision.
+- **Cable entry** — fixed or detachable — is undecided.
+- **Clamp force as a number.** The HD 600 / DT 770 target is a feel, not a spec. Converting
+  it is cheap: spread the headphone across two blocks at a known separation, rest one arm on
+  a kitchen scale, read the force, repeat with the references.
+
+---
+
+**Source:** The CAD, STLs, and the running design log are developed in the open at
+[github.com/makerphones/first-chair](https://github.com/makerphones/first-chair), the
+canonical home for the design files. The model is fully parametric — change the driver, the
+pad, or the head size and the parts regenerate to match.

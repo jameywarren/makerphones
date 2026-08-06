@@ -1,0 +1,72 @@
+---
+title: "First Chair — Parts & Exploded View"
+handle: first-chair-parts
+type: build-guide
+read_time: 4
+related: [first-chair-design-spec, headphone-form-factors, driver-mounting-and-assembly, daily-driver-parts]
+tags: [build-guide, first-chair, parts, 3d-print, exploded-view, on-ear]
+description: "Every First Chair part you print, in 3D: pull the on-ear assembly apart and put it back together, isolate any part, and see exactly what to print and how."
+excerpt: "Spin the whole headphone, drag the slider to explode it, click any part to isolate it, then check the print list below for what each part needs."
+---
+
+import PartsViewer from '../../../components/PartsViewer.astro';
+import PartsGallery from '../../../components/PartsGallery.astro';
+import { FIRST_CHAIR_PARTS } from '../../../data/build-parts';
+
+This is First Chair as an interactive model. Drag the slider to **pull the assembly
+apart and back together**, toggle the **sub-assemblies**, or **click any part to
+isolate it** and inspect it on its own.
+
+:::caution[Live build — this is the working design]
+First Chair is being designed in the open right now, and this view updates on **every
+commit**. Nothing is print-verified, and some parts are mid-rebuild — the **baffle** is
+still carrying the Daily Driver's Ø91 plate diameter and will change. Follow along, and
+fork freely. It's all at
+[github.com/makerphones/first-chair](https://github.com/makerphones/first-chair).
+:::
+
+<PartsViewer
+  glb="https://makerphones.github.io/first-chair/models/first-chair.glb"
+  groups="https://makerphones.github.io/first-chair/models/first-chair.groups.json"
+/>
+
+The headphone is built from a small set of 3D-printed parts, one bought metal headband
+bow, a pair of drivers, and a pair of commodity earpads. Everything below is what you
+print to make one pair: quantities are per complete headphone (two ears).
+
+## Parts to print
+
+<PartsGallery
+  table={FIRST_CHAIR_PARTS}
+  renders="https://makerphones.github.io/first-chair/renders"
+  models="https://makerphones.github.io/first-chair/models"
+/>
+
+## Two print orientations that aren't optional
+
+Most of the orientation notes above are about surface finish and support. Two of them
+are structural:
+
+- **The yoke prints flat in its plane, with the layer lines running *along* the arm.**
+  The arms carry bending load and layer adhesion is the weak axis. This is the
+  difference between a yoke that lasts and one that snaps.
+- **The cup prints grille-face-down.** The lattice is self-supporting that way, and the
+  pad lip comes off the plate clean.
+
+## What you don't print
+
+**The bow.** No FDM plastic is a good spring — a printed headband works on day one and
+is loose by month three. This is the one bought structural part.
+
+**The pads.** First Chair ships no pad and designs none: the cup rim is built to the
+Grado pattern so the whole aftermarket fits. That's deliberate, and it's a feature —
+swapping flats for bowls is your main tonal lever, and it costs about ten dollars
+instead of a reprint.
+
+**The driver.** 40 mm, ~32 Ω. A mockup appears in the 3D assembly above so the
+driver ↔ baffle ↔ clamp fit reads.
+
+For sourcing and rough costs, see the bill of materials in the
+[design spec](/learn/first-chair-design-spec/). Each printed part is a starting point you
+can modify — the model is fully parametric, so changing a driver, a pad, or the head size
+regenerates the parts to match.

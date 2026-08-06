@@ -82,9 +82,13 @@ const sidebar = [
   {
     label: 'Build Guides',
     items: [
-      // Hands-on companion builds — no nav numbering, outside the chapter chain
+      // Hands-on companion builds — no nav numbering, outside the chapter chain.
+      // First Chair leads the builds: it is the flagship (the on-ear open-back that
+      // is the first rung), and Daily Driver follows as the over-ear you graduate to.
       'learn/choosing-a-3d-printer',
       'learn/your-first-build',
+      'learn/first-chair-design-spec',
+      'learn/first-chair-parts',
       'learn/simple-open-back-build',
       'learn/closed-back-studio-build',
       'learn/daily-driver-design-spec',

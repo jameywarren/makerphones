@@ -1,56 +1,35 @@
 ---
 /**
- * Daily Driver printable-parts gallery — grouped "what you need to print" cards.
+ * Printable-parts gallery — grouped "what you need to print" cards.
  * Each card shows the per-part render poster and a "View in 3D" button that swaps in
- * a Google <model-viewer> loading the per-part GLB (both published by the daily-driver
- * repo's GitHub Pages — single source, nothing copied here). Print metadata is
- * editorial (from the design spec / build log).
+ * a Google <model-viewer> loading the per-part GLB (both published by the build repo's
+ * GitHub Pages — single source, nothing copied here). Print metadata is editorial
+ * (from the design spec / build log).
  *
- * `renders` / `models` base URLs default to the live (beta) channel; the "current
- * build" page passes the promoted `-stable` paths instead.
+ * `renders` / `models` base URLs default to Daily Driver's live (beta) channel; the
+ * "current build" page passes the promoted `-stable` paths instead.
+ *
+ * `table` selects which build's parts to list — see src/data/build-parts.ts. It
+ * defaults to Daily Driver so the existing pages need no change.
  */
+import { DAILY_DRIVER_PARTS, type BuildPartsTable } from '../data/build-parts';
+
 interface Props {
   renders?: string;
   models?: string;
+  table?: BuildPartsTable;
 }
 const {
   renders = 'https://makerphones.github.io/daily-driver/renders',
   models = 'https://makerphones.github.io/daily-driver/models',
+  table = DAILY_DRIVER_PARTS,
 } = Astro.props;
 const R = renders;
 const M = models;
 
-const PARTS = [
-  // --- Earcup (one piece) ---
-  { group: 'Earcup', base: 'cup', label: 'Cup', qty: '×2', material: 'PETG',
-    orient: 'Grille face down', supports: 'Light (pivot bosses)', note: 'One-piece earcup: triangular-lattice grille with the flush logo, buttressed baffle bosses, the yoke pivot bosses, and the earpad retaining lip. Damping is accessed from the front (baffle off).' },
-  { group: 'Earcup', base: 'baffle', label: 'Baffle', qty: '×2', material: 'PETG / PLA+',
-    orient: 'Flat', supports: 'No', note: 'Front driver-mount plate: driver guard + recess, 4 M3 rim holes, vents, and 3 standoffs for the clamp ring. The guard prints over the aperture.' },
-  { group: 'Earcup', base: 'driver_clamp', label: 'Driver clamp ring', qty: '×2', material: 'PETG',
-    orient: 'Recess up', supports: 'No', note: 'Retains the driver from the back: the driver’s rear nests into the ring’s recess, the inner shoulder catches the frame rim, and 3 M3 screws into baffle-back standoffs pull it tight.' },
-  { group: 'Earcup', base: 'driver', label: 'Dynamic driver', qty: '×2', bought: true, material: '40 mm dynamic driver, 32 Ω',
-    orient: '—', supports: '—', note: 'NOT printed: the bought driver. A mockup is shown in the 3D assembly above so the driver ↔ baffle ↔ clamp fit reads.' },
-  // --- Gimbal ---
-  { group: 'Gimbal', base: 'yoke', label: 'Fork-yoke', qty: '×2 (L/R mirror)', material: 'PETG',
-    orient: 'Flat in its plane', supports: 'Minimal', note: 'Wraparound bracket. M3 shoulder-screw pivot, ±20° tilt with a hard stop. Mirror for left/right.' },
-  // --- Headband ---
-  { group: 'Headband', base: 'slider', label: 'Slider', qty: '×2', material: 'PETG',
-    orient: 'Post bore vertical', supports: 'Light', note: 'Rounded Beyer-end-cap lozenge that clamps the 33 mm metal band: its two prongs drop into a recess and a cover plate + 2× M3 screws sandwich them. A slim post-bore barrel rides outside the band; the yoke’s round post slides in it for height and lets the cup swivel when unlocked, friction-locked by an M3 thumbscrew (Grado HP1000-style). Symmetric — the same print serves both ears.' },
-  { group: 'Headband', base: 'headband_pad', label: 'Headband pad', qty: '×1', material: 'Foam or printed TPU',
-    orient: 'Arch on its side', supports: 'Light', note: 'Rough-draft crown cushion; the channel grips the bow. Form/retention TBD.' },
-  { group: 'Headband', base: 'bow', label: 'Head bow', qty: '×1', bought: true, material: 'Beyerdynamic Metal Head Bow (~$11) or DIY 1095 spring steel',
-    orient: '—', supports: '—', note: 'NOT printed: the sprung headband is a bought/formed metal part (reference only).' },
-  // --- Optional ---
-  { group: 'Optional', base: 'grille_dot', label: 'Logo accent cap', qty: 'optional', material: 'Accent filament',
-    orient: 'Any', supports: 'No', note: 'Optional press-in cap at the grille centre. The logo is flush single-colour by default — add this only if you want a contrasting accent.' },
-  { group: 'Optional', base: 'adapter_ring', label: 'Driver adapter ring', qty: 'optional', material: 'PETG',
-    orient: 'Flat', supports: 'No', note: 'Step-down ring to host a smaller driver in a larger baffle. NOT acoustically neutral.' },
-];
-
-const GROUP_ORDER = ['Earcup', 'Gimbal', 'Headband', 'Optional'];
-const GROUP_NOTE = {
-  Gimbal: 'Plus the bought hardware per pivot (M3 shoulder screws + brass heat-set inserts). See the bill of materials.',
-};
+const PARTS = table.parts;
+const GROUP_ORDER = table.groupOrder;
+const GROUP_NOTE: Record<string, string> = table.groupNotes ?? {};
 const grouped = GROUP_ORDER
   .map((g) => ({ group: g, parts: PARTS.filter((p) => p.group === g) }))
   .filter((g) => g.parts.length);
