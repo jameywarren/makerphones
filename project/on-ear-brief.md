@@ -502,16 +502,44 @@ purpose:
 The one place we deliberately **do not** innovate is the pad interface, because that is the
 interoperability dimension and divergence there costs the builder the entire aftermarket.
 
-### The reframe: measure the pad, not the cup
+### The pad interface — settled by function, not by dimension (2026-08-06)
 
-Four sources give cup diameters between Ø54 and Ø56.7 depending on model, and **none of them is the
-number we actually need.** The cup is ours to design. The *pad* is the fixed, commodity part, and the
-dimension that governs is its **relaxed inner diameter and how far it will stretch** — which is a
-property of the pad, not of any Grado cup.
+A previous revision argued the governing number was the pad's relaxed ID and stretch range, and made
+that the important Tier-1 measurement. **Maker's call: don't measure it.** It is awkward to measure
+on compliant foam, the result would be soft anyway, and the behaviour is already known:
 
-That makes Tier-1 #2 the important measurement and Tier-1 #1 merely a sanity check. A rim anywhere in
-the Ø54–56.7 band is probably fine; what we cannot guess is how much stretch the foam tolerates
-before it either will not go on or will not stay on.
+> They slip over the step with a little bit of stretching, and once on they feel like a perfect fit.
+> They rotate around the cup, but they are snug, and they don't slide forward or backward.
+
+That is a functional spec, and it is more useful than a dimension because it says **how the pad is
+retained**:
+
+- **Axially forward** — by the lip. The pad cannot climb back over the Ø53.98 rim without being
+  stretched again, which is what "doesn't slide forward" means.
+- **Radially** — light. It rotates freely, so grip is *locating*, not clamping.
+- **Rearward** — friction on the Ø47.625 body alone. Nothing else is holding it.
+
+**So the step is the retention feature, and the lip depth matters more than rim-diameter precision.**
+
+**And the interface is forgiving.** Compliant foam with a working stretch range does not need ±0.1 mm,
+and the same pads reportedly fit a family of cups spanning Ø54–56.7. The earlier anxiety about
+getting the rim diameter exactly right was misplaced — a rim anywhere in that band, with a real lip
+and step, will work. Precision belongs on the driver register, not here.
+
+**Decision: build the rim to the profile below and treat pad fit as satisfied.** No further pad
+measurement before the first print; the first fitted pad is the test.
+
+### LOCKED: front face Ø 54.0 (maker, 2026-08-06)
+
+Not 53.98. The inch conversion was an artefact of the tape measure; the reference solid models it as
+Ø54.00, and a round metric number is the right thing to carry in a metric parametric model.
+
+**This is the first dimension in the build to come off `ESTIMATE`.** `cup_outer_diameter = 54.0`,
+decided rather than measured, and everything downstream now has a fixed root.
+
+Open, and worth rounding at the same time: the step. Derived from ⅛ in it is 3.175 per side, giving a
+Ø47.65 body. **Proposal: step 3.0 per side → body Ø48.0** — both round, both appear as real diameters
+in the reference solid, and 0.35 mm inside a foam pad's stretch range is nothing. One word settles it.
 
 ### The measurement worth inventing: turn the clamp target into a number
 
