@@ -405,14 +405,15 @@ test disagrees.
    is ruled out by experiment. Live follow-on, and it is *sourcing* not design: find an off-the-shelf
    bow we are happy to standardise on, or a supplier who will make and stock a bow to our spec for
    every Warren Labs headphone.
-6. **Two DoF — which two?** §4d #6 says "swivel a little bit as well as go up and down," and that is
-   ambiguous in a way that changes the yoke. Two readings:
-   - **(a)** two *rotational* axes at the cup — Grado's rod-block swivel plus gimbal tilt — with
-     height coming from the slider. Three adjustments total.
-   - **(b)** one rotational axis (swivel), with "up and down" meaning the slider's height travel.
-     Two adjustments total, and interface 4 changes shape.
+6. ~~Two DoF — which two?~~ — **settled 2026-08-06: all three.** Two rotational axes at the cup
+   (swivel + tilt) *plus* the slider's vertical travel.
 
-   Needs one sentence from the maker before the yoke is drawn.
+   Consequence, and it is not free: the detent coupon's rail is **rectangular**, so it cannot rotate
+   in its sleeve. That pushes **both** rotational axes out to designed joints at the yoke, where
+   Grado gets one of them free from a round rod. Interface 3 and interface 4 now each carry a real
+   axis and the yoke is the crowded part. If it will not take both, the first thing to revisit is
+   the rectangular rail — a round rod returns the swivel to the slider at the cost of letting the
+   cup twist under load.
 5. **What "pause Daily Driver" means concretely** — see §7.
 
 ## 7. What pausing Daily Driver actually touches

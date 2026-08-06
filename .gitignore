@@ -26,3 +26,6 @@ npm-debug.log*
 
 # editor / harness local config
 .claude/
+
+# Detent-coupon build artifacts — regenerate with detent_coupon.py
+project/experiments/detent-coupon/output/
