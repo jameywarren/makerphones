@@ -106,7 +106,5 @@ export const FIRST_CHAIR_PARTS: BuildPartsTable = {
       orient: 'Any', supports: 'No', note: 'Press-in cap at the grille centre. The logo is flush single-colour by default — add this only if you want the contrasting accent.' },
     { group: 'Optional', base: 'adapter_ring', label: 'Driver adapter ring', qty: 'optional', material: 'PETG',
       orient: 'Flat', supports: 'No', note: 'Step-down ring to host a smaller driver in a bigger baffle. NOT acoustically neutral — it changes the front cavity.' },
-    { group: 'Optional', base: 'vent_plug', label: 'Tuning port plug', qty: 'optional', material: 'PETG',
-      orient: 'Flange down', supports: 'No', note: 'For the closed-back variant only: press-fit plugs so openness is a reversible knob — plug N of 6 and measure. The closed-back variant does not currently fit at 54 mm (the ports and the damping ring are competing for the same floor), so treat this as parked.' },
   ],
 };
