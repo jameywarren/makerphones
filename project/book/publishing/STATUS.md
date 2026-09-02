@@ -1,7 +1,7 @@
 # Publishing status — *The Art and Science of Headphone Design*
 
 Source of truth for ISBNs, pricing, and publishing progress. No credentials here
-(Bowker/KDP logins live only in the author's password manager). Last updated 2026-08-04.
+(Bowker/KDP logins live only in the author's password manager). Last updated 2026-09-02.
 
 ## ISBNs — Warren Labs block `979-8-9968299-x` (Bowker order #2531268)
 
@@ -31,7 +31,7 @@ Unused ISBNs still in the block (for future editions/formats — e.g. hardcover,
 ## Where it's sold
 - **Free online** — makerphones.com (text CC BY-NC). The funnel, not a conflict.
 - **Paid editions** — see `RUNBOOK.md`:
-  - [~] **Amazon KDP** — Kindle ebook **PUBLISHED 2026-06-27** ($9.99); **paperback REJECTED in review 2026-06-28** (interior: crop marks + margins) → **fixed, awaiting re-upload** ($49.99)
+  - [x] **Amazon KDP** — Kindle ebook **PUBLISHED 2026-06-27** ($9.99); paperback rejected 2026-06-28 (interior: crop marks + margins) → fixed → **RELEASED** ($49.99). *Jamey, 2026-09-02: "the book is released." Exact release date not recorded here — this file had it as awaiting re-upload until then.*
   - [x] **IngramSpark** — print + ebook **PUBLISHED** (pub date 26-JUN-26)
   - [~] **Apple Books / Kobo / Nook** — via IngramSpark ebook distribution. **Apple still not live
     as of 2026-08-04** — see "Apple Books — not live yet" below for the tripwire date
@@ -88,7 +88,7 @@ Ingram**. See `EBOOK.md`.
 - KDP (0.635in spine) + Ingram (0.705in spine) via `npm run book:cover` /
   `book:cover:ingram`. KDP's live covers still show the pre-redesign art (optional update).
 
-## KDP — Kindle live; paperback rejected → fixed (2026-06-28)
+## KDP — Kindle live; paperback rejected → fixed → released
 - **Kindle eBook** (id A3ULIJX13WJU86): **PUBLISHED** 2026-06-27, $9.99, 70%, all
   territories, NOT in KDP Select. Carries the pre-redesign cover (optional to update).
 - **Paperback** (title id P7ACH508QJK): **REJECTED in review** — KDP flagged the interior
@@ -110,8 +110,11 @@ Ingram**. See `EBOOK.md`.
      stays 282 pp and the cover spine is unaffected** (verified).
   - **Verified:** full 282-page sweep — no marks anywhere; the closest ink to any trim edge
     on *any* page is now **0.40"**, clearing both the 0.25" (no-bleed) and 0.375" (bleed)
-    minimums. **Next: re-upload `artifacts/book-press-cmyk.pdf` (rendered 2026-06-28) to the
-    KDP paperback; KDP re-reviews (~72h).**
+    minimums. The fixed interior was re-uploaded and the paperback is **RELEASED**
+    (Jamey, 2026-09-02). This file tracked it as "awaiting re-upload" from 2026-06-28 until
+    then, so any document that read it during that window — including the Forge portfolio
+    audit of 2026-09-01 — reported it as stalled. The exact release date was never recorded;
+    fill it in here if it matters, and this line stops being the only account of it.
 
 ## IngramSpark — published (acct #9945866)
 Title fully set up (7×10 premium-color perfect-bound matte, 282 pp; $49.99 print / $9.99
@@ -153,6 +156,15 @@ ingestion pass, so 6–8 weeks is unremarkable.
 |---|---|
 | ~Aug 13 2026 (6 wk) | Still normal. Keep waiting. |
 | **~Aug 27 2026 (8 wk)** | **Tripwire — past normal. Act.** |
+| **2026-09-02** | **Tripwire passed 6 days ago and the action has not been taken.** |
+
+> **Re-verified 2026-09-01** with the lookup above: `resultCount: 0` for the ebook ISBN, and
+> the author search returns only books by *Warren Rochelle*, a different person. Apple is
+> still absent. Confirmed independently by Jamey, 2026-09-02: *"it's not showing on Apple
+> Books for some reason still."*
+>
+> This is now the **only** open item in the book's distribution — every other channel is
+> live. The action below has not changed and has not been done.
 
 **At the tripwire:** contact IngramSpark support with the **ebook ISBN 979-8-9968299-1-0** and ask
 specifically for the **Apple Books ingestion status** for that ISBN — received, accepted, or
