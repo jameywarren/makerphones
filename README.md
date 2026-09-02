@@ -1,8 +1,8 @@
-# MakerPhones
+# makerphones
 
 **Version 1.2 · June 26, 2026**
 
-The MakerPhones Reference Manual — an open reference for designing and
+The makerphones Reference Manual — an open reference for designing and
 building your own headphones. Astro + Starlight, deployed to GitHub Pages
 at [makerphones.com](https://makerphones.com).
 

@@ -1,4 +1,4 @@
-# MakerPhones — Project Compass
+# makerphones — Project Compass
 
 **Version 1.5 · June 26, 2026** *(1.5: chapter count corrected to 33 — `measuring-raw-drivers` is counted in the numbered chain (manual.ts / astro.config), so Part 4 is eight chapters and the manual is 33; index range 1–33. 1.4: build-guide count updated to 7 — added the "Choosing a 3D Printer for Headphones" buying guide. 1.3: content-format line updated to the current Astro + Starlight / GitHub Pages stack — Shopify mapping marked parked, not current; slug pointer aimed at the Content & Style Guide handle appendix. 1.2: "The manual" counts reconciled to the filesystem — 32 chapters, 6 appendices, 6 build guides; chapter index range corrected to 1–32. 1.1: numbering rule updated for the v2 design — decimal numbers allowed in nav chrome)*
 
@@ -8,7 +8,7 @@
 
 ## What it is
 
-MakerPhones is Jamey Warren's open reference for designing and building your own headphones — real engineering explained plainly enough that a first-time builder can follow it and trust it. Its own brand (makerphones.com) and a project of Warren Labs. **Resource mode:** the Reference Manual is the product right now — published openly, genuinely useful, credible because of who wrote it. Not a marketing brand.
+The makerphones manual is Jamey Warren's open reference for designing and building your own headphones — real engineering explained plainly enough that a first-time builder can follow it and trust it. Its own brand (makerphones.com) and a project of Warren Labs. **Resource mode:** the Reference Manual is the product right now — published openly, genuinely useful, credible because of who wrote it. Not a marketing brand.
 
 ## Who it's for
 
@@ -42,7 +42,7 @@ Clear, approachable, credible — readable by a first-time builder, grounded in 
 
 ## Relationship to Warren Labs
 
-MakerPhones is a sibling project referenced from warrenlabs.com. The deep headphone R&D lives in the Warren Labs lab (and feeds the Daily Driver headphone); MakerPhones is where that knowledge becomes a build-focused resource for makers. Same person, two audiences — keep MakerPhones written for the builder.
+The makerphones site is a sibling project referenced from warrenlabs.com. The deep headphone R&D lives in the Warren Labs lab (and feeds the Daily Driver headphone); makerphones is where that knowledge becomes a build-focused resource for makers. Same person, two audiences — keep makerphones written for the builder.
 
 ## Naming the builds — the convention (locked 2026-08-06)
 

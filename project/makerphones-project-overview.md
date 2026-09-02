@@ -1,4 +1,4 @@
-# MakerPhones — Project Overview
+# makerphones — Project Overview
 
 **Version 2.1 · June 26, 2026**
 
@@ -52,7 +52,7 @@ This means: production experience at scale, thousands of headphones tested, manu
 
 ### vs. the alternatives
 
-| Resource | Strength | Weakness | MakerPhones advantage |
+| Resource | Strength | Weakness | makerphones advantage |
 |----------|----------|----------|----------------------|
 | Homebrew Headphones | Excellent single build | One design only | Full learning path + theory |
 | Head-Fi forums | Deep expertise | Scattered, intimidating | Organized, accessible |
@@ -115,7 +115,7 @@ From Jamey's perspective:
 
 Most people don't have access to manufacturers. They don't have decades to figure it out. They just want to build something cool and understand how it works.
 
-MakerPhones is the resource I wish existed when I started. It's sharing the knowledge that's usually locked behind NDAs and corporate walls. And honestly? I'm building this for myself too — documenting my own learning, organizing my knowledge, for people who geek out about this stuff the way I do."
+This is the resource I wish existed when I started. It's sharing the knowledge that's usually locked behind NDAs and corporate walls. And honestly? I'm building this for myself too — documenting my own learning, organizing my knowledge, for people who geek out about this stuff the way I do."
 
 ---
 

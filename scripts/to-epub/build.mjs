@@ -242,7 +242,7 @@ const FM = {
     `using the same methods this book teaches. The work, and its measurements, are published at makerphones.com.</p></section>`),
   colophon: () => xhtmlDoc('Colophon',
     `<section class="book-colophon"><h2>Colophon</h2>` +
-    `<p>${esc(BOOK_TITLE)} was generated from the Makerphones reference manual, an open Astro + Starlight site, by a single build ` +
+    `<p>${esc(BOOK_TITLE)} was generated from the makerphones reference manual, an open Astro + Starlight site, by a single build ` +
     `step that reuses the same content, diagrams, and design tokens as the website &#8212; one source, many outputs.</p>` +
     `<p>The text is set in <strong>Source Serif 4</strong>; headings in <strong>Schibsted Grotesk</strong>; technical labels and ` +
     `captions in <strong>JetBrains Mono</strong>. Every figure is a hand-built vector diagram, drawn for this manual.</p>` +

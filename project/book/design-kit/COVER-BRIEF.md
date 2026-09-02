@@ -1,7 +1,7 @@
 # Design brief — book cover
 
 **Project:** the cover for *The Art and Science of Headphone Design* by Jamey
-Warren — the print + digital edition of the Makerphones reference manual.
+Warren — the print + digital edition of the makerphones reference manual.
 **Companion to:** [`BRIEF.md`](BRIEF.md) (the interior print system, already
 delivered as `book.css` + `print-tokens.json`). The cover must be the same
 brand, finished as a book jacket.

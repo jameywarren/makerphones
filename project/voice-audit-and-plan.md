@@ -1,4 +1,4 @@
-# MakerPhones — Voice Audit & De-AI Remediation Plan
+# makerphones — Voice Audit & De-AI Remediation Plan
 
 **June 26, 2026 · v1.0**
 

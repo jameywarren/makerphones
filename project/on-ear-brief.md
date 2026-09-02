@@ -13,7 +13,7 @@ This file is the pre-fork artifact. When the open questions below close, fork an
 
 ## 1. Why this replaces Daily Driver as the flagship
 
-Not because Daily Driver is wrong. Because it is the wrong *first* build, and MakerPhones is
+Not because Daily Driver is wrong. Because it is the wrong *first* build, and makerphones is
 explicitly a learning path — so the flagship should be the first rung, not the last.
 
 **The barrier is the hardware, not the printing.** From `builds/daily-driver/BOM.md`, per pair:
