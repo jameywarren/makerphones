@@ -120,13 +120,13 @@ export default defineConfig({
   site: 'https://makerphones.com',
   integrations: [
     starlight({
-      title: 'Makerphones',
+      title: 'makerphones',
       description:
         'An open reference for designing and building your own headphones — real engineering, explained plainly.',
       sidebar,
       favicon: '/favicon.svg',
       head: [
-        { tag: 'meta', attrs: { property: 'og:site_name', content: 'Makerphones' } },
+        { tag: 'meta', attrs: { property: 'og:site_name', content: 'makerphones' } },
         // default branded OG image (per-page overrides optional later)
         { tag: 'meta', attrs: { property: 'og:image', content: 'https://makerphones.com/og-default.png' } },
         { tag: 'meta', attrs: { property: 'og:image:width', content: '1200' } },
@@ -140,7 +140,7 @@ export default defineConfig({
         { tag: 'link', attrs: { rel: 'manifest', href: '/site.webmanifest' } },
         { tag: 'meta', attrs: { name: 'theme-color', content: '#ea580c' } },
         // bench-notes feed
-        { tag: 'link', attrs: { rel: 'alternate', type: 'application/rss+xml', title: 'Makerphones — Bench Notes', href: '/rss.xml' } },
+        { tag: 'link', attrs: { rel: 'alternate', type: 'application/rss+xml', title: 'makerphones — Bench Notes', href: '/rss.xml' } },
         // Privacy-friendly analytics (GoatCounter: no cookies, no consent
         // banner needed).
         {

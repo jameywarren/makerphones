@@ -1,5 +1,5 @@
 /**
- * Makerphones — Claude Design v2 visual system.
+ * makerphones — Claude Design v2 visual system.
  *
  * Token layer over Starlight. Everything routes through --mp-* custom
  * properties; component styles consume tokens only. Fonts are

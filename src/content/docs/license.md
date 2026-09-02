@@ -1,6 +1,6 @@
 ---
 title: License
-description: "The Makerphones Reference Manual is free to read and share: Creative Commons BY-NC 4.0, stated plainly."
+description: "The makerphones Reference Manual is free to read and share: Creative Commons BY-NC 4.0, stated plainly."
 tableOfContents: false
 ---
 
@@ -9,7 +9,7 @@ under the [Creative Commons Attribution-NonCommercial 4.0 license](https://creat
 (CC BY-NC 4.0). Plainly:
 
 - **You can read it, share it, and adapt it**: print it for the bench, translate it, build on it.
-- **Give credit**: attribute it to Jamey Warren / Makerphones with a link back here.
+- **Give credit**: attribute it to Jamey Warren / makerphones with a link back here.
 - **Don't sell it**: no commercial use without permission. If you want to do something
   commercial with it, just ask.
 

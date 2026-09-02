@@ -1,12 +1,12 @@
 ---
 title: About
-description: Who writes the Makerphones Reference Manual, and the open-back headphone being designed in the open with AI as a design partner, the Daily Driver.
+description: Who writes the makerphones Reference Manual, and the open-back headphone being designed in the open with AI as a design partner, the Daily Driver.
 tableOfContents: false
 ---
 
-Makerphones is an open reference for designing and building your own headphones: real
-engineering, explained plainly enough that a first-time builder can follow it and trust it. It's
-written and maintained by one person, and it's free to read.
+The makerphones manual is an open reference for designing and building your own headphones:
+real engineering, explained plainly enough that a first-time builder can follow it and trust it.
+It's written and maintained by one person, and it's free to read.
 
 ## The author
 
