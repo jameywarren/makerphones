@@ -446,7 +446,7 @@ ${pressCss}
 <body>
 
 <section class="book-title-page">
-  <div class="bt-kicker">Makerphones</div>
+  <div class="bt-kicker">makerphones</div>
   <hr class="bt-rule">
   <h1 class="bt-title">${BOOK_TITLE}</h1>
   <p class="bt-sub">${BOOK_SUBTITLE}</p>
@@ -533,7 +533,7 @@ ${indexHtml}
 
 <section class="book-colophon">
   <h2>Colophon</h2>
-  <p>${BOOK_TITLE} was generated from the Makerphones reference manual, an
+  <p>${BOOK_TITLE} was generated from the makerphones reference manual, an
   open Astro + Starlight site, by a single build step that reuses the same
   content, diagrams, and design tokens as the website — one source, many
   outputs.</p>

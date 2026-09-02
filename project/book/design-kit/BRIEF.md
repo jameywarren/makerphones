@@ -1,9 +1,9 @@
 # Design brief — print/book design system
 
 **Project:** *The Art and Science of Headphone Design* by Jamey Warren — the
-print and PDF edition of the Makerphones reference manual.
+print and PDF edition of the makerphones reference manual.
 **You are designing:** an importable **print design system** that is the
-press-native sibling of the existing Makerphones web design system
+press-native sibling of the existing makerphones web design system
 ("Claude Design v2", `reference/theme.css`).
 
 ## The one rule

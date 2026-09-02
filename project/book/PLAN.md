@@ -5,7 +5,7 @@
 **Status:** Track 1 (PDF) — scaffolding in place, v0.1 generating.
 **Last updated:** 2026-06-26
 
-This is the living tracking doc for turning the Makerphones reference manual
+This is the living tracking doc for turning the makerphones reference manual
 into (1) a downloadable PDF and (2) a printed, published book. Update the
 **Status board** at the bottom as phases move. Everything here defers to
 `Project-Compass.md` for voice/positioning.
@@ -133,7 +133,7 @@ HTML-engine category.
 - **POD:** KDP **+** IngramSpark — KDP for Amazon reach/margin, Ingram for
   the bookstore/library/academic channel a technical title benefits from.
 - **ISBN:** buy a Bowker 10-block (~$295) and publish under an own imprint
-  (e.g. "Warren Labs" / "Makerphones Press"). Each format needs its own ISBN
+  (e.g. "Warren Labs" / "makerphones Press"). Each format needs its own ISBN
   (paperback / optional hardcover / PDF). A free KDP ISBN locks to Amazon.
 - **Press file:** PDF/X-1a, all-CMYK (the `#ea580c` remap pays off here),
   300dpi rasters, 0.125″ bleed, embedded fonts (all three are SIL OFL,

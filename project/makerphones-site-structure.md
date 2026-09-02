@@ -1,4 +1,4 @@
-# MakerPhones — Site Structure & Content Strategy
+# makerphones — Site Structure & Content Strategy
 
 **Version 2.1 · June 26, 2026**
 
@@ -18,7 +18,7 @@
 - **Head-Fi forums** — deep technical discussions but intimidating for beginners
 - **Measurement databases** — Crinacle, InnerFidelity (archived), but no "how to measure" for DIYers
 
-### Critical gaps MakerPhones fills
+### Critical gaps makerphones fills
 
 1. **Organized, progressive learning path** — beginner → intermediate → expert
 2. **Acoustic design fundamentals explained accessibly** — most resources assume knowledge
@@ -78,10 +78,10 @@ The original doc's detailed page inventory, reorganized as input for the unwritt
 
 ## Differentiation
 
-- **vs. Homebrew Headphones** — they focus on one Bluetooth build; MakerPhones is a full learning path with acoustic theory.
-- **vs. Head-Fi forums** — deep but scattered and intimidating; MakerPhones is organized, progressive, approachable.
-- **vs. DIY Open Headphone** — academic with minimal assembly support; MakerPhones is maker-focused and practical.
-- **vs. Instructables** — one-off projects of varying quality; MakerPhones is curated, explained, and supported.
+- **vs. Homebrew Headphones** — they focus on one Bluetooth build; makerphones is a full learning path with acoustic theory.
+- **vs. Head-Fi forums** — deep but scattered and intimidating; makerphones is organized, progressive, approachable.
+- **vs. DIY Open Headphone** — academic with minimal assembly support; makerphones is maker-focused and practical.
+- **vs. Instructables** — one-off projects of varying quality; makerphones is curated, explained, and supported.
 
 **Unique position:** the only comprehensive, beginner-to-expert resource for DIY headphone design, backed by 25+ years of professional audio and headphone-industry experience (Grace Design employee #1; HeadRoom VP Ops → President & CEO; now designing his own open-back headphone, the Daily Driver, in the open).
 
