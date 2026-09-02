@@ -10,7 +10,7 @@ tags: [sources, research, literature, measurement, standards, appendix]
 
 Reliable information on headphone design is scattered, and it clusters at two ends: deep
 acoustic theory, and a fast-moving pile of measurement data, with surprisingly little practical
-"how to actually build one" in between. That gap is much of why Makerphones exists. This page is
+"how to actually build one" in between. That gap is much of why makerphones exists. This page is
 the shelf we wish we'd had: the credible sources worth your time, sorted by what they're actually
 for, with an honest note on where to start.
 
@@ -135,5 +135,5 @@ Where the conversation happens and questions get answered.
 
 *This list leans toward theory and measurement because that's what credible, lasting sources
 exist for. The practical bridge between them, actually designing and building a headphone,
-is what the rest of Makerphones is for. Found a source worth adding? There's a feedback link on
+is what the rest of makerphones is for. Found a source worth adding? There's a feedback link on
 every page.*

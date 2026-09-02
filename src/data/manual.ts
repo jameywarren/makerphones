@@ -2,7 +2,7 @@
  * The manual's structure — six parts, 32 chapters, frozen handles.
  *
  * Handle order matches the Content & Style Guide appendix
- * (_source/Makerphones-Content-Style-Guide.md) verbatim. Nav-chrome
+ * (_source/MakerPhones-Content-Style-Guide.md) verbatim. Nav-chrome
  * decimal numbers (1.1–6.4) derive from position here — they are
  * NEVER stored in content. Chapter titles come from frontmatter at
  * build time (see chapterInfo).
