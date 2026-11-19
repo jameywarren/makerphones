@@ -68,7 +68,7 @@ Covered thoroughly in [Damping Materials](/learn/damping-materials/), but the qu
 
 **Acoustic foam:** Parts Express carries Acoustipack and similar materials. Amazon has many options: search for "acoustic foam packing material" rather than "soundproofing foam" (different products).
 
-**Felt:** Craft stores (Michaels, Hobby Lobby, Jo-Ann Fabrics). Adhesive-backed felt is convenient. Regular felt works fine too.
+**Felt:** Craft stores (Michaels, Hobby Lobby). Adhesive-backed felt is convenient. Regular felt works fine too.
 
 **Cotton:** Craft stores. Polyester fiberfill from a fabric store also works well for rear-chamber fill.
 
