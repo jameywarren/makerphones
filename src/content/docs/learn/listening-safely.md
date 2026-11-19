@@ -29,6 +29,6 @@ The fixes are easy, and worth making automatic.
 
 ## A rough yardstick
 
-Around 85 dB is roughly the level you can listen to all day safely, and the safe time drops fast above that: cut about in half for every 3 dB louder. The catch is you can't really know your level by ear, which is exactly why the habits matter more than any number. A simple gut check: if the music's loud enough that you couldn't hold a normal conversation over it, it's loud enough to add up over time.
+The recommended workplace limit is 85 dBA for an eight-hour day, and even that isn't risk-free. The allowed time drops fast above it: cut it in half for every 3 dB louder. The guidance written for headphone listening is stricter, about 80 dB for 40 hours a week. The catch is you can't really know your level by ear, which is exactly why the habits matter more than any number. A simple gut check: if the music's loud enough that you couldn't hold a normal conversation over it, it's loud enough to add up over time.
 
 None of this is about being precious. Hearing damage is cumulative and permanent, and tinnitus is a genuine occupational hazard in audio. Plenty of people who've spent a career around sound have the ringing to show for it. Protecting your ears isn't caution for its own sake. You're protecting the only tool you've got for judging whether the thing sounds good.
