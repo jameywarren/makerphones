@@ -30,7 +30,7 @@ This is the crux of the whole build. Too small a sealed volume stiffens the trap
 
 ## Stage 3 — Print the parts
 
-Print both cups identically. Thicker walls or a denser material like PETG help damp the shell so it doesn't ring like a drum under bass, and a quiet shell is part of a clean closed-back, as [manufacturing for consistency](/learn/manufacturing-for-consistency) and the resonance discussion both stress.
+Print both cups identically, per [manufacturing for consistency](/learn/manufacturing-for-consistency). Thicker walls or a denser material like PETG help damp the shell so it doesn't ring like a drum under bass, and a quiet shell is part of a clean closed-back, as [resonance control](/learn/resonance-control) stresses.
 
 ## Stage 4 — Mount and wire with an airtight seal
 
