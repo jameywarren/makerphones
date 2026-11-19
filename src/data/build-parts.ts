@@ -20,6 +20,8 @@ export interface BuildPart {
   supports: string;
   note: string;
   bought?: boolean;
+  /** Text for the no-image card when it is not simply a bought part. */
+  placeholder?: string;
 }
 
 export interface BuildPartsTable {
@@ -77,7 +79,7 @@ export const FIRST_CHAIR_PARTS: BuildPartsTable = {
   parts: [
     // --- Earcup ---
     { group: 'Earcup', base: 'cup', label: 'Cup', qty: '×2', material: 'PETG',
-      orient: 'Grille face down', supports: 'Light (pivot bosses)', note: 'One-piece Ø48 shell with a Ø54 front lip overhanging it — that step is what holds the pad on. Rear triangular-lattice grille with the logo riding flush on it, four buttressed baffle bosses embedded in the wall, and the two yoke pivot bosses. Damping goes in from the front, baffle off.' },
+      orient: 'Grille face down', supports: 'Light (pivot bosses, under the pad lip)', note: 'One-piece Ø48 shell with a Ø54 front lip overhanging it — that step is what holds the pad on. Rear triangular-lattice grille with the logo riding flush on it, four buttressed baffle bosses embedded in the wall, and the two yoke pivot bosses. Damping goes in from the front, baffle off.' },
     { group: 'Earcup', base: 'baffle', label: 'Baffle', qty: '×2', material: 'PETG / PLA+',
       orient: 'Flat', supports: 'No', note: 'Separate front plate carrying the driver — deliberately separate so it is the part you iterate on. Aperture, printed guard, driver seat + locating collar, controlled vents, and 4 M3 holes into the cup bosses. Still on Daily Driver’s plate diameter; a rebuild at Ø54 is the next job.' },
     { group: 'Earcup', base: 'driver_clamp', label: 'Driver clamp ring', qty: '×2', material: 'PETG',
@@ -86,14 +88,10 @@ export const FIRST_CHAIR_PARTS: BuildPartsTable = {
       orient: '—', supports: '—', note: 'NOT printed. 40 mm is the standard and the design does not chase a non-standard part. A mockup appears in the 3D assembly so the driver ↔ baffle ↔ clamp fit reads.' },
     // --- Gimbal ---
     { group: 'Gimbal', base: 'yoke', label: 'Fork-yoke', qty: '×2 (L/R mirror)', material: 'PETG',
-      orient: 'Flat in its plane, layers along the arm', supports: 'Minimal', note: 'Fork from slider to cup, carrying the tilt axis on an M3 shoulder screw. Print orientation is not a suggestion here: the arms carry bending load and layer adhesion is the weak axis, so the layer lines must run ALONG the arm. This is the difference between a yoke that lasts and one that snaps.' },
+      orient: 'Flat in its plane, layers along the arm', supports: 'Minimal', note: 'Fork from the band to the cup, carrying the tilt axis on an M3 shoulder screw. Print orientation is not a suggestion here: the arms carry bending load and layer adhesion is the weak axis, so the layer lines must run ALONG the arm. This is the difference between a yoke that lasts and one that snaps.' },
     // --- Headband ---
-    { group: 'Headband', base: 'slider', label: 'Slider', qty: '×2', material: 'PETG',
-      orient: 'Post bore vertical', supports: 'Light', note: 'Screws to the bow’s end tabs and carries height adjustment plus the yoke swivel. Screws are spent here on purpose — it is the one joint carrying sustained spring load, and using the tabs the bow already has retires it as a research problem.' },
-    { group: 'Headband', base: 'slider_shoe', label: 'Pressure shoe', qty: '×2', material: 'PETG or Delrin',
-      orient: 'Saddle up', supports: 'No', note: 'Captive shoe between the lock knob and the post: the knob presses the shoe, the shoe cradles the post over an area instead of a point, so the height lock holds without marring the rod.' },
-    { group: 'Headband', base: 'headband_clamp', label: 'Bow clamp plate', qty: '×2', material: 'PETG',
-      orient: 'Flat', supports: 'No', note: 'Inner cover plate that sandwiches the metal bow end against the slider.' },
+    { group: 'Headband', base: 'height_adjust', label: 'Height adjustment', qty: 'undesigned', bought: true, placeholder: 'Not designed yet', material: '—',
+      orient: '—', supports: '—', note: 'NOT a part yet. The yoke keeps its post, but nothing receives it: the slider, pressure shoe and bow clamp plate inherited from the Daily Driver were deleted on 2026-08-07 rather than carried over. Whether First Chair adjusts for height at all is an open question.' },
     { group: 'Headband', base: 'headband_pad', label: 'Headband pad', qty: '×1', material: 'Foam or printed TPU',
       orient: 'Arch on its side', supports: 'Light', note: 'Crown cushion; the channel grips the bow. Still a rough draft — form and retention are open.' },
     { group: 'Headband', base: 'bow', label: 'Head bow', qty: '×1', bought: true, material: 'Sprung steel bow — Beyerdynamic metal head bow (~$11)',

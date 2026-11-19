@@ -44,7 +44,7 @@ const grouped = GROUP_ORDER
         {g.parts.map((p) => (
           <article class={`pg-card${p.bought ? ' pg-bought' : ''}`}>
             {p.bought
-              ? <div class="pg-noimg">Bought part</div>
+              ? <div class="pg-noimg">{p.placeholder ?? 'Bought part'}</div>
               : (
                 <div class="pg-media" data-glb={`${M}/${p.base}.glb`} data-label={p.label}>
                   <img class="pg-img" src={`${R}/${p.base}_iso.png`} alt={`${p.label}, 3D render`} loading="lazy" decoding="async" width="360" height="360" />

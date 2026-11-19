@@ -17,16 +17,16 @@ This is First Chair as an interactive model. Drag the slider to **pull the assem
 apart and back together**, toggle the **sub-assemblies**, or **click any part to
 isolate it** and inspect it on its own.
 
-:::caution[Live build — and the form is under revision]
-First Chair is being designed in the open right now, and this view updates on **every
-commit**. Nothing is print-verified.
+:::caution[Paused build, and the shape will change]
+First Chair is paused while the drivers get measured. This is the model as of 2026-08-07.
+Nothing is print-verified.
 
 **The shape you're looking at is wrong and we know it.** This build was forked from the
 over-ear Daily Driver; the dimensions were reset to on-ear but the *form* wasn't
 redesigned, so what's in the viewer is essentially a shrunken over-ear — a domed cup and
-a circumaural stance on a 54 mm rim. An industrial-design pass is running to fix that,
-and these parts will change shape. The **baffle** is also still carrying the Daily
-Driver's Ø91 plate diameter.
+a circumaural stance on a 54 mm rim. The new form is decided but not modelled yet, so
+these parts will change shape. The **baffle** is also still the Daily Driver's 77 mm
+plate.
 
 Follow along, and fork freely. It's all at
 [github.com/makerphones/first-chair](https://github.com/makerphones/first-chair).
@@ -57,8 +57,9 @@ are structural:
 - **The yoke prints flat in its plane, with the layer lines running *along* the arm.**
   The arms carry bending load and layer adhesion is the weak axis. This is the
   difference between a yoke that lasts and one that snaps.
-- **The cup prints grille-face-down.** The lattice is self-supporting that way, and the
-  pad lip comes off the plate clean.
+- **The cup prints grille-face-down.** The lattice is self-supporting that way. The pad
+  lip ends up at the top, overhanging by 3 mm, so give it a touch of support or expect to
+  clean it up.
 
 ## What you don't print
 
@@ -73,7 +74,7 @@ instead of a reprint.
 **The driver.** 40 mm, ~32 Ω. A mockup appears in the 3D assembly above so the
 driver ↔ baffle ↔ clamp fit reads.
 
-For sourcing and rough costs, see the bill of materials in the
-[design spec](/learn/first-chair-design-spec/). Each printed part is a starting point you
+For sourcing and rough costs, see the
+[bill of materials in the repo](https://github.com/makerphones/first-chair/blob/main/BOM.md). Each printed part is a starting point you
 can modify — the model is fully parametric, so changing a driver, a pad, or the head size
 regenerates the parts to match.

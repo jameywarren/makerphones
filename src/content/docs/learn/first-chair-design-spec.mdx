@@ -18,23 +18,26 @@ import PartsViewer from '../../../components/PartsViewer.astro';
 
 🧊 **Spin it in 3D** — drag to orbit, scroll to zoom, slide to **explode**, and click a part to **isolate** it. This is the live model, developed in the open at [github.com/makerphones/first-chair](https://github.com/makerphones/first-chair). **Want every part to print?** [See the full parts list →](/learn/first-chair-parts/)
 
-**Status:** Design phase, CAD in progress, nothing print-verified. The cup was rebuilt to
+**Status:** Paused while the drivers get measured. Nothing is print-verified. The cup was rebuilt to
 the locked 54 mm profile on 2026-08-06; the baffle has not been yet. This document is the
 functional spec the CAD is built against.
 
-:::caution[The dimensions are settled. The form is not.]
-This is the **beta** view — the design as it stands right now, republished on every commit.
+:::caution[The dimensions are settled. The form is decided, but not modelled yet.]
+This is the **beta** view: the model as of 2026-08-07, when the build paused.
 
 **The shape in the viewer is a placeholder, and an inherited one.** First Chair was forked
 from the over-ear Daily Driver. The dimensions below were reset to the on-ear numbers and
 are real; the *form* was not redesigned, so the model still carries a DT880-family domed cup
 and a circumaural stance on a 54 mm rim. It reads as a shrunken over-ear because that's
-exactly what it is. An industrial-design pass is open to resolve the form properly — a
-supra-aural is a different object, not a small version of another one.
+exactly what it is. A supra-aural is a different object, not a small version of another one.
+
+**The form has since been decided:** a straight front wall from the lip, tapering to a Ø29
+back face, split at 12 mm. The CAD hasn't been rebuilt to it yet, so the viewer still shows
+the inherited dome.
 
 Everything under **the locked geometry** and **the decisions** below is real and settled. One
-thing is known-unfinished: the **baffle** is still carrying the Daily Driver's Ø91 plate
-diameter and is being rebuilt. All tracked in the repo's design log.
+thing is known-unfinished: the **baffle** is still the Daily Driver's 77 mm plate on a 54 mm
+cup, and has not been rebuilt. All tracked in the repo's design log.
 :::
 
 ---
@@ -45,8 +48,8 @@ First Chair replaces the [Daily Driver](/learn/daily-driver-design-spec/) as the
 not because the Daily Driver is wrong, but because it's the wrong *first* build: makerphones
 is a learning path, so the flagship should be the first rung, not the last.
 
-**The barrier was never the printing. It was the hardware.** The Daily Driver's bill of
-materials runs roughly $60–70 across eight suppliers, several of them specialty fastener
+**The barrier was never the printing. It was the hardware.** The Daily Driver needs
+roughly $60–70 of hardware alone, from eight suppliers, several of them specialty fastener
 houses, plus heat-set-insert technique before anything can be assembled. Its own BOM notes
 that one pivot screw sits below the official ISO size sheet, so every supplier brands it
 "similar to" — which asks a first-timer to judge fastener equivalence on a part that has to
@@ -123,11 +126,11 @@ way to compete given the bass trade.
 ## System architecture
 
 ```
-SPRUNG STEEL BOW  (bought — screwed at its end tabs)
+SPRUNG STEEL BOW  (bought)
         |
-SLIDER × 2  (printed) — height adjustment + the yoke swivel
+HEIGHT ADJUSTMENT  (not designed yet; may not exist)
         |
-YOKE × 2  (printed) — slider to cup, carries the tilt axis
+YOKE × 2  (printed) — post up to the band, swivel and tilt at the cup
         |
 CUP × 2  (printed) — Ø48 body, Ø54 front lip, integral rear grille
         |
@@ -136,7 +139,8 @@ BAFFLE × 2  (printed, separate) + CLAMP RING × 2 (printed)
 EARPADS  (commodity Grado-pattern — not designed, not shipped)
 ```
 
-**Three degrees of freedom:** swivel and tilt at the cup, plus the slider's vertical travel.
+**Three degrees of freedom is the intent:** swivel and tilt at the cup, plus vertical travel.
+The vertical part isn't designed yet.
 
 ---
 
@@ -219,16 +223,15 @@ This repo ships CAD publicly under MIT.
 
 ## What's still open
 
-- **The form itself.** The dimensions above are locked; the *shape* is not. The build was
-  forked from an over-ear and the industrial-design brief was renamed rather than rewritten,
-  so the CAD faithfully built a shrunken DT880. A form pass is open to resolve what a
-  supra-aural in this family should actually look like — Grado is the right *architectural*
+- **The form in CAD.** The dimensions above are locked and the shape is decided, but the
+  model hasn't been rebuilt to it. The build was forked from an over-ear and the
+  industrial-design brief was renamed rather than rewritten, so the CAD faithfully built a
+  shrunken DT880, and that is still what the viewer shows. Grado is the right *architectural*
   reference (small cup, minimal band, everything visible) and the wrong styling target.
-- **The printed friction slider** is the mechanism's real unknown, and the part with the
-  least precedent — printed detents that still hold after a few hundred adjustments are not
-  a solved problem in the maker literature. A physical test coupon (one rail, five sleeves at
-  graduated leaf thickness) settles it by feel rather than by analysis.
-- **The baffle** is still on the Daily Driver's Ø91 numbers and needs the same 54 mm rebuild
+- **Height adjustment.** The yoke has a post and nothing receives it yet. We deleted the
+  Daily Driver's thumbscrew lock rather than inherit it. Whether First Chair adjusts at all
+  is an open question.
+- **The baffle** is still the Daily Driver's 77 mm plate and needs the same 54 mm rebuild
   the cup just had.
 - **Cable entry** — fixed or detachable — is undecided.
 - **Clamp force as a number.** The HD 600 / DT 770 target is a feel, not a spec. Converting
