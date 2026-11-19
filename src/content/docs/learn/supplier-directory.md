@@ -20,7 +20,7 @@ Don't overlook salvage. An inexpensive or broken donor headphone is a perfectly 
 
 ## The modding-platform route
 
-If you'd rather learn by modifying than by building from a bare driver, there's a legendary on-ramp: the Fostex T50RP. Now in its fourth generation, it's a stock planar-magnetic headphone practically designed to be opened up, damped, and re-voiced, with a famously improvable stock sound and one of the deepest modding communities in the hobby. A whole ecosystem surrounds it, from community designs like ModHouse's Argon to ready-made mod kits and sanctioned pad-and-driver variants.
+If you'd rather learn by modifying than by building from a bare driver, there's a legendary on-ramp: the Fostex T50RP. Now in its fourth generation, it's a stock planar-magnetic headphone practically designed to be opened up, damped, and re-voiced, with a famously improvable stock sound and one of the deepest modding communities in the hobby. A whole ecosystem surrounds it, from community designs like Mod House Audio's Argon to ready-made mod kits and sanctioned pad-and-driver variants.
 
 Modding a T50RP is many builders' first serious project, and it teaches the same fundamentals as a ground-up build (chambers, damping, seal, measurement) with the structure and the driver already sorted. It's a genuinely good place to start.
 
