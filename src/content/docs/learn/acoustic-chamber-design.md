@@ -62,7 +62,7 @@ These figures are ballparks. They get you a sensible first print and keep you fr
 
 ## Sealed or vented
 
-A fully sealed rear chamber gives you the most isolation, but trapping the air also stiffens the spring, and a stiff sealed system tends to throw up a resonance peak, a bump where the bass piles up on one frequency and booms. You can fight that peak three ways: give it a bigger volume, damp it (covered next chapter), or open a vent.
+A fully sealed rear chamber gives you the most isolation, but trapping the air also stiffens the spring, and a stiff sealed system tends to throw up a resonance peak, a bump where the bass piles up on one frequency and booms. You can fight that peak three ways: give it a bigger volume, damp it (covered in [damping strategy and application](/learn/damping-strategy-and-application)), or open a vent.
 
 A vent is just a deliberate, controlled leak. Opening a small hole relieves the trapped pressure, lowers and tames that resonance peak, and can smooth the bass into something more even. This is the same sealed-versus-open trade-off from [open vs closed back design](/learn/open-vs-closed-back-design), except here you're not choosing one or the other: you're dialing in exactly how much leak you want, by the millimeter. An open-back design is really just the far end of this same slider: a rear chamber so open it barely resists the driver at all.
 
