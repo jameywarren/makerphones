@@ -56,9 +56,9 @@ const panels = [
         {[yA, yB, ySum].map((y) => (
           <line x1={p.x} y1={y} x2={p.x + W} y2={y} stroke={hair} stroke-width="1" stroke-dasharray="2 4" />
         ))}
-        <text x={p.x} y={yA - 30} font-size="9" font-weight="500" fill={label}>WAVE A</text>
-        <text x={p.x} y={yB - 30} font-size="9" font-weight="500" fill={label}>{p.bLabel}</text>
-        <text x={p.x} y={ySum - 54} font-size="9" font-weight="500" fill={label}>SUM A + B</text>
+        <text x={p.x} y={yA - 30} font-size="10" font-weight="500" fill={label}>WAVE A</text>
+        <text x={p.x} y={yB - 30} font-size="10" font-weight="500" fill={label}>{p.bLabel}</text>
+        <text x={p.x} y={ySum - 54} font-size="10" font-weight="500" fill={label}>SUM A + B</text>
         <line x1={p.x} y1="246" x2={p.x + W} y2="246" stroke={hair} stroke-width="1" />
         <g clip-path={`url(#${p.clip})`}>
           <path class="mp-scroll" d={sinePath(p.x - wl, yA, amp, wl, W + 2 * wl, 0)} fill="none" stroke={label} stroke-width="1.5" />
@@ -70,7 +70,7 @@ const panels = [
           )}
         </g>
         {p.phaseB !== 0 && (
-          <text x={p.x + W / 2} y={ySum - 12} font-size="9" font-weight="500" fill={label} text-anchor="middle">SILENCE</text>
+          <text x={p.x + W / 2} y={ySum - 12} font-size="10" font-weight="500" fill={label} text-anchor="middle">SILENCE</text>
         )}
         <text x={p.x} y="392" font-size="10" font-weight="500" fill={label} opacity="0.9">{p.note}</text>
       </g>
