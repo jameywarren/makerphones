@@ -78,4 +78,4 @@ Before you commit to an eight-hour cup print, print a small test coupon that exe
 
 ## What's Next
 
-You've got parts that fit and print. The next question is what those internal volumes actually do to the sound: the cavity in front of the driver, the chamber behind it, and how you vent them. [Acoustic chambers and enclosures](/learn/acoustic-chambers-and-enclosures) covers the fundamentals; a dedicated walk through designing a chamber for your own build is coming as this section fills out.
+You've got parts that fit and print. The next question is what those internal volumes actually do to the sound: the cavity in front of the driver, the chamber behind it, and how you vent them. [Acoustic chambers and enclosures](/learn/acoustic-chambers-and-enclosures) covers the fundamentals; [acoustic chamber design](/learn/acoustic-chamber-design) is where you make those calls for your own build.
