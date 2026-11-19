@@ -96,7 +96,7 @@ Give the cable a small slack loop, roughly `30mm`, at each cup end so the cup ca
 
 Before you reach for a measurement rig, run these checks by ear with music you know well. They catch the build problems a measurement won't tell you in plain language.
 
-1. **Mono center image.** Play a centered mono signal, a voice or a single instrument, and it should sit dead center in your head. If it pulls left or right, recheck your wiring polarity.
+1. **Mono center image.** Play a centered mono signal, a voice or a single instrument, and it should sit dead center in your head. If it sounds wide or hollow instead, recheck your wiring polarity. If it sits solidly off to one side, that's a level problem; the channel balance check below sorts it out.
 2. **Rattle and bottoming.** Play something bass-heavy at moderate volume and listen for buzz or rattle (usually something loose in the cup) or gritty distortion (the driver bottoming out, check the gasket isn't so thick it's pushing the cone into something).
 3. **Channel balance.** Swap the cups left-to-right on your head. If the same physical cup is always louder, that's a driver mismatch or wiring issue, not your ears or the fit.
 4. **Seal-break check.** Press the cups firmly to your ears and note the bass, then slowly break the seal on one side: you should hear the bass change clearly. No change means the cup isn't sealing against your head; look at pad depth and cup angle.
