@@ -603,6 +603,10 @@ dialog.mp-zoom {
   overflow: auto;
   cursor: zoom-out;
 }
+dialog.mp-zoom { overscroll-behavior: contain; }
+dialog.mp-zoom:focus-visible { outline: none; }
+html:has(dialog.mp-zoom[open]) { overflow: hidden; }
+@media print { .mp-zoom-hint { display: none; } }
 dialog.mp-zoom::backdrop { background: var(--mp-surface); }
 dialog.mp-zoom .mp-zoom-inner {
   border: 0;

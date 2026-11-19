@@ -25,7 +25,7 @@ const { label, caption } = Astro.props;
   // Web only: click or tap a figure to open it large. Added at runtime, so the
   // built HTML that the book and EPUB pipelines read carries no extra markup.
   function setup() {
-    document.querySelectorAll('figure.mp-figure').forEach((fig) => {
+    document.querySelectorAll('figure.mp-figure').forEach((fig, i) => {
       const svg = fig.querySelector('svg');
       if (!svg || fig.dataset.zoom) return;
       fig.dataset.zoom = '1';
@@ -36,6 +36,8 @@ const { label, caption } = Astro.props;
         const hint = document.createElement('span');
         hint.className = 'mp-zoom-hint';
         hint.textContent = ' Tap to enlarge.';
+        hint.id = 'mp-zoom-hint-' + i;
+        svg.setAttribute('aria-describedby', hint.id);
         cap.appendChild(hint);
       }
       const open = () => {
