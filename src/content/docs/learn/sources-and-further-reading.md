@@ -135,5 +135,5 @@ Where the conversation happens and questions get answered.
 
 *This list leans toward theory and measurement because that's what credible, lasting sources
 exist for. The practical bridge between them, actually designing and building a headphone,
-is what the rest of makerphones is for. Found a source worth adding? There's a feedback link on
-every page.*
+is what the rest of makerphones is for. Found a source worth adding? Send it through the Contact link at
+makerphones.com.*
