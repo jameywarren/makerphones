@@ -36,7 +36,7 @@ Here's everything you need for a complete headphone build:
 
 Ear pad sourcing depends on your design. If you're using an existing headphone chassis or headband, look for replacement pads compatible with that model. If you're designing from scratch, you have more options.
 
-**Amazon:** Large selection of generic replacement pads. Search for "replacement ear pads" with your desired diameter (usually 90–105mm inner diameter for over-ear). Quality varies. Read reviews carefully.
+**Amazon:** Large selection of generic replacement pads. Search for "replacement ear pads" with your desired diameter (usually 90–105mm outer diameter for over-ear). Quality varies. Read reviews carefully.
 
 **Geekria (geekria.com):** Specializes in replacement audio accessories. Better quality than random Amazon generics, reasonable prices, good selection of materials.
 
