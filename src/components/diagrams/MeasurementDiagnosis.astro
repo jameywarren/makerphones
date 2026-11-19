@@ -3,8 +3,9 @@
  * FIG 21 — Reading a measurement: diagnosis, not judgment. A
  * measured trace against the expected curve with three faults
  * flagged — seal-leak bass loss, a sharp 5 kHz cavity resonance,
- * and channels diverging up top — each with its fix. Curves are
- * illustrative, not measured data.
+ * and the channels diverging through the mids (inside the band the
+ * chapter says the rig can be trusted in) — each with its fix. Curves
+ * are illustrative, not measured data.
  */
 import FrFrame from './FrFrame.astro';
 import { lgx } from './geometry';
@@ -21,8 +22,8 @@ const healthy = (lg: number) =>
 // seal-leak bass loss below ~60 Hz, sharp 5 kHz resonance, hash
 const measured = (lg: number) =>
   healthy(lg) - 9 / (1 + Math.exp((lg - 1.78) * 10)) + 7 * Math.exp(-Math.pow(lg - 3.7, 2) / (2 * 0.045 * 0.045)) + 0.7 * Math.sin(lg * 14);
-// channel B diverges above ~8 kHz
-const other = (lg: number) => measured(lg) + (lg > 3.9 ? (lg - 3.9) * 8 : 0);
+// channel R sits about 2.5 dB low through the mids, roughly 300 Hz to 2 kHz
+const other = (lg: number) => measured(lg) - 2.6 * Math.exp(-Math.pow(lg - 2.85, 2) / (2 * 0.22 * 0.22));
 
 function path(fn: (lg: number) => number): string {
   const pts: string[] = [];
@@ -33,9 +34,10 @@ function path(fn: (lg: number) => number): string {
 }
 
 const flags = [
-  { n: '01', f: 45, lab: 'BASS DOWN, LOW END ONLY', fix: 'SEAL LEAK — RE-SEAT PADS, RETEST', lx: 110, ly: 120 },
-  { n: '02', f: 5000, lab: 'SHARP, HIGH-Q PEAK', fix: 'CAVITY RESONANCE — DAMP THE FRONT', lx: 360, ly: 110 },
-  { n: '03', f: 13000, lab: 'CHANNELS DIVERGE UP TOP', fix: 'MISMATCH — RESEAT THE DRIVER', lx: 545, ly: 156 },
+  { n: '01', f: 45, lab: 'BASS DOWN, LOW END ONLY', fix: 'SEAL LEAK — RE-SEAT PADS, RETEST', lx: 110, ly: 120, fn: measured, below: false },
+  { n: '02', f: 5000, lab: 'SHARP, HIGH-Q PEAK', fix: 'CAVITY RESONANCE — DAMP THE FRONT', lx: 404, ly: 112, fn: measured, below: false },
+  // 03 marks the R trace where it sits under L, so its label hangs below the curves
+  { n: '03', f: 700, lab: 'CHANNELS DIVERGE', fix: 'MISMATCH — SEAL, DAMPING, OR DRIVER', lx: 300, ly: 326, fn: other, below: true },
 ];
 
 const ink = 'var(--mp-charcoal)';
@@ -49,42 +51,52 @@ const faint = 'var(--mp-faint)';
   viewBox="0 92 760 380"
   class="mp-dgm"
   role="img"
-  aria-label="A measured frequency-response trace against the expected curve with three problem features flagged: bass loss from a seal leak, a sharp high-Q resonance peak near 5 kilohertz, and the two channels diverging above 8 kilohertz — each flag paired with its fix"
+  aria-label="A measured frequency-response trace against the expected curve with three problem features flagged: bass loss from a seal leak, a sharp high-Q resonance peak near 5 kilohertz, and the two channels diverging by a few decibels through the midrange — each flag paired with its fix. Illustrative curves, level in decibels against frequency"
 >
   <path d={path(healthy)} fill="none" stroke={faint} stroke-width="1.2" stroke-dasharray="5 4"></path>
-  <path d={path(other)} fill="none" stroke={label} stroke-width="1.4" opacity="0.85"></path>
+  <path d={path(other)} fill="none" stroke={label} stroke-width="1.6" stroke-dasharray="2 3"></path>
   <path d={path(measured)} fill="none" stroke={accent} stroke-width="2.2"></path>
   <FrFrame x0={x0} y0={y0} W={W} H={H} dbTicks={[-10, 0, 10]} pxPerDb={px} yZero={yZ} />
+  <text
+    x={x0 - 48}
+    y={y0 - H + 4}
+    font-size="10"
+    font-weight="500"
+    fill={label}
+    text-anchor="end"
+    transform={`rotate(-90 ${x0 - 48} ${y0 - H + 4})`}>LEVEL (dB)</text
+  >
 
   {
     flags.map((fl) => {
       const fx = lgx(fl.f, x0, W);
-      const cyy = yZ - measured(Math.log10(fl.f)) * px;
+      const cyy = yZ - fl.fn(Math.log10(fl.f)) * px;
+      const ay = fl.below ? cyy + 7 : cyy - 7;
       return (
         <g>
           <circle cx={fx} cy={cyy} r="5" fill="none" stroke={accent} stroke-width="1.5" />
           <text x={fl.lx} y={fl.ly} font-size="10" font-weight="700" fill={accent}>
             {fl.n}
           </text>
-          <text x={fl.lx + 26} y={fl.ly} font-size="9" font-weight="600" fill={dark}>
+          <text x={fl.lx + 26} y={fl.ly} font-size="10" font-weight="600" fill={dark}>
             {fl.lab}
           </text>
-          <text x={fl.lx + 26} y={fl.ly + 14} font-size="8" font-weight="500" fill={label}>
+          <text x={fl.lx + 26} y={fl.ly + 14} font-size="10" font-weight="500" fill={label}>
             {fl.fix}
           </text>
-          <line x1={fl.lx + 30} y1={fl.ly + 21} x2={fx} y2={cyy - 7} stroke={faint} stroke-width="1" />
-          <circle cx={fx} cy={cyy - 7} r="2.2" fill={faint} />
+          <line x1={fl.lx + 30} y1={fl.below ? fl.ly - 13 : fl.ly + 21} x2={fx} y2={ay} stroke={faint} stroke-width="1" />
+          <circle cx={fx} cy={ay} r="2.2" fill={faint} />
         </g>
       );
     })
   }
 
-  <line x1={x0} y1="428" x2={x0 + 24} y2="428" stroke={accent} stroke-width="2.2"></line>
-  <text x={x0 + 32} y="431" font-size="8.5" font-weight="500" fill={label}>MEASURED — L</text>
-  <line x1={x0 + 150} y1="428" x2={x0 + 174} y2="428" stroke={label} stroke-width="1.4"></line>
-  <text x={x0 + 182} y="431" font-size="8.5" font-weight="500" fill={label}>MEASURED — R</text>
-  <line x1={x0 + 300} y1="428" x2={x0 + 324} y2="428" stroke={faint} stroke-width="1.2" stroke-dasharray="5 4"></line>
-  <text x={x0 + 332} y="431" font-size="8.5" font-weight="500" fill={label}>EXPECTED</text>
+  <line x1={x0} y1="434" x2={x0 + 24} y2="434" stroke={accent} stroke-width="2.2"></line>
+  <text x={x0 + 32} y="437.5" font-size="10" font-weight="500" fill={label}>MEASURED — L</text>
+  <line x1={x0 + 150} y1="434" x2={x0 + 174} y2="434" stroke={label} stroke-width="1.6" stroke-dasharray="2 3"></line>
+  <text x={x0 + 182} y="437.5" font-size="10" font-weight="500" fill={label}>MEASURED — R</text>
+  <line x1={x0 + 300} y1="434" x2={x0 + 324} y2="434" stroke={faint} stroke-width="1.2" stroke-dasharray="5 4"></line>
+  <text x={x0 + 332} y="437.5" font-size="10" font-weight="500" fill={label}>EXPECTED</text>
 
   <text x="24" y="462" font-size="10" font-weight="500" fill={label} opacity="0.9"
     >EVERY WIGGLE HAS A CAUSE AND A FIX — READ WHERE, HOW SHARP, AND ONE CHANNEL OR BOTH.</text
