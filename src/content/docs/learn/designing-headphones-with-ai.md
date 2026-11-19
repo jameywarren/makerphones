@@ -68,7 +68,7 @@ productive layer on top.
 April 28, 2026, as part of Anthropic's "Claude for Creative Work" launch, one of nine
 design-tool connectors alongside Blender, Adobe, SketchUp and others. It lets Claude take real
 actions inside Fusion through natural language; Autodesk structured it as two MCPs, one for
-creating and modifying geometry and one for querying the model. The connector is available
+building and querying the model in your open Fusion session and a cloud one for your project data. The connector is available
 across Claude plans, but you need a Fusion subscription to use it; set it up through the Fusion
 connector in Claude per Autodesk's official instructions.
 
