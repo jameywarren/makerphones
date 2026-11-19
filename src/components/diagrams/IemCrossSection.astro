@@ -40,7 +40,7 @@ const washAccent = 'color-mix(in srgb, var(--mp-accent) 7%, transparent)';
       );
     })
   }
-  <text x="650" y={cy - 70} font-size="9.5" font-weight="500" fill={label} text-anchor="end">EAR CANAL</text>
+  <text x="650" y={cy - 70} font-size="10" font-weight="500" fill={label} text-anchor="end">EAR CANAL</text>
 
   <path
     d={`M 420 ${cy - 36} C 420 ${cy - 96} 350 ${cy - 110} 280 ${cy - 96} C 200 ${cy - 80} 182 ${cy + 30} 240 ${cy + 78} C 300 ${cy + 124} 408 ${cy + 64} 420 ${cy + 36} Z`}
@@ -50,7 +50,7 @@ const washAccent = 'color-mix(in srgb, var(--mp-accent) 7%, transparent)';
   <rect x="420" y={cy - 22} width="56" height="44" rx="6" fill={ground} stroke={ink} stroke-width="1.5"></rect>
   <line x1="426" y1={cy} x2="472" y2={cy} stroke={accent} stroke-width="2.5"></line>
   <path
-    d={`M 452 ${cy - 22} Q 492 ${cy - 40} 496 ${cy - 4} L 496 ${cy + 4} Q 492 ${cy + 40} 452 ${cy + 22}`}
+    d={`M 452 ${cy - 22} C 452 ${cy - 38} 462 ${cy - 44.5} 474 ${cy - 44.5} C 492 ${cy - 44.5} 502 ${cy - 24} 502 ${cy - 4} L 502 ${cy + 4} C 502 ${cy + 24} 492 ${cy + 44.5} 474 ${cy + 44.5} C 462 ${cy + 44.5} 452 ${cy + 38} 452 ${cy + 22}`}
     fill={washInk}
     stroke={ink}
     stroke-width="1.5"></path>
@@ -59,16 +59,18 @@ const washAccent = 'color-mix(in srgb, var(--mp-accent) 7%, transparent)';
   <rect x="262" y={cy - 64} width="42" height="26" rx="3" fill="none" stroke={ink} stroke-width="1.5"></rect>
   <rect x="262" y={cy - 28} width="42" height="26" rx="3" fill="none" stroke={ink} stroke-width="1.5"></rect>
   <rect x="236" y={cy + 22} width="34" height="22" rx="3" fill={washInk} stroke={ink} stroke-width="1.5"></rect>
-  <path d={`M 304 ${cy - 50} C 370 ${cy - 50} 400 ${cy - 18} 426 ${cy - 6}`} fill="none" stroke={label} stroke-width="1.4"></path>
-  <path d={`M 380 ${cy + 16} C 404 ${cy + 12} 414 ${cy + 6} 426 ${cy + 4}`} fill="none" stroke={label} stroke-width="1.4"></path>
-  <path d={`M 270 ${cy + 22} C 280 ${cy + 4} 300 ${cy - 6} 320 ${cy - 10}`} fill="none" stroke={hair} stroke-width="1.2" stroke-dasharray="2 3"></path>
+  <path d={`M 304 ${cy - 50} C 370 ${cy - 50} 400 ${cy - 20} 426 ${cy - 9}`} fill="none" stroke={label} stroke-width="1.4"></path>
+  <path d={`M 304 ${cy - 15} C 350 ${cy - 15} 396 ${cy - 6} 426 ${cy - 3}`} fill="none" stroke={label} stroke-width="1.4"></path>
+  <path d={`M 380 ${cy + 16} C 404 ${cy + 12} 414 ${cy + 8} 426 ${cy + 6}`} fill="none" stroke={label} stroke-width="1.4"></path>
+  <path d={`M 250 ${cy + 22} C 250 ${cy + 10} 262 ${cy + 4} 272 ${cy - 2}`} fill="none" stroke={hair} stroke-width="1.2" stroke-dasharray="2 3"></path>
+  <path d={`M 270 ${cy + 34} C 290 ${cy + 36} 304 ${cy + 30} 321 ${cy + 26}`} fill="none" stroke={hair} stroke-width="1.2" stroke-dasharray="2 3"></path>
 
   {
     [14, 26].map((r, i) => (
       <path
         class="mp-wave-out2"
         style={i ? 'animation-delay: -1.2s' : undefined}
-        d={arcPath(500, cy, r, -50, 50)}
+        d={arcPath(506, cy, r, -50, 50)}
         fill="none"
         stroke={accent}
         stroke-width="1.6"
@@ -77,21 +79,21 @@ const washAccent = 'color-mix(in srgb, var(--mp-accent) 7%, transparent)';
     ))
   }
 
-  <text x="150" y="108" font-size="9.5" font-weight="500" fill={label}>BALANCED ARMATURES — HIGHS</text>
+  <text x="150" y="108" font-size="10" font-weight="500" fill={label}>BALANCED ARMATURES — HIGHS</text>
   <line x1="236" y1="114" x2="282" y2={cy - 56} stroke={faint} stroke-width="1"></line>
   <circle cx="282" cy={cy - 56} r="2.2" fill={faint}></circle>
-  <text x="96" y={cy + 116} font-size="9.5" font-weight="500" fill={label}>CROSSOVER</text>
+  <text x="96" y={cy + 116} font-size="10" font-weight="500" fill={label}>CROSSOVER</text>
   <line x1="136" y1={cy + 110} x2="248" y2={cy + 40} stroke={faint} stroke-width="1"></line>
   <circle cx="248" cy={cy + 40} r="2.2" fill={faint}></circle>
-  <text x="328" y={cy + 106} font-size="9.5" font-weight="500" fill={label}>DYNAMIC DRIVER — LOWS</text>
+  <text x="328" y={cy + 106} font-size="10" font-weight="500" fill={label}>DYNAMIC DRIVER — LOWS</text>
   <line x1="372" y1={cy + 98} x2="356" y2={cy + 44} stroke={faint} stroke-width="1"></line>
   <circle cx="356" cy={cy + 44} r="2.2" fill={faint}></circle>
-  <text x="430" y="120" font-size="9.5" font-weight="500" fill={label}>SOUND BORE</text>
-  <line x1="452" y1="126" x2="446" y2={cy - 8} stroke={faint} stroke-width="1"></line>
-  <circle cx="446" cy={cy - 8} r="2.2" fill={faint}></circle>
-  <text x="556" y="150" font-size="9.5" font-weight="500" fill={label}>EAR-TIP — THE SEAL</text>
-  <line x1="566" y1="156" x2="488" y2={cy - 26} stroke={faint} stroke-width="1"></line>
-  <circle cx="488" cy={cy - 26} r="2.2" fill={faint}></circle>
+  <text x="430" y="120" font-size="10" font-weight="500" fill={label}>SOUND BORE</text>
+  <line x1="452" y1="126" x2="447" y2={cy - 4} stroke={faint} stroke-width="1"></line>
+  <circle cx="447" cy={cy - 4} r="2.2" fill={faint}></circle>
+  <text x="556" y="150" font-size="10" font-weight="500" fill={label}>EAR-TIP — THE SEAL</text>
+  <line x1="566" y1="156" x2="484" y2={cy - 40} stroke={faint} stroke-width="1"></line>
+  <circle cx="484" cy={cy - 40} r="2.2" fill={faint}></circle>
 
   <text x="24" y="446" font-size="10" font-weight="500" fill={label} opacity="0.9"
     >THE SEAL IS THE BASS — A LEAKING TIP COSTS MORE LOW END THAN ANY DRIVER UPGRADE BUYS BACK.</text
