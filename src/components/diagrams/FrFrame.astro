@@ -2,7 +2,8 @@
 /**
  * Shared log-frequency axis frame for the response figures (FIG 09 /
  * 10): ink axes, faint ticks at the standard decade points, optional
- * dB scale on the left. Renders bare SVG elements — use inside an
+ * dB scale on the left, optional axis title for that scale (dbTitle,
+ * off by default). Renders bare SVG elements — use inside an
  * <svg class="mp-dgm">.
  */
 import { lgx, FR_TICKS } from './geometry';
@@ -15,8 +16,10 @@ interface Props {
   dbTicks?: number[] | null;
   pxPerDb?: number;
   yZero?: number;
+  /** Rotated title for the level axis, e.g. "LEVEL (dB)". Off when omitted. */
+  dbTitle?: string | null;
 }
-const { x0, y0, W, H, dbTicks = null, pxPerDb = 0, yZero = 0 } = Astro.props;
+const { x0, y0, W, H, dbTicks = null, pxPerDb = 0, yZero = 0, dbTitle = null } = Astro.props;
 
 const ink = 'var(--mp-charcoal)';
 const label = 'var(--mp-meta)';
@@ -29,7 +32,7 @@ const faint = 'var(--mp-faint)';
   FR_TICKS.map(([f, lab]) => (
     <g>
       <line x1={lgx(f, x0, W)} y1={y0} x2={lgx(f, x0, W)} y2={y0 + 5} stroke={faint} stroke-width="1" />
-      <text x={lgx(f, x0, W)} y={y0 + 20} font-size="8.5" font-weight="500" fill={label} text-anchor="middle">
+      <text x={lgx(f, x0, W)} y={y0 + 20} font-size="10" font-weight="500" fill={label} text-anchor="middle">
         {lab}
       </text>
     </g>
@@ -40,10 +43,25 @@ const faint = 'var(--mp-faint)';
     dbTicks.map((db) => (
       <g>
         <line x1={x0 - 5} y1={yZero - db * pxPerDb} x2={x0} y2={yZero - db * pxPerDb} stroke={faint} stroke-width="1" />
-        <text x={x0 - 10} y={yZero - db * pxPerDb + 3.5} font-size="8.5" font-weight="500" fill={label} text-anchor="end">
+        <text x={x0 - 10} y={yZero - db * pxPerDb + 3.5} font-size="10" font-weight="500" fill={label} text-anchor="end">
           {db > 0 ? `+${db}` : db}
         </text>
       </g>
     ))
 }
-<text x={x0 + W / 2} y={y0 + 38} font-size="9" font-weight="500" fill={label} text-anchor="middle">FREQUENCY (Hz) — LOG</text>
+{
+  dbTitle && (
+    <text
+      x={x0 - 52}
+      y={y0 - H + 8}
+      font-size="10"
+      font-weight="500"
+      fill={label}
+      text-anchor="end"
+      transform={`rotate(-90 ${x0 - 52} ${y0 - H + 8})`}
+    >
+      {dbTitle}
+    </text>
+  )
+}
+<text x={x0 + W / 2} y={y0 + 38} font-size="10" font-weight="500" fill={label} text-anchor="middle">FREQUENCY (Hz) — LOG</text>
