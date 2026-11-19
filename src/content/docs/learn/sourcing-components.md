@@ -26,7 +26,7 @@ Here's everything you need for a complete headphone build:
 
 ## Drivers: Your Main Suppliers
 
-**Parts Express (partsexpress.com):** The go-to source for North American DIY builders: reliable quality control, reasonable prices, fast shipping. One caution about the house brand: most of the Dayton Audio catalog is loudspeaker drivers, not headphone drivers. The one Dayton part that genuinely belongs in a headphone build is the CE38MB-32 (part # 285-131), a 38 mm, 32-ohm mini driver around $3.49 that Dayton actually markets as a headphone replacement driver, and that the DIY community has real build history with. Its known character: bass-heavy in a closed-back design, so plan your damping accordingly.
+**Parts Express (parts-express.com):** The go-to source for North American DIY builders: reliable quality control, reasonable prices, fast shipping. One caution about the house brand: most of the Dayton Audio catalog is loudspeaker drivers, not headphone drivers. The one Dayton part that genuinely belongs in a headphone build is the CE38MB-32 (part # 285-131), a 38 mm, 32-ohm mini driver around $3.49 that Dayton actually markets as a headphone replacement driver, and that the DIY community has real build history with. Its known character: bass-heavy in a closed-back design, so plan your damping accordingly.
 
 **Madisound (madisound.com):** Another excellent US supplier. More focused on high-end components, sometimes carries drivers you won't find elsewhere. Good customer service and technical knowledge.
 
