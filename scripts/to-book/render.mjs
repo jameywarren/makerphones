@@ -38,6 +38,7 @@ import { spawn } from 'node:child_process';
 import path from 'node:path';
 import puppeteer from 'puppeteer-core';
 import { ROOT, DIST, ARTIFACTS } from '../lib/paths.mjs';
+import { BOOK_TITLE, PRINTED_PAGE_COUNT } from '../lib/edition.mjs';
 
 const PRESS = process.argv.includes('--press');
 const CMYK = process.argv.includes('--cmyk');   // fast CMYK convert (KDP-ready)
@@ -171,6 +172,11 @@ async function main() {
     const { pages, clipped, wordBreaksMoved } = await renderPdf(chrome, url);
     console.log(`  ✓ ${path.relative(ROOT, rgbPdf)}  (${pages} pages)`);
     console.log(`  page breaks moved off the middle of a word: ${wordBreaksMoved}`);
+    if (pages !== PRINTED_PAGE_COUNT) {
+      console.log(`\n  NOTE: ${pages} pages. The cover spine is built for ${PRINTED_PAGE_COUNT} (lib/edition.mjs).`);
+      console.log('  If this is a press render, recompute the spine in project/book/cover/cover-print.html');
+      console.log('  (and the two replace strings in render-cover.mjs) before making covers.\n');
+    }
 
     // Clipped-text check. Runs on every render; fails it unless --allow-clipped.
     if (clipped == null) {
@@ -210,10 +216,10 @@ async function main() {
         if (PDFX) {
           const defPath = path.join(ARTIFACTS, '_book', 'PDFX_def.ps');
           await mkdir(path.dirname(defPath), { recursive: true });
-          await writeFile(defPath, pdfxDef(ICC, 'The Art and Science of Headphone Design'));
+          await writeFile(defPath, pdfxDef(ICC, BOOK_TITLE));
           console.log(`  PDF/X-1a -> ${path.relative(ROOT, x1aPdf)} …`);
           console.log('  (SLOW: -dPDFX flattens all transparency to PDF 1.3 — ~40+ min on this');
-          console.log('   282-pp book. Run it only when you actually need the IngramSpark file.)');
+          console.log(`   ${pages}-pp book. Run it only when you actually need the IngramSpark file.)`);
           await run('gs', [
             '-dPDFX', '-dBATCH', '-dNOPAUSE', '-dNOSAFER',
             '-sDEVICE=pdfwrite', '-dProcessColorModel=/DeviceCMYK',

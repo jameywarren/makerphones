@@ -26,10 +26,12 @@ import { spawnSync } from 'node:child_process';
 import { DOMParser } from '@xmldom/xmldom';
 import {
   SPINE, checkSpine, readBuiltPage, divInner, sanitizeBody, processFigures, firstH1, metaDesc,
-  buildIndex, WEB_NOTE, exists,
-  BOOK_TITLE, BOOK_SUBTITLE, AUTHOR, COPYRIGHT_HOLDER, IMPRINT,
-  ISBN_EBOOK, DIST, ROOT,
+  buildIndex, WEB_NOTE, exists, DIST, ROOT,
 } from '../to-book/collect.mjs';
+import {
+  BOOK_TITLE, BOOK_SUBTITLE, AUTHOR, COPYRIGHT_HOLDER, IMPRINT,
+  ISBN_EBOOK, EDITION, EDITION_YEAR, REVISION,
+} from '../lib/edition.mjs';
 import { ARTIFACTS } from '../lib/paths.mjs';
 import { assertFreshDist } from '../lib/fresh-dist.mjs';
 
@@ -205,7 +207,8 @@ const FM = {
     `<section class="book-title-page"><p class="bt-kicker">Warren Labs</p><h1 class="bt-title">${esc(BOOK_TITLE)}</h1>` +
     `<p class="bt-sub">${esc(BOOK_SUBTITLE)}</p><p class="bt-author">${esc(AUTHOR)}</p></section>`),
   copyright: () => xhtmlDoc('Copyright',
-    `<section class="book-copyright"><p>${esc(BOOK_TITLE)}</p><p>First edition &#8226; 2026</p>` +
+    `<section class="book-copyright"><p>${esc(BOOK_TITLE)}</p><p>${esc(EDITION)} &#8226; ${EDITION_YEAR}</p>` +
+    (REVISION ? `<p>${esc(REVISION)}</p>` : '') +
     `<p>&#169; ${esc(COPYRIGHT_HOLDER)}. Manual text licensed Creative Commons BY-NC 4.0; design files MIT. ` +
     `Full terms in the license appendix and at makerphones.com.</p><p>Published by ${esc(IMPRINT)}.</p>` +
     `<p class="cr-isbn">ISBN ${ISBN_EBOOK} (ebook)</p>` +
@@ -443,7 +446,7 @@ async function main() {
 <meta refines="#creator" property="role" scheme="marc:relators">aut</meta>
 <dc:publisher>${esc(IMPRINT)}</dc:publisher>
 <dc:language>en</dc:language>
-<dc:date>2026</dc:date>
+<dc:date>${EDITION_YEAR}</dc:date>
 <dc:rights>© ${esc(COPYRIGHT_HOLDER)}. Text licensed CC BY-NC 4.0.</dc:rights>
 <dc:description>${esc(BOOK_SUBTITLE)}</dc:description>
 <meta property="dcterms:modified">${NOW}</meta>

@@ -33,22 +33,17 @@ import path from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { ROOT, DIST } from '../lib/paths.mjs';
 import { assertFreshDist } from '../lib/fresh-dist.mjs';
+import {
+  BOOK_TITLE, BOOK_SUBTITLE, AUTHOR, COPYRIGHT_HOLDER, IMPRINT,
+  ISBN_PAPERBACK, ISBN_EBOOK, EDITION, EDITION_YEAR, REVISION,
+} from '../lib/edition.mjs';
 
 const STYLES = path.join(ROOT, 'src', 'styles');
 
 const PRESS = process.argv.includes('--press');
 const OUT = path.join(DIST, PRESS ? 'book-press.html' : 'book.html');
 
-const BOOK_TITLE = 'The Art and Science of Headphone Design';
-const BOOK_SUBTITLE =
-  'Designing and building your own headphones — the real engineering, explained plainly.';
-const AUTHOR = 'Jamey Warren';             // pen name — byline on the cover + title page
-const COPYRIGHT_HOLDER = 'James A. Warren'; // legal name — copyright line + ISBN registrant of record
-const IMPRINT = 'Warren Labs';
-// Warren Labs ISBN block 979-8-9968299-x (Bowker order #2531268). Each edition
-// gets its own ISBN; both are listed on the copyright page.
-const ISBN_PAPERBACK = '979-8-9968299-0-3';
-const ISBN_EBOOK = '979-8-9968299-1-0';
+// Title, author, ISBNs, edition statement: typed once, in lib/edition.mjs.
 
 /** The spine: which pages are in the book, and in what order.
  *
@@ -594,7 +589,7 @@ ${pressCss}
 
 <section class="book-copyright">
   <p class="cr-title">${BOOK_TITLE}</p>
-  <p>First edition · 2026</p>
+  <p>${EDITION} · ${EDITION_YEAR}</p>${REVISION ? `\n  <p>${REVISION}</p>` : ''}
   <p>© ${COPYRIGHT_HOLDER}. Manual text licensed Creative Commons BY-NC 4.0; design
   files MIT. Full terms in the license appendix and at makerphones.com.</p>
   <p>Published by ${IMPRINT}.</p>
