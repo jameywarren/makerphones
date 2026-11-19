@@ -591,7 +591,7 @@ ${pressCss}
   <p class="cr-title">${BOOK_TITLE}</p>
   <p>${EDITION} · ${EDITION_YEAR}</p>${REVISION ? `\n  <p>${REVISION}</p>` : ''}
   <p>© ${COPYRIGHT_HOLDER}. Manual text licensed Creative Commons BY-NC 4.0; design
-  files MIT. Full terms in the license appendix and at makerphones.com.</p>
+  files MIT. Full terms at makerphones.com/license.</p>
   <p>Published by ${IMPRINT}.</p>
   <p class="cr-isbn">ISBN ${ISBN_PAPERBACK} (paperback)<br>ISBN ${ISBN_EBOOK} (ebook)</p>
   <p>Set in Schibsted Grotesk, Source Serif 4, and JetBrains Mono.</p>
@@ -615,13 +615,13 @@ ${lofHtml}
   <p>This is a reference manual you can read two ways. Read it front to back
   and it builds an argument: how headphones make sound, what the parts do, how
   to design and build an enclosure, how to measure what you made, and how to
-  tune it. Or treat it as a reference — each chapter names what you should have
-  read first, so you can come in from any direction and find your footing.</p>
+  tune it. Or treat it as a reference — each chapter tells you which other
+  chapters to turn to, so you can come in from any direction and find your footing.</p>
   <p>The six numbered parts climb from beginner to advanced. After them, the
   build guides walk through real headphones end to end, and the appendices
   collect a glossary, suppliers, resources, sources, troubleshooting, and a
-  standing note on listening safely. Figures are numbered by chapter — Fig. 4.2
-  is the second figure in Chapter 4 — and gathered in the list of figures up
+  standing note on listening safely. Figures are numbered by chapter — Fig. 27.2
+  is the second figure in Chapter 27 — and gathered in the list of figures up
   front.</p>
   <p>Nothing here is theory for its own sake. Every claim that can be measured
   is, and the curve is shown. Where a value is a judgment call, it says so. The

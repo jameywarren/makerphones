@@ -210,7 +210,7 @@ const FM = {
     `<section class="book-copyright"><p>${esc(BOOK_TITLE)}</p><p>${esc(EDITION)} &#8226; ${EDITION_YEAR}</p>` +
     (REVISION ? `<p>${esc(REVISION)}</p>` : '') +
     `<p>&#169; ${esc(COPYRIGHT_HOLDER)}. Manual text licensed Creative Commons BY-NC 4.0; design files MIT. ` +
-    `Full terms in the license appendix and at makerphones.com.</p><p>Published by ${esc(IMPRINT)}.</p>` +
+    `Full terms at makerphones.com/license.</p><p>Published by ${esc(IMPRINT)}.</p>` +
     `<p class="cr-isbn">ISBN ${ISBN_EBOOK} (ebook)</p>` +
     `<p>Set in Schibsted Grotesk, Source Serif 4, and JetBrains Mono.</p>` +
     `<p>Generated from the live manual at makerphones.com. For interactive figures and the 3D parts viewer, visit the website.</p></section>`),
@@ -221,10 +221,10 @@ const FM = {
     `<section class="book-preface"><h2>How to use this book</h2>` +
     `<p>This is a reference manual you can read two ways. Read it front to back and it builds an argument: how headphones make ` +
     `sound, what the parts do, how to design and build an enclosure, how to measure what you made, and how to tune it. Or treat ` +
-    `it as a reference &#8212; each chapter names what you should have read first, so you can come in from any direction and find your footing.</p>` +
+    `it as a reference &#8212; each chapter tells you which other chapters to turn to, so you can come in from any direction and find your footing.</p>` +
     `<p>The six numbered parts climb from beginner to advanced. After them, the build guides walk through real headphones end to ` +
     `end, and the appendices collect a glossary, suppliers, resources, sources, troubleshooting, and a standing note on listening ` +
-    `safely. Figures are numbered by chapter &#8212; Fig. 4.2 is the second figure in Chapter 4.</p>` +
+    `safely. Figures are numbered by chapter &#8212; Fig. 27.2 is the second figure in Chapter 27.</p>` +
     `<p>Nothing here is theory for its own sake. Every claim that can be measured is, and the curve is shown. Where a value is a ` +
     `judgment call, it says so.</p>` +
     `<p>A few things live only on the website &#8212; most of all the interactive 3D parts viewer. Where the page can&#8217;t carry them, the book points you to makerphones.com.</p></section>`),
