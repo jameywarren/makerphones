@@ -561,6 +561,21 @@ h1[data-page-title] {
 .sl-markdown-content tr:nth-child(2n) td:not(:where(.not-content *)) {
   background: transparent;
 }
+/* Phone widths: tighter cells, long code tokens may wrap, and a table that is
+   still too wide scrolls inside itself instead of widening the page. */
+@media (max-width: 40rem) {
+  .sl-markdown-content table:not(:where(.not-content *)) {
+    display: block;
+    overflow-x: auto;
+  }
+  .sl-markdown-content th:not(:where(.not-content *)),
+  .sl-markdown-content td:not(:where(.not-content *)) {
+    padding: 10px 10px;
+  }
+  .sl-markdown-content td:not(:where(.not-content *)) code {
+    overflow-wrap: anywhere;
+  }
+}
 
 /* ---- figure / diagram ----------------------------------------------------- */
 .mp-figure {
