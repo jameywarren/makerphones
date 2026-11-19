@@ -8,7 +8,6 @@
  */
 import { getManual } from '../../data/manual';
 import HeroExploded from '../illustration/HeroExploded.astro';
-import PhotoPlate from '../illustration/PhotoPlate.astro';
 import Motifs from '../illustration/Motifs.astro';
 import MpIcon from '../illustration/MpIcon.astro';
 import DifficultyArcs from '../illustration/DifficultyArcs.astro';
@@ -110,7 +109,7 @@ const BENCH = {
 
   <!-- contents -->
   <section class="mp-full mp-sec">
-    <div class="mp-secB-grid">
+    <div class="mp-secB-grid mp-secB-solo">
       <div>
         <p class="mono orange">Contents</p>
         <h2 class="h-display" style="font-size: clamp(1.6rem, 3vw, 2.375rem); margin: 12px 0 30px;">The manual in six parts</h2>
@@ -128,17 +127,11 @@ const BENCH = {
           ))}
         </div>
       </div>
-      <div style="padding-top: 86px;">
-        <PhotoPlate label="PLATE I — THE BENCH, TODAY" height={330} placeholder="WORKSHOP PHOTO" />
-      </div>
     </div>
   </section>
 
   <!-- author -->
-  <section class="mp-full mp-bio-margin">
-    <div>
-      <PhotoPlate label="PLATE II — THE AUTHOR, AT THE BENCH" height={170} placeholder="BENCH PORTRAIT" />
-    </div>
+  <section class="mp-full mp-bio-margin mp-bio-solo">
     <div>
       <p class="mono orange" style="margin-bottom: 14px;">Who is writing this</p>
       {BIO.paras.map((p, i) => (
@@ -154,16 +147,6 @@ const BENCH = {
   <div class="mp-ornament" aria-hidden="true">
     <DriverMark size={17} />
   </div>
-
-  <!-- the record -->
-  <section class="mp-full mp-sec" style="padding-top: 56px;">
-    <p class="mono orange" style="margin-bottom: 18px;">The record — prototypes & builds</p>
-    <div class="mp-platerow">
-      <PhotoPlate label="PLATE III — FIRST PROTOTYPE" height={230} placeholder="PROTOTYPE PHOTO" />
-      <PhotoPlate label="PLATE IV — BUILD 022, COMMUNITY" height={230} placeholder="FINISHED BUILD PHOTO" />
-      <PhotoPlate label="PLATE V — FINISHED PAIR" height={230} placeholder="FINISHED PAIR PHOTO" />
-    </div>
-  </section>
 
   <!-- bench band -->
   <section class="mp-full mp-bench">

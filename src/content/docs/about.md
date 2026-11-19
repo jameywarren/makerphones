@@ -28,8 +28,6 @@ Hertsens** of HeadRoom — much of what's here traces back to him. And my real a
 education came from **Michael and Eben Grace**: the years I spent at Grace Design, working
 directly under the two brothers, were my true schooling in this craft.
 
-<div class="mp-ph" style="height: 220px; margin: 1.5rem 0;" role="img" aria-label="workshop photo placeholder"><span class="mp-ph-label">workshop photo, real shot coming</span></div>
-
 ## The Daily Driver
 
 The Daily Driver is the process happening in the open: an open-back headphone being designed with

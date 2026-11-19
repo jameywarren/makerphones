@@ -506,3 +506,14 @@
   border-radius: 999px;
   padding: 3px 10px;
 }
+
+/* Photo plates are out until there are real photos (2026-11-19). These keep the
+   contents list and the author block as a single column meanwhile. To bring a
+   plate back, restore its markup in HomePage.astro and drop the -solo class. */
+.mp-secB-grid.mp-secB-solo,
+.mp-bio-margin.mp-bio-solo {
+  grid-template-columns: 1fr;
+}
+.mp-secB-grid.mp-secB-solo > div {
+  max-width: 62rem;
+}
