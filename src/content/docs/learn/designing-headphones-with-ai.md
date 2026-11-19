@@ -100,7 +100,7 @@ varies and the output isn't manufacturing-ready. Possible use: turn a chosen ren
 geometry as a reference body to import into CAD, then rebuild it parametrically. Worth knowing
 about; not a primary path.
 
-**OpenSCAD and CadQuery (code-based CAD).** Code-based parametric CAD libraries. Claude can
+**OpenSCAD and CadQuery (code-based CAD).** Code-based parametric CAD tools. Claude can
 write the script, you run it locally, you get an STL, no MCP needed, because the workflow
 doesn't require one. Less polished than Fusion (no surface tools, no fillet UI), but the
 iteration loop is dead simple. For open, reproducible designs, the code-based path has real
