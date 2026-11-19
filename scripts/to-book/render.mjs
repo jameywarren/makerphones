@@ -24,6 +24,10 @@
  * --cmyk needs Ghostscript on PATH (`brew install ghostscript` / apt). It's a
  * CMYK color conversion, not a validated PDF/X-1a (PLAN.md Phase 5).
  *
+ * After pagination, every page is checked for text that falls outside its page
+ * box (clipped, so it would not print). Any hit fails the render before the
+ * CMYK / PDF-X step; --allow-clipped overrides. See paged-guards.js.
+ *
  * Assemble the HTML first: `node scripts/to-book/collect.mjs [--press]`.
  */
 
@@ -38,6 +42,7 @@ import { ROOT, DIST, ARTIFACTS } from '../lib/paths.mjs';
 const PRESS = process.argv.includes('--press');
 const CMYK = process.argv.includes('--cmyk');   // fast CMYK convert (KDP-ready)
 const PDFX = process.argv.includes('--pdfx');   // PDF/X-1a (IngramSpark; SLOW)
+const ALLOW_CLIPPED = process.argv.includes('--allow-clipped');   // skip the clipped-text gate
 const htmlFile = PRESS ? 'book-press.html' : 'book.html';
 const rgbPdf = path.join(ARTIFACTS, PRESS ? 'book-press.pdf' : 'book.pdf');
 const cmykPdf = path.join(ARTIFACTS, 'book-press-cmyk.pdf');
@@ -132,8 +137,12 @@ async function renderPdf(chrome, url) {
       if (c === last) { if (++stable >= 6) break; } else { stable = 0; last = c; }
       await new Promise((r) => setTimeout(r, 500));
     }
+    // Text outside its page box is text the reader never sees (see paged-guards.js).
+    const clipped = await page.evaluate(
+      'typeof window.__bookClipAudit === "function" ? window.__bookClipAudit() : null');
+    const wordBreaksMoved = await page.evaluate('window.__bookWordBreaksMoved || 0');
     await page.pdf({ path: rgbPdf, printBackground: true, preferCSSPageSize: true, timeout: 0 });
-    return last;
+    return { pages: last, clipped, wordBreaksMoved };
   } finally {
     await browser.close();
   }
@@ -159,8 +168,28 @@ async function main() {
     console.log(`\n  chrome:  ${chrome}`);
     console.log(`  serving dist/ on :${port}`);
     console.log(`  rendering ${htmlFile} -> ${path.relative(ROOT, rgbPdf)} (paginating…)`);
-    const pages = await renderPdf(chrome, url);
+    const { pages, clipped, wordBreaksMoved } = await renderPdf(chrome, url);
     console.log(`  ✓ ${path.relative(ROOT, rgbPdf)}  (${pages} pages)`);
+    console.log(`  page breaks moved off the middle of a word: ${wordBreaksMoved}`);
+
+    // Clipped-text check. Runs on every render; fails it unless --allow-clipped.
+    if (clipped == null) {
+      console.log('  ! clipped-text check did not run (book.html predates paged-guards.js — re-run collect.mjs)');
+    } else if (clipped.length) {
+      console.error(`\n  CLIPPED TEXT on ${new Set(clipped.map((c) => c.page)).size} page(s): this text is in the`);
+      console.error('  source but falls outside the page box, so it will not print.');
+      for (const c of clipped.slice(0, 40)) console.error(`    p. ${c.page}: ${c.text}`);
+      if (clipped.length > 40) console.error(`    … and ${clipped.length - 40} more`);
+      if (!ALLOW_CLIPPED) {
+        console.error(`\n  ${path.relative(ROOT, rgbPdf)} was written so you can look at those pages. DO NOT UPLOAD IT.`);
+        console.error('  Fix the cause (usually a block that cannot wrap or break), or pass --allow-clipped.\n');
+        process.exitCode = 1;
+        return;
+      }
+      console.error('  (--allow-clipped: continuing anyway)\n');
+    } else {
+      console.log('  ✓ no text outside the page box on any page');
+    }
 
     if (CMYK || PDFX) {
       if (!(await hasGhostscript())) {

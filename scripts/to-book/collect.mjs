@@ -215,7 +215,13 @@ function sanitizeBody(html) {
     .replace(/<script\b[\s\S]*?<\/script>/gi, '')
     .replace(/<canvas\b[\s\S]*?<\/canvas>/gi, '')
     .replace(/<model-viewer\b[\s\S]*?<\/model-viewer>/gi, '')
-    .replace(/<model-viewer\b[^>]*\/?>/gi, '');
+    .replace(/<model-viewer\b[^>]*\/?>/gi, '')
+    // Stylesheets linked from INSIDE the body (Expressive Code puts its own next
+    // to every code block). They load late, after Paged.js has already measured
+    // the page, so the code block grows and pushes the last lines of the page
+    // past the bottom edge, where they are clipped and lost. book.css styles
+    // code blocks itself.
+    .replace(/<link\b[^>]*rel="stylesheet"[^>]*>/gi, '');
   // drop the whole interactive-viewer containers (their innards stall Paged.js)
   for (const cls of ['parts-viewer', 'parts-gallery']) h = stripDivByClass(h, cls);
   return h;
@@ -427,6 +433,7 @@ async function main() {
   for (const b of cssBlocks) bundled += stripModernSelectors(b) + '\n';
   const bookCss = await readFile(path.join(STYLES, 'book.css'), 'utf8');
   const pressCss = PRESS ? await readFile(path.join(STYLES, 'book-press.css'), 'utf8') : '';
+  const guards = await readFile(path.join(ROOT, 'scripts', 'to-book', 'paged-guards.js'), 'utf8');
 
   // vendor the Paged.js polyfill into dist (no CDN at render/print time)
   let pagedSrc = 'https://unpkg.com/pagedjs/dist/paged.polyfill.js';
@@ -550,8 +557,13 @@ ${indexHtml}
   <p>${IMPRINT} · makerphones.com</p>
 </section>
 
-<!-- Paged.js paginates this document in the browser and under the headless renderer. -->
+<!-- Paged.js paginates this document in the browser and under the headless renderer.
+     auto:false so paged-guards.js can register its handler first; it starts the preview. -->
+<script>window.PagedConfig = { auto: false };</script>
 <script src="${pagedSrc}"></script>
+<script>
+${guards}
+</script>
 </body>
 </html>
 `;

@@ -144,6 +144,29 @@ nav.pagination-links, canvas, model-viewer, .parts-viewer, .parts-gallery,
   break-inside: avoid;
 }
 
+/* code blocks — Expressive Code markup (figure.frame > pre > code > .ec-line).
+ * Its own stylesheet is NOT loaded in the book (collect.mjs strips the in-body
+ * <link>: it loaded after pagination and pushed text off the page). Long lines
+ * WRAP here; on the web they scroll, and a page can't. */
+.expressive-code { margin: 14pt 0; }
+.expressive-code figure.frame { margin: 0; break-inside: avoid; }
+.expressive-code figcaption.header, .expressive-code .copy { display: none; }
+.expressive-code pre {
+  font: 400 8pt/13pt var(--mp-mono);
+  color: var(--mp-ink);
+  background: var(--mp-bg);
+  border: 0.5pt solid var(--mp-line);
+  border-radius: 3pt;
+  padding: 10pt 12pt;
+  margin: 0;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  overflow: visible;
+  hyphens: none;
+}
+.expressive-code pre code { font: inherit; background: none; padding: 0; }
+.expressive-code .ec-line, .expressive-code .ec-line .code { display: block; }
+
 /* caution / tip callouts — ported from .starlight-aside */
 .starlight-aside { break-inside: avoid; border-radius: 4pt; margin: 14pt 0; overflow: hidden; }
 .starlight-aside__title {
