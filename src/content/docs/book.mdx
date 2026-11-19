@@ -7,7 +7,11 @@ head:
   - tag: script
     attrs:
       type: application/ld+json
-    content: '{"@context":"https://schema.org","@type":"Book","name":"The Art and Science of Headphone Design","alternateName":"A bench guide to how headphones are designed, measured & built","url":"https://makerphones.com/book/","inLanguage":"en","author":{"@type":"Person","name":"Jamey Warren"},"publisher":{"@type":"Organization","name":"Warren Labs"},"workExample":[{"@type":"Book","bookFormat":"https://schema.org/Paperback","isbn":"9798996829903","numberOfPages":282,"datePublished":"2026-06-26","potentialAction":{"@type":"ReadAction","target":"https://www.amazon.com/s?k=9798996829903","expectsAcceptanceOf":{"@type":"Offer","price":"49.99","priceCurrency":"USD","availability":"https://schema.org/InStock"}}},{"@type":"Book","bookFormat":"https://schema.org/EBook","isbn":"9798996829910","datePublished":"2026-06-26","potentialAction":{"@type":"ReadAction","target":"https://www.amazon.com/dp/B0H6XWXM4C","expectsAcceptanceOf":{"@type":"Offer","price":"9.99","priceCurrency":"USD","availability":"https://schema.org/InStock"}}}]}'
+    content: '{"@context":"https://schema.org","@type":"Book","name":"The Art and Science of Headphone Design","alternateName":"A bench guide to how headphones are designed, measured & built","url":"https://makerphones.com/book/","inLanguage":"en","author":{"@type":"Person","name":"Jamey Warren"},"publisher":{"@type":"Organization","name":"Warren Labs"},"workExample":[{"@type":"Book","bookFormat":"https://schema.org/Paperback","isbn":"9798996829903","numberOfPages":282,"datePublished":"2026-06-26","offers":{"@type":"Offer","url":"https://www.amazon.com/s?k=9798996829903","price":"49.99","priceCurrency":"USD","availability":"https://schema.org/InStock"}},{"@type":"Book","bookFormat":"https://schema.org/EBook","datePublished":"2026-06-26","offers":{"@type":"Offer","url":"https://www.amazon.com/dp/B0H6XWXM4C","price":"9.99","priceCurrency":"USD","availability":"https://schema.org/InStock"}}]}'
+  - tag: meta
+    attrs:
+      property: og:title
+      content: "The Art and Science of Headphone Design, by Jamey Warren"
 template: splash
 tableOfContents: false
 ---
@@ -39,7 +43,7 @@ import PublishedNote from '../../components/PublishedNote.astro';
     <div class="mp-edition">
       <span class="mp-edition-tag mono">EBOOK · $9.99</span>
       <h2>Ebook</h2>
-      <p><strong>Buy once, read it anywhere.</strong> Any Kindle device or the free Kindle app, on- or offline. When the manual gets a meaningful revision, we update the Kindle edition too, so a new copy is always the current one. Amazon decides when copies already bought get the update. The free web edition is always the latest, living copy.</p>
+      <p><strong>Buy once, read it anywhere.</strong> Any Kindle device or the free Kindle app, on- or offline. When the manual gets a meaningful revision, we update the Kindle edition too, so a new copy is always the current one. Amazon decides whether and when copies already bought get the update. The free web edition is always the latest, living copy.</p>
       <a class="mp-btn mp-btn-sm" href="https://www.amazon.com/dp/B0H6XWXM4C" target="_blank" rel="noopener" style="margin-top: 0.95rem;">Buy on Amazon Kindle&nbsp;&nbsp;→</a>
     </div>
     <div class="mp-edition">
@@ -47,8 +51,10 @@ import PublishedNote from '../../components/PublishedNote.astro';
       <h2>Print edition</h2>
       <p>A paperback in the same 7×10 field-manual design, made to live on the bench.</p>
       <p class="mp-meta">ISBN 979-8-9968299-0-3</p>
-      <a class="mp-btn mp-btn-sm" href="https://www.amazon.com/s?k=9798996829903" target="_blank" rel="noopener" style="margin-top: 0.95rem;">Find it on Amazon&nbsp;&nbsp;→</a>
-      <a class="mp-btn mp-btn-sm mp-btn-ghost" href="https://www.barnesandnoble.com/s/9798996829903" target="_blank" rel="noopener" style="margin-top: 0.6rem;">Barnes &amp; Noble&nbsp;&nbsp;→</a>
+      <div style="display: flex; flex-wrap: wrap; gap: 0.6rem; margin-top: 0.95rem;">
+        <a class="mp-btn mp-btn-sm" href="https://www.amazon.com/s?k=9798996829903" target="_blank" rel="noopener">Find it on Amazon&nbsp;&nbsp;→</a>
+        <a class="mp-btn mp-btn-sm mp-btn-ghost" href="https://www.barnesandnoble.com/s/9798996829903" target="_blank" rel="noopener">Barnes &amp; Noble&nbsp;&nbsp;→</a>
+      </div>
     </div>
   </div>
 </div>
