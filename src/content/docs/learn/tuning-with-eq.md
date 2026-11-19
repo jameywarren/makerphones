@@ -24,7 +24,7 @@ Where damping changes the physics inside the cup, EQ changes the signal going in
 
 EQ is genuinely good at broad tonal balance. If your build measures a touch bright, or the bass shelf is a couple dB light, or there's a gentle dip through the lower treble, a few wide parametric filters will bring the magnitude response right where you want it. It's also how you land precisely on a target after you've gotten close acoustically, which is exactly what tools like AutoEq automate, computing filters from a measurement to a chosen target. (Using those databases and targets is what the [benchmarking](/learn/benchmarking-with-public-measurements) chapter is about.)
 
-For getting the overall tonal shape onto a target, EQ is fast, reversible, and free. Damping can't be undone once you've over-stuffed a cup. An EQ filter is a slider you can pull right back.
+For getting the overall tonal shape onto a target, EQ is fast, reversible, and free. Undoing damping means opening the cup and pulling material back out. An EQ filter is a slider you can pull right back.
 
 ## What EQ can't fix — and this is the important part
 
