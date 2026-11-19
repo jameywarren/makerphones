@@ -2,7 +2,7 @@
 /**
  * FIG 05 / 05b — Standing waves & resonance (animated: build-up
  * envelope × oscillation between mirror states). harmonic={1}: nodes
- * at the walls, antinode at center, f₀ ≈ c/2L. harmonic={2}: the
+ * at the walls, antinode at center, f₁ ≈ c/2L. harmonic={2}: the
  * second mode — twice the frequency, extra node dead-center.
  */
 import { hatchV, arrowHead } from './geometry';
@@ -38,14 +38,17 @@ const hair = 'var(--mp-line)';
 const origin = `transform-origin: ${xm}px ${cy}px; transform-box: view-box;`;
 const hatchLeft = hatchV(146, 128, 318, -1, 7);
 const hatchRight = hatchV(574, 128, 318, 1, 7);
-const arrR = arrowHead(335, 128, 0, 6);
-const arrL = arrowHead(385, 140, 180, 6);
+// travelling-wave arrows: in the second mode they tuck between the two
+// antinode leaders instead of crossing them
+const trav = harmonic === 2 ? { r0: 275, r1: 350, l0: 445, l1: 370 } : { r0: 210, r1: 335, l0: 510, l1: 385 };
+const arrR = arrowHead(trav.r1, 128, 0, 6);
+const arrL = arrowHead(trav.l1, 140, 180, 6);
 const dimL = arrowHead(xL + 6, 384, 180, 6);
 const dimR = arrowHead(xR - 6, 384, 0, 6);
 const caption =
   harmonic === 2
     ? 'THE NEXT MODE UP — f₂ = c / L · TWICE THE FREQUENCY, WITH A DEAD SPOT AT CENTRE'
-    : 'REFLECTIONS REINFORCE AT f₀ ≈ c / 2L (AND MULTIPLES) — AMPLITUDE BUILDS WITH EACH PASS';
+    : 'REFLECTIONS REINFORCE AT f₁ ≈ c / 2L (AND MULTIPLES) — AMPLITUDE BUILDS WITH EACH PASS';
 ---
 
 <svg
@@ -63,9 +66,9 @@ const caption =
 
   <line x1={xL} y1={cy} x2={xR} y2={cy} stroke={hair} stroke-width="1" stroke-dasharray="2 4"></line>
 
-  <line x1="210" y1="128" x2="335" y2="128" stroke={faint} stroke-width="1.2"></line>
+  <line x1={trav.r0} y1="128" x2={trav.r1} y2="128" stroke={faint} stroke-width="1.2"></line>
   <polygon points={arrR.points} transform={arrR.transform} fill={faint}></polygon>
-  <line x1="510" y1="140" x2="385" y2="140" stroke={faint} stroke-width="1.2"></line>
+  <line x1={trav.l0} y1="140" x2={trav.l1} y2="140" stroke={faint} stroke-width="1.2"></line>
   <polygon points={arrL.points} transform={arrL.transform} fill={faint}></polygon>
 
   <g class="sw-build" style={origin}>
@@ -78,26 +81,26 @@ const caption =
 
   <circle cx={xL} cy={cy} r="3" fill={dark}></circle>
   <circle cx={xR} cy={cy} r="3" fill={dark}></circle>
-  <text x="152" y="358" font-size="9" font-weight="500" fill={label} text-anchor="middle">NODE</text>
-  <text x="568" y="358" font-size="9" font-weight="500" fill={label} text-anchor="middle">NODE</text>
+  <text x="152" y="358" font-size="10" font-weight="500" fill={label} text-anchor="middle">NODE</text>
+  <text x="568" y="358" font-size="10" font-weight="500" fill={label} text-anchor="middle">NODE</text>
 
   {
     harmonic === 2 ? (
       <g>
         <circle cx={xm} cy={cy} r="3" fill={dark} />
-        <text x={xm} y="358" font-size="9" font-weight="500" fill={label} text-anchor="middle">NODE — λ = L</text>
+        <text x={xm} y="358" font-size="10" font-weight="500" fill={label} text-anchor="middle">NODE — λ = L</text>
         <line x1={xm} y1="346" x2={xm} y2={cy + 8} stroke={faint} stroke-width="1" />
         <circle cx={xm} cy={cy + 8} r="2.2" fill={faint} />
-        <text x={xL + L / 4} y="96" font-size="9" font-weight="500" fill={label} text-anchor="middle">ANTINODE</text>
+        <text x={xL + L / 4} y="96" font-size="10" font-weight="500" fill={label} text-anchor="middle">ANTINODE</text>
         <line x1={xL + L / 4} y1="104" x2={xL + L / 4} y2={cy - A - 6} stroke={faint} stroke-width="1" />
         <circle cx={xL + L / 4} cy={cy - A - 6} r="2.2" fill={faint} />
-        <text x={xL + (3 * L) / 4} y="96" font-size="9" font-weight="500" fill={label} text-anchor="middle">ANTINODE</text>
-        <line x1={xL + (3 * L) / 4} y1="104" x2={xL + (3 * L) / 4} y2={cy - A - 6} stroke={faint} stroke-width="1" />
-        <circle cx={xL + (3 * L) / 4} cy={cy - A - 6} r="2.2" fill={faint} />
+        <text x={xL + (3 * L) / 4} y="334" font-size="10" font-weight="500" fill={label} text-anchor="middle">ANTINODE</text>
+        <line x1={xL + (3 * L) / 4} y1="322" x2={xL + (3 * L) / 4} y2={cy + A + 6} stroke={faint} stroke-width="1" />
+        <circle cx={xL + (3 * L) / 4} cy={cy + A + 6} r="2.2" fill={faint} />
       </g>
     ) : (
       <g>
-        <text x={xm} y="96" font-size="9" font-weight="500" fill={label} text-anchor="middle">ANTINODE</text>
+        <text x={xm} y="96" font-size="10" font-weight="500" fill={label} text-anchor="middle">ANTINODE</text>
         <line x1={xm} y1="104" x2={xm} y2="148" stroke={faint} stroke-width="1" />
         <circle cx={xm} cy="148" r="2.2" fill={faint} />
       </g>
