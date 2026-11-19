@@ -8,7 +8,7 @@
  * to CMYK with Ghostscript.
  *
  *   node scripts/to-book/render.mjs             screen -> artifacts/book.pdf
- *   node scripts/to-book/render.mjs --press     7x10+bleed -> artifacts/book-press.pdf
+ *   node scripts/to-book/render.mjs --press     7x10, no bleed -> artifacts/book-press.pdf
  *   node scripts/to-book/render.mjs --press --cmyk   ...then -> artifacts/book-press-cmyk.pdf
  *
  * Why drive Puppeteer directly instead of pagedjs-cli: a 200+ page book

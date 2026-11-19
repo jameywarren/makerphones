@@ -2,8 +2,10 @@
 
 **Working title:** *The Art and Science of Headphone Design*
 **Author:** Jamey Warren
-**Status:** Track 1 (PDF) — scaffolding in place, v0.1 generating.
-**Last updated:** 2026-06-26
+**Status:** pipeline built: there are `npm run` scripts for the screen PDF, the press PDF
+(CMYK and PDF/X-1a), the covers and the EPUB. For what is published where, see `publishing/STATUS.md`.
+**Last updated:** 2026-11-19 (this header and the note under the status board; the sections
+below are the plan as written on 2026-06-26 and are kept as the record)
 
 This is the living tracking doc for turning the makerphones reference manual
 into (1) a downloadable PDF and (2) a printed, published book. Update the
@@ -196,11 +198,29 @@ the back-of-book **index**, parts-viewer **stills** (GLBs are in
 `builds/daily-driver/docs/models/`), the **real CMYK build** + POD **accounts
 / ISBN**, and the **design system** (kit is ready to hand off).
 
+> **Corrected 2026-11-19: where the paragraph above no longer matches the code.**
+> - Both modes are 7×10. Press mode has **no bleed and no crop marks** since 2026-06-28
+>   (`src/styles/book-press.css` explains why).
+> - Finished files go to **`artifacts/`**, not `dist/`. Only the staged `book.html` /
+>   `book-press.html` live in `dist/`.
+> - The index, the assembled parts still, the front and back matter and the EPUB are built.
+> - Current commands and guards: `scripts/to-book/README.md`. Reprint steps:
+>   `publishing/RUNBOOK.md` §12.
+
 **Calendar to first printed proof:** ~3–6 weeks, dominated by the index,
 CMYK figure proofing, and proof shipping — not platform setup.
 **Cost to first proof:** ~$30 (proof only) to ~$325 (with the Bowker block).
 
 ### Changelog
+- 2026-11-19 — Pipeline audit fixes (group B). Assemblers refuse a **stale `dist/`**
+  (`scripts/lib/fresh-dist.mjs`). **Text lost at page breaks** fixed: Expressive Code's
+  in-body stylesheet is stripped (it loaded after pagination), code blocks wrap, and a
+  Paged.js handler keeps words whole across pages (`scripts/to-book/paged-guards.js`);
+  `render.mjs` now fails when any text falls outside a page. **Heading anchor icons**,
+  **"N min read"** and the 3D-viewer instructions no longer print. **Spine check** against
+  the site's manual lists with an explicit `WEB_ONLY` list. **Edition facts in one file**
+  (`scripts/lib/edition.mjs`) with a `REVISION` line for reprints. Copyright page and
+  preface: three untrue statements corrected. Docs corrected to match the code.
 - 2026-06-26 — Cover + press + parts. **Cover brief** pushed into the
   Makerphones Design System Claude project (`cover/BRIEF.md`) — design the
   cover there, no folder upload. **CMYK press** is the default press file

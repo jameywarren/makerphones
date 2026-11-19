@@ -9,7 +9,7 @@
  * in spine order, into one HTML book. Paged.js (vendored locally) paginates it.
  *
  *   node scripts/to-book/collect.mjs            -> dist/book.html        (screen)
- *   node scripts/to-book/collect.mjs --press    -> dist/book-press.html  (+ bleed + marks)
+ *   node scripts/to-book/collect.mjs --press    -> dist/book-press.html  (+ book-press.css: CMYK-safe accent; no bleed, no marks)
  *
  * Both refuse to run on a stale dist/ (any source newer than the build) unless
  * --allow-stale is passed. Use `npm run book` / `npm run book:press`, which
@@ -693,7 +693,7 @@ ${guards}
 
   const parts = SPINE.filter((g) => g.kind === 'part').length;
   const idxTerms = (indexHtml.match(/ix-entry/g) || []).length;
-  console.log(`\n  to-book (${PRESS ? 'PRESS 7x10+bleed' : 'screen 7x10'}): wrote ${path.relative(ROOT, OUT)}`);
+  console.log(`\n  to-book (${PRESS ? 'PRESS 7x10, no bleed' : 'screen 7x10'}): wrote ${path.relative(ROOT, OUT)}`);
   console.log(`  chapters: ${chapterNum} numbered (${parts} parts) + ` +
     `${entries.filter((e) => e.kind === 'guides').length} guides + ` +
     `${entries.filter((e) => e.kind === 'appendix').length} appendices`);

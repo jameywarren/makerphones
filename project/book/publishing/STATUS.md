@@ -2,6 +2,7 @@
 
 Source of truth for ISBNs, pricing, and publishing progress. No credentials here
 (Bowker/KDP logins live only in the author's password manager). Last updated 2026-09-02.
+File paths and pipeline notes corrected 2026-11-19; publishing status was not re-checked then.
 
 ## ISBNs — Warren Labs block `979-8-9968299-x` (Bowker order #2531268)
 
@@ -26,7 +27,7 @@ Unused ISBNs still in the block (for future editions/formats — e.g. hardcover,
 ## Names
 - **Legal:** James A. (Arthur) Warren — copyright holder + Bowker registrant of record.
 - **Pen name / byline:** Jamey Warren — on the cover and title page.
-- In `scripts/to-book/collect.mjs`: `AUTHOR`, `COPYRIGHT_HOLDER`, `ISBN_PAPERBACK`, `ISBN_EBOOK`.
+- In `scripts/lib/edition.mjs` (one place, imported by the print, EPUB and render scripts): `AUTHOR`, `COPYRIGHT_HOLDER`, `ISBN_PAPERBACK`, `ISBN_EBOOK`, the edition statement, and `REVISION`.
 
 ## Where it's sold
 - **Free online** — makerphones.com (text CC BY-NC). The funnel, not a conflict.
@@ -36,30 +37,41 @@ Unused ISBNs still in the block (for future editions/formats — e.g. hardcover,
   - [~] **Apple Books / Kobo / Nook** — via IngramSpark ebook distribution. **Apple still not live
     as of 2026-08-04** — see "Apple Books — not live yet" below for the tripwire date
 
-## Press files (generated locally — `dist/` is gitignored, so they stay on the author's machine)
+## Press files (generated locally — `artifacts/` is gitignored, so they stay on the author's machine)
 
 | File | What | Command |
 |---|---|---|
 | `artifacts/book-press-cmyk.pdf` | Interior, **282 pp**, CMYK, **7×10 no-bleed, no marks** — KDP paperback | `npm run book:press:pdf` |
 | `artifacts/book-press-pdfx1a.pdf` | Interior, PDF/X-1a — IngramSpark (slow ~40 min) | `npm run book:press:pdfx` |
 | `artifacts/cover-kdp.pdf` / `-cmyk.pdf` | Full-wrap cover, 14.885 × 10.25 in, spine 0.635 in | `npm run book:cover` |
+| `artifacts/cover-ingram.pdf` / `-cmyk.pdf` | Full-wrap cover, 14.955 × 10.25 in, spine 0.705 in | `npm run book:cover:ingram` |
 | `artifacts/book.epub` | Reflowable **EPUB 3** — Kindle + Apple/Kobo (via Ingram) | `npm run epub` |
+
+> **What is actually on disk (checked 2026-11-19).** `artifacts/` holds
+> `book-press.pdf` and `book-press-cmyk.pdf` (2026-06-28), `cover-kdp.pdf` and
+> `-cmyk.pdf` (2026-06-28), `cover-ingram.pdf` and `-cmyk.pdf` (2026-07-02).
+> It does **not** hold `book-press-pdfx1a.pdf` or `book.epub`. The table says
+> where each command writes, not that the file is there: the interior uploaded
+> to IngramSpark and the EPUB uploaded to Kindle and Ingram are not on this
+> machine.
 
 > Book products now render to `artifacts/` (gitignored), not `dist/` — `astro build`
 > no longer wipes them. Older builds may still sit in `dist/`; the **current** KDP
 > interior to upload is `artifacts/book-press-cmyk.pdf` (rendered 2026-06-28).
 
 Spine = page count × 0.002252 (KDP white). If the page count moves off 282,
-recompute and update `--spine` in `project/book/cover/cover-print.html`.
+recompute and update `--spine` and `size` in `project/book/cover/cover-print.html`,
+the two replace strings in `scripts/to-book/render-cover.mjs` (they make the Ingram
+cover), and `PRINTED_PAGE_COUNT` in `scripts/lib/edition.mjs`.
 
-> ⚠️ **`astro build` wipes `dist/`.** Astro clears the whole `dist/` on every build
-> (`npm run dev` / `build` / `preview` all trigger it), deleting these gitignored
-> artifacts — a concurrent session did this twice on 2026-06-27. Regenerate with the
-> `book:*` / `epub` commands (covers + epub in seconds; `book:press:pdfx` Ingram interior
-> ~25 min). Don't run a website build in parallel with a book render. **Durable fix TODO:**
-> write the book outputs to a directory outside `dist/` so Astro can't delete them.
+> **`astro build` wipes `dist/`, not `artifacts/`.** Astro clears the whole `dist/` on
+> every build. That used to delete the book files too (a concurrent session did it twice
+> on 2026-06-27, when they were written to `dist/`). They now go to `artifacts/`
+> (`scripts/lib/paths.mjs`), which a build does not touch. What a build still wipes is the
+> staged `dist/book.html` / `dist/book-press.html` that the renderer reads, so don't run a
+> website build in parallel with a book render.
 
-**EPUB v0.2 — BUILT + Ingram-validated.** `npm run epub` → `dist/book.epub`: reflowable EPUB 3, 47 chapters,
+**EPUB v0.2 — BUILT + Ingram-validated.** `npm run epub` → `artifacts/book.epub`: reflowable EPUB 3, 47 chapters,
 inline-SVG figures, 3 embedded fonts, front/back matter, navigable TOC + landmarks, the
 ebook ISBN in the OPF, and the FR-graph cover as the raster cover image. Built by
 `scripts/to-epub/build.mjs`, which reuses the to-book spine + chapter assembly (one

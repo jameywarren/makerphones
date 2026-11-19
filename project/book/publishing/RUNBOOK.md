@@ -68,9 +68,15 @@ sandbox lacks Chromium + Ghostscript):
 
 | Command | Output | Use |
 |---|---|---|
-| `npm run book:press:pdf` | `dist/book-press-cmyk.pdf` | **KDP interior** (CMYK, ~2 min) |
-| `npm run book:press:pdfx` | `dist/book-press-pdfx1a.pdf` | **IngramSpark interior** (PDF/X-1a, embeds coated-CMYK output intent; ~40 min) |
-| cover render (see §6) | `cover-kdp.pdf` / `cover-ingram.pdf` | full-wrap covers, one per platform (spine differs by paper) |
+| `npm run book:press:pdf` | `artifacts/book-press-cmyk.pdf` | **KDP interior** (CMYK, ~2 min) |
+| `npm run book:press:pdfx` | `artifacts/book-press-pdfx1a.pdf` | **IngramSpark interior** (PDF/X-1a, embeds coated-CMYK output intent; ~40 min) |
+| `npm run book:cover` / `npm run book:cover:ingram` (see §6) | `artifacts/cover-kdp-cmyk.pdf` / `artifacts/cover-ingram-cmyk.pdf` | full-wrap covers, one per platform (spine differs by paper) |
+| `npm run epub` | `artifacts/book.epub` | **ebook** (reflowable EPUB 3) |
+
+Everything lands in `artifacts/` (gitignored, outside the `dist/` publish root),
+never in `dist/`. Always use the `npm run` scripts: they run `astro build` first.
+The assemblers refuse to run on a stale `dist/`, and the renderer fails if any
+text falls outside a page (see `scripts/to-book/README.md`).
 
 ### File-routing table (read this twice)
 
@@ -94,8 +100,9 @@ fold/spine text. Generate each from its platform's own cover template/calc.
 ### File-spec checklist (must all be true before upload)
 
 - [ ] Trim **7 × 10 in** on every interior page.
-- [ ] Bleed **0.125 in (3 mm)** on the **outer three edges** of interior
-      pages (top, bottom, outside — **not** the bind/inside edge). Cover
+- [ ] Interior has **no bleed and no printer marks**: every page box is
+      exactly the 7 × 10 in trim (504 × 720 pt). KDP rejected the first
+      upload for crop marks; see `src/styles/book-press.css`. Cover
       bleed **0.125 in on all four sides**.
 - [ ] Interior is **CMYK** (KDP) / **PDF/X-1a:2001, CMYK** (Ingram). No RGB
       images, no spot colors, no transparency live in the Ingram file
@@ -180,8 +187,8 @@ warrants a new ISBN.
 4. **Paperback Content:**
    - Print options: **Premium Color**, **white** paper, **glossy or matte**
      cover (matte suits a technical title), **7 × 10 in** trim, **bleed:
-     yes**.
-   - **Upload interior:** `dist/book-press-cmyk.pdf`.
+     no** (the interior file is no-bleed; the cover still has bleed).
+   - **Upload interior:** `artifacts/book-press-cmyk.pdf`.
    - **Upload cover:** the KDP full-wrap cover PDF (KDP spine ≈ 0.635 in).
    - Run the **Online Previewer** — page through *every* spread; confirm no
      content in the bleed-trim margin, figures intact, running heads
@@ -237,7 +244,7 @@ Do this **after** KDP paperback is live with Expanded Distribution OFF.
    than creating a duplicate.
 3. **Specs:** 7 × 10 in trim, **Premium / Color** interior, white paper,
    paperback/perfect bound.
-4. **Upload interior:** `dist/book-press-pdfx1a.pdf` (**must be
+4. **Upload interior:** `artifacts/book-press-pdfx1a.pdf` (**must be
    PDF/X-1a:2001**). Upload the **Ingram-spine cover** (Ingram white ≈
    0.705 in spine — different from KDP). Ingram's automated check validates
    PDF/X compliance, bleed, and fonts on upload.
@@ -271,8 +278,16 @@ KDP   (282 pp, white, 0.002252/pg): SPINE ≈ 0.635 in → wrap ≈ 14.885 × 10
 Ingram(282 pp, white, 0.0025/pg):   SPINE ≈ 0.705 in → wrap ≈ 14.955 × 10.25 in
 ```
 
-- Render the wrap (`pagedjs-cli cover.html -o cover.pdf`), then convert to
-  CMYK like the interior; for Ingram, output **PDF/X-1a** as well.
+- Render the wraps with `npm run book:cover` (KDP) and
+  `npm run book:cover:ingram` (Ingram). `scripts/to-book/render-cover.mjs`
+  renders `project/book/cover/cover-print.html` and converts to CMYK:
+  `artifacts/cover-kdp-cmyk.pdf` and `artifacts/cover-ingram-cmyk.pdf`. Both
+  are CMYK PDFs; the script has no PDF/X step for covers.
+- The KDP spine and sheet size are typed by hand in `cover-print.html`
+  (`--spine:0.635in`, `size:14.885in 10.25in`). The Ingram cover is made by
+  replacing those two exact strings (`render-cover.mjs`). Change one and you
+  must change the other, or `book:cover:ingram` quietly writes a KDP-width
+  cover.
 - **Always confirm spine against the live calculator** before upload: KDP
   cover calculator (kdp.amazon.com/cover-calculator) and Ingram's cover
   template generator (it issues an exact-size template per your page
@@ -301,15 +316,15 @@ KDP 2026 premium-color print cost: **$0.85 fixed + $0.07/page**.
 
 ## 8. The ebook (EPUB) — note
 
-This is a 282-page color technical book with ~27 vector diagrams, an index,
+This is a 282-page color technical book with 23 numbered vector figures, an index,
 and figure cross-references. **Do not upload the print PDF as the ebook.**
 Build a **reflowable EPUB** from the same single source (the same
 `learn/*.md{,x}` content the print pipeline consumes), with:
 SVG figures inline, a navigable TOC, the glossary and index as linked
 back-matter, and the **ebook ISBN** in the OPF metadata. KDP's Kindle
 previewer will flag reflow problems with the wide FR plots — expect to set
-those figures to scale-to-width. *(This EPUB build is a prep task Claude can
-do from the existing pipeline; it is not yet wired as an `npm` target.)*
+those figures to scale-to-width. The build is `npm run epub`
+(`scripts/to-epub/build.mjs`) → `artifacts/book.epub`.
 
 ---
 
@@ -322,7 +337,7 @@ do from the existing pipeline; it is not yet wired as an `npm` target.)*
 | **Fonts not embedded** | subsetting/licensing | all three faces SIL OFL, embedded by the render; check with `pdffonts` (all should say "emb yes") |
 | **Spine width wrong / text on fold** | spine from stale page count or wrong paper | recompute from FINAL page count + the *platform's* paper; one cover per platform |
 | **Content in the bleed/margin** | figure or running head too close to trim | KDP previewer + keep text ≥ 0.25 in inside trim; figures keep-together in `book.css` |
-| **Bleed missing on interior** | exported without bleed | press render sets 0.125 in bleed on outer 3 edges |
+| **Crop marks / margins too small** (KDP, 2026-06-28) | printer marks drawn into a bleed strip | interior is no-bleed with no marks (`book-press.css`); nothing in it runs to the edge |
 | **Blank-page / pagination drift** | the 3D parts-viewer widget truncated the book at ~241 pp (already fixed) | parts-viewer stripped from print HTML; confirm full **282 pp** renders |
 | **Cover too small / not full-wrap** | front-only file uploaded | upload the single flat back·spine·front wrap; front-only JPG is **ebook-only** |
 | **Metadata mismatch KDP↔Ingram** | listings won't merge on Amazon | paste identical §0 metadata + same ISBN on both |
@@ -358,15 +373,68 @@ do from the existing pipeline; it is not yet wired as an `npm` target.)*
 
 ```bash
 # Interiors
-npm run book:press:pdf     # → dist/book-press-cmyk.pdf      (KDP interior)
-npm run book:press:pdfx    # → dist/book-press-pdfx1a.pdf    (Ingram interior, ~40 min)
+npm run book:press:pdf     # → artifacts/book-press-cmyk.pdf      (KDP interior)
+npm run book:press:pdfx    # → artifacts/book-press-pdfx1a.pdf    (Ingram interior, ~40 min)
 
 # Pre-flight checks (run on the generated PDFs)
-pdffonts dist/book-press-cmyk.pdf      # every font must show "emb yes" / "sub yes"
-pdfinfo  dist/book-press-cmyk.pdf      # confirm page count (≈282) and page size 504×720 pt (7×10 in)
+pdffonts artifacts/book-press-cmyk.pdf      # every font must show "emb yes" / "sub yes"
+pdfinfo  artifacts/book-press-cmyk.pdf      # confirm page count (≈282) and page size 504×720 pt (7×10 in)
 
-# Cover: edit spine in project/book/cover/cover.html per platform, then render + CMYK (see §6)
+# Covers (spine lives in project/book/cover/cover-print.html, see §6)
+npm run book:cover           # → artifacts/cover-kdp-cmyk.pdf
+npm run book:cover:ingram    # → artifacts/cover-ingram-cmyk.pdf
+
+# Ebook
+npm run epub                 # → artifacts/book.epub
 ```
+
+---
+
+## 12. Second printing checklist
+
+The mechanical steps for a corrected reprint, in order. Whether it is a reprint
+(same ISBN) or a new edition (new ISBN) is the author's call and comes first.
+
+1. **Set the printing line.** In `scripts/lib/edition.mjs`, set `REVISION`, for
+   example `'Second printing, with corrections · 2027'`. It prints on the
+   copyright page of the paperback and the EPUB. Leave it `null` and nothing
+   prints.
+2. **Fresh build, press PDF.** `npm run book:press:pdf`. It runs `astro build`
+   first. Never run `collect.mjs` or `render.mjs` on their own for a press
+   file: the first press PDF was made that way, from an old `dist/`. The
+   scripts now stop on a stale build, on a manual page that is in neither the
+   spine nor the web-only list, and on any text that falls outside a page.
+3. **Check the page count.** The render prints it. The cover spine is built
+   for **282** (`PRINTED_PAGE_COUNT` in `scripts/lib/edition.mjs`). If it
+   moved: KDP spine = pages × 0.002252 in, Ingram spine = pages × 0.0025 in.
+   Edit `--spine` and `size` in `project/book/cover/cover-print.html`, the two
+   replace strings in `scripts/to-book/render-cover.mjs`, then
+   `PRINTED_PAGE_COUNT`. Confirm against the KDP cover calculator and the
+   Ingram template generator.
+4. **Covers**, only if the spine moved or the cover changed:
+   `npm run book:cover` and `npm run book:cover:ingram`.
+5. **Look at the pages.** Open `artifacts/book-press-cmyk.pdf` and page
+   through it. The automated checks catch clipped text; they do not judge
+   layout.
+6. **KDP paperback upload.** Interior `artifacts/book-press-cmyk.pdf` (and
+   the cover if it changed). Print options stay 7 × 10, no bleed. Re-review.
+7. **PDF/X for IngramSpark.** `npm run book:press:pdfx` (about 40 minutes)
+   → `artifacts/book-press-pdfx1a.pdf`. Upload it with the Ingram-spine cover
+   and approve the eProof.
+8. **EPUB rebuild, upload to both.** `npm run epub` →
+   `artifacts/book.epub`. Upload to KDP (Kindle) and to IngramSpark (which
+   feeds Apple, Kobo, Nook).
+9. **Keep what you uploaded and write down the commit.** `artifacts/` is
+   gitignored. Record the commit hash and the upload dates in `STATUS.md`.
+
+> **OPEN QUESTION (2026-11-19).** There is no record that the IngramSpark
+> interior was replaced after the KDP no-bleed fix of 2026-06-28. `STATUS.md`
+> records the Ingram title as published (pub date 26-JUN-26) and a cover
+> re-upload around 2026-07-02. It says nothing about a new interior after KDP
+> rejected the bleed-and-crop-marks file. No `book-press-pdfx1a.pdf` is on
+> disk to check. So IngramSpark may still be printing the earlier interior
+> (3 mm bleed, crop marks, folio 0.22 in from the trim). Only the IngramSpark
+> account can answer this.
 
 **Sources (reconfirm at upload time):**
 - [KDP paperback submission guidelines](https://kdp.amazon.com/en_US/help/topic/G201857950) ·
