@@ -50,7 +50,7 @@ That's not cynicism, it's just how product development works at scale, and it's 
 
 The romantic idea that real audiophile designers work by ear and leave the test gear to the bean counters is, in my experience, backwards. Every serious manufacturer measures extensively, GRAS ear simulators, anechoic chambers, distortion rigs, and the listening sessions come *after* the measurements, not instead of them. The best work integrates both, which is exactly the discipline the [measurement chapters](/learn/why-measure-headphones) are trying to hand you. Don't let anyone talk you out of the rig.
 
-One thing that stays genuinely hidden, though, is damping. The specific combination of damping materials, their precise placement, and the reasoning behind those choices is some of the most proprietary knowledge in the industry. The ZMF damping patent this manual references is a rare public glimpse: most of it stays internal. The good news is that systematic measurement and iteration can reverse-engineer the *effects* even when the exact recipe stays locked in someone's lab.
+One thing that stays genuinely hidden, though, is damping. The specific combination of damping materials, their precise placement, and the reasoning behind those choices is some of the most proprietary knowledge in the industry. The ZMF damping patent is a rare public glimpse: most of it stays internal. The good news is that systematic measurement and iteration can reverse-engineer the *effects* even when the exact recipe stays locked in someone's lab.
 
 ## Expect to build more prototypes than you think
 
