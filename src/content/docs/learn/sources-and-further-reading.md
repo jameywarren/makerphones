@@ -72,7 +72,7 @@ gave the field a shared target.
 
 ## Foundational papers, and where the literature lives
 
-- **Møller, Jensen, Hammershøi & Sörensen, "Design Criteria for Headphones,"** *Journal of the
+- **Møller, Jensen, Hammershøi & Sørensen, "Design Criteria for Headphones,"** *Journal of the
   Audio Engineering Society*, Vol. 43, pp. 218–232 (1995). An early, foundational paper on the
   problem of designing headphones to a defined acoustic goal.
 - **The AES E-Library (aes.org).** The canonical archive of audio-engineering papers, including
