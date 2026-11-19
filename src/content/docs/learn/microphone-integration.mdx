@@ -19,7 +19,7 @@ Adding a microphone turns a pair of headphones into a headset, for calls, gaming
 
 ## Mic types
 
-**Electret condenser.** Cheap, common, and good enough for most voice work, the electret is the workhorse of headset boom mics. It needs a small bias voltage, "plug-in power", supplied by the host device, which most headset jacks and audio interfaces provide.
+**Electret condenser.** Cheap, common, and good enough for most voice work, the electret is the workhorse of headset boom mics. It needs a small bias voltage, "plug-in power", supplied by the host device, which most headset jacks provide. An audio interface with XLR mic inputs supplies 48 V phantom power instead, which is a different thing, so an electret wired for plug-in power needs an adapter built to convert it, not a plain 3.5 mm to XLR cable.
 
 **MEMS.** Tiny silicon microphones, the kind in phones and laptops. They come in analog and digital flavors and are ideal where space is tight, like an inline or in-cup mic. Compact and consistent, they're increasingly the default for small integrations.
 
@@ -53,7 +53,7 @@ Inside the build, route the mic wire with care. Use shielded mic cable to avoid 
 
 ## A few practical notes
 
-A small connector on the cup that makes the boom mic detachable is the most flexible arrangement, headset when you want it, clean headphones when you don't. Remember that an electret needs the host to supply plug-in power; most jacks and interfaces do, but a few don't, and a mic that's dead on one device but fine on another may just be missing its bias. Sidetone, hearing your own voice in the headphones, is usually handled by the host or its software rather than by the headphone itself, but it's worth knowing the term when someone asks why they can't hear themselves. And always test on the actual target device, because pinout and power vary between a phone, a PC, and an audio interface.
+A small connector on the cup that makes the boom mic detachable is the most flexible arrangement, headset when you want it, clean headphones when you don't. Remember that an electret needs the host to supply plug-in power; most headset jacks do, but a few don't, and a mic that's dead on one device but fine on another may just be missing its bias. Sidetone, hearing your own voice in the headphones, is usually handled by the host or its software rather than by the headphone itself, but it's worth knowing the term when someone asks why they can't hear themselves. And always test on the actual target device, because pinout and power vary between a phone, a PC, and an audio interface.
 
 ## Getting clean voice
 
