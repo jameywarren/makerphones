@@ -82,8 +82,8 @@ connector in Claude per Autodesk's official instructions.
 
 **Vizcom.** Built for industrial designers: takes a hand sketch and renders it
 photorealistically while preserving the original line work; the Modify tool iterates materials,
-colors, and lighting without altering the geometry. Free tier covers ~10 renders/month at 720p
-with watermarks; paid is around $29/month for unlimited 4K. Fits Phase 3: rough-sketch a
+colors, and lighting without altering the geometry. Free tier covers ~200 images/month (800 credits);
+paid is around $49/month with 4K exports. Fits Phase 3: rough-sketch a
 cup-and-yoke profile, render it in brushed aluminum, then walnut, then matte black-anodized.
 
 **Midjourney / Pinterest.** Upstream mood and concept exploration: "what does this kind of
