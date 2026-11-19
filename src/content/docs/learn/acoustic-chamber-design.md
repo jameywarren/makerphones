@@ -98,4 +98,4 @@ Make your rear vents as small drilled holes you can cover with tape, and open th
 
 ## What's Next
 
-The chamber sets the playing field. Damping is how you refine what's happening inside it, taming the leftover resonances and reflections the geometry alone can't address. That's [damping strategy and application](/learn/damping-strategy-and-application), where the chamber you just designed gets its final voicing.
+The chamber sets the playing field. Damping is how you refine what's happening inside it, taming the leftover resonances and reflections the geometry alone can't address. That's [damping strategy and application](/learn/damping-strategy-and-application), where the chamber you just designed gets its final voicing. But first the driver has to go in, and that's [driver mounting and assembly](/learn/driver-mounting-and-assembly).
