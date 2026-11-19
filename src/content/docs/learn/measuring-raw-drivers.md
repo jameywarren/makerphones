@@ -77,7 +77,7 @@ That's the entire point of the bench: ten minutes here means you'll never again 
 
 Once you can trust a driver, the next step is measuring it loaded, in a cup, with pads, the way it'll actually be heard. That's where a coupler comes in, and [tuning with damping](/learn/tuning-with-damping) puts one to work on a finished cup.
 
-If you're still assembling your bench, the [budget measurement setup](/learn/budget-measurement-setup) walks through the gear, and [taking and interpreting measurements](/learn/taking-and-interpreting-measurements) goes deeper on reading the curves. And if you're not yet sure which driver to put on the baffle in the first place, start with the [driver selection guide](/learn/driver-selection-guide).
+If you don't have a coupler rig yet, the [budget measurement setup](/learn/budget-measurement-setup) walks through the gear, and [taking and interpreting measurements](/learn/taking-and-interpreting-measurements) goes deeper on reading the curves. And if you're not yet sure which driver to put on the baffle in the first place, start with the [driver selection guide](/learn/driver-selection-guide).
 
 ---
 
