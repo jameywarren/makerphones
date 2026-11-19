@@ -25,7 +25,7 @@ import { fileURLToPath } from 'node:url';
 import { spawnSync } from 'node:child_process';
 import { DOMParser } from '@xmldom/xmldom';
 import {
-  SPINE, divInner, sanitizeBody, processFigures, firstH1, metaDesc,
+  SPINE, checkSpine, readBuiltPage, divInner, sanitizeBody, processFigures, firstH1, metaDesc,
   buildIndex, WEB_NOTE, exists,
   BOOK_TITLE, BOOK_SUBTITLE, AUTHOR, COPYRIGHT_HOLDER, IMPRINT,
   ISBN_EBOOK, DIST, ROOT,
@@ -265,6 +265,7 @@ function validate(name, xml) {
 async function main() {
   // dist/ must exist AND be newer than the sources (see lib/fresh-dist.mjs).
   await assertFreshDist({ allowStale: process.argv.includes('--allow-stale'), tool: 'npm run epub' });
+  await checkSpine();                          // spine vs the site's manual lists
   await rm(STAGE, { recursive: true, force: true });
   await mkdir(path.join(OEBPS, 'fonts'), { recursive: true });
   await mkdir(path.join(STAGE, 'META-INF'), { recursive: true });
@@ -273,11 +274,8 @@ async function main() {
   const entries = [];
   for (const group of SPINE) {
     for (const handle of group.handles) {
-      const file = path.join(DIST, 'learn', handle, 'index.html');
-      if (!(await exists(file))) continue;
-      const html = await readFile(file, 'utf8');
+      const html = await readBuiltPage(handle);   // exits 1 if the page is missing
       const inner = divInner(html, '<div class="sl-markdown-content"');
-      if (inner == null) continue;
       entries.push({ group, kind: group.kind, handle, title: firstH1(html) || handle, desc: metaDesc(html), bodyInner: inner });
     }
   }

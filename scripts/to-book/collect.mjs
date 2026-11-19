@@ -28,7 +28,7 @@
  * upgrade). See project/book/PLAN.md.
  */
 
-import { readFile, writeFile, access, mkdir, copyFile } from 'node:fs/promises';
+import { readFile, writeFile, access, mkdir, copyFile, readdir } from 'node:fs/promises';
 import path from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { ROOT, DIST } from '../lib/paths.mjs';
@@ -50,7 +50,14 @@ const IMPRINT = 'Warren Labs';
 const ISBN_PAPERBACK = '979-8-9968299-0-3';
 const ISBN_EBOOK = '979-8-9968299-1-0';
 
-/** The spine — mirrors the astro.config.mjs sidebar verbatim. */
+/** The spine: which pages are in the book, and in what order.
+ *
+ *  This is the book's OWN list. It follows the site's manual (the sidebar in
+ *  astro.config.mjs, the lists in src/data/manual.ts) but it is not a copy of
+ *  it: the pages in WEB_ONLY below are on the site and not in the book.
+ *  checkSpine() compares the two on every run and stops the build when a site
+ *  page is in neither list, so a new page can't be left out of the book by
+ *  accident, only on purpose. */
 const SPINE = [
   { kind: 'part', num: 'One', title: 'Fundamentals', handles: [
     'how-headphones-create-sound', 'understanding-frequency-response',
@@ -90,6 +97,81 @@ const SPINE = [
     'sources-and-further-reading', 'troubleshooting-guide', 'community-builds',
   ] },
 ];
+
+/** Site pages that are deliberately NOT in the print or EPUB edition.
+ *  Moving one into the book is an edition decision: add it to SPINE, take it
+ *  out of here, and give its 3D viewer a printed stand-in (WEB_NOTE below). */
+const WEB_ONLY = [
+  'first-chair-design-spec',   // on the site since 2026-08-06, after the first printing
+  'first-chair-parts',         // on the site since 2026-08-06, after the first printing
+  'daily-driver-parts-beta',   // the live work-in-progress view of the parts page
+];
+
+const MANUAL_TS = path.join(ROOT, 'src', 'data', 'manual.ts');
+const LEARN_DIR = path.join(ROOT, 'src', 'content', 'docs', 'learn');
+
+/** Every manual page the site knows about: the three lists in
+ *  src/data/manual.ts plus every learn/*.md(x) file (index is the landing page). */
+async function siteManualHandles() {
+  const ts = await readFile(MANUAL_TS, 'utf8');
+  const strings = (block) => [...block.matchAll(/'([a-z0-9-]+)'/g)].map((m) => m[1]);
+  const listOf = (name) => {
+    const m = ts.match(new RegExp(`export const ${name}\\b[^=]*=\\s*\\[([\\s\\S]*?)\\]\\s*(?:as const)?\\s*;`));
+    return m ? m[1] : null;
+  };
+  const partsBlock = listOf('MANUAL_PARTS');
+  const lists = {
+    MANUAL_PARTS: partsBlock == null ? [] :
+      [...partsBlock.matchAll(/handles:\s*\[([\s\S]*?)\]/g)].flatMap((m) => strings(m[1])),
+    APPENDIX_HANDLES: strings(listOf('APPENDIX_HANDLES') ?? ''),
+    BUILD_GUIDE_HANDLES: strings(listOf('BUILD_GUIDE_HANDLES') ?? ''),
+  };
+  const unreadable = Object.entries(lists).filter(([, v]) => !v.length).map(([k]) => k);
+  const files = (await readdir(LEARN_DIR))
+    .filter((f) => /\.mdx?$/.test(f) && !/^index\.mdx?$/.test(f))
+    .map((f) => f.replace(/\.mdx?$/, ''));
+  const where = new Map();   // handle -> where the site lists it
+  const note = (h, src) => where.set(h, [...(where.get(h) ?? []), src]);
+  for (const [name, hs] of Object.entries(lists)) for (const h of hs) note(h, `manual.ts ${name}`);
+  for (const h of files) note(h, 'learn/ file');
+  return { where, files: new Set(files), unreadable };
+}
+
+/** Stop the build when the spine and the site's manual disagree. Returns
+ *  nothing; exits 1 with a list of what to fix. Shared with to-epub. */
+async function checkSpine() {
+  const { where, files, unreadable } = await siteManualHandles();
+  const spine = SPINE.flatMap((g) => g.handles);
+  const inSpine = new Set(spine);
+  const webOnly = new Set(WEB_ONLY);
+  const problems = [];
+
+  for (const name of unreadable) {
+    problems.push(`could not read ${name} from src/data/manual.ts (the list changed shape; update siteManualHandles)`);
+  }
+  for (const h of spine.filter((x, i) => spine.indexOf(x) !== i)) {
+    problems.push(`"${h}" is in SPINE twice`);
+  }
+  for (const h of spine) {
+    if (webOnly.has(h)) problems.push(`"${h}" is in both SPINE and WEB_ONLY: pick one`);
+    if (!files.has(h)) problems.push(`"${h}" is in SPINE but there is no src/content/docs/learn/${h}.md(x)`);
+  }
+  for (const h of WEB_ONLY) {
+    if (!where.has(h)) problems.push(`"${h}" is in WEB_ONLY but the site has no such page: remove it`);
+  }
+  for (const [h, src] of where) {
+    if (!inSpine.has(h) && !webOnly.has(h)) {
+      problems.push(`"${h}" is on the site (${src.join(', ')}) but in neither SPINE nor WEB_ONLY`);
+    }
+  }
+  if (!problems.length) return;
+
+  console.error('\n  SPINE CHECK FAILED: the book\'s page list and the site\'s manual disagree.');
+  for (const p of problems) console.error(`    - ${p}`);
+  console.error('  Every manual page must be in SPINE (in the book) or in WEB_ONLY (site only).');
+  console.error('  Both lists are at the top of scripts/to-book/collect.mjs.\n');
+  process.exit(1);
+}
 
 /** Chapters whose web-only widgets need a printed stand-in. */
 const WEB_NOTE = {
@@ -309,6 +391,22 @@ function linkChapterRefs(html, handleNum) {
   );
 }
 
+/** The built HTML of one spine page. A spine page with no built page, or with
+ *  no content block, is an ERROR: skipping it would renumber every chapter
+ *  after it and the book would still build. Shared with to-epub. */
+async function readBuiltPage(handle) {
+  const file = path.join(DIST, 'learn', handle, 'index.html');
+  const fail = (why) => {
+    console.error(`\n  MISSING CHAPTER: "${handle}" is in SPINE but ${why}.`);
+    console.error(`  Looked for ${path.relative(ROOT, file)}. Nothing was written.\n`);
+    process.exit(1);
+  };
+  if (!(await exists(file))) fail('the build has no page for it');
+  const html = await readFile(file, 'utf8');
+  if (divInner(html, '<div class="sl-markdown-content"') == null) fail('its built page has no content block (sl-markdown-content)');
+  return html;
+}
+
 /** Glossary-seeded, chapter-referenced index. */
 async function buildIndex(entries) {
   const gPath = path.join(DIST, 'learn', 'glossary', 'index.html');
@@ -350,18 +448,16 @@ async function main() {
     tool: PRESS ? 'npm run book:press' : 'npm run book',
   });
 
+  await checkSpine();
+
   const cssHrefs = new Set();
   const cssBlocks = new Set();
   const entries = [];   // { group, kind, handle, title, desc, bodyInner }
-  let missing = 0;
 
   for (const group of SPINE) {
     for (const handle of group.handles) {
-      const file = path.join(DIST, 'learn', handle, 'index.html');
-      if (!(await exists(file))) { console.warn(`  ! missing built chapter: ${handle}`); missing += 1; continue; }
-      const html = await readFile(file, 'utf8');
+      const html = await readBuiltPage(handle);
       const inner = divInner(html, '<div class="sl-markdown-content"');
-      if (inner == null) { console.warn(`  ! no sl-markdown-content in ${handle}`); missing += 1; continue; }
       linkHrefs(headOf(html), cssHrefs);
       styleInners(headOf(html), cssBlocks);
       entries.push({
@@ -609,14 +705,13 @@ ${guards}
   console.log(`  figures: ${lof.length} (Fig. N.m) · index entries: ${idxTerms} · ` +
     `TOC + LoF page numbers via target-counter`);
   console.log(`  inlined css: ${cssHrefs.size} bundle(s) + ${cssBlocks.size} scoped block(s)`);
-  if (missing) console.log(`  WARNING: ${missing} entr${missing === 1 ? 'y' : 'ies'} missing from dist/`);
   console.log('');
 }
 
 /* Shared with scripts/to-epub (the EPUB build reuses the spine + the same
  * chapter assembly so web, print, and ebook stay one source). */
 export {
-  SPINE, WEB_NOTE, partsBlock, divInner, plain, exists,
+  SPINE, WEB_ONLY, checkSpine, readBuiltPage, WEB_NOTE, partsBlock, divInner, plain, exists,
   firstH1, metaDesc, sanitizeBody, stripDivByClass,
   processFigures, linkChapterRefs, buildIndex, stripModernSelectors,
   BOOK_TITLE, BOOK_SUBTITLE, AUTHOR, COPYRIGHT_HOLDER, IMPRINT,
