@@ -184,10 +184,6 @@ function metaDesc(html) {
   const m = html.match(/<meta name="description" content="([^"]*)"/);
   return m ? m[1] : '';
 }
-function readMinutes(html) {
-  const m = html.match(/(\d+)\s*min read/i);
-  return m ? m[1] : null;
-}
 /** Balanced inner HTML of the first element matching `marker` (div-depth aware). */
 function divInner(html, marker) {
   const open = html.indexOf(marker);
@@ -209,13 +205,17 @@ function plain(html) {
 /** Remove web-only / interactive markup that has no place in print and that
  *  stalls Paged.js: inline scripts, the three.js <canvas>, and <model-viewer>
  *  3D widgets (tall, empty, and re-executed during pagination). The static
- *  prose around them stays; a "see the website" note is added separately. */
+ *  prose around them stays; a "see the website" note is added separately.
+ *
+ *  Two leftovers go with a stripped widget, because without it they point at
+ *  nothing (see stripWidgetLeftovers): the paragraph that tells the reader how
+ *  to operate it, and a heading that sat directly on top of it. */
 function sanitizeBody(html) {
   let h = html
     .replace(/<script\b[\s\S]*?<\/script>/gi, '')
     .replace(/<canvas\b[\s\S]*?<\/canvas>/gi, '')
-    .replace(/<model-viewer\b[\s\S]*?<\/model-viewer>/gi, '')
-    .replace(/<model-viewer\b[^>]*\/?>/gi, '')
+    .replace(/<model-viewer\b[\s\S]*?<\/model-viewer>/gi, WIDGET_GONE)
+    .replace(/<model-viewer\b[^>]*\/?>/gi, WIDGET_GONE)
     // Stylesheets linked from INSIDE the body (Expressive Code puts its own next
     // to every code block). They load late, after Paged.js has already measured
     // the page, so the code block grows and pushes the last lines of the page
@@ -227,12 +227,39 @@ function sanitizeBody(html) {
     // printed as a stray icon beside each heading.
     .replace(/<a\b[^>]*class="[^"]*\bsl-anchor-link\b[^"]*"[^>]*>[\s\S]*?<\/a>/gi, '');
   // drop the whole interactive-viewer containers (their innards stall Paged.js)
-  for (const cls of ['parts-viewer', 'parts-gallery']) h = stripDivByClass(h, cls);
-  return h;
+  for (const cls of ['parts-viewer', 'parts-gallery']) h = stripDivByClass(h, cls, WIDGET_GONE);
+  return stripWidgetLeftovers(h);
 }
 
-/** Remove every <div class="…cls…">…</div> (depth-aware) from the HTML. */
-function stripDivByClass(html, cls) {
+/** Left where an interactive widget was stripped, so the cleanup below can see
+ *  where it used to be. Never reaches the output. */
+const WIDGET_GONE = '<!--book:widget-gone-->';
+
+/** Words that only make sense with a pointer on a live widget. */
+const POINTER_VERBS = ['drag', 'click', 'scroll', 'toggle', 'slide'];
+
+/** On a page that HAD an interactive widget:
+ *   - drop a paragraph that is operating instructions for it (two or more
+ *     different pointer verbs: "drag to orbit, scroll to zoom, click a part…");
+ *   - drop a section heading that sat directly on the widget (the heading
+ *     titled the widget, and would print with nothing under it).
+ *  Pages without a widget are returned untouched. */
+function stripWidgetLeftovers(html) {
+  if (!html.includes(WIDGET_GONE)) return html;
+  let h = html.replace(/<p\b[^>]*>[\s\S]*?<\/p>/gi, (p) => {
+    const text = p.replace(/<[^>]+>/g, ' ').toLowerCase();
+    const verbs = POINTER_VERBS.filter((v) => new RegExp(`\\b${v}\\b`).test(text));
+    return verbs.length >= 2 ? '' : p;
+  });
+  const gone = WIDGET_GONE.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  h = h.replace(new RegExp(
+    `<div class="sl-heading-wrapper[^"]*">\\s*<h[2-6]\\b[^>]*>[\\s\\S]*?<\\/h[2-6]>\\s*<\\/div>(\\s*${gone})`, 'gi'), '$1');
+  return h.split(WIDGET_GONE).join('');
+}
+
+/** Remove every <div class="…cls…">…</div> (depth-aware) from the HTML,
+ *  leaving `marker` (default: nothing) where each one was. */
+function stripDivByClass(html, cls, marker = '') {
   const re = new RegExp(`<div\\b[^>]*class="[^"]*\\b${cls}\\b[^"]*"`);
   let out = html, guard = 0;
   while (guard++ < 50) {
@@ -247,7 +274,7 @@ function stripDivByClass(html, cls) {
       else depth += 1;
     }
     if (end === -1) break;
-    out = out.slice(0, open) + out.slice(end);
+    out = out.slice(0, open) + marker + out.slice(end);
   }
   return out;
 }
@@ -325,7 +352,7 @@ async function main() {
 
   const cssHrefs = new Set();
   const cssBlocks = new Set();
-  const entries = [];   // { group, kind, handle, title, desc, minutes, bodyInner }
+  const entries = [];   // { group, kind, handle, title, desc, bodyInner }
   let missing = 0;
 
   for (const group of SPINE) {
@@ -341,7 +368,6 @@ async function main() {
         group, kind: group.kind, handle,
         title: firstH1(html) || handle,
         desc: metaDesc(html),
-        minutes: readMinutes(html),
         bodyInner: inner,
       });
     }
@@ -383,8 +409,8 @@ async function main() {
     const note = notes[e.handle] ?? '';
     const id = `sec-${e.handle}`;
     if (e.kind === 'part') {
-      const meta = [e.minutes ? `${e.minutes} min read` : null, `makerphones.com/learn/${e.handle}`]
-        .filter(Boolean).map((b) => `<span>${b}</span>`).join('');
+      // The web page's "N min read" is not carried over: reading time is web chrome.
+      const meta = `<span>makerphones.com/learn/${e.handle}</span>`;
       body += `<article class="book-chapter" id="${id}"><div class="ch-eyebrow">Chapter ${e.chapterNum}</div>` +
         `<h1>${e.title}</h1>${e.desc ? `<p class="ch-lede">${e.desc}</p>` : ''}` +
         `<div class="ch-meta">${meta}</div><div class="ch-rule"></div>${note}${e.body}</article>`;
@@ -591,7 +617,7 @@ ${guards}
  * chapter assembly so web, print, and ebook stay one source). */
 export {
   SPINE, WEB_NOTE, partsBlock, divInner, plain, exists,
-  firstH1, metaDesc, readMinutes, sanitizeBody, stripDivByClass,
+  firstH1, metaDesc, sanitizeBody, stripDivByClass,
   processFigures, linkChapterRefs, buildIndex, stripModernSelectors,
   BOOK_TITLE, BOOK_SUBTITLE, AUTHOR, COPYRIGHT_HOLDER, IMPRINT,
   ISBN_PAPERBACK, ISBN_EBOOK, DIST, ROOT, STYLES,
