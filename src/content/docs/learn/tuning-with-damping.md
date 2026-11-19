@@ -44,7 +44,7 @@ The advice above tells you *which way* to move; this table tells you *what to re
 
 | What you measure | What to try first |
 | --- | --- |
-| Boomy / elevated bass (`80–300Hz`) | Foam on the rear chamber walls: start with one wall. An alternative for excess mid-bass is a small amount of cotton fill in the rear chamber, acting as an acoustic mass that smooths the resonance. |
+| Boomy / elevated bass (`80–300Hz`) | Foam on the rear chamber walls: start with one wall. An alternative for excess mid-bass is a small amount of cotton fill in the rear chamber, where it drags on the moving air and smooths the resonance. |
 | Hollow / boxy midrange (`300Hz–1kHz`) | Chamber standing waves. Thin felt on the interior side walls often helps more than foam here: felt absorbs well in the mids without killing everything else. Try one wall at a time. |
 | Forward / intense upper mids (`1–4kHz`) | Swap to pads with a more absorptive inner surface (velour over pleather), or add padding on the front baffle around, not over, the driver to cut reflections. |
 | Harsh / sibilant treble (`4–8kHz`) | Thin felt in front of the driver, applied sparingly. Start small: a `2cm` circle of craft felt across part of the driver face is enough to see an effect. This spot is sensitive, so go slowly. |
