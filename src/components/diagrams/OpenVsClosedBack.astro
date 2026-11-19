@@ -17,7 +17,10 @@ const cups = [
   { cx: 230, open: true },
   { cx: 650, open: false },
 ];
-const earArrows = cups.map((c) => arrowHead(c.cx - 185, cy, 180, 6));
+// each cup keeps its own TO EAR arrow tucked under its front waves, so the
+// closed cup's arrow cannot be read as the open cup's escaping rear wave
+const earY = cy + 104;
+const earArrows = cups.map((c) => arrowHead(c.cx - 96, earY, 180, 6));
 ---
 
 <svg
@@ -52,8 +55,8 @@ const earArrows = cups.map((c) => arrowHead(c.cx - 185, cy, 180, 6));
             <path class="mp-wave-out" d={arcPath(c.cx + 12, cy, 34, -48, 48)} fill="none" stroke={accent} stroke-width="1.8" opacity="0.85" />
             <path class="mp-wave-out" style="animation-delay: -0.8s;" d={arcPath(c.cx + 12, cy, 62, -48, 48)} fill="none" stroke={accent} stroke-width="1.8" opacity="0.6" />
             <path class="mp-wave-out" style="animation-delay: -1.6s;" d={arcPath(c.cx + 12, cy, 90, -48, 48)} fill="none" stroke={accent} stroke-width="1.8" opacity="0.4" />
-            <path class="mp-wave-out" style="animation-delay: -0.4s;" d={arcPath(c.cx + 12, cy, 152, -24, 24)} fill="none" stroke={accent} stroke-width="1.4" opacity="0.35" />
-            <path class="mp-wave-out" style="animation-delay: -1.2s;" d={arcPath(c.cx + 12, cy, 180, -24, 24)} fill="none" stroke={accent} stroke-width="1.4" opacity="0.2" />
+            <path class="mp-wave-out" style="animation-delay: -0.4s;" d={arcPath(c.cx + 12, cy, 152, -24, 24)} fill="none" stroke={accent} stroke-width="1.4" opacity="0.55" />
+            <path class="mp-wave-out" style="animation-delay: -1.2s;" d={arcPath(c.cx + 12, cy, 180, -24, 24)} fill="none" stroke={accent} stroke-width="1.4" opacity="0.4" />
           </g>
         ) : (
           <g>
@@ -65,21 +68,21 @@ const earArrows = cups.map((c) => arrowHead(c.cx - 185, cy, 180, 6));
           </g>
         )}
 
-        <line x1={c.cx - 150} y1={cy} x2={c.cx - 185} y2={cy} stroke={faint} stroke-width="1.2" />
+        <line x1={c.cx - 44} y1={earY} x2={c.cx - 96} y2={earY} stroke={faint} stroke-width="1.2" />
         <polygon points={earArrows[i].points} transform={earArrows[i].transform} fill={faint} />
-        <text x={c.cx - 168} y={cy - 14} font-size="9" font-weight="500" fill={label} text-anchor="middle">TO EAR</text>
+        <text x={c.cx - 70} y={earY - 12} font-size="11" font-weight="500" fill={label} text-anchor="middle">TO EAR</text>
       </g>
     ))
   }
 
-  <text x="380" y="380" font-size="9.5" font-weight="500" fill={label}>REAR WAVE ESCAPES</text>
+  <text x="380" y="380" font-size="11" font-weight="500" fill={label}>REAR WAVE ESCAPES</text>
   <line x1="390" y1="368" x2="380" y2="310" stroke={faint} stroke-width="1"></line>
   <circle cx="380" cy="310" r="2.2" fill={faint}></circle>
-  <text x="710" y="398" font-size="9.5" font-weight="500" fill={label}>REFLECTED INSIDE</text>
+  <text x="710" y="398" font-size="11" font-weight="500" fill={label}>REFLECTED INSIDE</text>
   <line x1="730" y1="386" x2="730" y2="290" stroke={faint} stroke-width="1"></line>
   <circle cx="730" cy="290" r="2.2" fill={faint}></circle>
-  <text x="230" y="428" font-size="10" font-weight="500" fill={label} opacity="0.9" text-anchor="middle">LESS PRESSURE BUILD-UP · LESS ISOLATION</text>
-  <text x="650" y="428" font-size="10" font-weight="500" fill={label} opacity="0.9" text-anchor="middle">ISOLATION — BUT REFLECTIONS RETURN</text>
+  <text x="230" y="428" font-size="11.5" font-weight="500" fill={label} opacity="0.9" text-anchor="middle">LESS PRESSURE BUILD-UP · LESS ISOLATION</text>
+  <text x="650" y="428" font-size="11.5" font-weight="500" fill={label} opacity="0.9" text-anchor="middle">ISOLATION — BUT REFLECTIONS RETURN</text>
 </svg>
 
 <style>
