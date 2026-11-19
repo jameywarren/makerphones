@@ -112,7 +112,7 @@ research above.
   aggregating measurements from oratory1990, Crinacle, and others; a good way to see how
   measurements, targets, and corrections connect.
 - **Others:** Rtings, Reference Audio Analyzer, and SoundStage Solo (Brent Butterworth), among
-  more. The underlying hardware is usually a GRAS rig (the 45-series, or the 43-series).
+  more. The underlying hardware varies: often a GRAS rig (the 45-series, or the 43-series), but Rtings, for one, uses other measurement heads.
 - **A standing caveat:** measurements shift with the rig, the seating, and the pad wear, and a
   headphone never sounds *exactly* like its graph. Read measurements as strong guidance, not
   gospel, which is why [good measurement means averaging several
