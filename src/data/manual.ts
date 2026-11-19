@@ -1,5 +1,5 @@
 /**
- * The manual's structure — six parts, 32 chapters, frozen handles.
+ * The manual's structure — six parts, 33 chapters, frozen handles.
  *
  * Handle order matches the Content & Style Guide appendix
  * (_source/MakerPhones-Content-Style-Guide.md) verbatim. Nav-chrome
@@ -124,7 +124,7 @@ export const APPENDIX_HANDLES = [
 /**
  * Build guides — hands-on companion builds (type: build-guide),
  * plus the design specs behind them (same type, no time_estimate).
- * Like appendices: no nav numbering, outside the 1–32 chain,
+ * Like appendices: no nav numbering, outside the chapter chain,
  * resolved in byHandle so cross-references link correctly.
  */
 export const BUILD_GUIDE_HANDLES = [
