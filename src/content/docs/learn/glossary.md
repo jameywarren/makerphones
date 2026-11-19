@@ -3,11 +3,11 @@ title: Glossary
 handle: glossary
 type: appendix
 description: "Plain-language definitions of the terms used throughout the manual, drivers, acoustics, measurement, and electronics, in one place to look up as you read."
-excerpt: "Every term the manual leans on, defined plainly and in one place. Keep it open in a tab while you read the chapters."
+excerpt: "Most of the terms the manual leans on, defined plainly and in one place. Keep it open in a tab while you read the chapters."
 tags: [glossary, reference, appendix, terminology]
 ---
 
-The manual uses a fair amount of vocabulary, and it's all defined where it first comes up, but here it is collected in one place to look up as you go.
+The manual uses a fair amount of vocabulary, and most of it is defined where it first comes up, but here it is collected in one place to look up as you go.
 
 **AAC**: A Bluetooth audio codec that performs well on Apple devices; one of several codecs a source and headphone may share.
 
