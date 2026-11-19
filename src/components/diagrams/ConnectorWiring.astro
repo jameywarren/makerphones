@@ -39,7 +39,7 @@ const hair = 'var(--mp-hair)';
 ---
 
 <svg
-  viewBox="0 84 760 376"
+  viewBox="0 84 760 392"
   class="mp-dgm"
   role="img"
   aria-label="Sectioned TRS and TRRS plugs with each contact mapped: tip is left, ring is right, sleeve is ground — and on TRRS, ring two is ground with the sleeve carrying the CTIA microphone"
@@ -50,10 +50,10 @@ const hair = 'var(--mp-hair)';
       { name: 'TRRS', sub: '4 CONTACTS', cy: 352, segs: trrs, pins: trrsPins, ly: 330 },
     ].map((p) => (
       <g>
-        <text x="42" y={p.ly} font-size="10" font-weight="700" fill={accent}>
+        <text x="42" y={p.ly} font-size="11" font-weight="700" fill={accent}>
           {p.name}
         </text>
-        <text x="42" y={p.ly + 15} font-size="8.5" font-weight="500" fill={label}>
+        <text x="42" y={p.ly + 15} font-size="10" font-weight="500" fill={label}>
           {p.sub}
         </text>
         <PlugBody x={x} cy={p.cy} segs={p.segs} />
@@ -68,10 +68,10 @@ const hair = 'var(--mp-hair)';
               stroke-width="1"
             />
             <circle cx={pin.cx} cy={pin.below ? p.cy + 24 : p.cy - 24} r="2.2" fill={faint} />
-            <text x={pin.cx} y={pin.below ? p.cy + 68 : p.cy - 72} font-size="9.5" font-weight="600" fill={dark} text-anchor="middle">
+            <text x={pin.cx} y={pin.below ? p.cy + 68 : p.cy - 73} font-size="10.5" font-weight="600" fill={dark} text-anchor="middle">
               {pin.lab}
             </text>
-            <text x={pin.cx} y={pin.below ? p.cy + 81 : p.cy - 59} font-size="8.5" font-weight="500" fill={label} text-anchor="middle">
+            <text x={pin.cx} y={pin.below ? p.cy + 82 : p.cy - 59} font-size="10" font-weight="500" fill={label} text-anchor="middle">
               {pin.sub}
             </text>
           </g>
@@ -80,15 +80,16 @@ const hair = 'var(--mp-hair)';
     ))
   }
 
-  <text x="560" y="150" font-size="9.5" font-weight="600" fill={dark}>ALWAYS TRUE</text>
-  <text x="560" y="168" font-size="8.5" font-weight="500" fill={label}>TIP = LEFT · METER IT</text>
-  <text x="560" y="181" font-size="8.5" font-weight="500" fill={label}>BEFORE YOU CLOSE THE CUP</text>
-  <line x1="560" y1="200" x2="722" y2="200" stroke={hair} stroke-width="1"></line>
-  <text x="560" y="222" font-size="9.5" font-weight="600" fill={dark}>WATCH FOR</text>
-  <text x="560" y="240" font-size="8.5" font-weight="500" fill={label}>OMTP (LEGACY) SWAPS</text>
-  <text x="560" y="253" font-size="8.5" font-weight="500" fill={label}>GROUND ↔ MIC — METER, DON'T ASSUME</text>
+  <text x="560" y="150" font-size="10.5" font-weight="600" fill={dark}>ALWAYS TRUE</text>
+  <text x="560" y="168" font-size="10" font-weight="500" fill={label}>TIP = LEFT · METER IT</text>
+  <text x="560" y="182" font-size="10" font-weight="500" fill={label}>BEFORE YOU CLOSE THE CUP</text>
+  <line x1="560" y1="202" x2="726" y2="202" stroke={hair} stroke-width="1"></line>
+  <text x="560" y="224" font-size="10.5" font-weight="600" fill={dark}>WATCH FOR</text>
+  <text x="560" y="242" font-size="10" font-weight="500" fill={label}>OMTP (LEGACY) SWAPS</text>
+  <text x="560" y="256" font-size="10" font-weight="500" fill={label}>GROUND ↔ MIC</text>
+  <text x="560" y="270" font-size="10" font-weight="500" fill={label}>METER, DON'T ASSUME</text>
 
-  <text x="24" y="446" font-size="10" font-weight="500" fill={label} opacity="0.9"
+  <text x="24" y="464" font-size="10" font-weight="500" fill={label} opacity="0.9"
     >TIP IS ALWAYS LEFT — TIN, SOLDER, METER, THEN STRAIN-RELIEVE. A SWAPPED RING REVERSES THE IMAGE.</text
   >
 </svg>
