@@ -43,14 +43,14 @@ Your rig isn't wrong — it's just a different instrument, measuring a slightly 
 
 So do not lay your curve over an oratory1990 graph and try to match it decibel for decibel. You'll chase ghosts up in the treble for a week and learn nothing.
 
-What you *can* compare is **shape and relative balance**: how far the bass sits above the mids, where the big peaks and dips land, the overall tilt from low to high. Those survive the difference in rigs reasonably well. Better still, compare **deltas to a target**: their headphone's distance from the Harman curve, and your build's distance from that same curve measured on your own rig. Two error curves are far more comparable than two raw curves, because each one already has its own rig's signature partly subtracted out.
+What you *can* compare is **shape and relative balance**: how far the bass sits above the mids, where the big peaks and dips land, the overall tilt from low to high. Those survive the difference in rigs reasonably well. Better still, if you own the headphone you're chasing, or can borrow one, measure it on **your own rig**. Then both curves come off the same instrument, and you can lay one right over the other.
 
 ## The workflow I use
 
 1. **Pick a reference.** Find a headphone in the database with a voicing you're after, and match the form factor to your build, because an open-back and a sealed can won't share a bass shelf. Note its shape relative to the target.
 2. **Set your target.** Use that shape, or the Harman target itself, as your goal. The frequency-response chapter covers what the target means and where it came from.
 3. **Measure your build on your own rig**: the same way, the same seating routine, every single time. Consistency on your bench matters more than agreement with theirs.
-4. **Compare shapes and distance-from-target, never raw level.** Where's your bass relative to your mids? Where are your problem peaks? How does that compare to the reference's relationship to the same target?
+4. **Compare shapes, never raw level.** Where's your bass relative to your mids? Where are your problem peaks? How does that compare to the reference's relationship to the same target?
 5. **Tune toward the shape, re-measure, repeat.** Damping is how you move the curve once you know which direction it needs to go.
 
 The database tells you where good headphones land; your own rig tells you where yours lands. Keep both honest and the gap between them is the work.
@@ -58,7 +58,7 @@ The database tells you where good headphones land; your own rig tells you where 
 ## Common Mistakes
 
 :::caution
-- **Matching absolute decibels across rigs.** Your 8 kHz peak and theirs aren't measuring the same thing. Compare shape and distance-from-target. Never raw level. This is the single biggest mistake, and it sends people down rabbit holes that don't exist.
+- **Matching absolute decibels across rigs.** Your 8 kHz peak and theirs aren't measuring the same thing. Compare shape. Never raw level. This is the single biggest mistake, and it sends people down rabbit holes that don't exist.
 - **Treating one measurement as gospel.** Even on a GRAS rig, a single seating shifts the result, and unit-to-unit variation between two copies of the same headphone is real. The good public measurers average several seatings; your numbers deserve the same respect before you trust them.
 - **Chasing an exact copy of a database curve.** It was measured on different hardware, on a different physical unit, maybe with different pads than yours. Aim for the overall shape, not an exact match to their line.
 - **Forgetting it's data, not preference.** A target tells you what most listeners prefer on average. It doesn't tell you what *you* prefer. Use the databases as a starting line, then trust your own ears to make the last calls.
