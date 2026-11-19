@@ -563,11 +563,13 @@ h1[data-page-title] {
 }
 /* Phone widths: tighter cells, long code tokens may wrap, and a table that is
    still too wide scrolls inside itself instead of widening the page. */
-@media (max-width: 40rem) {
+@media (max-width: 30rem) {
   .sl-markdown-content table:not(:where(.not-content *)) {
     display: block;
     overflow-x: auto;
   }
+}
+@media (max-width: 40rem) {
   .sl-markdown-content th:not(:where(.not-content *)),
   .sl-markdown-content td:not(:where(.not-content *)) {
     padding: 10px 10px;
