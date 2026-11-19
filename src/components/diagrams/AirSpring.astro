@@ -42,8 +42,8 @@ const earArrows = panels.map((p) => arrowHead(p.x0 - 30, 250, 180, 6));
   {
     panels.map((p, i) => (
       <g>
-        <text x={p.x0 + 26} y="84" font-size="12" font-weight="600" fill={dark}>{p.title}</text>
-        <text x={p.x0 + 26} y="102" font-size="9.5" font-weight="500" fill={label}>{p.sub}</text>
+        <text x={p.x0 + 26} y="84" font-size="13" font-weight="600" fill={dark}>{p.title}</text>
+        <text x={p.x0 + 26} y="102" font-size="11" font-weight="500" fill={label}>{p.sub}</text>
 
         <g class={p.clsCham} style={`transform-origin: ${p.backX}px ${cy}px; transform-box: view-box;`}>
           {p.airXs.map((x) => (
@@ -70,23 +70,23 @@ const earArrows = panels.map((p) => arrowHead(p.x0 - 30, 250, 180, 6));
         <polygon points={excArrows[i * 2].points} transform={excArrows[i * 2].transform} fill={accent} />
         <polygon points={excArrows[i * 2 + 1].points} transform={excArrows[i * 2 + 1].transform} fill={accent} />
 
-        <text x={p.x0 + 73} y="122" font-size="9" font-weight="500" fill={label} text-anchor="middle">FRONT CAVITY</text>
+        <text x={p.x0 + 73} y="122" font-size="10.5" font-weight="500" fill={label} text-anchor="middle">FRONT CAVITY</text>
         <line x1={p.x0 + 73} y1="128" x2={p.x0 + 73} y2="178" stroke={faint} stroke-width="1" />
         <circle cx={p.x0 + 73} cy="178" r="2.2" fill={faint} />
-        <text x={(p.baffleX + p.backX) / 2} y="122" font-size="9" font-weight="500" fill={label} text-anchor="middle">REAR CHAMBER</text>
+        <text x={(p.baffleX + p.backX) / 2} y="122" font-size="10.5" font-weight="500" fill={label} text-anchor="middle">REAR CHAMBER</text>
         <line x1={(p.baffleX + p.backX) / 2} y1="128" x2={(p.baffleX + p.backX) / 2} y2="170" stroke={faint} stroke-width="1" />
         <circle cx={(p.baffleX + p.backX) / 2} cy="170" r="2.2" fill={faint} />
-        <text x={p.x0 - 14} y="232" font-size="8.5" font-weight="500" fill={label} text-anchor="middle">TO EAR</text>
+        <text x={p.x0 - 14} y="232" font-size="10.5" font-weight="500" fill={label} text-anchor="middle">TO EAR</text>
         <line x1={p.x0 + 2} y1="250" x2={p.x0 - 30} y2="250" stroke={faint} stroke-width="1.2" />
         <polygon points={earArrows[i].points} transform={earArrows[i].transform} fill={faint} />
       </g>
     ))
   }
 
-  <text x="380" y="418" font-size="9.5" font-weight="500" fill={label}>DIAPHRAGM</text>
-  <line x1="420" y1="406" x2="548" y2="318" stroke={faint} stroke-width="1"></line>
-  <circle cx="548" cy="318" r="2.2" fill={faint}></circle>
-  <text x="50" y="452" font-size="10" font-weight="500" fill={label} opacity="0.9">SEALED AIR BEHIND THE DRIVER ACTS AS A SPRING — A LARGER REAR VOLUME IS A SOFTER SPRING, SO BASS MOVES MORE FREELY</text>
+  <text x="464" y="296" font-size="10.5" font-weight="500" fill={label}>DIAPHRAGM</text>
+  <line x1="530" y1="292" x2="547" y2="292" stroke={faint} stroke-width="1"></line>
+  <circle cx="547" cy="292" r="2.2" fill={faint}></circle>
+  <text x="24" y="452" font-size="10.5" font-weight="500" fill={label} opacity="0.9">SEALED AIR BEHIND THE DRIVER ACTS AS A SPRING — A LARGER REAR VOLUME IS A SOFTER SPRING, SO BASS MOVES MORE FREELY</text>
 </svg>
 
 <style>
