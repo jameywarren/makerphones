@@ -31,6 +31,7 @@ import {
   ISBN_EBOOK, DIST, ROOT,
 } from '../to-book/collect.mjs';
 import { ARTIFACTS } from '../lib/paths.mjs';
+import { assertFreshDist } from '../lib/fresh-dist.mjs';
 
 const STAGE = path.join(ARTIFACTS, '_epub');
 const OEBPS = path.join(STAGE, 'OEBPS');
@@ -262,7 +263,8 @@ function validate(name, xml) {
 }
 
 async function main() {
-  if (!(await exists(DIST))) { console.error('  dist/ not found — run `astro build` first.'); process.exit(1); }
+  // dist/ must exist AND be newer than the sources (see lib/fresh-dist.mjs).
+  await assertFreshDist({ allowStale: process.argv.includes('--allow-stale'), tool: 'npm run epub' });
   await rm(STAGE, { recursive: true, force: true });
   await mkdir(path.join(OEBPS, 'fonts'), { recursive: true });
   await mkdir(path.join(STAGE, 'META-INF'), { recursive: true });

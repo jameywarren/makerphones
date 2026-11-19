@@ -11,6 +11,10 @@
  *   node scripts/to-book/collect.mjs            -> dist/book.html        (screen)
  *   node scripts/to-book/collect.mjs --press    -> dist/book-press.html  (+ bleed + marks)
  *
+ * Both refuse to run on a stale dist/ (any source newer than the build) unless
+ * --allow-stale is passed. Use `npm run book` / `npm run book:press`, which
+ * build first.
+ *
  * What it builds:
  *   - front matter: title, copyright, dedication, contents (with page numbers),
  *     list of figures (with page numbers), preface
@@ -28,6 +32,7 @@ import { readFile, writeFile, access, mkdir, copyFile } from 'node:fs/promises';
 import path from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { ROOT, DIST } from '../lib/paths.mjs';
+import { assertFreshDist } from '../lib/fresh-dist.mjs';
 
 const STYLES = path.join(ROOT, 'src', 'styles');
 
@@ -302,10 +307,11 @@ async function buildIndex(entries) {
 }
 
 async function main() {
-  if (!(await exists(DIST))) {
-    console.error('dist/ not found — run `astro build` first (or use `npm run book`).');
-    process.exit(1);
-  }
+  // dist/ must exist AND be newer than the sources (see lib/fresh-dist.mjs).
+  await assertFreshDist({
+    allowStale: process.argv.includes('--allow-stale'),
+    tool: PRESS ? 'npm run book:press' : 'npm run book',
+  });
 
   const cssHrefs = new Set();
   const cssBlocks = new Set();
