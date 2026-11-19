@@ -20,3 +20,49 @@ const { label, caption } = Astro.props;
     </figcaption>
   )}
 </figure>
+
+<script>
+  // Web only: click or tap a figure to open it large. Added at runtime, so the
+  // built HTML that the book and EPUB pipelines read carries no extra markup.
+  function setup() {
+    document.querySelectorAll('figure.mp-figure').forEach((fig) => {
+      const svg = fig.querySelector('svg');
+      if (!svg || fig.dataset.zoom) return;
+      fig.dataset.zoom = '1';
+      svg.setAttribute('tabindex', '0');
+      svg.classList.add('mp-zoomable');
+      const cap = fig.querySelector('.mp-figcaption');
+      if (cap) {
+        const hint = document.createElement('span');
+        hint.className = 'mp-zoom-hint';
+        hint.textContent = ' Tap to enlarge.';
+        cap.appendChild(hint);
+      }
+      const open = () => {
+        const dlg = document.createElement('dialog');
+        dlg.className = 'mp-zoom';
+        dlg.setAttribute('aria-label', 'Enlarged figure. Press Escape or click to close.');
+        const wrap = document.createElement('div');
+        wrap.className = 'mp-zoom-inner mp-figure';
+        const copy = svg.cloneNode(true);
+        copy.removeAttribute('tabindex');
+        copy.classList.remove('mp-zoomable');
+        wrap.appendChild(copy);
+        dlg.appendChild(wrap);
+        document.body.appendChild(dlg);
+        dlg.addEventListener('click', () => dlg.close());
+        dlg.addEventListener('close', () => dlg.remove());
+        dlg.showModal();
+      };
+      svg.addEventListener('click', open);
+      svg.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          open();
+        }
+      });
+    });
+  }
+  setup();
+  document.addEventListener('astro:page-load', setup);
+</script>
