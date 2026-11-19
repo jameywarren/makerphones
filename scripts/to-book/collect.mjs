@@ -221,7 +221,11 @@ function sanitizeBody(html) {
     // the page, so the code block grows and pushes the last lines of the page
     // past the bottom edge, where they are clipped and lost. book.css styles
     // code blocks itself.
-    .replace(/<link\b[^>]*rel="stylesheet"[^>]*>/gi, '');
+    .replace(/<link\b[^>]*rel="stylesheet"[^>]*>/gi, '')
+    // Starlight's heading anchors: a chain-link icon plus a screen-reader label
+    // after every section heading. A click target on the web; on paper it
+    // printed as a stray icon beside each heading.
+    .replace(/<a\b[^>]*class="[^"]*\bsl-anchor-link\b[^"]*"[^>]*>[\s\S]*?<\/a>/gi, '');
   // drop the whole interactive-viewer containers (their innards stall Paged.js)
   for (const cls of ['parts-viewer', 'parts-gallery']) h = stripDivByClass(h, cls);
   return h;
